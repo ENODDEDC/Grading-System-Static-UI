@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grade Cards - EduManage PH</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-sm border-b">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <a href="index.html" class="flex-shrink-0 flex items-center">
+                        <div class="h-8 w-8 bg-gray-700 rounded flex items-center justify-center mr-3">
+                            <i class="fas fa-graduation-cap text-white text-sm"></i>
+                        </div>
+                        <h1 class="text-lg font-medium text-gray-900">EduManage PH</h1>
+                    </a>
+                    <div class="hidden md:ml-8 md:flex md:space-x-8">
+                        <a href="teacher-dashboard.html" class="text-gray-600 hover:text-gray-900 px-3 py-2 text-sm font-medium">Dashboard</a>
+                        <a href="grading-system.html" class="text-gray-600 hover:text-gray-900 px-3 py-2 text-sm font-medium">Grading</a>
+                        <a href="grade-entry.html" class="text-gray-600 hover:text-gray-900 px-3 py-2 text-sm font-medium">Grade Entry</a>
+                        <a href="grade-cards.html" class="text-gray-900 border-b-2 border-gray-700 px-3 py-2 text-sm font-medium">Grade Cards</a>
+                        <a href="student-records.html" class="text-gray-600 hover:text-gray-900 px-3 py-2 text-sm font-medium">My Students</a>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <span class="text-sm text-gray-600">Welcome, Teacher Name</span>
+                    <button class="text-gray-600 hover:text-gray-900">
+                        <i class="fas fa-sign-out-alt"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
+        <!-- Header -->
+        <div class="mb-8">
+            <div class="flex items-center justify-between">
+                <div>
+                    <h1 class="text-2xl font-medium text-gray-900">Grade Cards</h1>
+                    <p class="text-gray-600">Generate and view student grade cards</p>
+                </div>
+                <div class="flex space-x-2">
+                    <button class="bg-gray-700 text-white px-4 py-2 text-sm hover:bg-gray-800">
+                        <i class="fas fa-print mr-2"></i>Print Cards
+                    </button>
+                    <button class="bg-gray-100 text-gray-700 px-4 py-2 text-sm hover:bg-gray-200 border border-gray-300">
+                        <i class="fas fa-download mr-2"></i>Export
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Student Selection -->
+        <div class="bg-white border border-gray-200 p-6 mb-8">
+            <h3 class="text-lg font-medium text-gray-900 mb-4">Select Student</h3>
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Education Level</label>
+                    <select class="w-full px-3 py-2 border border-gray-300 focus:outline-none focus:ring-1 focus:ring-gray-500">
+                        <option>Select Level</option>
+                        <option>Kindergarten</option>
+                        <option>Elementary</option>
+                        <option>Junior High</option>
+                        <option>Senior High</option>
+                        <option>College</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Section</label>
+                    <select class="w-full px-3 py-2 border border-gray-300 focus:outline-none focus:ring-1 focus:ring-gray-500">
+                        <option>Select Section</option>
+                        <option>BSIT 3-A</option>
+                        <option>BSIT 3-B</option>
+                        <option>Grade 7-A</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Student</label>
+                    <select class="w-full px-3 py-2 border border-gray-300 focus:outline-none focus:ring-1 focus:ring-gray-500">
+                        <option>Select Student</option>
+                        <option>Juan Dela Cruz (2023-001234)</option>
+                        <option>Maria Santos (2023-001235)</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Academic Period</label>
+                    <select class="w-full px-3 py-2 border border-gray-300 focus:outline-none focus:ring-1 focus:ring-gray-500">
+                        <option>2nd Semester 2023-2024</option>
+                        <option>1st Semester 2023-2024</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!-- Grade Card Display -->
+        <div class="bg-white border border-gray-200 p-8">
+            <!-- Grade Card Header -->
+            <div class="text-center mb-8 border-b border-gray-200 pb-6">
+                <h2 class="text-xl font-medium text-gray-900 mb-2">OFFICIAL GRADE CARD</h2>
+                <p class="text-gray-600">Academic Year 2023-2024 | Second Semester</p>
+            </div>
+
+            <!-- Student Information -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+                <div>
+                    <h3 class="text-lg font-medium text-gray-900 mb-4">Student Information</h3>
+                    <div class="space-y-2">
+                        <div class="flex">
+                            <span class="w-32 text-sm font-medium text-gray-600">Student ID:</span>
+                            <span class="text-sm text-gray-900">2023-001234</span>
+                        </div>
+                        <div class="flex">
+                            <span class="w-32 text-sm font-medium text-gray-600">Name:</span>
+                            <span class="text-sm text-gray-900">Juan Dela Cruz</span>
+                        </div>
+                        <div class="flex">
+                            <span class="w-32 text-sm font-medium text-gray-600">Program:</span>
+                            <span class="text-sm text-gray-900">Bachelor of Science in Information Technology</span>
+                        </div>
+                        <div class="flex">
+                            <span class="w-32 text-sm font-medium text-gray-600">Year Level:</span>
+                            <span class="text-sm text-gray-900">3rd Year</span>
+                        </div>
+                        <div class="flex">
+                            <span class="w-32 text-sm font-medium text-gray-600">Section:</span>
+                            <span class="text-sm text-gray-900">BSIT 3-A</span>
+                        </div>
+                        <div class="flex">
+                            <span class="w-32 text-sm font-medium text-gray-600">Status:</span>
+                            <span class="text-sm text-red-600 font-medium">Irregular</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-medium text-gray-900 mb-4">Academic Summary</h3>
+                    <div class="space-y-2">
+                        <div class="flex">
+                            <span class="w-32 text-sm font-medium text-gray-600">Total Units:</span>
+                            <span class="text-sm text-gray-900">21</span>
+                        </div>
+                        <div class="flex">
+                            <span class="w-32 text-sm font-medium text-gray-600">GPA:</span>
+                            <span class="text-sm text-gray-900">2.15</span>
+                        </div>
+                        <div class="flex">
+                            <span class="w-32 text-sm font-medium text-gray-600">Semester GPA:</span>
+                            <span class="text-sm text-gray-900">2.25</span>
+                        </div>
+                        <div class="flex">
+                            <span class="w-32 text-sm font-medium text-gray-600">Units Earned:</span>
+                            <span class="text-sm text-gray-900">18</span>
+                        </div>
+                        <div class="flex">
+                            <span class="w-32 text-sm font-medium text-gray-600">Failed Units:</span>
+                            <span class="text-sm text-red-600">3</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Grades Table -->
+            <div class="mb-8">
+                <h3 class="text-lg font-medium text-gray-900 mb-4">Current Semester Grades</h3>
+                <div class="overflow-x-auto">
+                    <table class="w-full border border-gray-300">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase border-b border-gray-300">Course Code</th>
+                                <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase border-b border-gray-300">Course Title</th>
+                                <th class="px-4 py-2 text-center text-xs font-medium text-gray-500 uppercase border-b border-gray-300">Units</th>
+                                <th class="px-4 py-2 text-center text-xs font-medium text-gray-500 uppercase border-b border-gray-300">Grade</th>
+                                <th class="px-4 py-2 text-center text-xs font-medium text-gray-500 uppercase border-b border-gray-300">Remarks</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-gray-200">
+                            <tr>
+                                <td class="px-4 py-2 text-sm text-gray-900 border-b border-gray-200">CS 301</td>
+                                <td class="px-4 py-2 text-sm text-gray-900 border-b border-gray-200">Data Structures and Algorithms</td>
+                                <td class="px-4 py-2 text-sm text-center text-gray-900 border-b border-gray-200">3</td>
+                                <td class="px-4 py-2 text-sm text-center text-gray-900 border-b border-gray-200">2.00</td>
+                                <td class="px-4 py-2 text-sm text-center text-green-600 border-b border-gray-200">Passed</td>
+                            </tr>
+                            <tr>
+                                <td class="px-4 py-2 text-sm text-gray-900 border-b border-gray-200">CS 302</td>
+                                <td class="px-4 py-2 text-sm text-gray-900 border-b border-gray-200">Database Management Systems</td>
+                                <td class="px-4 py-2 text-sm text-center text-gray-900 border-b border-gray-200">3</td>
+                                <td class="px-4 py-2 text-sm text-center text-gray-900 border-b border-gray-200">1.75</td>
+                                <td class="px-4 py-2 text-sm text-center text-green-600 border-b border-gray-200">Passed</td>
+                            </tr>
+                            <tr>
+                                <td class="px-4 py-2 text-sm text-gray-900 border-b border-gray-200">CS 303</td>
+                                <td class="px-4 py-2 text-sm text-gray-900 border-b border-gray-200">Web Development</td>
+                                <td class="px-4 py-2 text-sm text-center text-gray-900 border-b border-gray-200">3</td>
+                                <td class="px-4 py-2 text-sm text-center text-gray-900 border-b border-gray-200">2.50</td>
+                                <td class="px-4 py-2 text-sm text-center text-green-600 border-b border-gray-200">Passed</td>
+                            </tr>
+                            <tr class="bg-red-50">
+                                <td class="px-4 py-2 text-sm text-gray-900 border-b border-gray-200">MATH 201</td>
+                                <td class="px-4 py-2 text-sm text-gray-900 border-b border-gray-200">Discrete Mathematics (Back Subject)</td>
+                                <td class="px-4 py-2 text-sm text-center text-gray-900 border-b border-gray-200">3</td>
+                                <td class="px-4 py-2 text-sm text-center text-red-600 border-b border-gray-200">5.00</td>
+                                <td class="px-4 py-2 text-sm text-center text-red-600 border-b border-gray-200">Failed</td>
+                            </tr>
+                            <tr>
+                                <td class="px-4 py-2 text-sm text-gray-900 border-b border-gray-200">GE 301</td>
+                                <td class="px-4 py-2 text-sm text-gray-900 border-b border-gray-200">Ethics</td>
+                                <td class="px-4 py-2 text-sm text-center text-gray-900 border-b border-gray-200">3</td>
+                                <td class="px-4 py-2 text-sm text-center text-gray-900 border-b border-gray-200">2.25</td>
+                                <td class="px-4 py-2 text-sm text-center text-green-600 border-b border-gray-200">Passed</td>
+                            </tr>
+                            <tr>
+                                <td class="px-4 py-2 text-sm text-gray-900 border-b border-gray-200">PE 3</td>
+                                <td class="px-4 py-2 text-sm text-gray-900 border-b border-gray-200">Physical Education 3</td>
+                                <td class="px-4 py-2 text-sm text-center text-gray-900 border-b border-gray-200">2</td>
+                                <td class="px-4 py-2 text-sm text-center text-gray-900 border-b border-gray-200">1.50</td>
+                                <td class="px-4 py-2 text-sm text-center text-green-600 border-b border-gray-200">Passed</td>
+                            </tr>
+                            <tr>
+                                <td class="px-4 py-2 text-sm text-gray-900 border-b border-gray-200">NSTP 2</td>
+                                <td class="px-4 py-2 text-sm text-gray-900 border-b border-gray-200">National Service Training Program 2</td>
+                                <td class="px-4 py-2 text-sm text-center text-gray-900 border-b border-gray-200">3</td>
+                                <td class="px-4 py-2 text-sm text-center text-gray-900 border-b border-gray-200">2.00</td>
+                                <td class="px-4 py-2 text-sm text-center text-green-600 border-b border-gray-200">Passed</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Irregular Student Notice -->
+            <div class="bg-red-50 border border-red-200 p-4 mb-8">
+                <div class="flex">
+                    <i class="fas fa-exclamation-triangle text-red-600 mr-3 mt-1"></i>
+                    <div>
+                        <h4 class="text-sm font-medium text-red-800">Irregular Student Status</h4>
+                        <p class="text-sm text-red-700 mt-1">
+                            This student has back subjects from previous years that need to be completed. 
+                            Failed subjects must be retaken in the next available semester.
+                        </p>
+                        <div class="mt-2">
+                            <p class="text-sm font-medium text-red-800">Back Subjects:</p>
+                            <ul class="text-sm text-red-700 ml-4 list-disc">
+                                <li>MATH 201 - Discrete Mathematics (2nd Year, 1st Sem)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Grade Card Footer -->
+            <div class="border-t border-gray-200 pt-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div>
+                        <h4 class="text-sm font-medium text-gray-900 mb-2">Grading Scale (College)</h4>
+                        <div class="text-xs text-gray-600 space-y-1">
+                            <div>1.00-1.25: Excellent</div>
+                            <div>1.50-1.75: Very Good</div>
+                            <div>2.00-2.25: Good</div>
+                            <div>2.50-2.75: Satisfactory</div>
+                            <div>3.00: Passed</div>
+                            <div>5.00: Failed</div>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <p class="text-xs text-gray-600 mb-4">Generated on: January 18, 2026</p>
+                        <div class="border-t border-gray-300 pt-4">
+                            <p class="text-xs text-gray-600">Registrar</p>
+                            <p class="text-xs text-gray-900 font-medium">Ms. Carmen Rodriguez</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

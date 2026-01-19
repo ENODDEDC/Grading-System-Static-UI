@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - EduManage PH</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-sm border-b">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <a href="index.html" class="flex-shrink-0 flex items-center">
+                        <div class="h-8 w-8 bg-gray-700 rounded flex items-center justify-center mr-3">
+                            <i class="fas fa-graduation-cap text-white text-sm"></i>
+                        </div>
+                        <h1 class="text-lg font-medium text-gray-900">EduManage PH</h1>
+                    </a>
+                    <div class="hidden md:ml-8 md:flex md:space-x-8">
+                        <a href="admin-dashboard.html" class="text-gray-900 border-b-2 border-gray-700 px-3 py-2 text-sm font-medium">Dashboard</a>
+                        <a href="student-records.html" class="text-gray-600 hover:text-gray-900 px-3 py-2 text-sm font-medium">Students</a>
+                        <a href="k12-management.html" class="text-gray-600 hover:text-gray-900 px-3 py-2 text-sm font-medium">K-12</a>
+                        <a href="college-management.html" class="text-gray-600 hover:text-gray-900 px-3 py-2 text-sm font-medium">College</a>
+                        <a href="user-management.html" class="text-gray-600 hover:text-gray-900 px-3 py-2 text-sm font-medium">Users</a>
+                        <a href="reports.html" class="text-gray-600 hover:text-gray-900 px-3 py-2 text-sm font-medium">Reports</a>
+                        <a href="system-settings.html" class="text-gray-600 hover:text-gray-900 px-3 py-2 text-sm font-medium">Settings</a>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <div class="flex items-center space-x-2">
+                        <span class="px-2 py-1 bg-red-100 text-red-700 text-xs font-medium">ADMIN</span>
+                        <span class="text-sm text-gray-600">Dr. Carmen Rodriguez</span>
+                    </div>
+                    <button class="text-gray-600 hover:text-gray-900">
+                        <i class="fas fa-sign-out-alt"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
+        <!-- Header -->
+        <div class="mb-8">
+            <h1 class="text-2xl font-medium text-gray-900">Administrator Dashboard</h1>
+            <p class="text-gray-600">System overview and management controls</p>
+        </div>
+
+        <!-- System Stats Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-5 gap-6 mb-8">
+            <div class="bg-white border border-gray-200 p-6">
+                <div class="flex items-center">
+                    <div class="p-2 bg-gray-100">
+                        <i class="fas fa-users text-gray-700 text-lg"></i>
+                    </div>
+                    <div class="ml-4">
+                        <p class="text-sm font-medium text-gray-600">Total Students</p>
+                        <p class="text-2xl font-medium text-gray-900">1,247</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white border border-gray-200 p-6">
+                <div class="flex items-center">
+                    <div class="p-2 bg-gray-100">
+                        <i class="fas fa-chalkboard-teacher text-gray-700 text-lg"></i>
+                    </div>
+                    <div class="ml-4">
+                        <p class="text-sm font-medium text-gray-600">Teachers</p>
+                        <p class="text-2xl font-medium text-gray-900">45</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white border border-gray-200 p-6">
+                <div class="flex items-center">
+                    <div class="p-2 bg-gray-100">
+                        <i class="fas fa-layer-group text-gray-700 text-lg"></i>
+                    </div>
+                    <div class="ml-4">
+                        <p class="text-sm font-medium text-gray-600">Sections</p>
+                        <p class="text-2xl font-medium text-gray-900">47</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white border border-gray-200 p-6">
+                <div class="flex items-center">
+                    <div class="p-2 bg-gray-100">
+                        <i class="fas fa-book text-gray-700 text-lg"></i>
+                    </div>
+                    <div class="ml-4">
+                        <p class="text-sm font-medium text-gray-600">Courses</p>
+                        <p class="text-2xl font-medium text-gray-900">127</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white border border-gray-200 p-6">
+                <div class="flex items-center">
+                    <div class="p-2 bg-gray-100">
+                        <i class="fas fa-exclamation-triangle text-gray-700 text-lg"></i>
+                    </div>
+                    <div class="ml-4">
+                        <p class="text-sm font-medium text-gray-600">Irregular Students</p>
+                        <p class="text-2xl font-medium text-gray-900">44</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content Grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <!-- System Overview -->
+            <div class="lg:col-span-2 space-y-6">
+                <!-- Recent Activities -->
+                <div class="bg-white border border-gray-200">
+                    <div class="p-6 border-b border-gray-200">
+                        <h3 class="text-lg font-medium text-gray-900">Recent System Activities</h3>
+                    </div>
+                    <div class="p-6">
+                        <div class="space-y-4">
+                            <div class="flex items-center space-x-3">
+                                <div class="p-2 bg-blue-100 rounded-full">
+                                    <i class="fas fa-user-plus text-blue-600 text-sm"></i>
+                                </div>
+                                <div class="flex-1">
+                                    <p class="text-sm font-medium text-gray-900">New student enrolled: Maria Santos (BSIT 1-A)</p>
+                                    <p class="text-xs text-gray-500">2 hours ago</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center space-x-3">
+                                <div class="p-2 bg-green-100 rounded-full">
+                                    <i class="fas fa-check text-green-600 text-sm"></i>
+                                </div>
+                                <div class="flex-1">
+                                    <p class="text-sm font-medium text-gray-900">Grades submitted: Prof. Juan Dela Cruz (CS 301)</p>
+                                    <p class="text-xs text-gray-500">4 hours ago</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center space-x-3">
+                                <div class="p-2 bg-yellow-100 rounded-full">
+                                    <i class="fas fa-user text-yellow-600 text-sm"></i>
+                                </div>
+                                <div class="flex-1">
+                                    <p class="text-sm font-medium text-gray-900">New teacher account created: Ms. Elena Rodriguez</p>
+                                    <p class="text-xs text-gray-500">6 hours ago</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center space-x-3">
+                                <div class="p-2 bg-red-100 rounded-full">
+                                    <i class="fas fa-exclamation text-red-600 text-sm"></i>
+                                </div>
+                                <div class="flex-1">
+                                    <p class="text-sm font-medium text-gray-900">System backup completed successfully</p>
+                                    <p class="text-xs text-gray-500">1 day ago</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Enrollment Statistics -->
+                <div class="bg-white border border-gray-200">
+                    <div class="p-6 border-b border-gray-200">
+                        <h3 class="text-lg font-medium text-gray-900">Enrollment by Level</h3>
+                    </div>
+                    <div class="p-6">
+                        <div class="space-y-4">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center">
+                                    <i class="fas fa-baby text-gray-600 mr-3"></i>
+                                    <span class="text-sm font-medium text-gray-900">Kindergarten</span>
+                                </div>
+                                <div class="flex items-center space-x-4">
+                                    <div class="w-32 bg-gray-200 rounded-full h-2">
+                                        <div class="bg-gray-600 h-2 rounded-full" style="width: 78%"></div>
+                                    </div>
+                                    <span class="text-sm font-medium text-gray-900">156</span>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center">
+                                    <i class="fas fa-child text-gray-600 mr-3"></i>
+                                    <span class="text-sm font-medium text-gray-900">Elementary</span>
+                                </div>
+                                <div class="flex items-center space-x-4">
+                                    <div class="w-32 bg-gray-200 rounded-full h-2">
+                                        <div class="bg-gray-600 h-2 rounded-full" style="width: 97%"></div>
+                                    </div>
+                                    <span class="text-sm font-medium text-gray-900">487</span>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center">
+                                    <i class="fas fa-user-graduate text-gray-600 mr-3"></i>
+                                    <span class="text-sm font-medium text-gray-900">Junior High</span>
+                                </div>
+                                <div class="flex items-center space-x-4">
+                                    <div class="w-32 bg-gray-200 rounded-full h-2">
+                                        <div class="bg-gray-600 h-2 rounded-full" style="width: 81%"></div>
+                                    </div>
+                                    <span class="text-sm font-medium text-gray-900">324</span>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center">
+                                    <i class="fas fa-graduation-cap text-gray-600 mr-3"></i>
+                                    <span class="text-sm font-medium text-gray-900">Senior High</span>
+                                </div>
+                                <div class="flex items-center space-x-4">
+                                    <div class="w-32 bg-gray-200 rounded-full h-2">
+                                        <div class="bg-gray-600 h-2 rounded-full" style="width: 70%"></div>
+                                    </div>
+                                    <span class="text-sm font-medium text-gray-900">280</span>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center">
+                                    <i class="fas fa-university text-gray-600 mr-3"></i>
+                                    <span class="text-sm font-medium text-gray-900">College</span>
+                                </div>
+                                <div class="flex items-center space-x-4">
+                                    <div class="w-32 bg-gray-200 rounded-full h-2">
+                                        <div class="bg-gray-600 h-2 rounded-full" style="width: 68%"></div>
+                                    </div>
+                                    <span class="text-sm font-medium text-gray-900">342</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Admin Controls -->
+            <div class="space-y-6">
+                <!-- System Management -->
+                <div class="bg-white border border-gray-200">
+                    <div class="p-6 border-b border-gray-200">
+                        <h3 class="text-lg font-medium text-gray-900">System Management</h3>
+                    </div>
+                    <div class="p-6">
+                        <div class="space-y-3">
+                            <a href="user-management.html" class="w-full text-left p-3 border border-gray-200 hover:bg-gray-50 block">
+                                <div class="flex items-center">
+                                    <i class="fas fa-user-plus text-gray-600 mr-3"></i>
+                                    <span class="text-sm font-medium">Add New User</span>
+                                </div>
+                            </a>
+                            
+                            <a href="system-settings.html" class="w-full text-left p-3 border border-gray-200 hover:bg-gray-50 block">
+                                <div class="flex items-center">
+                                    <i class="fas fa-cog text-gray-600 mr-3"></i>
+                                    <span class="text-sm font-medium">System Settings</span>
+                                </div>
+                            </a>
+                            
+                            <a href="system-settings.html" class="w-full text-left p-3 border border-gray-200 hover:bg-gray-50 block">
+                                <div class="flex items-center">
+                                    <i class="fas fa-database text-gray-600 mr-3"></i>
+                                    <span class="text-sm font-medium">Backup Database</span>
+                                </div>
+                            </a>
+                            
+                            <a href="reports.html" class="w-full text-left p-3 border border-gray-200 hover:bg-gray-50 block">
+                                <div class="flex items-center">
+                                    <i class="fas fa-chart-bar text-gray-600 mr-3"></i>
+                                    <span class="text-sm font-medium">Generate Reports</span>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- System Status -->
+                <div class="bg-white border border-gray-200">
+                    <div class="p-6 border-b border-gray-200">
+                        <h3 class="text-lg font-medium text-gray-900">System Status</h3>
+                    </div>
+                    <div class="p-6">
+                        <div class="space-y-3">
+                            <div class="flex items-center justify-between">
+                                <span class="text-sm text-gray-600">Database</span>
+                                <span class="px-2 py-1 text-xs font-medium bg-green-100 text-green-800">Online</span>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span class="text-sm text-gray-600">Backup Service</span>
+                                <span class="px-2 py-1 text-xs font-medium bg-green-100 text-green-800">Running</span>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span class="text-sm text-gray-600">Email Service</span>
+                                <span class="px-2 py-1 text-xs font-medium bg-green-100 text-green-800">Active</span>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span class="text-sm text-gray-600">Storage Usage</span>
+                                <span class="text-sm text-gray-900">2.3 GB / 10 GB</span>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span class="text-sm text-gray-600">Active Users</span>
+                                <span class="text-sm text-gray-900">23</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Alerts & Notifications -->
+                <div class="bg-white border border-gray-200">
+                    <div class="p-6 border-b border-gray-200">
+                        <h3 class="text-lg font-medium text-gray-900">System Alerts</h3>
+                    </div>
+                    <div class="p-6">
+                        <div class="space-y-3">
+                            <div class="flex items-start space-x-3">
+                                <div class="p-1 bg-red-100 rounded-full">
+                                    <i class="fas fa-exclamation text-red-600 text-xs"></i>
+                                </div>
+                                <div>
+                                    <p class="text-sm font-medium text-gray-900">Grade Submission Deadline</p>
+                                    <p class="text-xs text-gray-500">5 teachers haven't submitted grades</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start space-x-3">
+                                <div class="p-1 bg-yellow-100 rounded-full">
+                                    <i class="fas fa-clock text-yellow-600 text-xs"></i>
+                                </div>
+                                <div>
+                                    <p class="text-sm font-medium text-gray-900">System Maintenance</p>
+                                    <p class="text-xs text-gray-500">Scheduled for this weekend</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start space-x-3">
+                                <div class="p-1 bg-blue-100 rounded-full">
+                                    <i class="fas fa-info text-blue-600 text-xs"></i>
+                                </div>
+                                <div>
+                                    <p class="text-sm font-medium text-gray-900">New Enrollment Period</p>
+                                    <p class="text-xs text-gray-500">Starts next month</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Academic Year Summary -->
+        <div class="mt-8 bg-white border border-gray-200 p-6">
+            <div class="flex items-center justify-between mb-4">
+                <h3 class="text-lg font-medium text-gray-900">Academic Year 2023-2024 Summary</h3>
+                <button class="bg-gray-700 text-white px-4 py-2 text-sm hover:bg-gray-800">
+                    <i class="fas fa-download mr-2"></i>Export Report
+                </button>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                <div class="text-center p-4 border border-gray-200">
+                    <p class="text-2xl font-medium text-gray-900">89.2%</p>
+                    <p class="text-sm text-gray-600">Overall Pass Rate</p>
+                </div>
+                <div class="text-center p-4 border border-gray-200">
+                    <p class="text-2xl font-medium text-gray-900">2.15</p>
+                    <p class="text-sm text-gray-600">Average GPA</p>
+                </div>
+                <div class="text-center p-4 border border-gray-200">
+                    <p class="text-2xl font-medium text-gray-900">95.8%</p>
+                    <p class="text-sm text-gray-600">Retention Rate</p>
+                </div>
+                <div class="text-center p-4 border border-gray-200">
+                    <p class="text-2xl font-medium text-gray-900">156</p>
+                    <p class="text-sm text-gray-600">Graduates</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

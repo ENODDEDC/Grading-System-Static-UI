@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Section Management - EduManage PH</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-sm border-b">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <a href="index.html" class="flex-shrink-0 flex items-center">
+                        <div class="h-8 w-8 bg-gray-700 rounded flex items-center justify-center mr-3">
+                            <i class="fas fa-graduation-cap text-white text-sm"></i>
+                        </div>
+                        <h1 class="text-lg font-medium text-gray-900">EduManage PH</h1>
+                    </a>
+                    <div class="hidden md:ml-8 md:flex md:space-x-8">
+                        <a href="admin-dashboard.html" class="text-gray-600 hover:text-gray-900 px-3 py-2 text-sm font-medium">Dashboard</a>
+                        <a href="student-records.html" class="text-gray-600 hover:text-gray-900 px-3 py-2 text-sm font-medium">Students</a>
+                        <a href="k12-management.html" class="text-gray-600 hover:text-gray-900 px-3 py-2 text-sm font-medium">K-12</a>
+                        <a href="college-management.html" class="text-gray-600 hover:text-gray-900 px-3 py-2 text-sm font-medium">College</a>
+                        <a href="course-management.html" class="text-gray-600 hover:text-gray-900 px-3 py-2 text-sm font-medium">Courses</a>
+                        <a href="section-management.html" class="text-gray-900 border-b-2 border-gray-700 px-3 py-2 text-sm font-medium">Sections</a>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <span class="text-sm text-gray-600">Welcome, Teacher Name</span>
+                    <button class="text-gray-600 hover:text-gray-900">
+                        <i class="fas fa-sign-out-alt"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
+        <!-- Header -->
+        <div class="mb-8">
+            <div class="flex items-center justify-between">
+                <div>
+                    <h1 class="text-2xl font-medium text-gray-900">Section Management</h1>
+                    <p class="text-gray-600">Manage class sections and academic terms</p>
+                </div>
+                <button class="bg-gray-700 text-white px-4 py-2 text-sm hover:bg-gray-800">
+                    <i class="fas fa-plus mr-2"></i>Create Section
+                </button>
+            </div>
+        </div>
+
+        <!-- Academic Year Info -->
+        <div class="bg-white border border-gray-200 p-6 mb-8">
+            <div class="flex items-center justify-between">
+                <div>
+                    <h3 class="text-lg font-medium text-gray-900">Current Academic Year</h3>
+                    <p class="text-gray-600">2023-2024 | Second Semester</p>
+                </div>
+                <div class="text-right">
+                    <p class="text-sm text-gray-600">Days Remaining</p>
+                    <p class="text-2xl font-medium text-gray-900">45</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Education Level Tabs -->
+        <div class="mb-8">
+            <div class="border-b border-gray-200">
+                <nav class="-mb-px flex space-x-8">
+                    <button class="border-b-2 border-gray-700 text-gray-900 py-2 px-1 text-sm font-medium">All Sections</button>
+                    <button class="border-transparent text-gray-500 hover:text-gray-700 py-2 px-1 text-sm font-medium">Kindergarten</button>
+                    <button class="border-transparent text-gray-500 hover:text-gray-700 py-2 px-1 text-sm font-medium">Elementary</button>
+                    <button class="border-transparent text-gray-500 hover:text-gray-700 py-2 px-1 text-sm font-medium">Junior High</button>
+                    <button class="border-transparent text-gray-500 hover:text-gray-700 py-2 px-1 text-sm font-medium">Senior High</button>
+                    <button class="border-transparent text-gray-500 hover:text-gray-700 py-2 px-1 text-sm font-medium">College</button>
+                </nav>
+            </div>
+        </div>
+
+        <!-- Stats Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+            <div class="bg-white border border-gray-200 p-6">
+                <div class="flex items-center">
+                    <div class="p-2 bg-gray-100">
+                        <i class="fas fa-layer-group text-gray-700 text-lg"></i>
+                    </div>
+                    <div class="ml-4">
+                        <p class="text-sm font-medium text-gray-600">Total Sections</p>
+                        <p class="text-2xl font-medium text-gray-900">47</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white border border-gray-200 p-6">
+                <div class="flex items-center">
+                    <div class="p-2 bg-gray-100">
+                        <i class="fas fa-users text-gray-700 text-lg"></i>
+                    </div>
+                    <div class="ml-4">
+                        <p class="text-sm font-medium text-gray-600">Total Students</p>
+                        <p class="text-2xl font-medium text-gray-900">1,247</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white border border-gray-200 p-6">
+                <div class="flex items-center">
+                    <div class="p-2 bg-gray-100">
+                        <i class="fas fa-chalkboard-teacher text-gray-700 text-lg"></i>
+                    </div>
+                    <div class="ml-4">
+                        <p class="text-sm font-medium text-gray-600">Active Teachers</p>
+                        <p class="text-2xl font-medium text-gray-900">45</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white border border-gray-200 p-6">
+                <div class="flex items-center">
+                    <div class="p-2 bg-gray-100">
+                        <i class="fas fa-door-open text-gray-700 text-lg"></i>
+                    </div>
+                    <div class="ml-4">
+                        <p class="text-sm font-medium text-gray-600">Classrooms</p>
+                        <p class="text-2xl font-medium text-gray-900">32</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sections List -->
+        <div class="bg-white border border-gray-200">
+            <div class="p-6 border-b border-gray-200">
+                <div class="flex justify-between items-center">
+                    <h3 class="text-lg font-medium text-gray-900">All Sections</h3>
+                    <div class="flex space-x-2">
+                        <input type="text" placeholder="Search sections..." 
+                               class="px-3 py-1 border border-gray-300 text-sm focus:outline-none focus:ring-1 focus:ring-gray-500">
+                        <select class="px-3 py-1 border border-gray-300 text-sm focus:outline-none focus:ring-1 focus:ring-gray-500">
+                            <option>All Levels</option>
+                            <option>Kindergarten</option>
+                            <option>Elementary</option>
+                            <option>Junior High</option>
+                            <option>Senior High</option>
+                            <option>College</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="divide-y divide-gray-200">
+                <!-- Kindergarten Section -->
+                <div class="p-6 hover:bg-gray-50">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center">
+                            <div class="h-10 w-10 bg-gray-100 flex items-center justify-center mr-4">
+                                <i class="fas fa-baby text-gray-700"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-medium text-gray-900">Kindergarten - Rose</h4>
+                                <p class="text-sm text-gray-600">Teacher: Ms. Maria Santos | Room: 101 | Students: 25</p>
+                                <p class="text-sm text-gray-600">Schedule: Monday-Friday, 8:00 AM - 11:00 AM</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <span class="px-2 py-1 text-xs font-medium bg-green-100 text-green-800">Active</span>
+                            <button class="text-gray-600 hover:text-gray-900">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button class="text-gray-600 hover:text-gray-900">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Elementary Section -->
+                <div class="p-6 hover:bg-gray-50">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center">
+                            <div class="h-10 w-10 bg-gray-100 flex items-center justify-center mr-4">
+                                <i class="fas fa-child text-gray-700"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-medium text-gray-900">Grade 4 - Diamond</h4>
+                                <p class="text-sm text-gray-600">Teacher: Ms. Ana Garcia | Room: 204 | Students: 32</p>
+                                <p class="text-sm text-gray-600">Schedule: Monday-Friday, 7:30 AM - 4:30 PM</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <span class="px-2 py-1 text-xs font-medium bg-green-100 text-green-800">Active</span>
+                            <button class="text-gray-600 hover:text-gray-900">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button class="text-gray-600 hover:text-gray-900">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Junior High Section -->
+                <div class="p-6 hover:bg-gray-50">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center">
+                            <div class="h-10 w-10 bg-gray-100 flex items-center justify-center mr-4">
+                                <i class="fas fa-user-graduate text-gray-700"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-medium text-gray-900">Grade 7 - Einstein</h4>
+                                <p class="text-sm text-gray-600">Adviser: Mr. Carlos Reyes | Room: 301 | Students: 28</p>
+                                <p class="text-sm text-gray-600">Schedule: Monday-Friday, 7:00 AM - 5:00 PM</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <span class="px-2 py-1 text-xs font-medium bg-green-100 text-green-800">Active</span>
+                            <button class="text-gray-600 hover:text-gray-900">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button class="text-gray-600 hover:text-gray-900">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Senior High Section -->
+                <div class="p-6 hover:bg-gray-50">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center">
+                            <div class="h-10 w-10 bg-gray-100 flex items-center justify-center mr-4">
+                                <i class="fas fa-graduation-cap text-gray-700"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-medium text-gray-900">Grade 11 STEM - Newton</h4>
+                                <p class="text-sm text-gray-600">Adviser: Ms. Elena Rodriguez | Room: 401 | Students: 25</p>
+                                <p class="text-sm text-gray-600">Schedule: Monday-Friday, 7:00 AM - 5:00 PM</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <span class="px-2 py-1 text-xs font-medium bg-green-100 text-green-800">Active</span>
+                            <button class="text-gray-600 hover:text-gray-900">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button class="text-gray-600 hover:text-gray-900">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- College Section -->
+                <div class="p-6 hover:bg-gray-50">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center">
+                            <div class="h-10 w-10 bg-gray-100 flex items-center justify-center mr-4">
+                                <i class="fas fa-university text-gray-700"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-medium text-gray-900">BSIT 3-A</h4>
+                                <p class="text-sm text-gray-600">Adviser: Prof. Juan Dela Cruz | Room: CCS-301 | Students: 35</p>
+                                <p class="text-sm text-gray-600">Regular: 28 | Irregular: 7</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <span class="px-2 py-1 text-xs font-medium bg-green-100 text-green-800">Active</span>
+                            <button class="text-gray-600 hover:text-gray-900">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button class="text-gray-600 hover:text-gray-900">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

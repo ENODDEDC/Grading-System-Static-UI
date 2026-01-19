@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>College Management - EduManage PH</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-sm border-b">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <a href="index.html" class="flex-shrink-0 flex items-center">
+                        <div class="h-8 w-8 bg-gray-700 rounded flex items-center justify-center mr-3">
+                            <i class="fas fa-graduation-cap text-white text-sm"></i>
+                        </div>
+                        <h1 class="text-lg font-medium text-gray-900">EduManage PH</h1>
+                    </a>
+                    <div class="hidden md:ml-8 md:flex md:space-x-8">
+                        <a href="admin-dashboard.html" class="text-gray-600 hover:text-gray-900 px-3 py-2 text-sm font-medium">Dashboard</a>
+                        <a href="student-records.html" class="text-gray-600 hover:text-gray-900 px-3 py-2 text-sm font-medium">Students</a>
+                        <a href="k12-management.html" class="text-gray-600 hover:text-gray-900 px-3 py-2 text-sm font-medium">K-12</a>
+                        <a href="college-management.html" class="text-gray-900 border-b-2 border-gray-700 px-3 py-2 text-sm font-medium">College</a>
+                        <a href="course-management.html" class="text-gray-600 hover:text-gray-900 px-3 py-2 text-sm font-medium">Courses</a>
+                        <a href="section-management.html" class="text-gray-600 hover:text-gray-900 px-3 py-2 text-sm font-medium">Sections</a>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <span class="text-sm text-gray-600">Welcome, Teacher Name</span>
+                    <button class="text-gray-600 hover:text-gray-900">
+                        <i class="fas fa-sign-out-alt"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
+        <!-- Header -->
+        <div class="mb-8">
+            <div class="flex items-center justify-between">
+                <div>
+                    <h1 class="text-2xl font-medium text-gray-900">College Management</h1>
+                    <p class="text-gray-600">Manage college programs and irregular students</p>
+                </div>
+                <button class="bg-gray-700 text-white px-4 py-2 text-sm hover:bg-gray-800">
+                    <i class="fas fa-plus mr-2"></i>Create Section
+                </button>
+            </div>
+        </div>
+
+        <!-- Program Tabs -->
+        <div class="mb-8">
+            <div class="border-b border-gray-200">
+                <nav class="-mb-px flex space-x-8">
+                    <button class="border-b-2 border-gray-700 text-gray-900 py-3 px-1 text-sm font-medium">BSIT</button>
+                    <button class="border-transparent text-gray-500 hover:text-gray-700 py-3 px-1 text-sm font-medium">BSCS</button>
+                    <button class="border-transparent text-gray-500 hover:text-gray-700 py-3 px-1 text-sm font-medium">BSA</button>
+                    <button class="border-transparent text-gray-500 hover:text-gray-700 py-3 px-1 text-sm font-medium">BSBA</button>
+                    <button class="border-transparent text-gray-500 hover:text-gray-700 py-3 px-1 text-sm font-medium">BSED</button>
+                </nav>
+            </div>
+        </div>
+
+        <!-- Stats Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+            <div class="bg-white border border-gray-200 p-6">
+                <div class="flex items-center">
+                    <div class="p-2 bg-gray-100">
+                        <i class="fas fa-users text-gray-700 text-lg"></i>
+                    </div>
+                    <div class="ml-4">
+                        <p class="text-sm font-medium text-gray-600">Total Students</p>
+                        <p class="text-2xl font-medium text-gray-900">342</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white border border-gray-200 p-6">
+                <div class="flex items-center">
+                    <div class="p-2 bg-gray-100">
+                        <i class="fas fa-user-check text-gray-700 text-lg"></i>
+                    </div>
+                    <div class="ml-4">
+                        <p class="text-sm font-medium text-gray-600">Regular Students</p>
+                        <p class="text-2xl font-medium text-gray-900">298</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white border border-gray-200 p-6">
+                <div class="flex items-center">
+                    <div class="p-2 bg-gray-100">
+                        <i class="fas fa-exclamation-triangle text-gray-700 text-lg"></i>
+                    </div>
+                    <div class="ml-4">
+                        <p class="text-sm font-medium text-gray-600">Irregular Students</p>
+                        <p class="text-2xl font-medium text-gray-900">44</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white border border-gray-200 p-6">
+                <div class="flex items-center">
+                    <div class="p-2 bg-gray-100">
+                        <i class="fas fa-book text-gray-700 text-lg"></i>
+                    </div>
+                    <div class="ml-4">
+                        <p class="text-sm font-medium text-gray-600">Active Courses</p>
+                        <p class="text-2xl font-medium text-gray-900">28</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content Grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <!-- Year Level Sections -->
+            <div class="lg:col-span-2 bg-white border border-gray-200">
+                <div class="p-6 border-b border-gray-200 flex justify-between items-center">
+                    <h3 class="text-lg font-medium text-gray-900">BSIT Sections</h3>
+                    <button class="bg-gray-700 text-white px-4 py-2 text-sm hover:bg-gray-800">
+                        <i class="fas fa-plus mr-2"></i>Add Section
+                    </button>
+                </div>
+                <div class="p-6">
+                    <div class="space-y-4">
+                        <!-- 1st Year -->
+                        <div class="border border-gray-200 p-4">
+                            <div class="flex justify-between items-start mb-3">
+                                <div>
+                                    <h4 class="font-medium text-gray-900">BSIT 1-A</h4>
+                                    <p class="text-sm text-gray-600">Instructor: Prof. Juan Dela Cruz</p>
+                                    <p class="text-sm text-gray-600">Students: 35 | Room: CCS-201</p>
+                                </div>
+                                <div class="flex space-x-2">
+                                    <button class="text-gray-600 hover:text-gray-900">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button class="text-gray-600 hover:text-gray-900">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-4 text-xs">
+                                <span class="bg-gray-100 text-gray-800 px-2 py-1">Regular: 32</span>
+                                <span class="bg-gray-100 text-gray-800 px-2 py-1">Irregular: 3</span>
+                            </div>
+                        </div>
+
+                        <!-- 2nd Year -->
+                        <div class="border border-gray-200 p-4">
+                            <div class="flex justify-between items-start mb-3">
+                                <div>
+                                    <h4 class="font-medium text-gray-900">BSIT 2-A</h4>
+                                    <p class="text-sm text-gray-600">Instructor: Prof. Maria Santos</p>
+                                    <p class="text-sm text-gray-600">Students: 28 | Room: CCS-202</p>
+                                </div>
+                                <div class="flex space-x-2">
+                                    <button class="text-gray-600 hover:text-gray-900">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button class="text-gray-600 hover:text-gray-900">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-4 text-xs">
+                                <span class="bg-gray-100 text-gray-800 px-2 py-1">Regular: 23</span>
+                                <span class="bg-gray-100 text-gray-800 px-2 py-1">Irregular: 5</span>
+                            </div>
+                        </div>
+
+                        <!-- 3rd Year -->
+                        <div class="border border-gray-200 p-4">
+                            <div class="flex justify-between items-start mb-3">
+                                <div>
+                                    <h4 class="font-medium text-gray-900">BSIT 3-A</h4>
+                                    <p class="text-sm text-gray-600">Instructor: Prof. Carlos Reyes</p>
+                                    <p class="text-sm text-gray-600">Students: 25 | Room: CCS-203</p>
+                                </div>
+                                <div class="flex space-x-2">
+                                    <button class="text-gray-600 hover:text-gray-900">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button class="text-gray-600 hover:text-gray-900">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-4 text-xs">
+                                <span class="bg-gray-100 text-gray-800 px-2 py-1">Regular: 18</span>
+                                <span class="bg-gray-100 text-gray-800 px-2 py-1">Irregular: 7</span>
+                            </div>
+                        </div>
+
+                        <!-- 4th Year -->
+                        <div class="border border-gray-200 p-4">
+                            <div class="flex justify-between items-start mb-3">
+                                <div>
+                                    <h4 class="font-medium text-gray-900">BSIT 4-A</h4>
+                                    <p class="text-sm text-gray-600">Instructor: Prof. Ana Garcia</p>
+                                    <p class="text-sm text-gray-600">Students: 22 | Room: CCS-204</p>
+                                </div>
+                                <div class="flex space-x-2">
+                                    <button class="text-gray-600 hover:text-gray-900">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button class="text-gray-600 hover:text-gray-900">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-4 text-xs">
+                                <span class="bg-gray-100 text-gray-800 px-2 py-1">Regular: 15</span>
+                                <span class="bg-gray-100 text-gray-800 px-2 py-1">Irregular: 7</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- College Grading System -->
+            <div class="bg-white border border-gray-200">
+                <div class="p-6 border-b border-gray-200">
+                    <h3 class="text-lg font-medium text-gray-900">College Grading Scale</h3>
+                </div>
+                <div class="p-6">
+                    <div class="space-y-3">
+                        <div class="flex justify-between items-center p-3 bg-gray-50 border border-gray-200">
+                            <span class="font-medium text-gray-900">Excellent</span>
+                            <span class="text-gray-900 font-medium">1.00-1.25</span>
+                        </div>
+                        <div class="flex justify-between items-center p-3 bg-gray-50 border border-gray-200">
+                            <span class="font-medium text-gray-900">Very Good</span>
+                            <span class="text-gray-900 font-medium">1.50-1.75</span>
+                        </div>
+                        <div class="flex justify-between items-center p-3 bg-gray-50 border border-gray-200">
+                            <span class="font-medium text-gray-900">Good</span>
+                            <span class="text-gray-900 font-medium">2.00-2.25</span>
+                        </div>
+                        <div class="flex justify-between items-center p-3 bg-gray-50 border border-gray-200">
+                            <span class="font-medium text-gray-900">Satisfactory</span>
+                            <span class="text-gray-900 font-medium">2.50-2.75</span>
+                        </div>
+                        <div class="flex justify-between items-center p-3 bg-gray-50 border border-gray-200">
+                            <span class="font-medium text-gray-900">Passed</span>
+                            <span class="text-gray-900 font-medium">3.00</span>
+                        </div>
+                        <div class="flex justify-between items-center p-3 bg-gray-50 border border-gray-200">
+                            <span class="font-medium text-gray-900">Failed</span>
+                            <span class="text-gray-900 font-medium">5.00</span>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-6 pt-6 border-t border-gray-200">
+                        <h4 class="font-medium text-gray-900 mb-3">Special Grades</h4>
+                        <div class="space-y-2 text-sm">
+                            <div class="flex justify-between">
+                                <span class="text-gray-600">Incomplete</span>
+                                <span class="font-medium text-gray-900">INC</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-600">Dropped</span>
+                                <span class="font-medium text-gray-900">DRP</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-600">Withdrawn</span>
+                                <span class="font-medium text-gray-900">W</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Irregular Students Alert -->
+        <div class="mt-8 bg-gray-50 border border-gray-200 p-6">
+            <div class="flex items-center">
+                <i class="fas fa-exclamation-triangle text-gray-700 text-xl mr-4"></i>
+                <div>
+                    <h3 class="text-lg font-medium text-gray-900">Irregular Students Management</h3>
+                    <p class="text-gray-600 mt-1">44 students require special attention for back subjects and grade completion</p>
+                    <button class="mt-3 bg-gray-700 text-white px-4 py-2 text-sm hover:bg-gray-800">
+                        <i class="fas fa-eye mr-2"></i>View Irregular Students
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

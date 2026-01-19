@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Management - EduManage PH</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-sm border-b">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <a href="index.html" class="flex-shrink-0 flex items-center">
+                        <div class="h-8 w-8 bg-gray-700 rounded flex items-center justify-center mr-3">
+                            <i class="fas fa-graduation-cap text-white text-sm"></i>
+                        </div>
+                        <h1 class="text-lg font-medium text-gray-900">EduManage PH</h1>
+                    </a>
+                    <div class="hidden md:ml-8 md:flex md:space-x-8">
+                        <a href="admin-dashboard.html" class="text-gray-600 hover:text-gray-900 px-3 py-2 text-sm font-medium">Dashboard</a>
+                        <a href="student-records.html" class="text-gray-600 hover:text-gray-900 px-3 py-2 text-sm font-medium">Students</a>
+                        <a href="k12-management.html" class="text-gray-600 hover:text-gray-900 px-3 py-2 text-sm font-medium">K-12</a>
+                        <a href="college-management.html" class="text-gray-600 hover:text-gray-900 px-3 py-2 text-sm font-medium">College</a>
+                        <a href="course-management.html" class="text-gray-900 border-b-2 border-gray-700 px-3 py-2 text-sm font-medium">Courses</a>
+                        <a href="section-management.html" class="text-gray-600 hover:text-gray-900 px-3 py-2 text-sm font-medium">Sections</a>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <span class="text-sm text-gray-600">Welcome, Teacher Name</span>
+                    <button class="text-gray-600 hover:text-gray-900">
+                        <i class="fas fa-sign-out-alt"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
+        <!-- Header -->
+        <div class="mb-8">
+            <div class="flex items-center justify-between">
+                <div>
+                    <h1 class="text-2xl font-medium text-gray-900">Course Management</h1>
+                    <p class="text-gray-600">Manage courses and curriculum for all education levels</p>
+                </div>
+                <button class="bg-gray-700 text-white px-4 py-2 text-sm hover:bg-gray-800">
+                    <i class="fas fa-plus mr-2"></i>Create New Course
+                </button>
+            </div>
+        </div>
+
+        <!-- Education Level Tabs -->
+        <div class="mb-8">
+            <div class="border-b border-gray-200">
+                <nav class="-mb-px flex space-x-8">
+                    <button class="border-b-2 border-gray-700 text-gray-900 py-3 px-1 text-sm font-medium">All Courses</button>
+                    <button class="border-transparent text-gray-500 hover:text-gray-700 py-3 px-1 text-sm font-medium">K-12 Subjects</button>
+                    <button class="border-transparent text-gray-500 hover:text-gray-700 py-3 px-1 text-sm font-medium">College Courses</button>
+                    <button class="border-transparent text-gray-500 hover:text-gray-700 py-3 px-1 text-sm font-medium">Curriculum</button>
+                </nav>
+            </div>
+        </div>
+
+        <!-- Search and Filters -->
+        <div class="bg-white border border-gray-200 p-6 mb-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Search Course</label>
+                    <div class="relative">
+                        <input type="text" placeholder="Course name or code" 
+                               class="w-full pl-10 pr-4 py-2 border border-gray-300 focus:outline-none focus:ring-1 focus:ring-gray-500">
+                        <i class="fas fa-search absolute left-3 top-2.5 text-gray-400"></i>
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Education Level</label>
+                    <select class="w-full px-3 py-2 border border-gray-300 focus:outline-none focus:ring-1 focus:ring-gray-500">
+                        <option>All Levels</option>
+                        <option>Kindergarten</option>
+                        <option>Elementary</option>
+                        <option>Junior High</option>
+                        <option>Senior High</option>
+                        <option>College</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Department</label>
+                    <select class="w-full px-3 py-2 border border-gray-300 focus:outline-none focus:ring-1 focus:ring-gray-500">
+                        <option>All Departments</option>
+                        <option>Computer Science</option>
+                        <option>Business Administration</option>
+                        <option>Education</option>
+                        <option>Arts & Sciences</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Status</label>
+                    <select class="w-full px-3 py-2 border border-gray-300 focus:outline-none focus:ring-1 focus:ring-gray-500">
+                        <option>All Status</option>
+                        <option>Active</option>
+                        <option>Inactive</option>
+                        <option>Draft</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!-- Stats Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+            <div class="bg-white border border-gray-200 p-6">
+                <div class="flex items-center">
+                    <div class="p-2 bg-gray-100">
+                        <i class="fas fa-book text-gray-700 text-lg"></i>
+                    </div>
+                    <div class="ml-4">
+                        <p class="text-sm font-medium text-gray-600">Total Courses</p>
+                        <p class="text-2xl font-medium text-gray-900">127</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white border border-gray-200 p-6">
+                <div class="flex items-center">
+                    <div class="p-2 bg-gray-100">
+                        <i class="fas fa-check-circle text-gray-700 text-lg"></i>
+                    </div>
+                    <div class="ml-4">
+                        <p class="text-sm font-medium text-gray-600">Active Courses</p>
+                        <p class="text-2xl font-medium text-gray-900">89</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white border border-gray-200 p-6">
+                <div class="flex items-center">
+                    <div class="p-2 bg-gray-100">
+                        <i class="fas fa-university text-gray-700 text-lg"></i>
+                    </div>
+                    <div class="ml-4">
+                        <p class="text-sm font-medium text-gray-600">College Courses</p>
+                        <p class="text-2xl font-medium text-gray-900">45</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white border border-gray-200 p-6">
+                <div class="flex items-center">
+                    <div class="p-2 bg-gray-100">
+                        <i class="fas fa-school text-gray-700 text-lg"></i>
+                    </div>
+                    <div class="ml-4">
+                        <p class="text-sm font-medium text-gray-600">K-12 Subjects</p>
+                        <p class="text-2xl font-medium text-gray-900">82</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Course Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- College Course Card -->
+            <div class="bg-white border border-gray-200 hover:border-gray-300">
+                <div class="p-6">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="flex items-center">
+                            <div class="h-10 w-10 bg-gray-100 flex items-center justify-center mr-3">
+                                <i class="fas fa-laptop-code text-gray-700 text-lg"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-medium text-gray-900">Data Structures</h3>
+                                <p class="text-sm text-gray-600">CS 201</p>
+                            </div>
+                        </div>
+                        <span class="bg-green-100 text-green-800 px-2 py-1 text-xs font-medium">Active</span>
+                    </div>
+                    
+                    <div class="space-y-2 mb-4">
+                        <div class="flex items-center text-sm text-gray-600">
+                            <i class="fas fa-graduation-cap mr-2 text-gray-700"></i>
+                            <span>College - BSIT 2nd Year</span>
+                        </div>
+                        <div class="flex items-center text-sm text-gray-600">
+                            <i class="fas fa-user mr-2 text-gray-700"></i>
+                            <span>Prof. Juan Dela Cruz</span>
+                        </div>
+                        <div class="flex items-center text-sm text-gray-600">
+                            <i class="fas fa-users mr-2 text-gray-700"></i>
+                            <span>35 Students Enrolled</span>
+                        </div>
+                        <div class="flex items-center text-sm text-gray-600">
+                            <i class="fas fa-clock mr-2 text-gray-700"></i>
+                            <span>3 Units | 3 hrs/week</span>
+                        </div>
+                    </div>
+                    
+                    <div class="flex space-x-2">
+                        <button class="flex-1 bg-gray-700 text-white py-2 px-3 text-sm hover:bg-gray-800">
+                            <i class="fas fa-eye mr-1"></i>View
+                        </button>
+                        <button class="flex-1 bg-gray-100 text-gray-700 py-2 px-3 text-sm hover:bg-gray-200 border border-gray-300">
+                            <i class="fas fa-edit mr-1"></i>Edit
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- K-12 Subject Card -->
+            <div class="bg-white border border-gray-200 hover:border-gray-300">
+                <div class="p-6">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="flex items-center">
+                            <div class="h-10 w-10 bg-gray-100 flex items-center justify-center mr-3">
+                                <i class="fas fa-calculator text-gray-700 text-lg"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-medium text-gray-900">Mathematics</h3>
+                                <p class="text-sm text-gray-600">MATH 7</p>
+                            </div>
+                        </div>
+                        <span class="bg-green-100 text-green-800 px-2 py-1 text-xs font-medium">Active</span>
+                    </div>
+                    
+                    <div class="space-y-2 mb-4">
+                        <div class="flex items-center text-sm text-gray-600">
+                            <i class="fas fa-school mr-2 text-gray-700"></i>
+                            <span>Junior High - Grade 7</span>
+                        </div>
+                        <div class="flex items-center text-sm text-gray-600">
+                            <i class="fas fa-user mr-2 text-gray-700"></i>
+                            <span>Ms. Maria Santos</span>
+                        </div>
+                        <div class="flex items-center text-sm text-gray-600">
+                            <i class="fas fa-users mr-2 text-gray-700"></i>
+                            <span>28 Students Enrolled</span>
+                        </div>
+                        <div class="flex items-center text-sm text-gray-600">
+                            <i class="fas fa-clock mr-2 text-gray-700"></i>
+                            <span>5 hrs/week</span>
+                        </div>
+                    </div>
+                    
+                    <div class="flex space-x-2">
+                        <button class="flex-1 bg-gray-700 text-white py-2 px-3 text-sm hover:bg-gray-800">
+                            <i class="fas fa-eye mr-1"></i>View
+                        </button>
+                        <button class="flex-1 bg-gray-100 text-gray-700 py-2 px-3 text-sm hover:bg-gray-200 border border-gray-300">
+                            <i class="fas fa-edit mr-1"></i>Edit
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Elementary Subject Card -->
+            <div class="bg-white border border-gray-200 hover:border-gray-300">
+                <div class="p-6">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="flex items-center">
+                            <div class="h-10 w-10 bg-gray-100 flex items-center justify-center mr-3">
+                                <i class="fas fa-leaf text-gray-700 text-lg"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-medium text-gray-900">Science</h3>
+                                <p class="text-sm text-gray-600">SCI 4</p>
+                            </div>
+                        </div>
+                        <span class="bg-green-100 text-green-800 px-2 py-1 text-xs font-medium">Active</span>
+                    </div>
+                    
+                    <div class="space-y-2 mb-4">
+                        <div class="flex items-center text-sm text-gray-600">
+                            <i class="fas fa-child mr-2 text-gray-700"></i>
+                            <span>Elementary - Grade 4</span>
+                        </div>
+                        <div class="flex items-center text-sm text-gray-600">
+                            <i class="fas fa-user mr-2 text-gray-700"></i>
+                            <span>Ms. Ana Garcia</span>
+                        </div>
+                        <div class="flex items-center text-sm text-gray-600">
+                            <i class="fas fa-users mr-2 text-gray-700"></i>
+                            <span>32 Students Enrolled</span>
+                        </div>
+                        <div class="flex items-center text-sm text-gray-600">
+                            <i class="fas fa-clock mr-2 text-gray-700"></i>
+                            <span>4 hrs/week</span>
+                        </div>
+                    </div>
+                    
+                    <div class="flex space-x-2">
+                        <button class="flex-1 bg-gray-700 text-white py-2 px-3 text-sm hover:bg-gray-800">
+                            <i class="fas fa-eye mr-1"></i>View
+                        </button>
+                        <button class="flex-1 bg-gray-100 text-gray-700 py-2 px-3 text-sm hover:bg-gray-200 border border-gray-300">
+                            <i class="fas fa-edit mr-1"></i>Edit
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Senior High Subject Card -->
+            <div class="bg-white border border-gray-200 hover:border-gray-300">
+                <div class="p-6">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="flex items-center">
+                            <div class="h-10 w-10 bg-gray-100 flex items-center justify-center mr-3">
+                                <i class="fas fa-flask text-gray-700 text-lg"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-medium text-gray-900">General Chemistry</h3>
+                                <p class="text-sm text-gray-600">CHEM 11</p>
+                            </div>
+                        </div>
+                        <span class="bg-green-100 text-green-800 px-2 py-1 text-xs font-medium">Active</span>
+                    </div>
+                    
+                    <div class="space-y-2 mb-4">
+                        <div class="flex items-center text-sm text-gray-600">
+                            <i class="fas fa-graduation-cap mr-2 text-gray-700"></i>
+                            <span>Senior High - Grade 11 STEM</span>
+                        </div>
+                        <div class="flex items-center text-sm text-gray-600">
+                            <i class="fas fa-user mr-2 text-gray-700"></i>
+                            <span>Prof. Carlos Reyes</span>
+                        </div>
+                        <div class="flex items-center text-sm text-gray-600">
+                            <i class="fas fa-users mr-2 text-gray-700"></i>
+                            <span>25 Students Enrolled</span>
+                        </div>
+                        <div class="flex items-center text-sm text-gray-600">
+                            <i class="fas fa-clock mr-2 text-gray-700"></i>
+                            <span>4 hrs/week</span>
+                        </div>
+                    </div>
+                    
+                    <div class="flex space-x-2">
+                        <button class="flex-1 bg-gray-700 text-white py-2 px-3 text-sm hover:bg-gray-800">
+                            <i class="fas fa-eye mr-1"></i>View
+                        </button>
+                        <button class="flex-1 bg-gray-100 text-gray-700 py-2 px-3 text-sm hover:bg-gray-200 border border-gray-300">
+                            <i class="fas fa-edit mr-1"></i>Edit
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Business Course Card -->
+            <div class="bg-white border border-gray-200 hover:border-gray-300">
+                <div class="p-6">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="flex items-center">
+                            <div class="h-10 w-10 bg-gray-100 flex items-center justify-center mr-3">
+                                <i class="fas fa-chart-line text-gray-700 text-lg"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-medium text-gray-900">Financial Management</h3>
+                                <p class="text-sm text-gray-600">FINMAN 101</p>
+                            </div>
+                        </div>
+                        <span class="bg-green-100 text-green-800 px-2 py-1 text-xs font-medium">Active</span>
+                    </div>
+                    
+                    <div class="space-y-2 mb-4">
+                        <div class="flex items-center text-sm text-gray-600">
+                            <i class="fas fa-university mr-2 text-gray-700"></i>
+                            <span>College - BSBA 3rd Year</span>
+                        </div>
+                        <div class="flex items-center text-sm text-gray-600">
+                            <i class="fas fa-user mr-2 text-gray-700"></i>
+                            <span>Prof. Elena Rodriguez</span>
+                        </div>
+                        <div class="flex items-center text-sm text-gray-600">
+                            <i class="fas fa-users mr-2 text-gray-700"></i>
+                            <span>28 Students Enrolled</span>
+                        </div>
+                        <div class="flex items-center text-sm text-gray-600">
+                            <i class="fas fa-clock mr-2 text-gray-700"></i>
+                            <span>3 Units | 3 hrs/week</span>
+                        </div>
+                    </div>
+                    
+                    <div class="flex space-x-2">
+                        <button class="flex-1 bg-gray-700 text-white py-2 px-3 text-sm hover:bg-gray-800">
+                            <i class="fas fa-eye mr-1"></i>View
+                        </button>
+                        <button class="flex-1 bg-gray-100 text-gray-700 py-2 px-3 text-sm hover:bg-gray-200 border border-gray-300">
+                            <i class="fas fa-edit mr-1"></i>Edit
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Kindergarten Subject Card -->
+            <div class="bg-white border border-gray-200 hover:border-gray-300">
+                <div class="p-6">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="flex items-center">
+                            <div class="h-10 w-10 bg-gray-100 flex items-center justify-center mr-3">
+                                <i class="fas fa-language text-gray-700 text-lg"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-medium text-gray-900">Mother Tongue</h3>
+                                <p class="text-sm text-gray-600">MT K</p>
+                            </div>
+                        </div>
+                        <span class="bg-green-100 text-green-800 px-2 py-1 text-xs font-medium">Active</span>
+                    </div>
+                    
+                    <div class="space-y-2 mb-4">
+                        <div class="flex items-center text-sm text-gray-600">
+                            <i class="fas fa-baby mr-2 text-gray-700"></i>
+                            <span>Kindergarten</span>
+                        </div>
+                        <div class="flex items-center text-sm text-gray-600">
+                            <i class="fas fa-user mr-2 text-gray-700"></i>
+                            <span>Ms. Carmen Villanueva</span>
+                        </div>
+                        <div class="flex items-center text-sm text-gray-600">
+                            <i class="fas fa-users mr-2 text-gray-700"></i>
+                            <span>24 Students Enrolled</span>
+                        </div>
+                        <div class="flex items-center text-sm text-gray-600">
+                            <i class="fas fa-clock mr-2 text-gray-700"></i>
+                            <span>3 hrs/week</span>
+                        </div>
+                    </div>
+                    
+                    <div class="flex space-x-2">
+                        <button class="flex-1 bg-gray-700 text-white py-2 px-3 text-sm hover:bg-gray-800">
+                            <i class="fas fa-eye mr-1"></i>View
+                        </button>
+                        <button class="flex-1 bg-gray-100 text-gray-700 py-2 px-3 text-sm hover:bg-gray-200 border border-gray-300">
+                            <i class="fas fa-edit mr-1"></i>Edit
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pagination -->
+        <div class="mt-8 flex justify-center">
+            <div class="flex space-x-2">
+                <button class="px-3 py-2 border border-gray-300 text-sm text-gray-500 hover:bg-gray-50">Previous</button>
+                <button class="px-3 py-2 bg-gray-700 text-white text-sm">1</button>
+                <button class="px-3 py-2 border border-gray-300 text-sm text-gray-500 hover:bg-gray-50">2</button>
+                <button class="px-3 py-2 border border-gray-300 text-sm text-gray-500 hover:bg-gray-50">3</button>
+                <button class="px-3 py-2 border border-gray-300 text-sm text-gray-500 hover:bg-gray-50">Next</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

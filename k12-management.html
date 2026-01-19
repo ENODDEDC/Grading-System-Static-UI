@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>K-12 Management - EduManage PH</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-sm border-b">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <a href="index.html" class="flex-shrink-0">
+                        <h1 class="text-xl font-semibold text-gray-900">EduManage PH</h1>
+                    </a>
+                    <div class="hidden md:ml-6 md:flex md:space-x-8">
+                        <a href="admin-dashboard.html" class="text-gray-600 hover:text-gray-900 px-3 py-2 text-sm font-medium">Dashboard</a>
+                        <a href="student-records.html" class="text-gray-600 hover:text-gray-900 px-3 py-2 text-sm font-medium">Students</a>
+                        <a href="k12-management.html" class="text-gray-900 border-b-2 border-gray-700 px-3 py-2 text-sm font-medium">K-12</a>
+                        <a href="college-management.html" class="text-gray-600 hover:text-gray-900 px-3 py-2 text-sm font-medium">College</a>
+                        <a href="course-management.html" class="text-gray-600 hover:text-gray-900 px-3 py-2 text-sm font-medium">Courses</a>
+                        <a href="section-management.html" class="text-gray-600 hover:text-gray-900 px-3 py-2 text-sm font-medium">Sections</a>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <span class="text-sm text-gray-600">Welcome, Teacher Name</span>
+                    <button class="bg-gray-100 p-2 rounded-md">
+                        <i class="fas fa-sign-out-alt text-gray-600"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+        <!-- Header -->
+        <div class="mb-8">
+            <h1 class="text-2xl font-bold text-gray-900">K-12 Management</h1>
+            <p class="text-gray-600">Kindergarten to Senior High School Management</p>
+        </div>
+
+        <!-- Grade Level Tabs -->
+        <div class="mb-6">
+            <div class="border-b border-gray-200">
+                <nav class="-mb-px flex space-x-8">
+                    <button class="border-b-2 border-blue-600 text-blue-600 py-2 px-1 text-sm font-medium">Kindergarten</button>
+                    <button class="border-transparent text-gray-500 hover:text-gray-700 py-2 px-1 text-sm font-medium">Elementary</button>
+                    <button class="border-transparent text-gray-500 hover:text-gray-700 py-2 px-1 text-sm font-medium">Junior High</button>
+                    <button class="border-transparent text-gray-500 hover:text-gray-700 py-2 px-1 text-sm font-medium">Senior High</button>
+                </nav>
+            </div>
+        </div>
+
+        <!-- Stats Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+            <div class="bg-white rounded-lg shadow-sm border p-6">
+                <div class="flex items-center">
+                    <div class="p-2 bg-pink-100 rounded-lg">
+                        <i class="fas fa-baby text-pink-600 text-xl"></i>
+                    </div>
+                    <div class="ml-4">
+                        <p class="text-sm font-medium text-gray-600">Kindergarten</p>
+                        <p class="text-2xl font-bold text-gray-900">156</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-lg shadow-sm border p-6">
+                <div class="flex items-center">
+                    <div class="p-2 bg-blue-100 rounded-lg">
+                        <i class="fas fa-child text-blue-600 text-xl"></i>
+                    </div>
+                    <div class="ml-4">
+                        <p class="text-sm font-medium text-gray-600">Elementary</p>
+                        <p class="text-2xl font-bold text-gray-900">487</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-lg shadow-sm border p-6">
+                <div class="flex items-center">
+                    <div class="p-2 bg-green-100 rounded-lg">
+                        <i class="fas fa-user-graduate text-green-600 text-xl"></i>
+                    </div>
+                    <div class="ml-4">
+                        <p class="text-sm font-medium text-gray-600">Junior High</p>
+                        <p class="text-2xl font-bold text-gray-900">324</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-lg shadow-sm border p-6">
+                <div class="flex items-center">
+                    <div class="p-2 bg-purple-100 rounded-lg">
+                        <i class="fas fa-graduation-cap text-purple-600 text-xl"></i>
+                    </div>
+                    <div class="ml-4">
+                        <p class="text-sm font-medium text-gray-600">Senior High</p>
+                        <p class="text-2xl font-bold text-gray-900">280</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content Grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <!-- Class Sections -->
+            <div class="lg:col-span-2 bg-white rounded-lg shadow-sm border">
+                <div class="p-6 border-b flex justify-between items-center">
+                    <h3 class="text-lg font-semibold text-gray-900">Kindergarten Sections</h3>
+                    <button class="bg-blue-600 text-white px-4 py-2 rounded-md text-sm hover:bg-blue-700">
+                        <i class="fas fa-plus mr-2"></i>Add Section
+                    </button>
+                </div>
+                <div class="p-6">
+                    <div class="space-y-4">
+                        <div class="border rounded-lg p-4 hover:bg-gray-50">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <h4 class="font-medium text-gray-900">Kindergarten - Rose</h4>
+                                    <p class="text-sm text-gray-600">Teacher: Ms. Maria Santos</p>
+                                    <p class="text-sm text-gray-600">Students: 25 | Room: 101</p>
+                                </div>
+                                <div class="flex space-x-2">
+                                    <button class="text-blue-600 hover:text-blue-800">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button class="text-green-600 hover:text-green-800">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="border rounded-lg p-4 hover:bg-gray-50">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <h4 class="font-medium text-gray-900">Kindergarten - Lily</h4>
+                                    <p class="text-sm text-gray-600">Teacher: Ms. Ana Cruz</p>
+                                    <p class="text-sm text-gray-600">Students: 23 | Room: 102</p>
+                                </div>
+                                <div class="flex space-x-2">
+                                    <button class="text-blue-600 hover:text-blue-800">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button class="text-green-600 hover:text-green-800">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="border rounded-lg p-4 hover:bg-gray-50">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <h4 class="font-medium text-gray-900">Kindergarten - Sunflower</h4>
+                                    <p class="text-sm text-gray-600">Teacher: Ms. Carmen Reyes</p>
+                                    <p class="text-sm text-gray-600">Students: 24 | Room: 103</p>
+                                </div>
+                                <div class="flex space-x-2">
+                                    <button class="text-blue-600 hover:text-blue-800">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button class="text-green-600 hover:text-green-800">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- K-12 Grading System -->
+            <div class="bg-white rounded-lg shadow-sm border">
+                <div class="p-6 border-b">
+                    <h3 class="text-lg font-semibold text-gray-900">K-12 Grading Scale</h3>
+                </div>
+                <div class="p-6">
+                    <div class="space-y-3">
+                        <div class="flex justify-between items-center p-3 bg-green-50 rounded-lg">
+                            <span class="font-medium text-green-800">Outstanding</span>
+                            <span class="text-green-600">90-100</span>
+                        </div>
+                        <div class="flex justify-between items-center p-3 bg-blue-50 rounded-lg">
+                            <span class="font-medium text-blue-800">Very Satisfactory</span>
+                            <span class="text-blue-600">85-89</span>
+                        </div>
+                        <div class="flex justify-between items-center p-3 bg-yellow-50 rounded-lg">
+                            <span class="font-medium text-yellow-800">Satisfactory</span>
+                            <span class="text-yellow-600">80-84</span>
+                        </div>
+                        <div class="flex justify-between items-center p-3 bg-orange-50 rounded-lg">
+                            <span class="font-medium text-orange-800">Fairly Satisfactory</span>
+                            <span class="text-orange-600">75-79</span>
+                        </div>
+                        <div class="flex justify-between items-center p-3 bg-red-50 rounded-lg">
+                            <span class="font-medium text-red-800">Did Not Meet</span>
+                            <span class="text-red-600">Below 75</span>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-6 pt-6 border-t">
+                        <h4 class="font-medium text-gray-900 mb-3">Grade Components</h4>
+                        <div class="space-y-2 text-sm">
+                            <div class="flex justify-between">
+                                <span class="text-gray-600">Written Works</span>
+                                <span class="font-medium">30%</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-600">Performance Tasks</span>
+                                <span class="font-medium">50%</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-600">Quarterly Assessment</span>
+                                <span class="font-medium">20%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Subject Management -->
+        <div class="mt-6 bg-white rounded-lg shadow-sm border">
+            <div class="p-6 border-b flex justify-between items-center">
+                <h3 class="text-lg font-semibold text-gray-900">Kindergarten Subjects</h3>
+                <button class="bg-green-600 text-white px-4 py-2 rounded-md text-sm hover:bg-green-700">
+                    <i class="fas fa-plus mr-2"></i>Add Subject
+                </button>
+            </div>
+            <div class="p-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <div class="border rounded-lg p-4 hover:bg-gray-50">
+                        <div class="flex items-center mb-2">
+                            <i class="fas fa-language text-blue-600 mr-2"></i>
+                            <h4 class="font-medium">Mother Tongue</h4>
+                        </div>
+                        <p class="text-sm text-gray-600">Foundation language skills</p>
+                    </div>
+                    
+                    <div class="border rounded-lg p-4 hover:bg-gray-50">
+                        <div class="flex items-center mb-2">
+                            <i class="fas fa-calculator text-green-600 mr-2"></i>
+                            <h4 class="font-medium">Mathematics</h4>
+                        </div>
+                        <p class="text-sm text-gray-600">Basic numeracy skills</p>
+                    </div>
+                    
+                    <div class="border rounded-lg p-4 hover:bg-gray-50">
+                        <div class="flex items-center mb-2">
+                            <i class="fas fa-leaf text-emerald-600 mr-2"></i>
+                            <h4 class="font-medium">Understanding Self</h4>
+                        </div>
+                        <p class="text-sm text-gray-600">Personal development</p>
+                    </div>
+                    
+                    <div class="border rounded-lg p-4 hover:bg-gray-50">
+                        <div class="flex items-center mb-2">
+                            <i class="fas fa-globe text-purple-600 mr-2"></i>
+                            <h4 class="font-medium">Understanding Others</h4>
+                        </div>
+                        <p class="text-sm text-gray-600">Social awareness</p>
+                    </div>
+                    
+                    <div class="border rounded-lg p-4 hover:bg-gray-50">
+                        <div class="flex items-center mb-2">
+                            <i class="fas fa-tree text-teal-600 mr-2"></i>
+                            <h4 class="font-medium">Understanding World</h4>
+                        </div>
+                        <p class="text-sm text-gray-600">Environmental awareness</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

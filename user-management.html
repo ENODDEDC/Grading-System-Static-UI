@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Management - EduManage PH</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-sm border-b">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <a href="index.html" class="flex-shrink-0 flex items-center">
+                        <div class="h-8 w-8 bg-gray-700 rounded flex items-center justify-center mr-3">
+                            <i class="fas fa-graduation-cap text-white text-sm"></i>
+                        </div>
+                        <h1 class="text-lg font-medium text-gray-900">EduManage PH</h1>
+                    </a>
+                    <div class="hidden md:ml-8 md:flex md:space-x-8">
+                        <a href="admin-dashboard.html" class="text-gray-600 hover:text-gray-900 px-3 py-2 text-sm font-medium">Dashboard</a>
+                        <a href="student-records.html" class="text-gray-600 hover:text-gray-900 px-3 py-2 text-sm font-medium">Students</a>
+                        <a href="user-management.html" class="text-gray-900 border-b-2 border-gray-700 px-3 py-2 text-sm font-medium">Users</a>
+                        <a href="reports.html" class="text-gray-600 hover:text-gray-900 px-3 py-2 text-sm font-medium">Reports</a>
+                        <a href="system-settings.html" class="text-gray-600 hover:text-gray-900 px-3 py-2 text-sm font-medium">Settings</a>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <span class="text-sm text-gray-600">Welcome, Administrator</span>
+                    <button class="text-gray-600 hover:text-gray-900">
+                        <i class="fas fa-sign-out-alt"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
+        <!-- Header -->
+        <div class="mb-8">
+            <div class="flex items-center justify-between">
+                <div>
+                    <h1 class="text-2xl font-medium text-gray-900">User Management</h1>
+                    <p class="text-gray-600">Manage teacher and administrator accounts</p>
+                </div>
+                <button class="bg-gray-700 text-white px-4 py-2 text-sm hover:bg-gray-800">
+                    <i class="fas fa-plus mr-2"></i>Add New User
+                </button>
+            </div>
+        </div>
+
+        <!-- User Filters -->
+        <div class="bg-white border border-gray-200 p-6 mb-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Search User</label>
+                    <div class="relative">
+                        <input type="text" placeholder="Name or email" 
+                               class="w-full pl-10 pr-4 py-2 border border-gray-300 focus:outline-none focus:ring-1 focus:ring-gray-500">
+                        <i class="fas fa-search absolute left-3 top-2.5 text-gray-400"></i>
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Role</label>
+                    <select class="w-full px-3 py-2 border border-gray-300 focus:outline-none focus:ring-1 focus:ring-gray-500">
+                        <option>All Roles</option>
+                        <option>Administrator</option>
+                        <option>Teacher</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Department</label>
+                    <select class="w-full px-3 py-2 border border-gray-300 focus:outline-none focus:ring-1 focus:ring-gray-500">
+                        <option>All Departments</option>
+                        <option>Computer Science</option>
+                        <option>Business Administration</option>
+                        <option>Education</option>
+                        <option>Arts & Sciences</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Status</label>
+                    <select class="w-full px-3 py-2 border border-gray-300 focus:outline-none focus:ring-1 focus:ring-gray-500">
+                        <option>All Status</option>
+                        <option>Active</option>
+                        <option>Inactive</option>
+                        <option>Suspended</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!-- User Statistics -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+            <div class="bg-white border border-gray-200 p-6">
+                <div class="flex items-center">
+                    <div class="p-2 bg-gray-100">
+                        <i class="fas fa-users text-gray-700 text-lg"></i>
+                    </div>
+                    <div class="ml-4">
+                        <p class="text-sm font-medium text-gray-600">Total Users</p>
+                        <p class="text-2xl font-medium text-gray-900">47</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white border border-gray-200 p-6">
+                <div class="flex items-center">
+                    <div class="p-2 bg-gray-100">
+                        <i class="fas fa-chalkboard-teacher text-gray-700 text-lg"></i>
+                    </div>
+                    <div class="ml-4">
+                        <p class="text-sm font-medium text-gray-600">Teachers</p>
+                        <p class="text-2xl font-medium text-gray-900">42</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white border border-gray-200 p-6">
+                <div class="flex items-center">
+                    <div class="p-2 bg-gray-100">
+                        <i class="fas fa-user-shield text-gray-700 text-lg"></i>
+                    </div>
+                    <div class="ml-4">
+                        <p class="text-sm font-medium text-gray-600">Administrators</p>
+                        <p class="text-2xl font-medium text-gray-900">5</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white border border-gray-200 p-6">
+                <div class="flex items-center">
+                    <div class="p-2 bg-gray-100">
+                        <i class="fas fa-user-check text-gray-700 text-lg"></i>
+                    </div>
+                    <div class="ml-4">
+                        <p class="text-sm font-medium text-gray-600">Active Users</p>
+                        <p class="text-2xl font-medium text-gray-900">45</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Users List -->
+        <div class="bg-white border border-gray-200">
+            <div class="p-6 border-b border-gray-200">
+                <div class="flex justify-between items-center">
+                    <h3 class="text-lg font-medium text-gray-900">System Users</h3>
+                    <div class="flex space-x-2">
+                        <button class="bg-gray-100 text-gray-700 px-3 py-1 text-sm border border-gray-300 hover:bg-gray-200">
+                            <i class="fas fa-download mr-1"></i>Export
+                        </button>
+                        <button class="bg-gray-100 text-gray-700 px-3 py-1 text-sm border border-gray-300 hover:bg-gray-200">
+                            <i class="fas fa-filter mr-1"></i>Filter
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="overflow-x-auto">
+                <table class="w-full">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">User Info</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Role</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Department</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Last Login</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Status</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-gray-200">
+                        <!-- Administrator -->
+                        <tr class="hover:bg-gray-50">
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="flex items-center">
+                                    <div class="h-10 w-10 bg-gray-100 rounded-full flex items-center justify-center">
+                                        <span class="text-gray-700 font-medium text-sm">AD</span>
+                                    </div>
+                                    <div class="ml-4">
+                                        <div class="text-sm font-medium text-gray-900">Dr. Carmen Rodriguez</div>
+                                        <div class="text-sm text-gray-500">carmen.rodriguez@school.edu.ph</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <span class="px-2 py-1 text-xs font-medium bg-gray-100 text-gray-800">Administrator</span>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">Academic Affairs</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">Jan 18, 2026 9:30 AM</td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <span class="px-2 py-1 text-xs font-medium bg-green-100 text-green-800">Active</span>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                <div class="flex space-x-2">
+                                    <button class="text-gray-600 hover:text-gray-900">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                    <button class="text-gray-600 hover:text-gray-900">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button class="text-gray-600 hover:text-gray-900">
+                                        <i class="fas fa-key"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <!-- Teacher 1 -->
+                        <tr class="hover:bg-gray-50">
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="flex items-center">
+                                    <div class="h-10 w-10 bg-gray-100 rounded-full flex items-center justify-center">
+                                        <span class="text-gray-700 font-medium text-sm">JD</span>
+                                    </div>
+                                    <div class="ml-4">
+                                        <div class="text-sm font-medium text-gray-900">Prof. Juan Dela Cruz</div>
+                                        <div class="text-sm text-gray-500">juan.delacruz@school.edu.ph</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <span class="px-2 py-1 text-xs font-medium bg-gray-100 text-gray-800">Teacher</span>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">Computer Science</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">Jan 18, 2026 8:15 AM</td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <span class="px-2 py-1 text-xs font-medium bg-green-100 text-green-800">Active</span>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                <div class="flex space-x-2">
+                                    <button class="text-gray-600 hover:text-gray-900">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                    <button class="text-gray-600 hover:text-gray-900">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button class="text-gray-600 hover:text-gray-900">
+                                        <i class="fas fa-key"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <!-- Teacher 2 -->
+                        <tr class="hover:bg-gray-50">
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="flex items-center">
+                                    <div class="h-10 w-10 bg-gray-100 rounded-full flex items-center justify-center">
+                                        <span class="text-gray-700 font-medium text-sm">MS</span>
+                                    </div>
+                                    <div class="ml-4">
+                                        <div class="text-sm font-medium text-gray-900">Ms. Maria Santos</div>
+                                        <div class="text-sm text-gray-500">maria.santos@school.edu.ph</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <span class="px-2 py-1 text-xs font-medium bg-gray-100 text-gray-800">Teacher</span>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">Mathematics</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">Jan 17, 2026 4:45 PM</td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <span class="px-2 py-1 text-xs font-medium bg-green-100 text-green-800">Active</span>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                <div class="flex space-x-2">
+                                    <button class="text-gray-600 hover:text-gray-900">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                    <button class="text-gray-600 hover:text-gray-900">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button class="text-gray-600 hover:text-gray-900">
+                                        <i class="fas fa-key"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <!-- Teacher 3 -->
+                        <tr class="hover:bg-gray-50">
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="flex items-center">
+                                    <div class="h-10 w-10 bg-gray-100 rounded-full flex items-center justify-center">
+                                        <span class="text-gray-700 font-medium text-sm">AG</span>
+                                    </div>
+                                    <div class="ml-4">
+                                        <div class="text-sm font-medium text-gray-900">Ms. Ana Garcia</div>
+                                        <div class="text-sm text-gray-500">ana.garcia@school.edu.ph</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <span class="px-2 py-1 text-xs font-medium bg-gray-100 text-gray-800">Teacher</span>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">Elementary</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">Jan 16, 2026 3:20 PM</td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <span class="px-2 py-1 text-xs font-medium bg-red-100 text-red-800">Inactive</span>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                <div class="flex space-x-2">
+                                    <button class="text-gray-600 hover:text-gray-900">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                    <button class="text-gray-600 hover:text-gray-900">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button class="text-gray-600 hover:text-gray-900">
+                                        <i class="fas fa-key"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <!-- Teacher 4 -->
+                        <tr class="hover:bg-gray-50">
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="flex items-center">
+                                    <div class="h-10 w-10 bg-gray-100 rounded-full flex items-center justify-center">
+                                        <span class="text-gray-700 font-medium text-sm">CR</span>
+                                    </div>
+                                    <div class="ml-4">
+                                        <div class="text-sm font-medium text-gray-900">Mr. Carlos Reyes</div>
+                                        <div class="text-sm text-gray-500">carlos.reyes@school.edu.ph</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <span class="px-2 py-1 text-xs font-medium bg-gray-100 text-gray-800">Teacher</span>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">Science</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">Jan 18, 2026 7:45 AM</td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <span class="px-2 py-1 text-xs font-medium bg-green-100 text-green-800">Active</span>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                <div class="flex space-x-2">
+                                    <button class="text-gray-600 hover:text-gray-900">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                    <button class="text-gray-600 hover:text-gray-900">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button class="text-gray-600 hover:text-gray-900">
+                                        <i class="fas fa-key"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <!-- Pagination -->
+            <div class="px-6 py-4 border-t border-gray-200">
+                <div class="flex items-center justify-between">
+                    <div class="text-sm text-gray-700">
+                        Showing <span class="font-medium">1</span> to <span class="font-medium">10</span> of <span class="font-medium">47</span> results
+                    </div>
+                    <div class="flex space-x-2">
+                        <button class="px-3 py-1 border border-gray-300 text-sm text-gray-500 hover:bg-gray-50">Previous</button>
+                        <button class="px-3 py-1 bg-gray-700 text-white text-sm">1</button>
+                        <button class="px-3 py-1 border border-gray-300 text-sm text-gray-500 hover:bg-gray-50">2</button>
+                        <button class="px-3 py-1 border border-gray-300 text-sm text-gray-500 hover:bg-gray-50">3</button>
+                        <button class="px-3 py-1 border border-gray-300 text-sm text-gray-500 hover:bg-gray-50">Next</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
