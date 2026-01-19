@@ -236,10 +236,10 @@
                                 </div>
                                 
                                 <div class="grid grid-cols-2 gap-1">
-                                    <div class="year-item text-sm text-gray-600 hover:text-gray-900 text-center">Grade 7</div>
-                                    <div class="year-item text-sm text-gray-600 hover:text-gray-900 text-center">Grade 8</div>
-                                    <div class="year-item text-sm text-gray-600 hover:text-gray-900 text-center">Grade 9</div>
-                                    <div class="year-item text-sm text-gray-600 hover:text-gray-900 text-center">Grade 10</div>
+                                    <div class="year-item text-sm text-gray-600 hover:text-gray-900 text-center cursor-pointer" onclick="showGradeContent('Grade 7')">Grade 7</div>
+                                    <div class="year-item text-sm text-gray-600 hover:text-gray-900 text-center cursor-pointer" onclick="showGradeContent('Grade 8')">Grade 8</div>
+                                    <div class="year-item text-sm text-gray-600 hover:text-gray-900 text-center cursor-pointer" onclick="showGradeContent('Grade 9')">Grade 9</div>
+                                    <div class="year-item text-sm text-gray-600 hover:text-gray-900 text-center cursor-pointer" onclick="showGradeContent('Grade 10')">Grade 10</div>
                                 </div>
                             </div>
                             
@@ -251,8 +251,8 @@
                                 </div>
                                 
                                 <div class="grid grid-cols-2 gap-1">
-                                    <div class="year-item text-sm text-gray-600 hover:text-gray-900 text-center">Grade 11</div>
-                                    <div class="year-item text-sm text-gray-600 hover:text-gray-900 text-center">Grade 12</div>
+                                    <div class="year-item text-sm text-gray-600 hover:text-gray-900 text-center cursor-pointer" onclick="showGradeContent('Grade 11')">Grade 11</div>
+                                    <div class="year-item text-sm text-gray-600 hover:text-gray-900 text-center cursor-pointer" onclick="showGradeContent('Grade 12')">Grade 12</div>
                                 </div>
                             </div>
                         </div>
@@ -1038,6 +1038,38 @@
                     { name: 'Science Discovery', icon: 'fas fa-seedling', description: 'Nature & Exploration', students: 45, sections: 3 },
                     { name: 'Story Time', icon: 'fas fa-book-open', description: 'Listening & Comprehension', students: 45, sections: 3 }
                 ];
+            } else if (['Grade 7', 'Grade 8', 'Grade 9', 'Grade 10'].includes(grade)) {
+                // Junior High School subjects
+                subjects = [
+                    { name: 'Mathematics', icon: 'fas fa-calculator', description: 'Algebra & Geometry', students: 180, sections: 6 },
+                    { name: 'Science', icon: 'fas fa-atom', description: 'Biology, Chemistry & Physics', students: 180, sections: 6 },
+                    { name: 'English', icon: 'fas fa-book-open', description: 'Literature & Communication', students: 180, sections: 6 },
+                    { name: 'Filipino', icon: 'fas fa-flag', description: 'Wika at Panitikan', students: 180, sections: 6 },
+                    { name: 'Araling Panlipunan', icon: 'fas fa-globe-asia', description: 'Social Studies & History', students: 180, sections: 6 },
+                    { name: 'Technology and Livelihood Education', icon: 'fas fa-tools', description: 'TLE & Practical Skills', students: 180, sections: 6 },
+                    { name: 'Music, Arts, PE & Health', icon: 'fas fa-heart', description: 'MAPEH Integrated', students: 180, sections: 6 },
+                    { name: 'Edukasyon sa Pagpapakatao', icon: 'fas fa-hands-helping', description: 'Values Education', students: 180, sections: 6 },
+                    { name: 'Computer Education', icon: 'fas fa-laptop', description: 'ICT & Digital Literacy', students: 180, sections: 6 }
+                ];
+            } else if (['Grade 11', 'Grade 12'].includes(grade)) {
+                // Senior High School subjects - Core + Track-based
+                subjects = [
+                    // Core Subjects
+                    { name: 'Oral Communication', icon: 'fas fa-microphone', description: 'Communication Skills', students: 240, sections: 8 },
+                    { name: 'Reading and Writing', icon: 'fas fa-pen-fancy', description: 'Literacy & Composition', students: 240, sections: 8 },
+                    { name: 'Komunikasyon at Pananaliksik', icon: 'fas fa-search', description: 'Filipino Research', students: 240, sections: 8 },
+                    { name: 'General Mathematics', icon: 'fas fa-square-root-alt', description: 'Applied Mathematics', students: 240, sections: 8 },
+                    { name: 'Statistics and Probability', icon: 'fas fa-chart-line', description: 'Data Analysis', students: 240, sections: 8 },
+                    { name: 'Earth and Life Science', icon: 'fas fa-globe', description: 'Environmental Science', students: 240, sections: 8 },
+                    { name: 'Physical Science', icon: 'fas fa-atom', description: 'Physics & Chemistry', students: 240, sections: 8 },
+                    { name: 'Personal Development', icon: 'fas fa-user-graduate', description: 'Life Skills', students: 240, sections: 8 },
+                    // Track Subjects
+                    { name: 'STEM Track', icon: 'fas fa-flask', description: 'Science, Technology, Engineering, Math', students: 90, sections: 3 },
+                    { name: 'ABM Track', icon: 'fas fa-chart-pie', description: 'Accountancy, Business, Management', students: 90, sections: 3 },
+                    { name: 'HUMSS Track', icon: 'fas fa-users', description: 'Humanities & Social Sciences', students: 90, sections: 3 },
+                    { name: 'GAS Track', icon: 'fas fa-graduation-cap', description: 'General Academic Strand', students: 90, sections: 3 },
+                    { name: 'TVL Track', icon: 'fas fa-tools', description: 'Technical-Vocational-Livelihood', students: 90, sections: 3 }
+                ];
             } else {
                 // Elementary subjects (existing)
                 subjects = [
@@ -1225,7 +1257,132 @@
                     { section: 'Tale Tellers', teacher: 'Ms. Read' },
                     { section: 'Story Circle', teacher: 'Ms. Listen' }
                 ],
-                // Elementary sections (existing)
+                // Junior High School sections
+                'Mathematics': [
+                    { section: 'Newton', teacher: 'Mr. Algebra' },
+                    { section: 'Einstein', teacher: 'Ms. Geometry' },
+                    { section: 'Pythagoras', teacher: 'Dr. Calculus' },
+                    { section: 'Euler', teacher: 'Ms. Statistics' },
+                    { section: 'Fibonacci', teacher: 'Mr. Numbers' },
+                    { section: 'Gauss', teacher: 'Ms. Equations' }
+                ],
+                'Araling Panlipunan': [
+                    { section: 'Luzon', teacher: 'G. Kasaysayan' },
+                    { section: 'Visayas', teacher: 'Gng. Kultura' },
+                    { section: 'Mindanao', teacher: 'Dr. Lipunan' },
+                    { section: 'Manila', teacher: 'Ms. Bayan' },
+                    { section: 'Cebu', teacher: 'G. Lahi' },
+                    { section: 'Davao', teacher: 'Gng. Mundo' }
+                ],
+                'Technology and Livelihood Education': [
+                    { section: 'Innovators', teacher: 'Mr. Tech' },
+                    { section: 'Builders', teacher: 'Ms. Craft' },
+                    { section: 'Creators', teacher: 'Dr. Skills' },
+                    { section: 'Makers', teacher: 'Ms. Tools' },
+                    { section: 'Engineers', teacher: 'Mr. Build' },
+                    { section: 'Designers', teacher: 'Ms. Create' }
+                ],
+                'Music, Arts, PE & Health': [
+                    { section: 'Harmony', teacher: 'Ms. Melody' },
+                    { section: 'Rhythm', teacher: 'Mr. Beat' },
+                    { section: 'Canvas', teacher: 'Ms. Paint' },
+                    { section: 'Fitness', teacher: 'Coach Strong' },
+                    { section: 'Wellness', teacher: 'Ms. Health' },
+                    { section: 'Athletes', teacher: 'Coach Power' }
+                ],
+                'Edukasyon sa Pagpapakatao': [
+                    { section: 'Mabuting Asal', teacher: 'Gng. Virtue' },
+                    { section: 'Pagkakaisa', teacher: 'G. Unity' },
+                    { section: 'Kapayapaan', teacher: 'Ms. Peace' },
+                    { section: 'Pagmamahal', teacher: 'Gng. Love' },
+                    { section: 'Katapatan', teacher: 'G. Truth' },
+                    { section: 'Respeto', teacher: 'Ms. Honor' }
+                ],
+                'Computer Education': [
+                    { section: 'Coders', teacher: 'Mr. Binary' },
+                    { section: 'Programmers', teacher: 'Ms. Logic' },
+                    { section: 'Developers', teacher: 'Dr. Code' },
+                    { section: 'Techies', teacher: 'Ms. Digital' },
+                    { section: 'Gamers', teacher: 'Mr. Pixel' },
+                    { section: 'Hackers', teacher: 'Ms. Cyber' }
+                ],
+                // Senior High School sections
+                'Oral Communication': [
+                    { section: 'Speakers', teacher: 'Ms. Eloquent' },
+                    { section: 'Orators', teacher: 'Mr. Voice' },
+                    { section: 'Debaters', teacher: 'Dr. Argument' },
+                    { section: 'Presenters', teacher: 'Ms. Stage' },
+                    { section: 'Communicators', teacher: 'Mr. Express' },
+                    { section: 'Rhetoricians', teacher: 'Ms. Persuade' },
+                    { section: 'Articulate', teacher: 'Dr. Clear' },
+                    { section: 'Eloquence', teacher: 'Ms. Fluent' }
+                ],
+                'Reading and Writing': [
+                    { section: 'Authors', teacher: 'Ms. Pen' },
+                    { section: 'Writers', teacher: 'Mr. Ink' },
+                    { section: 'Scribes', teacher: 'Dr. Text' },
+                    { section: 'Poets', teacher: 'Ms. Verse' },
+                    { section: 'Journalists', teacher: 'Mr. News' },
+                    { section: 'Editors', teacher: 'Ms. Revise' },
+                    { section: 'Critics', teacher: 'Dr. Review' },
+                    { section: 'Novelists', teacher: 'Ms. Story' }
+                ],
+                'Komunikasyon at Pananaliksik': [
+                    { section: 'Mananaliksik', teacher: 'Gng. Saliksik' },
+                    { section: 'Tagasuri', teacher: 'G. Pagsusuri' },
+                    { section: 'Manunulat', teacher: 'Dr. Sulat' },
+                    { section: 'Tagapagsalaysay', teacher: 'Ms. Salaysay' },
+                    { section: 'Tagapagbalita', teacher: 'G. Balita' },
+                    { section: 'Tagapagturo', teacher: 'Gng. Turo' },
+                    { section: 'Tagapagbasa', teacher: 'Dr. Basa' },
+                    { section: 'Tagapagsulat', teacher: 'Ms. Akda' }
+                ],
+                'General Mathematics': [
+                    { section: 'Calculators', teacher: 'Mr. Numbers' },
+                    { section: 'Equations', teacher: 'Ms. Formula' },
+                    { section: 'Functions', teacher: 'Dr. Graph' },
+                    { section: 'Algorithms', teacher: 'Ms. Logic' },
+                    { section: 'Theorems', teacher: 'Mr. Proof' },
+                    { section: 'Variables', teacher: 'Ms. Unknown' },
+                    { section: 'Constants', teacher: 'Dr. Fixed' },
+                    { section: 'Solutions', teacher: 'Ms. Answer' }
+                ],
+                'Statistics and Probability': [
+                    { section: 'Data Miners', teacher: 'Mr. Stats' },
+                    { section: 'Analysts', teacher: 'Ms. Data' },
+                    { section: 'Researchers', teacher: 'Dr. Survey' },
+                    { section: 'Statisticians', teacher: 'Ms. Mean' },
+                    { section: 'Probability', teacher: 'Mr. Chance' },
+                    { section: 'Samplers', teacher: 'Ms. Random' },
+                    { section: 'Correlators', teacher: 'Dr. Relate' },
+                    { section: 'Predictors', teacher: 'Ms. Forecast' }
+                ],
+                'STEM Track': [
+                    { section: 'Innovators', teacher: 'Dr. Science' },
+                    { section: 'Engineers', teacher: 'Ms. Tech' },
+                    { section: 'Researchers', teacher: 'Mr. Lab' }
+                ],
+                'ABM Track': [
+                    { section: 'Entrepreneurs', teacher: 'Ms. Business' },
+                    { section: 'Accountants', teacher: 'Mr. Finance' },
+                    { section: 'Managers', teacher: 'Dr. Leadership' }
+                ],
+                'HUMSS Track': [
+                    { section: 'Philosophers', teacher: 'Dr. Wisdom' },
+                    { section: 'Historians', teacher: 'Ms. Past' },
+                    { section: 'Sociologists', teacher: 'Mr. Society' }
+                ],
+                'GAS Track': [
+                    { section: 'Explorers', teacher: 'Ms. Discover' },
+                    { section: 'Learners', teacher: 'Mr. Knowledge' },
+                    { section: 'Scholars', teacher: 'Dr. Academic' }
+                ],
+                'TVL Track': [
+                    { section: 'Craftsmen', teacher: 'Mr. Skills' },
+                    { section: 'Technicians', teacher: 'Ms. Hands' },
+                    { section: 'Artisans', teacher: 'Dr. Craft' }
+                ],
+                // Elementary sections (existing - keeping Science separate for JHS)
                 'Science': [
                     { section: 'Pluto', teacher: 'Mr. Cruz' },
                     { section: 'Mars', teacher: 'Ms. Reyes' },
@@ -1332,11 +1489,80 @@
                 { section: 'Section D', teacher: 'Teacher 4' }
             ];
             
+            // For JHS subjects that might conflict with elementary, use grade-specific sections
+            let actualSections = sections;
+            if (['Grade 7', 'Grade 8', 'Grade 9', 'Grade 10'].includes(navigationState.grade)) {
+                if (subject === 'Science') {
+                    actualSections = [
+                        { section: 'Atom', teacher: 'Dr. Chemistry' },
+                        { section: 'Molecule', teacher: 'Ms. Biology' },
+                        { section: 'Element', teacher: 'Mr. Physics' },
+                        { section: 'Compound', teacher: 'Ms. Science' },
+                        { section: 'Reaction', teacher: 'Dr. Lab' },
+                        { section: 'Formula', teacher: 'Mr. Experiment' }
+                    ];
+                } else if (subject === 'English') {
+                    actualSections = [
+                        { section: 'Literature', teacher: 'Ms. Shakespeare' },
+                        { section: 'Grammar', teacher: 'Mr. Language' },
+                        { section: 'Writing', teacher: 'Dr. Composition' },
+                        { section: 'Reading', teacher: 'Ms. Comprehension' },
+                        { section: 'Speaking', teacher: 'Mr. Communication' },
+                        { section: 'Listening', teacher: 'Ms. Audio' }
+                    ];
+                } else if (subject === 'Filipino') {
+                    actualSections = [
+                        { section: 'Panitikan', teacher: 'Gng. Literatura' },
+                        { section: 'Gramatika', teacher: 'G. Wika' },
+                        { section: 'Pagbasa', teacher: 'Ms. Unawa' },
+                        { section: 'Pagsulat', teacher: 'Gng. Akda' },
+                        { section: 'Pakikipagtalastasan', teacher: 'G. Salita' },
+                        { section: 'Kultura', teacher: 'Dr. Tradisyon' }
+                    ];
+                }
+            } else if (['Grade 11', 'Grade 12'].includes(navigationState.grade)) {
+                // SHS subjects use the defined sections from subjectSections
+                if (subject === 'Earth and Life Science') {
+                    actualSections = [
+                        { section: 'Biosphere', teacher: 'Dr. Earth' },
+                        { section: 'Ecosystem', teacher: 'Ms. Life' },
+                        { section: 'Geology', teacher: 'Mr. Rock' },
+                        { section: 'Biology', teacher: 'Ms. Living' },
+                        { section: 'Environment', teacher: 'Dr. Green' },
+                        { section: 'Evolution', teacher: 'Ms. Darwin' },
+                        { section: 'Genetics', teacher: 'Mr. DNA' },
+                        { section: 'Ecology', teacher: 'Dr. Nature' }
+                    ];
+                } else if (subject === 'Physical Science') {
+                    actualSections = [
+                        { section: 'Physics', teacher: 'Dr. Newton' },
+                        { section: 'Chemistry', teacher: 'Ms. Element' },
+                        { section: 'Motion', teacher: 'Mr. Force' },
+                        { section: 'Energy', teacher: 'Ms. Power' },
+                        { section: 'Matter', teacher: 'Dr. Particle' },
+                        { section: 'Waves', teacher: 'Ms. Frequency' },
+                        { section: 'Optics', teacher: 'Mr. Light' },
+                        { section: 'Thermodynamics', teacher: 'Dr. Heat' }
+                    ];
+                } else if (subject === 'Personal Development') {
+                    actualSections = [
+                        { section: 'Self-Awareness', teacher: 'Ms. Mind' },
+                        { section: 'Goal Setting', teacher: 'Mr. Target' },
+                        { section: 'Leadership', teacher: 'Dr. Lead' },
+                        { section: 'Communication', teacher: 'Ms. Connect' },
+                        { section: 'Relationships', teacher: 'Mr. Bond' },
+                        { section: 'Career Planning', teacher: 'Ms. Future' },
+                        { section: 'Life Skills', teacher: 'Dr. Practical' },
+                        { section: 'Wellness', teacher: 'Ms. Health' }
+                    ];
+                }
+            }
+            
             // Populate sections grid
             const sectionsGrid = document.getElementById('sections-grid');
             sectionsGrid.innerHTML = '';
             
-            sections.forEach(item => {
+            actualSections.forEach(item => {
                 const sectionCard = document.createElement('div');
                 sectionCard.className = 'bg-white border border-gray-200 hover:border-gray-400 cursor-pointer transition-colors';
                 sectionCard.onclick = () => showSectionDetails(subject, item.section, item.teacher);
@@ -1449,6 +1675,170 @@
                     { id: 'K2023-043', lastName: 'Rodriguez', firstName: 'Zoey Dawn', middleName: 'Espinoza', gender: 'Female', status: 'Active' },
                     { id: 'K2023-044', lastName: 'Lewis', firstName: 'Caleb Antonio', middleName: 'Moreno', gender: 'Male', status: 'Active' },
                     { id: 'K2023-045', lastName: 'Lee', firstName: 'Nora Hope', middleName: 'Valdez', gender: 'Female', status: 'Active' }
+                ],
+                // Junior High School students
+                'Atom': [
+                    { id: 'JHS2023-001', lastName: 'Mendoza', firstName: 'Adrian Kyle', middleName: 'Santos', gender: 'Male', status: 'Active' },
+                    { id: 'JHS2023-002', lastName: 'Villanueva', firstName: 'Sophia Claire', middleName: 'Reyes', gender: 'Female', status: 'Active' },
+                    { id: 'JHS2023-003', lastName: 'Fernandez', firstName: 'Marcus James', middleName: 'Lopez', gender: 'Male', status: 'Active' },
+                    { id: 'JHS2023-004', lastName: 'Torres', firstName: 'Isabella Mae', middleName: 'Garcia', gender: 'Female', status: 'Active' },
+                    { id: 'JHS2023-005', lastName: 'Morales', firstName: 'Ethan Luis', middleName: 'Cruz', gender: 'Male', status: 'Active' },
+                    { id: 'JHS2023-006', lastName: 'Castillo', firstName: 'Mia Grace', middleName: 'Rodriguez', gender: 'Female', status: 'Active' },
+                    { id: 'JHS2023-007', lastName: 'Herrera', firstName: 'Gabriel Jose', middleName: 'Mendoza', gender: 'Male', status: 'Active' },
+                    { id: 'JHS2023-008', lastName: 'Navarro', firstName: 'Olivia Rose', middleName: 'Valdez', gender: 'Female', status: 'Active' },
+                    { id: 'JHS2023-009', lastName: 'Aguilar', firstName: 'Lucas Miguel', middleName: 'Jimenez', gender: 'Male', status: 'Active' },
+                    { id: 'JHS2023-010', lastName: 'Ortega', firstName: 'Emma Faith', middleName: 'Gutierrez', gender: 'Female', status: 'Active' },
+                    { id: 'JHS2023-011', lastName: 'Ramirez', firstName: 'Noah David', middleName: 'Moreno', gender: 'Male', status: 'Active' },
+                    { id: 'JHS2023-012', lastName: 'Flores', firstName: 'Ava Marie', middleName: 'Vargas', gender: 'Female', status: 'Active' },
+                    { id: 'JHS2023-013', lastName: 'Guerrero', firstName: 'Liam Paul', middleName: 'Silva', gender: 'Male', status: 'Active' },
+                    { id: 'JHS2023-014', lastName: 'Medina', firstName: 'Charlotte Joy', middleName: 'Vega', gender: 'Female', status: 'Active' },
+                    { id: 'JHS2023-015', lastName: 'Ruiz', firstName: 'Mason Rey', middleName: 'Rojas', gender: 'Male', status: 'Active' },
+                    { id: 'JHS2023-016', lastName: 'Jimenez', firstName: 'Amelia Hope', middleName: 'Soto', gender: 'Female', status: 'Active' },
+                    { id: 'JHS2023-017', lastName: 'Vargas', firstName: 'Jacob Antonio', middleName: 'Pena', gender: 'Male', status: 'Active' },
+                    { id: 'JHS2023-018', lastName: 'Molina', firstName: 'Harper Belle', middleName: 'Ortiz', gender: 'Female', status: 'Active' },
+                    { id: 'JHS2023-019', lastName: 'Contreras', firstName: 'Benjamin Luis', middleName: 'Herrera', gender: 'Male', status: 'Active' },
+                    { id: 'JHS2023-020', lastName: 'Sandoval', firstName: 'Evelyn Dawn', middleName: 'Castro', gender: 'Female', status: 'Active' }
+                ],
+                'Newton': [
+                    { id: 'JHS2023-021', lastName: 'Dominguez', firstName: 'Alexander John', middleName: 'Morales', gender: 'Male', status: 'Active' },
+                    { id: 'JHS2023-022', lastName: 'Paredes', firstName: 'Scarlett Grace', middleName: 'Romero', gender: 'Female', status: 'Active' },
+                    { id: 'JHS2023-023', lastName: 'Salazar', firstName: 'Henry James', middleName: 'Aguilar', gender: 'Male', status: 'Active' },
+                    { id: 'JHS2023-024', lastName: 'Rivera', firstName: 'Luna Marie', middleName: 'Delgado', gender: 'Female', status: 'Active' },
+                    { id: 'JHS2023-025', lastName: 'Torres', firstName: 'Sebastian Paul', middleName: 'Espinoza', gender: 'Male', status: 'Active' },
+                    { id: 'JHS2023-026', lastName: 'Ramos', firstName: 'Penelope Rose', middleName: 'Moreno', gender: 'Female', status: 'Active' },
+                    { id: 'JHS2023-027', lastName: 'Cruz', firstName: 'Daniel Antonio', middleName: 'Valdez', gender: 'Male', status: 'Active' },
+                    { id: 'JHS2023-028', lastName: 'Lopez', firstName: 'Layla Faith', middleName: 'Gutierrez', gender: 'Female', status: 'Active' },
+                    { id: 'JHS2023-029', lastName: 'Gonzales', firstName: 'Matthew Rey', middleName: 'Herrera', gender: 'Male', status: 'Active' },
+                    { id: 'JHS2023-030', lastName: 'Perez', firstName: 'Chloe Belle', middleName: 'Jimenez', gender: 'Female', status: 'Active' },
+                    { id: 'JHS2023-031', lastName: 'Martinez', firstName: 'Christopher Luis', middleName: 'Vargas', gender: 'Male', status: 'Active' },
+                    { id: 'JHS2023-032', lastName: 'Anderson', firstName: 'Zoey Hope', middleName: 'Ortega', gender: 'Female', status: 'Active' },
+                    { id: 'JHS2023-033', lastName: 'Taylor', firstName: 'Caleb David', middleName: 'Silva', gender: 'Male', status: 'Active' },
+                    { id: 'JHS2023-034', lastName: 'Thomas', firstName: 'Nora Joy', middleName: 'Vega', gender: 'Female', status: 'Active' },
+                    { id: 'JHS2023-035', lastName: 'Jackson', firstName: 'Ryan Miguel', middleName: 'Rojas', gender: 'Male', status: 'Active' },
+                    { id: 'JHS2023-036', lastName: 'White', firstName: 'Victoria Grace', middleName: 'Soto', gender: 'Female', status: 'Active' },
+                    { id: 'JHS2023-037', lastName: 'Harris', firstName: 'Nathan James', middleName: 'Pena', gender: 'Male', status: 'Active' },
+                    { id: 'JHS2023-038', lastName: 'Martin', firstName: 'Avery Rose', middleName: 'Ortiz', gender: 'Female', status: 'Active' },
+                    { id: 'JHS2023-039', lastName: 'Garcia', firstName: 'Joshua Luis', middleName: 'Herrera', gender: 'Male', status: 'Active' },
+                    { id: 'JHS2023-040', lastName: 'Martinez', firstName: 'Lily Faith', middleName: 'Castro', gender: 'Female', status: 'Active' }
+                ],
+                'Luzon': [
+                    { id: 'JHS2023-041', lastName: 'Robinson', firstName: 'Samuel Rey', middleName: 'Morales', gender: 'Male', status: 'Active' },
+                    { id: 'JHS2023-042', lastName: 'Clark', firstName: 'Stella Mae', middleName: 'Romero', gender: 'Female', status: 'Active' },
+                    { id: 'JHS2023-043', lastName: 'Rodriguez', firstName: 'Owen David', middleName: 'Aguilar', gender: 'Male', status: 'Active' },
+                    { id: 'JHS2023-044', lastName: 'Lewis', firstName: 'Hazel Grace', middleName: 'Delgado', gender: 'Female', status: 'Active' },
+                    { id: 'JHS2023-045', lastName: 'Lee', firstName: 'Eli James', middleName: 'Espinoza', gender: 'Male', status: 'Active' },
+                    { id: 'JHS2023-046', lastName: 'Walker', firstName: 'Violet Rose', middleName: 'Moreno', gender: 'Female', status: 'Active' },
+                    { id: 'JHS2023-047', lastName: 'Hall', firstName: 'Wyatt Luis', middleName: 'Valdez', gender: 'Male', status: 'Active' },
+                    { id: 'JHS2023-048', lastName: 'Allen', firstName: 'Aurora Belle', middleName: 'Gutierrez', gender: 'Female', status: 'Active' },
+                    { id: 'JHS2023-049', lastName: 'Young', firstName: 'Grayson Paul', middleName: 'Herrera', gender: 'Male', status: 'Active' },
+                    { id: 'JHS2023-050', lastName: 'Hernandez', firstName: 'Savannah Joy', middleName: 'Jimenez', gender: 'Female', status: 'Active' },
+                    { id: 'JHS2023-051', lastName: 'King', firstName: 'Leo Antonio', middleName: 'Vargas', gender: 'Male', status: 'Active' },
+                    { id: 'JHS2023-052', lastName: 'Wright', firstName: 'Brooklyn Faith', middleName: 'Ortega', gender: 'Female', status: 'Active' },
+                    { id: 'JHS2023-053', lastName: 'Lopez', firstName: 'Jaxon Rey', middleName: 'Silva', gender: 'Male', status: 'Active' },
+                    { id: 'JHS2023-054', lastName: 'Hill', firstName: 'Bella Hope', middleName: 'Vega', gender: 'Female', status: 'Active' },
+                    { id: 'JHS2023-055', lastName: 'Scott', firstName: 'Carson Miguel', middleName: 'Rojas', gender: 'Male', status: 'Active' },
+                    { id: 'JHS2023-056', lastName: 'Green', firstName: 'Claire Dawn', middleName: 'Soto', gender: 'Female', status: 'Active' },
+                    { id: 'JHS2023-057', lastName: 'Adams', firstName: 'Easton James', middleName: 'Pena', gender: 'Male', status: 'Active' },
+                    { id: 'JHS2023-058', lastName: 'Baker', firstName: 'Skylar Grace', middleName: 'Ortiz', gender: 'Female', status: 'Active' },
+                    { id: 'JHS2023-059', lastName: 'Gonzalez', firstName: 'Colton Luis', middleName: 'Herrera', gender: 'Male', status: 'Active' },
+                    { id: 'JHS2023-060', lastName: 'Nelson', firstName: 'Paisley Rose', middleName: 'Castro', gender: 'Female', status: 'Active' }
+                ],
+                // Senior High School students
+                'Speakers': [
+                    { id: 'SHS2023-001', lastName: 'Villanueva', firstName: 'Alexis Marie', middleName: 'Santos', gender: 'Female', status: 'Active' },
+                    { id: 'SHS2023-002', lastName: 'Fernandez', firstName: 'Ethan Gabriel', middleName: 'Reyes', gender: 'Male', status: 'Active' },
+                    { id: 'SHS2023-003', lastName: 'Torres', firstName: 'Sophia Claire', middleName: 'Lopez', gender: 'Female', status: 'Active' },
+                    { id: 'SHS2023-004', lastName: 'Morales', firstName: 'Lucas James', middleName: 'Garcia', gender: 'Male', status: 'Active' },
+                    { id: 'SHS2023-005', lastName: 'Castillo', firstName: 'Isabella Grace', middleName: 'Cruz', gender: 'Female', status: 'Active' },
+                    { id: 'SHS2023-006', lastName: 'Herrera', firstName: 'Mason Paul', middleName: 'Rodriguez', gender: 'Male', status: 'Active' },
+                    { id: 'SHS2023-007', lastName: 'Navarro', firstName: 'Olivia Rose', middleName: 'Mendoza', gender: 'Female', status: 'Active' },
+                    { id: 'SHS2023-008', lastName: 'Aguilar', firstName: 'Noah David', middleName: 'Valdez', gender: 'Male', status: 'Active' },
+                    { id: 'SHS2023-009', lastName: 'Ortega', firstName: 'Emma Faith', middleName: 'Jimenez', gender: 'Female', status: 'Active' },
+                    { id: 'SHS2023-010', lastName: 'Ramirez', firstName: 'Liam Miguel', middleName: 'Gutierrez', gender: 'Male', status: 'Active' },
+                    { id: 'SHS2023-011', lastName: 'Flores', firstName: 'Ava Marie', middleName: 'Moreno', gender: 'Female', status: 'Active' },
+                    { id: 'SHS2023-012', lastName: 'Guerrero', firstName: 'William Rey', middleName: 'Vargas', gender: 'Male', status: 'Active' },
+                    { id: 'SHS2023-013', lastName: 'Medina', firstName: 'Charlotte Joy', middleName: 'Silva', gender: 'Female', status: 'Active' },
+                    { id: 'SHS2023-014', lastName: 'Ruiz', firstName: 'Benjamin Luis', middleName: 'Vega', gender: 'Male', status: 'Active' },
+                    { id: 'SHS2023-015', lastName: 'Jimenez', firstName: 'Amelia Hope', middleName: 'Rojas', gender: 'Female', status: 'Active' },
+                    { id: 'SHS2023-016', lastName: 'Vargas', firstName: 'James Antonio', middleName: 'Soto', gender: 'Male', status: 'Active' },
+                    { id: 'SHS2023-017', lastName: 'Molina', firstName: 'Harper Belle', middleName: 'Pena', gender: 'Female', status: 'Active' },
+                    { id: 'SHS2023-018', lastName: 'Contreras', firstName: 'Alexander John', middleName: 'Ortiz', gender: 'Male', status: 'Active' },
+                    { id: 'SHS2023-019', lastName: 'Sandoval', firstName: 'Evelyn Dawn', middleName: 'Herrera', gender: 'Female', status: 'Active' },
+                    { id: 'SHS2023-020', lastName: 'Dominguez', firstName: 'Henry James', middleName: 'Castro', gender: 'Male', status: 'Active' },
+                    { id: 'SHS2023-021', lastName: 'Paredes', firstName: 'Scarlett Grace', middleName: 'Morales', gender: 'Female', status: 'Active' },
+                    { id: 'SHS2023-022', lastName: 'Salazar', firstName: 'Sebastian Paul', middleName: 'Romero', gender: 'Male', status: 'Active' },
+                    { id: 'SHS2023-023', lastName: 'Rivera', firstName: 'Luna Marie', middleName: 'Aguilar', gender: 'Female', status: 'Active' },
+                    { id: 'SHS2023-024', lastName: 'Torres', firstName: 'Daniel Antonio', middleName: 'Delgado', gender: 'Male', status: 'Active' },
+                    { id: 'SHS2023-025', lastName: 'Ramos', firstName: 'Penelope Rose', middleName: 'Espinoza', gender: 'Female', status: 'Active' },
+                    { id: 'SHS2023-026', lastName: 'Cruz', firstName: 'Matthew Rey', middleName: 'Moreno', gender: 'Male', status: 'Active' },
+                    { id: 'SHS2023-027', lastName: 'Lopez', firstName: 'Layla Faith', middleName: 'Valdez', gender: 'Female', status: 'Active' },
+                    { id: 'SHS2023-028', lastName: 'Gonzales', firstName: 'Christopher Luis', middleName: 'Gutierrez', gender: 'Male', status: 'Active' },
+                    { id: 'SHS2023-029', lastName: 'Perez', firstName: 'Chloe Belle', middleName: 'Herrera', gender: 'Female', status: 'Active' },
+                    { id: 'SHS2023-030', lastName: 'Martinez', firstName: 'Joshua David', middleName: 'Jimenez', gender: 'Male', status: 'Active' }
+                ],
+                'Innovators': [
+                    { id: 'SHS2023-031', lastName: 'Anderson', firstName: 'Zoey Hope', middleName: 'Vargas', gender: 'Female', status: 'Active' },
+                    { id: 'SHS2023-032', lastName: 'Taylor', firstName: 'Caleb Miguel', middleName: 'Ortega', gender: 'Male', status: 'Active' },
+                    { id: 'SHS2023-033', lastName: 'Thomas', firstName: 'Nora Joy', middleName: 'Silva', gender: 'Female', status: 'Active' },
+                    { id: 'SHS2023-034', lastName: 'Jackson', firstName: 'Ryan James', middleName: 'Vega', gender: 'Male', status: 'Active' },
+                    { id: 'SHS2023-035', lastName: 'White', firstName: 'Victoria Grace', middleName: 'Rojas', gender: 'Female', status: 'Active' },
+                    { id: 'SHS2023-036', lastName: 'Harris', firstName: 'Nathan Paul', middleName: 'Soto', gender: 'Male', status: 'Active' },
+                    { id: 'SHS2023-037', lastName: 'Martin', firstName: 'Avery Rose', middleName: 'Pena', gender: 'Female', status: 'Active' },
+                    { id: 'SHS2023-038', lastName: 'Garcia', firstName: 'Joshua Luis', middleName: 'Ortiz', gender: 'Male', status: 'Active' },
+                    { id: 'SHS2023-039', lastName: 'Martinez', firstName: 'Lily Faith', middleName: 'Herrera', gender: 'Female', status: 'Active' },
+                    { id: 'SHS2023-040', lastName: 'Robinson', firstName: 'Samuel Rey', middleName: 'Castro', gender: 'Male', status: 'Active' },
+                    { id: 'SHS2023-041', lastName: 'Clark', firstName: 'Stella Mae', middleName: 'Morales', gender: 'Female', status: 'Active' },
+                    { id: 'SHS2023-042', lastName: 'Rodriguez', firstName: 'Owen David', middleName: 'Romero', gender: 'Male', status: 'Active' },
+                    { id: 'SHS2023-043', lastName: 'Lewis', firstName: 'Hazel Grace', middleName: 'Aguilar', gender: 'Female', status: 'Active' },
+                    { id: 'SHS2023-044', lastName: 'Lee', firstName: 'Eli James', middleName: 'Delgado', gender: 'Male', status: 'Active' },
+                    { id: 'SHS2023-045', lastName: 'Walker', firstName: 'Violet Rose', middleName: 'Espinoza', gender: 'Female', status: 'Active' },
+                    { id: 'SHS2023-046', lastName: 'Hall', firstName: 'Wyatt Luis', middleName: 'Moreno', gender: 'Male', status: 'Active' },
+                    { id: 'SHS2023-047', lastName: 'Allen', firstName: 'Aurora Belle', middleName: 'Valdez', gender: 'Female', status: 'Active' },
+                    { id: 'SHS2023-048', lastName: 'Young', firstName: 'Grayson Paul', middleName: 'Gutierrez', gender: 'Male', status: 'Active' },
+                    { id: 'SHS2023-049', lastName: 'Hernandez', firstName: 'Savannah Joy', middleName: 'Herrera', gender: 'Female', status: 'Active' },
+                    { id: 'SHS2023-050', lastName: 'King', firstName: 'Leo Antonio', middleName: 'Jimenez', gender: 'Male', status: 'Active' },
+                    { id: 'SHS2023-051', lastName: 'Wright', firstName: 'Brooklyn Faith', middleName: 'Vargas', gender: 'Female', status: 'Active' },
+                    { id: 'SHS2023-052', lastName: 'Lopez', firstName: 'Jaxon Rey', middleName: 'Ortega', gender: 'Male', status: 'Active' },
+                    { id: 'SHS2023-053', lastName: 'Hill', firstName: 'Bella Hope', middleName: 'Silva', gender: 'Female', status: 'Active' },
+                    { id: 'SHS2023-054', lastName: 'Scott', firstName: 'Carson Miguel', middleName: 'Vega', gender: 'Male', status: 'Active' },
+                    { id: 'SHS2023-055', lastName: 'Green', firstName: 'Claire Dawn', middleName: 'Rojas', gender: 'Female', status: 'Active' },
+                    { id: 'SHS2023-056', lastName: 'Adams', firstName: 'Easton James', middleName: 'Soto', gender: 'Male', status: 'Active' },
+                    { id: 'SHS2023-057', lastName: 'Baker', firstName: 'Skylar Grace', middleName: 'Pena', gender: 'Female', status: 'Active' },
+                    { id: 'SHS2023-058', lastName: 'Gonzalez', firstName: 'Colton Luis', middleName: 'Ortiz', gender: 'Male', status: 'Active' },
+                    { id: 'SHS2023-059', lastName: 'Nelson', firstName: 'Paisley Rose', middleName: 'Herrera', gender: 'Female', status: 'Active' },
+                    { id: 'SHS2023-060', lastName: 'Carter', firstName: 'Maverick John', middleName: 'Castro', gender: 'Male', status: 'Active' }
+                ],
+                'Entrepreneurs': [
+                    { id: 'SHS2023-061', lastName: 'Mitchell', firstName: 'Kennedy Mae', middleName: 'Morales', gender: 'Female', status: 'Active' },
+                    { id: 'SHS2023-062', lastName: 'Perez', firstName: 'Declan Paul', middleName: 'Romero', gender: 'Male', status: 'Active' },
+                    { id: 'SHS2023-063', lastName: 'Roberts', firstName: 'Kinsley Joy', middleName: 'Aguilar', gender: 'Female', status: 'Active' },
+                    { id: 'SHS2023-064', lastName: 'Turner', firstName: 'Greyson Luis', middleName: 'Delgado', gender: 'Male', status: 'Active' },
+                    { id: 'SHS2023-065', lastName: 'Phillips', firstName: 'Aubrey Grace', middleName: 'Espinoza', gender: 'Female', status: 'Active' },
+                    { id: 'SHS2023-066', lastName: 'Campbell', firstName: 'Brayden Rey', middleName: 'Moreno', gender: 'Male', status: 'Active' },
+                    { id: 'SHS2023-067', lastName: 'Parker', firstName: 'Adalynn Rose', middleName: 'Valdez', gender: 'Female', status: 'Active' },
+                    { id: 'SHS2023-068', lastName: 'Evans', firstName: 'Landon James', middleName: 'Gutierrez', gender: 'Male', status: 'Active' },
+                    { id: 'SHS2023-069', lastName: 'Edwards', firstName: 'Brielle Faith', middleName: 'Herrera', gender: 'Female', status: 'Active' },
+                    { id: 'SHS2023-070', lastName: 'Collins', firstName: 'Hunter David', middleName: 'Jimenez', gender: 'Male', status: 'Active' },
+                    { id: 'SHS2023-071', lastName: 'Stewart', firstName: 'Rylee Hope', middleName: 'Vargas', gender: 'Female', status: 'Active' },
+                    { id: 'SHS2023-072', lastName: 'Sanchez', firstName: 'Ryder Miguel', middleName: 'Ortega', gender: 'Male', status: 'Active' },
+                    { id: 'SHS2023-073', lastName: 'Morris', firstName: 'Melody Belle', middleName: 'Silva', gender: 'Female', status: 'Active' },
+                    { id: 'SHS2023-074', lastName: 'Rogers', firstName: 'Braxton Paul', middleName: 'Vega', gender: 'Male', status: 'Active' },
+                    { id: 'SHS2023-075', lastName: 'Reed', firstName: 'Piper Dawn', middleName: 'Rojas', gender: 'Female', status: 'Active' },
+                    { id: 'SHS2023-076', lastName: 'Cook', firstName: 'Kaiden Luis', middleName: 'Soto', gender: 'Male', status: 'Active' },
+                    { id: 'SHS2023-077', lastName: 'Morgan', firstName: 'Teagan Joy', middleName: 'Pena', gender: 'Female', status: 'Active' },
+                    { id: 'SHS2023-078', lastName: 'Bell', firstName: 'Jace Antonio', middleName: 'Ortiz', gender: 'Male', status: 'Active' },
+                    { id: 'SHS2023-079', lastName: 'Murphy', firstName: 'Emery Grace', middleName: 'Herrera', gender: 'Female', status: 'Active' },
+                    { id: 'SHS2023-080', lastName: 'Bailey', firstName: 'Knox Rey', middleName: 'Castro', gender: 'Male', status: 'Active' },
+                    { id: 'SHS2023-081', lastName: 'Rivera', firstName: 'Sloane Marie', middleName: 'Morales', gender: 'Female', status: 'Active' },
+                    { id: 'SHS2023-082', lastName: 'Cooper', firstName: 'Zane James', middleName: 'Romero', gender: 'Male', status: 'Active' },
+                    { id: 'SHS2023-083', lastName: 'Richardson', firstName: 'Juniper Rose', middleName: 'Aguilar', gender: 'Female', status: 'Active' },
+                    { id: 'SHS2023-084', lastName: 'Cox', firstName: 'Crew David', middleName: 'Delgado', gender: 'Male', status: 'Active' },
+                    { id: 'SHS2023-085', lastName: 'Howard', firstName: 'Wren Faith', middleName: 'Espinoza', gender: 'Female', status: 'Active' },
+                    { id: 'SHS2023-086', lastName: 'Ward', firstName: 'Kash Luis', middleName: 'Moreno', gender: 'Male', status: 'Active' },
+                    { id: 'SHS2023-087', lastName: 'Torres', firstName: 'Sage Hope', middleName: 'Valdez', gender: 'Female', status: 'Active' },
+                    { id: 'SHS2023-088', lastName: 'Peterson', firstName: 'Rowan Paul', middleName: 'Gutierrez', gender: 'Male', status: 'Active' },
+                    { id: 'SHS2023-089', lastName: 'Gray', firstName: 'Indie Belle', middleName: 'Herrera', gender: 'Female', status: 'Active' },
+                    { id: 'SHS2023-090', lastName: 'Ramirez', firstName: 'Zander Miguel', middleName: 'Jimenez', gender: 'Male', status: 'Active' }
                 ],
                 // Elementary students (existing)
                 'Pluto': [
