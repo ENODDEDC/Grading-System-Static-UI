@@ -160,7 +160,7 @@
         }
     </style>
 </head>
-<body class="bg-gray-100">
+<body class="bg-gray-100 overflow-hidden h-screen">
     <!-- Top Navigation -->
     <nav class="bg-white shadow-sm border-b h-16 fixed top-0 left-0 right-0 z-30">
         <div class="flex justify-between items-center h-full px-6">
@@ -179,7 +179,7 @@
 
     <div class="flex pt-16">
         <!-- Sidebar -->
-        <div class="w-72 sidebar-container min-h-screen fixed left-0 top-16 overflow-y-auto shadow-xl">
+        <div class="w-72 sidebar-container h-screen fixed left-0 top-16 overflow-y-auto shadow-xl">
             <!-- Sidebar Header -->
             <div class="sidebar-header">
                 <i class="fas fa-graduation-cap text-2xl mb-2"></i>
@@ -220,32 +220,32 @@
                     
                     <div id="elementary-content" class="section-content mt-4">
                         <div class="space-y-2 pl-2">
-                            <div class="sidebar-item py-3 px-4 cursor-pointer rounded-lg flex items-center">
+                            <div class="sidebar-item py-3 px-4 cursor-pointer rounded-lg flex items-center" onclick="showGradeContent('Grade 1')">
                                 <div class="grade-badge">1</div>
                                 <span class="font-medium">Grade 1</span>
                             </div>
                             
-                            <div class="sidebar-item py-3 px-4 cursor-pointer rounded-lg flex items-center">
+                            <div class="sidebar-item py-3 px-4 cursor-pointer rounded-lg flex items-center" onclick="showGradeContent('Grade 2')">
                                 <div class="grade-badge">2</div>
                                 <span class="font-medium">Grade 2</span>
                             </div>
                             
-                            <div class="sidebar-item py-3 px-4 cursor-pointer rounded-lg flex items-center">
+                            <div class="sidebar-item py-3 px-4 cursor-pointer rounded-lg flex items-center" onclick="showGradeContent('Grade 3')">
                                 <div class="grade-badge">3</div>
                                 <span class="font-medium">Grade 3</span>
                             </div>
                             
-                            <div class="sidebar-item py-3 px-4 cursor-pointer rounded-lg flex items-center">
+                            <div class="sidebar-item py-3 px-4 cursor-pointer rounded-lg flex items-center" onclick="showGradeContent('Grade 4')">
                                 <div class="grade-badge">4</div>
                                 <span class="font-medium">Grade 4</span>
                             </div>
                             
-                            <div class="sidebar-item py-3 px-4 cursor-pointer rounded-lg flex items-center">
+                            <div class="sidebar-item py-3 px-4 cursor-pointer rounded-lg flex items-center" onclick="showGradeContent('Grade 5')">
                                 <div class="grade-badge">5</div>
                                 <span class="font-medium">Grade 5</span>
                             </div>
                             
-                            <div class="sidebar-item py-3 px-4 cursor-pointer rounded-lg flex items-center">
+                            <div class="sidebar-item py-3 px-4 cursor-pointer rounded-lg flex items-center" onclick="showGradeContent('Grade 6')">
                                 <div class="grade-badge">6</div>
                                 <span class="font-medium">Grade 6</span>
                             </div>
@@ -295,152 +295,305 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- College Section -->
+                <div class="mb-6 college-section">
+                    <div class="sidebar-section rounded-xl p-4 cursor-pointer flex items-center justify-between text-white" onclick="toggleSection('college')">
+                        <div class="flex items-center">
+                            <i class="fas fa-university mr-3 text-lg"></i>
+                            <span class="font-semibold text-lg">College</span>
+                        </div>
+                        <i class="fas fa-chevron-down transition-transform duration-300"></i>
+                    </div>
+                    
+                    <div id="college-content" class="section-content mt-4">
+                        <div class="space-y-4 pl-2">
+                            <!-- HRM Program -->
+                            <div class="bg-white rounded-lg p-4 shadow-sm border border-gray-100">
+                                <div class="sidebar-item py-2 cursor-pointer rounded-lg flex items-center mb-3" onclick="toggleProgram('hrm')">
+                                    <div class="program-badge">HRM</div>
+                                    <span class="font-semibold text-gray-800">Hotel & Restaurant Management</span>
+                                    <i class="fas fa-chevron-right ml-auto transition-transform duration-300" id="hrm-chevron"></i>
+                                </div>
+                                
+                                <div id="hrm-subjects" class="hidden mt-3 space-y-2">
+                                    <!-- Core Subjects -->
+                                    <div class="text-xs font-semibold text-gray-500 uppercase tracking-wider px-2 mb-2">Core Subjects</div>
+                                    <div class="sidebar-item py-2 px-3 cursor-pointer rounded text-sm text-gray-700 hover:text-blue-600 hover:bg-blue-50" onclick="showSubjectYears('hrm', 'food-service')">Food Service Management</div>
+                                    <div class="sidebar-item py-2 px-3 cursor-pointer rounded text-sm text-gray-700 hover:text-blue-600 hover:bg-blue-50" onclick="showSubjectYears('hrm', 'hotel-operations')">Hotel Operations</div>
+                                    <div class="sidebar-item py-2 px-3 cursor-pointer rounded text-sm text-gray-700 hover:text-blue-600 hover:bg-blue-50" onclick="showSubjectYears('hrm', 'culinary-arts')">Culinary Arts</div>
+                                    <div class="sidebar-item py-2 px-3 cursor-pointer rounded text-sm text-gray-700 hover:text-blue-600 hover:bg-blue-50" onclick="showSubjectYears('hrm', 'tourism-management')">Tourism Management</div>
+                                    <div class="sidebar-item py-2 px-3 cursor-pointer rounded text-sm text-gray-700 hover:text-blue-600 hover:bg-blue-50" onclick="showSubjectYears('hrm', 'event-management')">Event Management</div>
+                                    <div class="sidebar-item py-2 px-3 cursor-pointer rounded text-sm text-gray-700 hover:text-blue-600 hover:bg-blue-50" onclick="showSubjectYears('hrm', 'hospitality-marketing')">Hospitality Marketing</div>
+                                    
+                                    <!-- Subject Year Levels (Hidden by default) -->
+                                    <div id="hrm-subject-years" class="hidden mt-4 p-3 bg-blue-50 rounded-lg border border-blue-200">
+                                        <div class="text-sm font-semibold text-blue-800 mb-2" id="hrm-subject-title">Subject Year Levels</div>
+                                        <div class="grid grid-cols-2 gap-2">
+                                            <div class="sidebar-item year-item py-2 px-3 cursor-pointer rounded text-sm text-blue-700 hover:text-blue-900 text-center bg-white border border-blue-200">1st Year</div>
+                                            <div class="sidebar-item year-item py-2 px-3 cursor-pointer rounded text-sm text-blue-700 hover:text-blue-900 text-center bg-white border border-blue-200">2nd Year</div>
+                                            <div class="sidebar-item year-item py-2 px-3 cursor-pointer rounded text-sm text-blue-700 hover:text-blue-900 text-center bg-white border border-blue-200">3rd Year</div>
+                                            <div class="sidebar-item year-item py-2 px-3 cursor-pointer rounded text-sm text-blue-700 hover:text-blue-900 text-center bg-white border border-blue-200">4th Year</div>
+                                        </div>
+                                        <button onclick="hideSubjectYears('hrm')" class="mt-3 text-xs text-blue-600 hover:text-blue-800 underline">← Back to Subjects</button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- IT Program -->
+                            <div class="bg-white rounded-lg p-4 shadow-sm border border-gray-100">
+                                <div class="sidebar-item py-2 cursor-pointer rounded-lg flex items-center mb-3" onclick="toggleProgram('it')">
+                                    <div class="program-badge" style="background: linear-gradient(135deg, #10b981, #059669);">IT</div>
+                                    <span class="font-semibold text-gray-800">Information Technology</span>
+                                    <i class="fas fa-chevron-right ml-auto transition-transform duration-300" id="it-chevron"></i>
+                                </div>
+                                
+                                <div id="it-subjects" class="hidden mt-3 space-y-2">
+                                    <!-- Core Subjects -->
+                                    <div class="text-xs font-semibold text-gray-500 uppercase tracking-wider px-2 mb-2">Core Subjects</div>
+                                    <div class="sidebar-item py-2 px-3 cursor-pointer rounded text-sm text-gray-700 hover:text-blue-600 hover:bg-blue-50" onclick="showSubjectYears('it', 'programming')">Programming Fundamentals</div>
+                                    <div class="sidebar-item py-2 px-3 cursor-pointer rounded text-sm text-gray-700 hover:text-blue-600 hover:bg-blue-50" onclick="showSubjectYears('it', 'database')">Database Management</div>
+                                    <div class="sidebar-item py-2 px-3 cursor-pointer rounded text-sm text-gray-700 hover:text-blue-600 hover:bg-blue-50" onclick="showSubjectYears('it', 'web-dev')">Web Development</div>
+                                    <div class="sidebar-item py-2 px-3 cursor-pointer rounded text-sm text-gray-700 hover:text-blue-600 hover:bg-blue-50" onclick="showSubjectYears('it', 'network')">Network Administration</div>
+                                    <div class="sidebar-item py-2 px-3 cursor-pointer rounded text-sm text-gray-700 hover:text-blue-600 hover:bg-blue-50" onclick="showSubjectYears('it', 'system-analysis')">System Analysis & Design</div>
+                                    <div class="sidebar-item py-2 px-3 cursor-pointer rounded text-sm text-gray-700 hover:text-blue-600 hover:bg-blue-50" onclick="showSubjectYears('it', 'cybersecurity')">Cybersecurity</div>
+                                    
+                                    <!-- Subject Year Levels (Hidden by default) -->
+                                    <div id="it-subject-years" class="hidden mt-4 p-3 bg-green-50 rounded-lg border border-green-200">
+                                        <div class="text-sm font-semibold text-green-800 mb-2" id="it-subject-title">Subject Year Levels</div>
+                                        <div class="grid grid-cols-2 gap-2">
+                                            <div class="sidebar-item year-item py-2 px-3 cursor-pointer rounded text-sm text-green-700 hover:text-green-900 text-center bg-white border border-green-200">1st Year</div>
+                                            <div class="sidebar-item year-item py-2 px-3 cursor-pointer rounded text-sm text-green-700 hover:text-green-900 text-center bg-white border border-green-200">2nd Year</div>
+                                            <div class="sidebar-item year-item py-2 px-3 cursor-pointer rounded text-sm text-green-700 hover:text-green-900 text-center bg-white border border-green-200">3rd Year</div>
+                                            <div class="sidebar-item year-item py-2 px-3 cursor-pointer rounded text-sm text-green-700 hover:text-green-900 text-center bg-white border border-green-200">4th Year</div>
+                                        </div>
+                                        <button onclick="hideSubjectYears('it')" class="mt-3 text-xs text-green-600 hover:text-green-800 underline">← Back to Subjects</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Business Administration Program -->
+                            <div class="bg-white rounded-lg p-4 shadow-sm border border-gray-100">
+                                <div class="sidebar-item py-2 cursor-pointer rounded-lg flex items-center mb-3" onclick="toggleProgram('bsba')">
+                                    <div class="program-badge" style="background: linear-gradient(135deg, #f59e0b, #d97706);">BSBA</div>
+                                    <span class="font-semibold text-gray-800">Business Administration</span>
+                                    <i class="fas fa-chevron-right ml-auto transition-transform duration-300" id="bsba-chevron"></i>
+                                </div>
+                                
+                                <div id="bsba-subjects" class="hidden mt-3 space-y-2">
+                                    <!-- Core Subjects -->
+                                    <div class="text-xs font-semibold text-gray-500 uppercase tracking-wider px-2 mb-2">Core Subjects</div>
+                                    <div class="sidebar-item py-2 px-3 cursor-pointer rounded text-sm text-gray-700 hover:text-blue-600 hover:bg-blue-50" onclick="showSubjectYears('bsba', 'business-mgmt')">Business Management</div>
+                                    <div class="sidebar-item py-2 px-3 cursor-pointer rounded text-sm text-gray-700 hover:text-blue-600 hover:bg-blue-50" onclick="showSubjectYears('bsba', 'financial-mgmt')">Financial Management</div>
+                                    <div class="sidebar-item py-2 px-3 cursor-pointer rounded text-sm text-gray-700 hover:text-blue-600 hover:bg-blue-50" onclick="showSubjectYears('bsba', 'marketing-mgmt')">Marketing Management</div>
+                                    <div class="sidebar-item py-2 px-3 cursor-pointer rounded text-sm text-gray-700 hover:text-blue-600 hover:bg-blue-50" onclick="showSubjectYears('bsba', 'hr-mgmt')">Human Resource Management</div>
+                                    <div class="sidebar-item py-2 px-3 cursor-pointer rounded text-sm text-gray-700 hover:text-blue-600 hover:bg-blue-50" onclick="showSubjectYears('bsba', 'operations-mgmt')">Operations Management</div>
+                                    <div class="sidebar-item py-2 px-3 cursor-pointer rounded text-sm text-gray-700 hover:text-blue-600 hover:bg-blue-50" onclick="showSubjectYears('bsba', 'entrepreneurship')">Entrepreneurship</div>
+                                    
+                                    <!-- Subject Year Levels (Hidden by default) -->
+                                    <div id="bsba-subject-years" class="hidden mt-4 p-3 bg-orange-50 rounded-lg border border-orange-200">
+                                        <div class="text-sm font-semibold text-orange-800 mb-2" id="bsba-subject-title">Subject Year Levels</div>
+                                        <div class="grid grid-cols-2 gap-2">
+                                            <div class="sidebar-item year-item py-2 px-3 cursor-pointer rounded text-sm text-orange-700 hover:text-orange-900 text-center bg-white border border-orange-200">1st Year</div>
+                                            <div class="sidebar-item year-item py-2 px-3 cursor-pointer rounded text-sm text-orange-700 hover:text-orange-900 text-center bg-white border border-orange-200">2nd Year</div>
+                                            <div class="sidebar-item year-item py-2 px-3 cursor-pointer rounded text-sm text-orange-700 hover:text-orange-900 text-center bg-white border border-orange-200">3rd Year</div>
+                                            <div class="sidebar-item year-item py-2 px-3 cursor-pointer rounded text-sm text-orange-700 hover:text-orange-900 text-center bg-white border border-orange-200">4th Year</div>
+                                        </div>
+                                        <button onclick="hideSubjectYears('bsba')" class="mt-3 text-xs text-orange-600 hover:text-orange-800 underline">← Back to Subjects</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
         <!-- Main Content -->
-        <div class="flex-1 ml-72 p-8">
-            <!-- Header -->
-            <div class="mb-8">
-                <h2 class="text-3xl font-bold text-gray-900 mb-2">Administrator Dashboard</h2>
-                <p class="text-gray-600">Manage your education system with comprehensive administrative tools</p>
-            </div>
+        <div class="flex-1 ml-72 overflow-hidden" style="height: calc(100vh - 64px);">
+            <!-- Default Dashboard Content -->
+            <div id="dashboard-content" class="h-full overflow-y-auto p-8">
+                <!-- Header -->
+                <div class="mb-8">
+                    <h2 class="text-3xl font-bold text-gray-900 mb-2">Administrator Dashboard</h2>
+                    <p class="text-gray-600">Manage your education system with comprehensive administrative tools</p>
+                </div>
 
-            <!-- Shortcuts Section -->
-            <div class="mb-8">
-                <h3 class="text-xl font-semibold text-gray-900 mb-6 text-center">Shortcuts</h3>
-                
-                <!-- Admin Feature Shortcuts Grid -->
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                <!-- Shortcuts Section -->
+                <div class="mb-8">
+                    <h3 class="text-xl font-semibold text-gray-900 mb-6 text-center">Shortcuts</h3>
                     
-                    <!-- Student Management -->
-                    <a href="student-records.html" class="shortcut-card bg-white border border-gray-200 p-6 text-center hover:border-blue-300">
-                        <div class="inline-flex items-center justify-center w-12 h-12 bg-blue-100 rounded-lg mb-4">
-                            <i class="fas fa-user-graduate text-blue-600 text-xl"></i>
-                        </div>
-                        <h4 class="font-semibold text-gray-900 mb-2">Student Records</h4>
-                        <p class="text-sm text-gray-600">Manage student information and enrollment</p>
-                    </a>
+                    <!-- Admin Feature Shortcuts Grid -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                        
+                        <!-- Student Management -->
+                        <a href="student-records.html" class="shortcut-card bg-white border border-gray-200 p-6 text-center hover:border-blue-300">
+                            <div class="inline-flex items-center justify-center w-12 h-12 bg-blue-100 rounded-lg mb-4">
+                                <i class="fas fa-user-graduate text-blue-600 text-xl"></i>
+                            </div>
+                            <h4 class="font-semibold text-gray-900 mb-2">Student Records</h4>
+                            <p class="text-sm text-gray-600">Manage student information and enrollment</p>
+                        </a>
 
-                    <!-- K-12 Management -->
-                    <a href="k12-management.html" class="shortcut-card bg-white border border-gray-200 p-6 text-center hover:border-green-300">
-                        <div class="inline-flex items-center justify-center w-12 h-12 bg-green-100 rounded-lg mb-4">
-                            <i class="fas fa-school text-green-600 text-xl"></i>
-                        </div>
-                        <h4 class="font-semibold text-gray-900 mb-2">K-12 Management</h4>
-                        <p class="text-sm text-gray-600">Kindergarten to Grade 12 administration</p>
-                    </a>
+                        <!-- K-12 Management -->
+                        <a href="k12-management.html" class="shortcut-card bg-white border border-gray-200 p-6 text-center hover:border-green-300">
+                            <div class="inline-flex items-center justify-center w-12 h-12 bg-green-100 rounded-lg mb-4">
+                                <i class="fas fa-school text-green-600 text-xl"></i>
+                            </div>
+                            <h4 class="font-semibold text-gray-900 mb-2">K-12 Management</h4>
+                            <p class="text-sm text-gray-600">Kindergarten to Grade 12 administration</p>
+                        </a>
 
-                    <!-- College Management -->
-                    <a href="college-management.html" class="shortcut-card bg-white border border-gray-200 p-6 text-center hover:border-purple-300">
-                        <div class="inline-flex items-center justify-center w-12 h-12 bg-purple-100 rounded-lg mb-4">
-                            <i class="fas fa-university text-purple-600 text-xl"></i>
-                        </div>
-                        <h4 class="font-semibold text-gray-900 mb-2">College Management</h4>
-                        <p class="text-sm text-gray-600">Higher education and irregular students</p>
-                    </a>
+                        <!-- College Management -->
+                        <a href="college-management.html" class="shortcut-card bg-white border border-gray-200 p-6 text-center hover:border-purple-300">
+                            <div class="inline-flex items-center justify-center w-12 h-12 bg-purple-100 rounded-lg mb-4">
+                                <i class="fas fa-university text-purple-600 text-xl"></i>
+                            </div>
+                            <h4 class="font-semibold text-gray-900 mb-2">College Management</h4>
+                            <p class="text-sm text-gray-600">Higher education and irregular students</p>
+                        </a>
 
-                    <!-- User Management -->
-                    <a href="user-management.html" class="shortcut-card bg-white border border-gray-200 p-6 text-center hover:border-yellow-300">
-                        <div class="inline-flex items-center justify-center w-12 h-12 bg-yellow-100 rounded-lg mb-4">
-                            <i class="fas fa-users-cog text-yellow-600 text-xl"></i>
-                        </div>
-                        <h4 class="font-semibold text-gray-900 mb-2">User Management</h4>
-                        <p class="text-sm text-gray-600">Teachers, staff, and admin accounts</p>
-                    </a>
+                        <!-- User Management -->
+                        <a href="user-management.html" class="shortcut-card bg-white border border-gray-200 p-6 text-center hover:border-yellow-300">
+                            <div class="inline-flex items-center justify-center w-12 h-12 bg-yellow-100 rounded-lg mb-4">
+                                <i class="fas fa-users-cog text-yellow-600 text-xl"></i>
+                            </div>
+                            <h4 class="font-semibold text-gray-900 mb-2">User Management</h4>
+                            <p class="text-sm text-gray-600">Teachers, staff, and admin accounts</p>
+                        </a>
 
-                    <!-- Course Management -->
-                    <a href="course-management.html" class="shortcut-card bg-white border border-gray-200 p-6 text-center hover:border-red-300">
-                        <div class="inline-flex items-center justify-center w-12 h-12 bg-red-100 rounded-lg mb-4">
-                            <i class="fas fa-book text-red-600 text-xl"></i>
-                        </div>
-                        <h4 class="font-semibold text-gray-900 mb-2">Course Management</h4>
-                        <p class="text-sm text-gray-600">Subjects, curriculum, and schedules</p>
-                    </a>
+                        <!-- Course Management -->
+                        <a href="course-management.html" class="shortcut-card bg-white border border-gray-200 p-6 text-center hover:border-red-300">
+                            <div class="inline-flex items-center justify-center w-12 h-12 bg-red-100 rounded-lg mb-4">
+                                <i class="fas fa-book text-red-600 text-xl"></i>
+                            </div>
+                            <h4 class="font-semibold text-gray-900 mb-2">Course Management</h4>
+                            <p class="text-sm text-gray-600">Subjects, curriculum, and schedules</p>
+                        </a>
 
-                    <!-- Section Management -->
-                    <a href="section-management.html" class="shortcut-card bg-white border border-gray-200 p-6 text-center hover:border-indigo-300">
-                        <div class="inline-flex items-center justify-center w-12 h-12 bg-indigo-100 rounded-lg mb-4">
-                            <i class="fas fa-layer-group text-indigo-600 text-xl"></i>
-                        </div>
-                        <h4 class="font-semibold text-gray-900 mb-2">Section Management</h4>
-                        <p class="text-sm text-gray-600">Class sections and room assignments</p>
-                    </a>
+                        <!-- Section Management -->
+                        <a href="section-management.html" class="shortcut-card bg-white border border-gray-200 p-6 text-center hover:border-indigo-300">
+                            <div class="inline-flex items-center justify-center w-12 h-12 bg-indigo-100 rounded-lg mb-4">
+                                <i class="fas fa-layer-group text-indigo-600 text-xl"></i>
+                            </div>
+                            <h4 class="font-semibold text-gray-900 mb-2">Section Management</h4>
+                            <p class="text-sm text-gray-600">Class sections and room assignments</p>
+                        </a>
 
-                    <!-- Grading System -->
-                    <a href="grading-system.html" class="shortcut-card bg-white border border-gray-200 p-6 text-center hover:border-teal-300">
-                        <div class="inline-flex items-center justify-center w-12 h-12 bg-teal-100 rounded-lg mb-4">
-                            <i class="fas fa-calculator text-teal-600 text-xl"></i>
-                        </div>
-                        <h4 class="font-semibold text-gray-900 mb-2">Grading System</h4>
-                        <p class="text-sm text-gray-600">Grade computation and standards</p>
-                    </a>
+                        <!-- Grading System -->
+                        <a href="grading-system.html" class="shortcut-card bg-white border border-gray-200 p-6 text-center hover:border-teal-300">
+                            <div class="inline-flex items-center justify-center w-12 h-12 bg-teal-100 rounded-lg mb-4">
+                                <i class="fas fa-calculator text-teal-600 text-xl"></i>
+                            </div>
+                            <h4 class="font-semibold text-gray-900 mb-2">Grading System</h4>
+                            <p class="text-sm text-gray-600">Grade computation and standards</p>
+                        </a>
 
-                    <!-- Reports & Analytics -->
-                    <a href="reports.html" class="shortcut-card bg-white border border-gray-200 p-6 text-center hover:border-pink-300">
-                        <div class="inline-flex items-center justify-center w-12 h-12 bg-pink-100 rounded-lg mb-4">
-                            <i class="fas fa-chart-bar text-pink-600 text-xl"></i>
-                        </div>
-                        <h4 class="font-semibold text-gray-900 mb-2">Reports & Analytics</h4>
-                        <p class="text-sm text-gray-600">Academic performance reports</p>
-                    </a>
+                        <!-- Reports & Analytics -->
+                        <a href="reports.html" class="shortcut-card bg-white border border-gray-200 p-6 text-center hover:border-pink-300">
+                            <div class="inline-flex items-center justify-center w-12 h-12 bg-pink-100 rounded-lg mb-4">
+                                <i class="fas fa-chart-bar text-pink-600 text-xl"></i>
+                            </div>
+                            <h4 class="font-semibold text-gray-900 mb-2">Reports & Analytics</h4>
+                            <p class="text-sm text-gray-600">Academic performance reports</p>
+                        </a>
 
-                    <!-- System Settings -->
-                    <a href="system-settings.html" class="shortcut-card bg-white border border-gray-200 p-6 text-center hover:border-gray-400">
-                        <div class="inline-flex items-center justify-center w-12 h-12 bg-gray-100 rounded-lg mb-4">
-                            <i class="fas fa-cog text-gray-600 text-xl"></i>
-                        </div>
-                        <h4 class="font-semibold text-gray-900 mb-2">System Settings</h4>
-                        <p class="text-sm text-gray-600">Configuration and preferences</p>
-                    </a>
+                        <!-- System Settings -->
+                        <a href="system-settings.html" class="shortcut-card bg-white border border-gray-200 p-6 text-center hover:border-gray-400">
+                            <div class="inline-flex items-center justify-center w-12 h-12 bg-gray-100 rounded-lg mb-4">
+                                <i class="fas fa-cog text-gray-600 text-xl"></i>
+                            </div>
+                            <h4 class="font-semibold text-gray-900 mb-2">System Settings</h4>
+                            <p class="text-sm text-gray-600">Configuration and preferences</p>
+                        </a>
 
-                    <!-- Grade Cards -->
-                    <a href="grade-cards.html" class="shortcut-card bg-white border border-gray-200 p-6 text-center hover:border-orange-300">
-                        <div class="inline-flex items-center justify-center w-12 h-12 bg-orange-100 rounded-lg mb-4">
-                            <i class="fas fa-file-alt text-orange-600 text-xl"></i>
-                        </div>
-                        <h4 class="font-semibold text-gray-900 mb-2">Grade Cards</h4>
-                        <p class="text-sm text-gray-600">Generate and print grade cards</p>
-                    </a>
+                        <!-- Grade Cards -->
+                        <a href="grade-cards.html" class="shortcut-card bg-white border border-gray-200 p-6 text-center hover:border-orange-300">
+                            <div class="inline-flex items-center justify-center w-12 h-12 bg-orange-100 rounded-lg mb-4">
+                                <i class="fas fa-file-alt text-orange-600 text-xl"></i>
+                            </div>
+                            <h4 class="font-semibold text-gray-900 mb-2">Grade Cards</h4>
+                            <p class="text-sm text-gray-600">Generate and print grade cards</p>
+                        </a>
 
-                    <!-- Academic Calendar -->
-                    <div class="shortcut-card bg-white border border-gray-200 p-6 text-center hover:border-cyan-300 cursor-pointer">
-                        <div class="inline-flex items-center justify-center w-12 h-12 bg-cyan-100 rounded-lg mb-4">
-                            <i class="fas fa-calendar-alt text-cyan-600 text-xl"></i>
+                        <!-- Academic Calendar -->
+                        <div class="shortcut-card bg-white border border-gray-200 p-6 text-center hover:border-cyan-300 cursor-pointer">
+                            <div class="inline-flex items-center justify-center w-12 h-12 bg-cyan-100 rounded-lg mb-4">
+                                <i class="fas fa-calendar-alt text-cyan-600 text-xl"></i>
+                            </div>
+                            <h4 class="font-semibold text-gray-900 mb-2">Academic Calendar</h4>
+                            <p class="text-sm text-gray-600">Manage academic year and terms</p>
                         </div>
-                        <h4 class="font-semibold text-gray-900 mb-2">Academic Calendar</h4>
-                        <p class="text-sm text-gray-600">Manage academic year and terms</p>
+
+                        <!-- Enrollment Management -->
+                        <div class="shortcut-card bg-white border border-gray-200 p-6 text-center hover:border-emerald-300 cursor-pointer">
+                            <div class="inline-flex items-center justify-center w-12 h-12 bg-emerald-100 rounded-lg mb-4">
+                                <i class="fas fa-user-plus text-emerald-600 text-xl"></i>
+                            </div>
+                            <h4 class="font-semibold text-gray-900 mb-2">Enrollment</h4>
+                            <p class="text-sm text-gray-600">Student enrollment and registration</p>
+                        </div>
+
                     </div>
+                </div>
 
-                    <!-- Enrollment Management -->
-                    <div class="shortcut-card bg-white border border-gray-200 p-6 text-center hover:border-emerald-300 cursor-pointer">
-                        <div class="inline-flex items-center justify-center w-12 h-12 bg-emerald-100 rounded-lg mb-4">
-                            <i class="fas fa-user-plus text-emerald-600 text-xl"></i>
-                        </div>
-                        <h4 class="font-semibold text-gray-900 mb-2">Enrollment</h4>
-                        <p class="text-sm text-gray-600">Student enrollment and registration</p>
+                <!-- Quick Stats -->
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mt-12">
+                    <div class="bg-white border border-gray-200 p-6 text-center">
+                        <div class="text-3xl font-bold text-blue-600 mb-2">1,247</div>
+                        <div class="text-sm text-gray-600">Total Students</div>
                     </div>
-
+                    <div class="bg-white border border-gray-200 p-6 text-center">
+                        <div class="text-3xl font-bold text-green-600 mb-2">89</div>
+                        <div class="text-sm text-gray-600">Teachers</div>
+                    </div>
+                    <div class="bg-white border border-gray-200 p-6 text-center">
+                        <div class="text-3xl font-bold text-purple-600 mb-2">45</div>
+                        <div class="text-sm text-gray-600">Sections</div>
+                    </div>
+                    <div class="bg-white border border-gray-200 p-6 text-center">
+                        <div class="text-3xl font-bold text-orange-600 mb-2">156</div>
+                        <div class="text-sm text-gray-600">Courses</div>
+                    </div>
                 </div>
             </div>
 
-            <!-- Quick Stats -->
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mt-12">
-                <div class="bg-white border border-gray-200 p-6 text-center">
-                    <div class="text-3xl font-bold text-blue-600 mb-2">1,247</div>
-                    <div class="text-sm text-gray-600">Total Students</div>
-                </div>
-                <div class="bg-white border border-gray-200 p-6 text-center">
-                    <div class="text-3xl font-bold text-green-600 mb-2">89</div>
-                    <div class="text-sm text-gray-600">Teachers</div>
-                </div>
-                <div class="bg-white border border-gray-200 p-6 text-center">
-                    <div class="text-3xl font-bold text-purple-600 mb-2">45</div>
-                    <div class="text-sm text-gray-600">Sections</div>
-                </div>
-                <div class="bg-white border border-gray-200 p-6 text-center">
-                    <div class="text-3xl font-bold text-orange-600 mb-2">156</div>
-                    <div class="text-sm text-gray-600">Courses</div>
+            <!-- Grade Content (Hidden by default) -->
+            <div id="grade-content" class="hidden h-full">
+                <div class="bg-white border-4 border-blue-400 h-full p-8 overflow-hidden box-border">
+                    <h2 id="grade-title" class="text-3xl font-bold text-gray-900 mb-8">Grade 1</h2>
+                    
+                    <!-- School Years in Horizontal Layout -->
+                    <div class="flex flex-wrap gap-4 mb-8">
+                        <div class="bg-gray-400 text-white px-6 py-3 cursor-pointer hover:bg-gray-500 transition-colors" onclick="showSchoolYearContent('2016-2017')">
+                            2016-2017
+                        </div>
+                        <div class="bg-gray-400 text-white px-6 py-3 cursor-pointer hover:bg-gray-500 transition-colors" onclick="showSchoolYearContent('2017-2018')">
+                            2017-2018
+                        </div>
+                        <div class="bg-gray-400 text-white px-6 py-3 cursor-pointer hover:bg-gray-500 transition-colors" onclick="showSchoolYearContent('2018-2019')">
+                            2018-2019
+                        </div>
+                        <div class="bg-gray-400 text-white px-6 py-3 cursor-pointer hover:bg-gray-500 transition-colors" onclick="showSchoolYearContent('2019-2020')">
+                            2019-2020
+                        </div>
+                        <div class="bg-gray-400 text-white px-6 py-3 cursor-pointer hover:bg-gray-500 transition-colors" onclick="showSchoolYearContent('2020-2021')">
+                            2020-2021
+                        </div>
+                        <div class="bg-gray-400 text-white px-6 py-3 cursor-pointer hover:bg-gray-500 transition-colors" onclick="showSchoolYearContent('2021-2022')">
+                            2021-2022
+                        </div>
+                        <div class="bg-gray-400 text-white px-6 py-3 cursor-pointer hover:bg-gray-500 transition-colors" onclick="showSchoolYearContent('2022-2023')">
+                            2022-2023
+                        </div>
+                        <div class="bg-gray-400 text-white px-6 py-3 cursor-pointer hover:bg-gray-500 transition-colors" onclick="showSchoolYearContent('2023-2024')">
+                            2023-2024
+                        </div>
+                    </div>
+                    
+                    <button onclick="showDashboard()" class="text-blue-600 hover:text-blue-800 underline">
+                        ← Back to Dashboard
+                    </button>
                 </div>
             </div>
         </div>
@@ -452,7 +605,8 @@
             const allSectionContainers = {
                 'preschool': document.querySelector('.preschool-section'),
                 'elementary': document.querySelector('.elementary-section'),
-                'highschool': document.querySelector('.highschool-section')
+                'highschool': document.querySelector('.highschool-section'),
+                'college': document.querySelector('.college-section')
             };
             
             const clickedContainer = allSectionContainers[sectionId];
@@ -483,6 +637,101 @@
                 clickedContainer.style.display = 'block';
                 content.classList.add('expanded');
                 section.classList.remove('collapsed');
+            }
+        }
+        
+        function showGradeContent(grade) {
+            // Hide dashboard content
+            document.getElementById('dashboard-content').classList.add('hidden');
+            
+            // Show grade content
+            document.getElementById('grade-content').classList.remove('hidden');
+            
+            // Update grade title
+            document.getElementById('grade-title').textContent = grade;
+        }
+        
+        function showDashboard() {
+            // Show dashboard content
+            document.getElementById('dashboard-content').classList.remove('hidden');
+            
+            // Hide grade content
+            document.getElementById('grade-content').classList.add('hidden');
+        }
+        
+        function showSchoolYearContent(schoolYear) {
+            // This function can be expanded later to show specific school year content
+            alert('Selected School Year: ' + schoolYear + '\n\nThis will show sections, students, and academic data for this year.');
+        }
+        
+        function showSubjectYears(program, subject) {
+            // Hide all subject year sections first
+            const allPrograms = ['hrm', 'it', 'bsba'];
+            allPrograms.forEach(prog => {
+                const yearSection = document.getElementById(prog + '-subject-years');
+                if (yearSection) {
+                    yearSection.classList.add('hidden');
+                }
+            });
+            
+            // Show the selected subject's year levels
+            const yearSection = document.getElementById(program + '-subject-years');
+            const titleElement = document.getElementById(program + '-subject-title');
+            
+            // Get subject name from the clicked element
+            const subjectNames = {
+                'hrm': {
+                    'food-service': 'Food Service Management',
+                    'hotel-operations': 'Hotel Operations',
+                    'culinary-arts': 'Culinary Arts',
+                    'tourism-management': 'Tourism Management',
+                    'event-management': 'Event Management',
+                    'hospitality-marketing': 'Hospitality Marketing'
+                },
+                'it': {
+                    'programming': 'Programming Fundamentals',
+                    'database': 'Database Management',
+                    'web-dev': 'Web Development',
+                    'network': 'Network Administration',
+                    'system-analysis': 'System Analysis & Design',
+                    'cybersecurity': 'Cybersecurity'
+                },
+                'bsba': {
+                    'business-mgmt': 'Business Management',
+                    'financial-mgmt': 'Financial Management',
+                    'marketing-mgmt': 'Marketing Management',
+                    'hr-mgmt': 'Human Resource Management',
+                    'operations-mgmt': 'Operations Management',
+                    'entrepreneurship': 'Entrepreneurship'
+                }
+            };
+            
+            const subjectName = subjectNames[program][subject];
+            titleElement.textContent = subjectName + ' - Year Levels';
+            yearSection.classList.remove('hidden');
+        }
+        
+        function hideSubjectYears(program) {
+            const yearSection = document.getElementById(program + '-subject-years');
+            yearSection.classList.add('hidden');
+        }
+        
+        function toggleProgram(programId) {
+            const subjectsDiv = document.getElementById(programId + '-subjects');
+            const chevron = document.getElementById(programId + '-chevron');
+            
+            if (subjectsDiv.classList.contains('hidden')) {
+                // Show subjects
+                subjectsDiv.classList.remove('hidden');
+                chevron.classList.remove('fa-chevron-right');
+                chevron.classList.add('fa-chevron-down');
+                chevron.style.transform = 'rotate(0deg)';
+            } else {
+                // Hide subjects
+                subjectsDiv.classList.add('hidden');
+                chevron.classList.remove('fa-chevron-down');
+                chevron.classList.add('fa-chevron-right');
+                chevron.style.transform = 'rotate(0deg)';
             }
         }
         
