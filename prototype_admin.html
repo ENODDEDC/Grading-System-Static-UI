@@ -8,65 +8,30 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
         .sidebar-item {
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .sidebar-item::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            height: 100%;
-            width: 3px;
-            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
-            transform: scaleY(0);
-            transition: transform 0.3s ease;
-        }
-        
-        .sidebar-item:hover::before {
-            transform: scaleY(1);
+            transition: all 0.2s ease;
+            border-radius: 4px;
         }
         
         .sidebar-item:hover {
-            background: linear-gradient(90deg, rgba(59, 130, 246, 0.1), rgba(59, 130, 246, 0.05));
-            transform: translateX(8px);
-            color: #1d4ed8;
+            background-color: #f3f4f6;
+            color: #374151;
         }
         
         .sidebar-section {
             cursor: pointer;
-            transition: all 0.3s ease;
-            position: relative;
-            background: linear-gradient(135deg, #374151, #4b5563);
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            transition: all 0.2s ease;
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 6px;
         }
         
         .sidebar-section:hover {
-            background: linear-gradient(135deg, #4b5563, #6b7280);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 15px -3px rgba(0, 0, 0, 0.2);
+            background: #f9fafb;
+            border-color: #d1d5db;
         }
         
         .sidebar-section.collapsed .fa-chevron-down {
             transform: rotate(-90deg);
-        }
-        
-        .sidebar-section::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            width: 0;
-            height: 2px;
-            background: linear-gradient(90deg, #3b82f6, #1d4ed8);
-            transition: all 0.3s ease;
-            transform: translateX(-50%);
-        }
-        
-        .sidebar-section:hover::after {
-            width: 80%;
         }
         
         .shortcut-card {
@@ -84,67 +49,54 @@
             justify-content: center;
             width: 32px;
             height: 32px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #e5e7eb, #f3f4f6);
+            border-radius: 6px;
+            background: #f3f4f6;
             color: #374151;
             font-weight: 600;
             font-size: 12px;
             margin-right: 12px;
-            transition: all 0.3s ease;
+            transition: all 0.2s ease;
         }
         
         .sidebar-item:hover .grade-badge {
-            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
-            color: white;
-            transform: scale(1.1);
+            background: #e5e7eb;
+            color: #111827;
         }
         
         .program-badge {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            padding: 4px 12px;
-            border-radius: 20px;
-            background: linear-gradient(135deg, #f59e0b, #d97706);
-            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            background: #f3f4f6;
+            color: #374151;
             font-weight: 600;
             font-size: 11px;
             margin-right: 8px;
-            transition: all 0.3s ease;
+            border: 1px solid #e5e7eb;
         }
         
         .year-item {
             position: relative;
-            padding-left: 20px;
+            padding: 8px 12px;
+            border-radius: 4px;
+            transition: all 0.2s ease;
         }
         
-        .year-item::before {
-            content: '';
-            position: absolute;
-            left: 8px;
-            top: 50%;
-            width: 6px;
-            height: 6px;
-            border-radius: 50%;
-            background: #9ca3af;
-            transform: translateY(-50%);
-            transition: all 0.3s ease;
-        }
-        
-        .year-item:hover::before {
-            background: #3b82f6;
-            transform: translateY(-50%) scale(1.5);
+        .year-item:hover {
+            background-color: #f3f4f6;
         }
         
         .sidebar-container {
-            background: linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%);
-            border-right: 1px solid #e2e8f0;
+            background: #ffffff;
+            border-right: 1px solid #e5e7eb;
         }
         
         .section-content {
             max-height: 0;
             overflow: hidden;
-            transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: max-height 0.3s ease;
         }
         
         .section-content.expanded {
@@ -152,11 +104,22 @@
         }
         
         .sidebar-header {
-            background: linear-gradient(135deg, #1e293b, #334155);
-            color: white;
+            background: #f8fafc;
+            color: #374151;
             padding: 20px;
             text-align: center;
-            border-bottom: 3px solid #3b82f6;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        
+        /* Breadcrumb Styles */
+        .breadcrumb-item {
+            transition: all 0.2s ease;
+            padding: 2px 4px;
+            border-radius: 4px;
+        }
+        
+        .breadcrumb-item:hover {
+            background-color: rgba(59, 130, 246, 0.1);
         }
     </style>
 </head>
@@ -182,114 +145,114 @@
         <div class="w-72 sidebar-container h-screen fixed left-0 top-16 overflow-y-auto shadow-xl">
             <!-- Sidebar Header -->
             <div class="sidebar-header">
-                <i class="fas fa-graduation-cap text-2xl mb-2"></i>
-                <h3 class="font-bold text-lg">Academic Levels</h3>
-                <p class="text-sm opacity-80">Manage Education System</p>
+                <i class="fas fa-graduation-cap text-xl mb-2 text-gray-600"></i>
+                <h3 class="font-semibold text-lg text-gray-900">Academic Levels</h3>
+                <p class="text-sm text-gray-500 mt-1">Education Management System</p>
             </div>
             
             <div class="p-6">
                 <!-- Preschool Section -->
-                <div class="mb-6 preschool-section">
-                    <div class="sidebar-section rounded-xl p-4 cursor-pointer flex items-center justify-between text-white" onclick="toggleSection('preschool')">
+                <div class="mb-4 preschool-section">
+                    <div class="sidebar-section p-4 cursor-pointer flex items-center justify-between" onclick="toggleSection('preschool')">
                         <div class="flex items-center">
-                            <i class="fas fa-baby mr-3 text-lg"></i>
-                            <span class="font-semibold text-lg">Preschool</span>
+                            <i class="fas fa-baby mr-3 text-gray-600"></i>
+                            <span class="font-medium text-gray-900">Preschool</span>
                         </div>
-                        <i class="fas fa-chevron-down transition-transform duration-300"></i>
+                        <i class="fas fa-chevron-down transition-transform duration-200 text-gray-400"></i>
                     </div>
                     
-                    <div id="preschool-content" class="section-content mt-4">
-                        <div class="space-y-2 pl-2">
-                            <div class="sidebar-item py-3 px-4 cursor-pointer rounded-lg flex items-center">
+                    <div id="preschool-content" class="section-content mt-3">
+                        <div class="space-y-1 px-2">
+                            <div class="sidebar-item py-2 px-3 cursor-pointer flex items-center" onclick="showGradeContent('Kindergarten')">
                                 <div class="grade-badge">K</div>
-                                <span class="font-medium">Kindergarten</span>
+                                <span class="font-medium text-gray-700">Kindergarten</span>
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <!-- Elementary Section -->
-                <div class="mb-6 elementary-section">
-                    <div class="sidebar-section rounded-xl p-4 cursor-pointer flex items-center justify-between text-white" onclick="toggleSection('elementary')">
+                <div class="mb-4 elementary-section">
+                    <div class="sidebar-section p-4 cursor-pointer flex items-center justify-between" onclick="toggleSection('elementary')">
                         <div class="flex items-center">
-                            <i class="fas fa-child mr-3 text-lg"></i>
-                            <span class="font-semibold text-lg">Elementary</span>
+                            <i class="fas fa-child mr-3 text-gray-600"></i>
+                            <span class="font-medium text-gray-900">Elementary</span>
                         </div>
-                        <i class="fas fa-chevron-down transition-transform duration-300"></i>
+                        <i class="fas fa-chevron-down transition-transform duration-200 text-gray-400"></i>
                     </div>
                     
-                    <div id="elementary-content" class="section-content mt-4">
-                        <div class="space-y-2 pl-2">
-                            <div class="sidebar-item py-3 px-4 cursor-pointer rounded-lg flex items-center" onclick="showGradeContent('Grade 1')">
+                    <div id="elementary-content" class="section-content mt-3">
+                        <div class="space-y-1 px-2">
+                            <div class="sidebar-item py-2 px-3 cursor-pointer flex items-center" onclick="showGradeContent('Grade 1')">
                                 <div class="grade-badge">1</div>
-                                <span class="font-medium">Grade 1</span>
+                                <span class="font-medium text-gray-700">Grade 1</span>
                             </div>
                             
-                            <div class="sidebar-item py-3 px-4 cursor-pointer rounded-lg flex items-center" onclick="showGradeContent('Grade 2')">
+                            <div class="sidebar-item py-2 px-3 cursor-pointer flex items-center" onclick="showGradeContent('Grade 2')">
                                 <div class="grade-badge">2</div>
-                                <span class="font-medium">Grade 2</span>
+                                <span class="font-medium text-gray-700">Grade 2</span>
                             </div>
                             
-                            <div class="sidebar-item py-3 px-4 cursor-pointer rounded-lg flex items-center" onclick="showGradeContent('Grade 3')">
+                            <div class="sidebar-item py-2 px-3 cursor-pointer flex items-center" onclick="showGradeContent('Grade 3')">
                                 <div class="grade-badge">3</div>
-                                <span class="font-medium">Grade 3</span>
+                                <span class="font-medium text-gray-700">Grade 3</span>
                             </div>
                             
-                            <div class="sidebar-item py-3 px-4 cursor-pointer rounded-lg flex items-center" onclick="showGradeContent('Grade 4')">
+                            <div class="sidebar-item py-2 px-3 cursor-pointer flex items-center" onclick="showGradeContent('Grade 4')">
                                 <div class="grade-badge">4</div>
-                                <span class="font-medium">Grade 4</span>
+                                <span class="font-medium text-gray-700">Grade 4</span>
                             </div>
                             
-                            <div class="sidebar-item py-3 px-4 cursor-pointer rounded-lg flex items-center" onclick="showGradeContent('Grade 5')">
+                            <div class="sidebar-item py-2 px-3 cursor-pointer flex items-center" onclick="showGradeContent('Grade 5')">
                                 <div class="grade-badge">5</div>
-                                <span class="font-medium">Grade 5</span>
+                                <span class="font-medium text-gray-700">Grade 5</span>
                             </div>
                             
-                            <div class="sidebar-item py-3 px-4 cursor-pointer rounded-lg flex items-center" onclick="showGradeContent('Grade 6')">
+                            <div class="sidebar-item py-2 px-3 cursor-pointer flex items-center" onclick="showGradeContent('Grade 6')">
                                 <div class="grade-badge">6</div>
-                                <span class="font-medium">Grade 6</span>
+                                <span class="font-medium text-gray-700">Grade 6</span>
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <!-- High School Section -->
-                <div class="mb-6 highschool-section">
-                    <div class="sidebar-section rounded-xl p-4 cursor-pointer flex items-center justify-between text-white" onclick="toggleSection('highschool')">
+                <div class="mb-4 highschool-section">
+                    <div class="sidebar-section p-4 cursor-pointer flex items-center justify-between" onclick="toggleSection('highschool')">
                         <div class="flex items-center">
-                            <i class="fas fa-user-graduate mr-3 text-lg"></i>
-                            <span class="font-semibold text-lg">High School</span>
+                            <i class="fas fa-user-graduate mr-3 text-gray-600"></i>
+                            <span class="font-medium text-gray-900">High School</span>
                         </div>
-                        <i class="fas fa-chevron-down transition-transform duration-300"></i>
+                        <i class="fas fa-chevron-down transition-transform duration-200 text-gray-400"></i>
                     </div>
                     
-                    <div id="highschool-content" class="section-content mt-4">
-                        <div class="space-y-4 pl-2">
+                    <div id="highschool-content" class="section-content mt-3">
+                        <div class="space-y-3 px-2">
                             <!-- Junior High School -->
-                            <div class="bg-white rounded-lg p-4 shadow-sm border border-gray-100">
-                                <div class="flex items-center mb-3">
-                                    <div class="program-badge" style="background: linear-gradient(135deg, #8b5cf6, #7c3aed);">JHS</div>
-                                    <span class="font-semibold text-gray-800">Junior High School</span>
+                            <div class="bg-gray-50 border border-gray-200 p-3">
+                                <div class="flex items-center mb-2">
+                                    <div class="program-badge">JHS</div>
+                                    <span class="font-medium text-gray-800">Junior High School</span>
                                 </div>
                                 
-                                <div class="grid grid-cols-2 gap-2">
-                                    <div class="sidebar-item year-item py-2 px-3 cursor-pointer rounded text-sm text-gray-600 hover:text-blue-600 text-center">Grade 7</div>
-                                    <div class="sidebar-item year-item py-2 px-3 cursor-pointer rounded text-sm text-gray-600 hover:text-blue-600 text-center">Grade 8</div>
-                                    <div class="sidebar-item year-item py-2 px-3 cursor-pointer rounded text-sm text-gray-600 hover:text-blue-600 text-center">Grade 9</div>
-                                    <div class="sidebar-item year-item py-2 px-3 cursor-pointer rounded text-sm text-gray-600 hover:text-blue-600 text-center">Grade 10</div>
+                                <div class="grid grid-cols-2 gap-1">
+                                    <div class="year-item text-sm text-gray-600 hover:text-gray-900 text-center cursor-pointer" onclick="showGradeContent('Grade 7')">Grade 7</div>
+                                    <div class="year-item text-sm text-gray-600 hover:text-gray-900 text-center cursor-pointer" onclick="showGradeContent('Grade 8')">Grade 8</div>
+                                    <div class="year-item text-sm text-gray-600 hover:text-gray-900 text-center cursor-pointer" onclick="showGradeContent('Grade 9')">Grade 9</div>
+                                    <div class="year-item text-sm text-gray-600 hover:text-gray-900 text-center cursor-pointer" onclick="showGradeContent('Grade 10')">Grade 10</div>
                                 </div>
                             </div>
                             
                             <!-- Senior High School -->
-                            <div class="bg-white rounded-lg p-4 shadow-sm border border-gray-100">
-                                <div class="flex items-center mb-3">
-                                    <div class="program-badge" style="background: linear-gradient(135deg, #ef4444, #dc2626);">SHS</div>
-                                    <span class="font-semibold text-gray-800">Senior High School</span>
+                            <div class="bg-gray-50 border border-gray-200 p-3">
+                                <div class="flex items-center mb-2">
+                                    <div class="program-badge">SHS</div>
+                                    <span class="font-medium text-gray-800">Senior High School</span>
                                 </div>
                                 
-                                <div class="grid grid-cols-2 gap-2">
-                                    <div class="sidebar-item year-item py-2 px-3 cursor-pointer rounded text-sm text-gray-600 hover:text-blue-600 text-center">Grade 11</div>
-                                    <div class="sidebar-item year-item py-2 px-3 cursor-pointer rounded text-sm text-gray-600 hover:text-blue-600 text-center">Grade 12</div>
+                                <div class="grid grid-cols-2 gap-1">
+                                    <div class="year-item text-sm text-gray-600 hover:text-gray-900 text-center cursor-pointer" onclick="showGradeContent('Grade 11')">Grade 11</div>
+                                    <div class="year-item text-sm text-gray-600 hover:text-gray-900 text-center cursor-pointer" onclick="showGradeContent('Grade 12')">Grade 12</div>
                                 </div>
                             </div>
                         </div>
@@ -297,109 +260,109 @@
                 </div>
 
                 <!-- College Section -->
-                <div class="mb-6 college-section">
-                    <div class="sidebar-section rounded-xl p-4 cursor-pointer flex items-center justify-between text-white" onclick="toggleSection('college')">
+                <div class="mb-4 college-section">
+                    <div class="sidebar-section p-4 cursor-pointer flex items-center justify-between" onclick="toggleSection('college')">
                         <div class="flex items-center">
-                            <i class="fas fa-university mr-3 text-lg"></i>
-                            <span class="font-semibold text-lg">College</span>
+                            <i class="fas fa-university mr-3 text-gray-600"></i>
+                            <span class="font-medium text-gray-900">College</span>
                         </div>
-                        <i class="fas fa-chevron-down transition-transform duration-300"></i>
+                        <i class="fas fa-chevron-down transition-transform duration-200 text-gray-400"></i>
                     </div>
                     
-                    <div id="college-content" class="section-content mt-4">
-                        <div class="space-y-4 pl-2">
+                    <div id="college-content" class="section-content mt-3">
+                        <div class="space-y-3 px-2">
                             <!-- HRM Program -->
-                            <div class="bg-white rounded-lg p-4 shadow-sm border border-gray-100">
-                                <div class="sidebar-item py-2 cursor-pointer rounded-lg flex items-center mb-3" onclick="toggleProgram('hrm')">
+                            <div class="bg-gray-50 border border-gray-200 p-3">
+                                <div class="sidebar-item py-1 cursor-pointer flex items-center mb-2" onclick="toggleProgram('hrm')">
                                     <div class="program-badge">HRM</div>
-                                    <span class="font-semibold text-gray-800">Hotel & Restaurant Management</span>
-                                    <i class="fas fa-chevron-right ml-auto transition-transform duration-300" id="hrm-chevron"></i>
+                                    <span class="font-medium text-gray-800">Hotel & Restaurant Management</span>
+                                    <i class="fas fa-chevron-right ml-auto transition-transform duration-200 text-gray-400" id="hrm-chevron"></i>
                                 </div>
                                 
-                                <div id="hrm-subjects" class="hidden mt-3 space-y-2">
+                                <div id="hrm-subjects" class="hidden mt-2 space-y-1">
                                     <!-- Core Subjects -->
-                                    <div class="text-xs font-semibold text-gray-500 uppercase tracking-wider px-2 mb-2">Core Subjects</div>
-                                    <div class="sidebar-item py-2 px-3 cursor-pointer rounded text-sm text-gray-700 hover:text-blue-600 hover:bg-blue-50" onclick="showSubjectYears('hrm', 'food-service')">Food Service Management</div>
-                                    <div class="sidebar-item py-2 px-3 cursor-pointer rounded text-sm text-gray-700 hover:text-blue-600 hover:bg-blue-50" onclick="showSubjectYears('hrm', 'hotel-operations')">Hotel Operations</div>
-                                    <div class="sidebar-item py-2 px-3 cursor-pointer rounded text-sm text-gray-700 hover:text-blue-600 hover:bg-blue-50" onclick="showSubjectYears('hrm', 'culinary-arts')">Culinary Arts</div>
-                                    <div class="sidebar-item py-2 px-3 cursor-pointer rounded text-sm text-gray-700 hover:text-blue-600 hover:bg-blue-50" onclick="showSubjectYears('hrm', 'tourism-management')">Tourism Management</div>
-                                    <div class="sidebar-item py-2 px-3 cursor-pointer rounded text-sm text-gray-700 hover:text-blue-600 hover:bg-blue-50" onclick="showSubjectYears('hrm', 'event-management')">Event Management</div>
-                                    <div class="sidebar-item py-2 px-3 cursor-pointer rounded text-sm text-gray-700 hover:text-blue-600 hover:bg-blue-50" onclick="showSubjectYears('hrm', 'hospitality-marketing')">Hospitality Marketing</div>
+                                    <div class="text-xs font-medium text-gray-500 uppercase tracking-wider px-2 mb-1">Core Subjects</div>
+                                    <div class="sidebar-item py-1 px-2 cursor-pointer text-sm text-gray-700 hover:text-gray-900" onclick="showSubjectYears('hrm', 'food-service')">Food Service Management</div>
+                                    <div class="sidebar-item py-1 px-2 cursor-pointer text-sm text-gray-700 hover:text-gray-900" onclick="showSubjectYears('hrm', 'hotel-operations')">Hotel Operations</div>
+                                    <div class="sidebar-item py-1 px-2 cursor-pointer text-sm text-gray-700 hover:text-gray-900" onclick="showSubjectYears('hrm', 'culinary-arts')">Culinary Arts</div>
+                                    <div class="sidebar-item py-1 px-2 cursor-pointer text-sm text-gray-700 hover:text-gray-900" onclick="showSubjectYears('hrm', 'tourism-management')">Tourism Management</div>
+                                    <div class="sidebar-item py-1 px-2 cursor-pointer text-sm text-gray-700 hover:text-gray-900" onclick="showSubjectYears('hrm', 'event-management')">Event Management</div>
+                                    <div class="sidebar-item py-1 px-2 cursor-pointer text-sm text-gray-700 hover:text-gray-900" onclick="showSubjectYears('hrm', 'hospitality-marketing')">Hospitality Marketing</div>
                                     
                                     <!-- Subject Year Levels (Hidden by default) -->
-                                    <div id="hrm-subject-years" class="hidden mt-4 p-3 bg-blue-50 rounded-lg border border-blue-200">
-                                        <div class="text-sm font-semibold text-blue-800 mb-2" id="hrm-subject-title">Subject Year Levels</div>
-                                        <div class="grid grid-cols-2 gap-2">
-                                            <div class="sidebar-item year-item py-2 px-3 cursor-pointer rounded text-sm text-blue-700 hover:text-blue-900 text-center bg-white border border-blue-200">1st Year</div>
-                                            <div class="sidebar-item year-item py-2 px-3 cursor-pointer rounded text-sm text-blue-700 hover:text-blue-900 text-center bg-white border border-blue-200">2nd Year</div>
-                                            <div class="sidebar-item year-item py-2 px-3 cursor-pointer rounded text-sm text-blue-700 hover:text-blue-900 text-center bg-white border border-blue-200">3rd Year</div>
-                                            <div class="sidebar-item year-item py-2 px-3 cursor-pointer rounded text-sm text-blue-700 hover:text-blue-900 text-center bg-white border border-blue-200">4th Year</div>
+                                    <div id="hrm-subject-years" class="hidden mt-3 p-2 bg-white border border-gray-300">
+                                        <div class="text-sm font-medium text-gray-800 mb-2" id="hrm-subject-title">Subject Year Levels</div>
+                                        <div class="grid grid-cols-2 gap-1">
+                                            <div class="year-item text-sm text-gray-700 hover:text-gray-900 text-center">1st Year</div>
+                                            <div class="year-item text-sm text-gray-700 hover:text-gray-900 text-center">2nd Year</div>
+                                            <div class="year-item text-sm text-gray-700 hover:text-gray-900 text-center">3rd Year</div>
+                                            <div class="year-item text-sm text-gray-700 hover:text-gray-900 text-center">4th Year</div>
                                         </div>
-                                        <button onclick="hideSubjectYears('hrm')" class="mt-3 text-xs text-blue-600 hover:text-blue-800 underline">← Back to Subjects</button>
+                                        <button onclick="hideSubjectYears('hrm')" class="mt-2 text-xs text-gray-600 hover:text-gray-800 underline">← Back to Subjects</button>
                                     </div>
                                 </div>
                             </div>
                             
                             <!-- IT Program -->
-                            <div class="bg-white rounded-lg p-4 shadow-sm border border-gray-100">
-                                <div class="sidebar-item py-2 cursor-pointer rounded-lg flex items-center mb-3" onclick="toggleProgram('it')">
-                                    <div class="program-badge" style="background: linear-gradient(135deg, #10b981, #059669);">IT</div>
-                                    <span class="font-semibold text-gray-800">Information Technology</span>
-                                    <i class="fas fa-chevron-right ml-auto transition-transform duration-300" id="it-chevron"></i>
+                            <div class="bg-gray-50 border border-gray-200 p-3">
+                                <div class="sidebar-item py-1 cursor-pointer flex items-center mb-2" onclick="toggleProgram('it')">
+                                    <div class="program-badge">IT</div>
+                                    <span class="font-medium text-gray-800">Information Technology</span>
+                                    <i class="fas fa-chevron-right ml-auto transition-transform duration-200 text-gray-400" id="it-chevron"></i>
                                 </div>
                                 
-                                <div id="it-subjects" class="hidden mt-3 space-y-2">
+                                <div id="it-subjects" class="hidden mt-2 space-y-1">
                                     <!-- Core Subjects -->
-                                    <div class="text-xs font-semibold text-gray-500 uppercase tracking-wider px-2 mb-2">Core Subjects</div>
-                                    <div class="sidebar-item py-2 px-3 cursor-pointer rounded text-sm text-gray-700 hover:text-blue-600 hover:bg-blue-50" onclick="showSubjectYears('it', 'programming')">Programming Fundamentals</div>
-                                    <div class="sidebar-item py-2 px-3 cursor-pointer rounded text-sm text-gray-700 hover:text-blue-600 hover:bg-blue-50" onclick="showSubjectYears('it', 'database')">Database Management</div>
-                                    <div class="sidebar-item py-2 px-3 cursor-pointer rounded text-sm text-gray-700 hover:text-blue-600 hover:bg-blue-50" onclick="showSubjectYears('it', 'web-dev')">Web Development</div>
-                                    <div class="sidebar-item py-2 px-3 cursor-pointer rounded text-sm text-gray-700 hover:text-blue-600 hover:bg-blue-50" onclick="showSubjectYears('it', 'network')">Network Administration</div>
-                                    <div class="sidebar-item py-2 px-3 cursor-pointer rounded text-sm text-gray-700 hover:text-blue-600 hover:bg-blue-50" onclick="showSubjectYears('it', 'system-analysis')">System Analysis & Design</div>
-                                    <div class="sidebar-item py-2 px-3 cursor-pointer rounded text-sm text-gray-700 hover:text-blue-600 hover:bg-blue-50" onclick="showSubjectYears('it', 'cybersecurity')">Cybersecurity</div>
+                                    <div class="text-xs font-medium text-gray-500 uppercase tracking-wider px-2 mb-1">Core Subjects</div>
+                                    <div class="sidebar-item py-1 px-2 cursor-pointer text-sm text-gray-700 hover:text-gray-900" onclick="showSubjectYears('it', 'programming')">Programming Fundamentals</div>
+                                    <div class="sidebar-item py-1 px-2 cursor-pointer text-sm text-gray-700 hover:text-gray-900" onclick="showSubjectYears('it', 'database')">Database Management</div>
+                                    <div class="sidebar-item py-1 px-2 cursor-pointer text-sm text-gray-700 hover:text-gray-900" onclick="showSubjectYears('it', 'web-dev')">Web Development</div>
+                                    <div class="sidebar-item py-1 px-2 cursor-pointer text-sm text-gray-700 hover:text-gray-900" onclick="showSubjectYears('it', 'network')">Network Administration</div>
+                                    <div class="sidebar-item py-1 px-2 cursor-pointer text-sm text-gray-700 hover:text-gray-900" onclick="showSubjectYears('it', 'system-analysis')">System Analysis & Design</div>
+                                    <div class="sidebar-item py-1 px-2 cursor-pointer text-sm text-gray-700 hover:text-gray-900" onclick="showSubjectYears('it', 'cybersecurity')">Cybersecurity</div>
                                     
                                     <!-- Subject Year Levels (Hidden by default) -->
-                                    <div id="it-subject-years" class="hidden mt-4 p-3 bg-green-50 rounded-lg border border-green-200">
-                                        <div class="text-sm font-semibold text-green-800 mb-2" id="it-subject-title">Subject Year Levels</div>
-                                        <div class="grid grid-cols-2 gap-2">
-                                            <div class="sidebar-item year-item py-2 px-3 cursor-pointer rounded text-sm text-green-700 hover:text-green-900 text-center bg-white border border-green-200">1st Year</div>
-                                            <div class="sidebar-item year-item py-2 px-3 cursor-pointer rounded text-sm text-green-700 hover:text-green-900 text-center bg-white border border-green-200">2nd Year</div>
-                                            <div class="sidebar-item year-item py-2 px-3 cursor-pointer rounded text-sm text-green-700 hover:text-green-900 text-center bg-white border border-green-200">3rd Year</div>
-                                            <div class="sidebar-item year-item py-2 px-3 cursor-pointer rounded text-sm text-green-700 hover:text-green-900 text-center bg-white border border-green-200">4th Year</div>
+                                    <div id="it-subject-years" class="hidden mt-3 p-2 bg-white border border-gray-300">
+                                        <div class="text-sm font-medium text-gray-800 mb-2" id="it-subject-title">Subject Year Levels</div>
+                                        <div class="grid grid-cols-2 gap-1">
+                                            <div class="year-item text-sm text-gray-700 hover:text-gray-900 text-center">1st Year</div>
+                                            <div class="year-item text-sm text-gray-700 hover:text-gray-900 text-center">2nd Year</div>
+                                            <div class="year-item text-sm text-gray-700 hover:text-gray-900 text-center">3rd Year</div>
+                                            <div class="year-item text-sm text-gray-700 hover:text-gray-900 text-center">4th Year</div>
                                         </div>
-                                        <button onclick="hideSubjectYears('it')" class="mt-3 text-xs text-green-600 hover:text-green-800 underline">← Back to Subjects</button>
+                                        <button onclick="hideSubjectYears('it')" class="mt-2 text-xs text-gray-600 hover:text-gray-800 underline">← Back to Subjects</button>
                                     </div>
                                 </div>
                             </div>
 
                             <!-- Business Administration Program -->
-                            <div class="bg-white rounded-lg p-4 shadow-sm border border-gray-100">
-                                <div class="sidebar-item py-2 cursor-pointer rounded-lg flex items-center mb-3" onclick="toggleProgram('bsba')">
-                                    <div class="program-badge" style="background: linear-gradient(135deg, #f59e0b, #d97706);">BSBA</div>
-                                    <span class="font-semibold text-gray-800">Business Administration</span>
-                                    <i class="fas fa-chevron-right ml-auto transition-transform duration-300" id="bsba-chevron"></i>
+                            <div class="bg-gray-50 border border-gray-200 p-3">
+                                <div class="sidebar-item py-1 cursor-pointer flex items-center mb-2" onclick="toggleProgram('bsba')">
+                                    <div class="program-badge">BSBA</div>
+                                    <span class="font-medium text-gray-800">Business Administration</span>
+                                    <i class="fas fa-chevron-right ml-auto transition-transform duration-200 text-gray-400" id="bsba-chevron"></i>
                                 </div>
                                 
-                                <div id="bsba-subjects" class="hidden mt-3 space-y-2">
+                                <div id="bsba-subjects" class="hidden mt-2 space-y-1">
                                     <!-- Core Subjects -->
-                                    <div class="text-xs font-semibold text-gray-500 uppercase tracking-wider px-2 mb-2">Core Subjects</div>
-                                    <div class="sidebar-item py-2 px-3 cursor-pointer rounded text-sm text-gray-700 hover:text-blue-600 hover:bg-blue-50" onclick="showSubjectYears('bsba', 'business-mgmt')">Business Management</div>
-                                    <div class="sidebar-item py-2 px-3 cursor-pointer rounded text-sm text-gray-700 hover:text-blue-600 hover:bg-blue-50" onclick="showSubjectYears('bsba', 'financial-mgmt')">Financial Management</div>
-                                    <div class="sidebar-item py-2 px-3 cursor-pointer rounded text-sm text-gray-700 hover:text-blue-600 hover:bg-blue-50" onclick="showSubjectYears('bsba', 'marketing-mgmt')">Marketing Management</div>
-                                    <div class="sidebar-item py-2 px-3 cursor-pointer rounded text-sm text-gray-700 hover:text-blue-600 hover:bg-blue-50" onclick="showSubjectYears('bsba', 'hr-mgmt')">Human Resource Management</div>
-                                    <div class="sidebar-item py-2 px-3 cursor-pointer rounded text-sm text-gray-700 hover:text-blue-600 hover:bg-blue-50" onclick="showSubjectYears('bsba', 'operations-mgmt')">Operations Management</div>
-                                    <div class="sidebar-item py-2 px-3 cursor-pointer rounded text-sm text-gray-700 hover:text-blue-600 hover:bg-blue-50" onclick="showSubjectYears('bsba', 'entrepreneurship')">Entrepreneurship</div>
+                                    <div class="text-xs font-medium text-gray-500 uppercase tracking-wider px-2 mb-1">Core Subjects</div>
+                                    <div class="sidebar-item py-1 px-2 cursor-pointer text-sm text-gray-700 hover:text-gray-900" onclick="showSubjectYears('bsba', 'business-mgmt')">Business Management</div>
+                                    <div class="sidebar-item py-1 px-2 cursor-pointer text-sm text-gray-700 hover:text-gray-900" onclick="showSubjectYears('bsba', 'financial-mgmt')">Financial Management</div>
+                                    <div class="sidebar-item py-1 px-2 cursor-pointer text-sm text-gray-700 hover:text-gray-900" onclick="showSubjectYears('bsba', 'marketing-mgmt')">Marketing Management</div>
+                                    <div class="sidebar-item py-1 px-2 cursor-pointer text-sm text-gray-700 hover:text-gray-900" onclick="showSubjectYears('bsba', 'hr-mgmt')">Human Resource Management</div>
+                                    <div class="sidebar-item py-1 px-2 cursor-pointer text-sm text-gray-700 hover:text-gray-900" onclick="showSubjectYears('bsba', 'operations-mgmt')">Operations Management</div>
+                                    <div class="sidebar-item py-1 px-2 cursor-pointer text-sm text-gray-700 hover:text-gray-900" onclick="showSubjectYears('bsba', 'entrepreneurship')">Entrepreneurship</div>
                                     
                                     <!-- Subject Year Levels (Hidden by default) -->
-                                    <div id="bsba-subject-years" class="hidden mt-4 p-3 bg-orange-50 rounded-lg border border-orange-200">
-                                        <div class="text-sm font-semibold text-orange-800 mb-2" id="bsba-subject-title">Subject Year Levels</div>
-                                        <div class="grid grid-cols-2 gap-2">
-                                            <div class="sidebar-item year-item py-2 px-3 cursor-pointer rounded text-sm text-orange-700 hover:text-orange-900 text-center bg-white border border-orange-200">1st Year</div>
-                                            <div class="sidebar-item year-item py-2 px-3 cursor-pointer rounded text-sm text-orange-700 hover:text-orange-900 text-center bg-white border border-orange-200">2nd Year</div>
-                                            <div class="sidebar-item year-item py-2 px-3 cursor-pointer rounded text-sm text-orange-700 hover:text-orange-900 text-center bg-white border border-orange-200">3rd Year</div>
-                                            <div class="sidebar-item year-item py-2 px-3 cursor-pointer rounded text-sm text-orange-700 hover:text-orange-900 text-center bg-white border border-orange-200">4th Year</div>
+                                    <div id="bsba-subject-years" class="hidden mt-3 p-2 bg-white border border-gray-300">
+                                        <div class="text-sm font-medium text-gray-800 mb-2" id="bsba-subject-title">Subject Year Levels</div>
+                                        <div class="grid grid-cols-2 gap-1">
+                                            <div class="year-item text-sm text-gray-700 hover:text-gray-900 text-center">1st Year</div>
+                                            <div class="year-item text-sm text-gray-700 hover:text-gray-900 text-center">2nd Year</div>
+                                            <div class="year-item text-sm text-gray-700 hover:text-gray-900 text-center">3rd Year</div>
+                                            <div class="year-item text-sm text-gray-700 hover:text-gray-900 text-center">4th Year</div>
                                         </div>
-                                        <button onclick="hideSubjectYears('bsba')" class="mt-3 text-xs text-orange-600 hover:text-orange-800 underline">← Back to Subjects</button>
+                                        <button onclick="hideSubjectYears('bsba')" class="mt-2 text-xs text-gray-600 hover:text-gray-800 underline">← Back to Subjects</button>
                                     </div>
                                 </div>
                             </div>
@@ -566,7 +529,10 @@
                     <div class="bg-white border-b border-gray-200 p-6 flex items-center justify-between">
                         <div>
                             <h2 id="grade-title" class="text-2xl font-semibold text-gray-900">Grade 1</h2>
-                            <p id="year-title" class="text-gray-600">Grade 1</p>
+                            <!-- Clickable Breadcrumb -->
+                            <nav id="breadcrumb-nav" class="text-gray-600 text-sm mt-1">
+                                <span id="breadcrumb-content">Grade 1</span>
+                            </nav>
                         </div>
                         <button onclick="showDashboard()" class="bg-gray-100 text-gray-700 px-4 py-2 border border-gray-300 hover:bg-gray-200 transition-colors">
                             <i class="fas fa-arrow-left mr-2"></i>← Back to Dashboard
@@ -623,21 +589,17 @@
                         </div>
                     </div>
 
-                    <!-- Back to Dashboard Button (Hidden by default) -->
-                    <div id="back-to-dashboard" class="hidden p-6 border-b border-gray-200">
-                        <button onclick="showSchoolYears()" class="bg-gray-100 text-gray-700 px-4 py-2 border border-gray-300 hover:bg-gray-200 transition-colors">
-                            <i class="fas fa-arrow-left mr-2"></i>← Back to School Years
-                        </button>
-                    </div>
+
 
                     <!-- Subjects View (Hidden by default) -->
-                    <div id="subjects-view" class="hidden p-8">
-                        <div class="mb-6">
-                            <h3 class="text-xl font-semibold text-gray-900 mb-4">Subjects</h3>
-                            <p class="text-gray-600">Manage subjects for the selected grade and school year</p>
-                        </div>
-                        
-                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div id="subjects-view" class="hidden overflow-y-auto" style="max-height: calc(100vh - 200px);">
+                        <div class="p-8">
+                            <div class="mb-6">
+                                <h3 class="text-xl font-semibold text-gray-900 mb-4">Subjects</h3>
+                                <p class="text-gray-600">Manage subjects for the selected grade and school year</p>
+                            </div>
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                             <!-- Science -->
                             <div class="bg-white border border-gray-200 p-6 hover:border-gray-400 cursor-pointer transition-colors" onclick="showSubjectDetails('Science')">
                                 <div class="flex items-center mb-4">
@@ -821,25 +783,80 @@
                                     </div>
                                 </div>
                             </div>
+                            </div>
                         </div>
                     </div>
 
-                    <!-- Back to Subjects Button (Hidden by default) -->
-                    <div id="back-to-subjects" class="hidden p-6 border-b border-gray-200">
-                        <button onclick="showSubjects()" class="bg-gray-100 text-gray-700 px-4 py-2 border border-gray-300 hover:bg-gray-200 transition-colors">
-                            <i class="fas fa-arrow-left mr-2"></i>← Back to Subjects
-                        </button>
-                    </div>
+
 
                     <!-- Sections View (Hidden by default) -->
-                    <div id="sections-view" class="hidden p-8">
-                        <div class="mb-6">
-                            <h3 id="subject-title" class="text-xl font-semibold text-gray-900 mb-4">Science - Sections</h3>
-                            <p class="text-gray-600">Select a section to manage students and grades</p>
+                    <div id="sections-view" class="hidden overflow-y-auto" style="max-height: calc(100vh - 200px);">
+                        <div class="p-8">
+                            <div class="mb-6">
+                                <h3 id="subject-title" class="text-xl font-semibold text-gray-900 mb-4">Science - Sections</h3>
+                                <p class="text-gray-600">Select a section to manage students and grades</p>
+                            </div>
+                            
+                            <div id="sections-grid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                                <!-- Sections will be populated dynamically -->
+                            </div>
                         </div>
-                        
-                        <div id="sections-grid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                            <!-- Sections will be populated dynamically -->
+                    </div>
+
+
+
+                    <!-- Section Details View (Hidden by default) -->
+                    <div id="section-details-view" class="hidden p-8">
+                        <!-- Teacher Badge -->
+                        <div class="mb-6">
+                            <div id="teacher-badge" class="inline-block bg-gray-400 text-white px-4 py-2 font-medium">
+                                Mr. Cruz
+                            </div>
+                        </div>
+
+                        <!-- Students List Section -->
+                        <div class="mb-4">
+                            <h4 class="text-lg font-semibold text-gray-900">Students List</h4>
+                        </div>
+
+                        <!-- Students Table Container -->
+                        <div class="bg-white border border-gray-200 overflow-hidden">
+                            <div class="overflow-x-auto overflow-y-auto" style="max-height: 350px;">
+                                <table class="w-full">
+                                    <thead class="bg-gray-50 border-b border-gray-200 sticky top-0">
+                                        <tr>
+                                            <th class="text-left py-3 px-4 font-semibold text-gray-900">Student ID</th>
+                                            <th class="text-left py-3 px-4 font-semibold text-gray-900">Last Name</th>
+                                            <th class="text-left py-3 px-4 font-semibold text-gray-900">First Name</th>
+                                            <th class="text-left py-3 px-4 font-semibold text-gray-900">Middle Name</th>
+                                            <th class="text-left py-3 px-4 font-semibold text-gray-900">Gender</th>
+                                            <th class="text-left py-3 px-4 font-semibold text-gray-900">Status</th>
+                                            <th class="text-left py-3 px-4 font-semibold text-gray-900">Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="students-table-body">
+                                        <!-- Students will be populated dynamically -->
+                                    </tbody>
+                                </table>
+                            </div>
+                            
+                            <!-- Table Footer -->
+                            <div class="bg-gray-50 px-4 py-3 border-t border-gray-200 flex justify-between items-center">
+                                <div class="text-sm text-gray-600">
+                                    <span id="student-count">Showing 14 students</span>
+                                </div>
+                                <div class="flex space-x-2">
+                                    <button class="bg-white text-gray-700 px-4 py-2 text-sm border border-gray-300 hover:bg-gray-50 transition-colors">
+                                        <i class="fas fa-plus mr-1"></i>Add Student
+                                    </button>
+                                    <button class="bg-white text-gray-700 px-4 py-2 text-sm border border-gray-300 hover:bg-gray-50 transition-colors">
+                                        <i class="fas fa-edit mr-1"></i>Manage Grades
+                                    </button>
+                                    <button class="bg-white text-gray-700 px-4 py-2 text-sm border border-gray-300 hover:bg-gray-50 transition-colors">
+                                        <i class="fas fa-download mr-1"></i>Export List
+                                    </button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -888,7 +905,73 @@
             }
         }
         
+        // Breadcrumb navigation system
+        let navigationState = {
+            grade: '',
+            schoolYear: '',
+            subject: '',
+            section: ''
+        };
+        
+        function updateBreadcrumb() {
+            const breadcrumbContent = document.getElementById('breadcrumb-content');
+            let breadcrumbHTML = '';
+            
+            // Grade level (always present)
+            if (navigationState.grade) {
+                breadcrumbHTML += `<span class="breadcrumb-item cursor-pointer text-blue-600 hover:text-blue-800 hover:underline" onclick="navigateToGrade('${navigationState.grade}')">${navigationState.grade}</span>`;
+            }
+            
+            // School year
+            if (navigationState.schoolYear) {
+                breadcrumbHTML += ` <span class="text-gray-400">/</span> <span class="breadcrumb-item cursor-pointer text-blue-600 hover:text-blue-800 hover:underline" onclick="navigateToSchoolYear('${navigationState.schoolYear}')">${navigationState.schoolYear}</span>`;
+            }
+            
+            // Subject
+            if (navigationState.subject) {
+                breadcrumbHTML += ` <span class="text-gray-400">/</span> <span class="breadcrumb-item cursor-pointer text-blue-600 hover:text-blue-800 hover:underline" onclick="navigateToSubject('${navigationState.subject}')">${navigationState.subject}</span>`;
+            }
+            
+            // Section (current level, not clickable)
+            if (navigationState.section) {
+                breadcrumbHTML += ` <span class="text-gray-400">/</span> <span class="text-gray-900 font-medium">${navigationState.section}</span>`;
+            }
+            
+            breadcrumbContent.innerHTML = breadcrumbHTML;
+        }
+        
+        function navigateToGrade(grade) {
+            // Reset navigation state to grade level
+            navigationState = { grade: grade, schoolYear: '', subject: '', section: '' };
+            
+            // Show school years view
+            showSchoolYears();
+            updateBreadcrumb();
+        }
+        
+        function navigateToSchoolYear(schoolYear) {
+            // Reset navigation state to school year level
+            navigationState.subject = '';
+            navigationState.section = '';
+            
+            // Show subjects view
+            showSchoolYearContent(schoolYear);
+            updateBreadcrumb();
+        }
+        
+        function navigateToSubject(subject) {
+            // Reset navigation state to subject level
+            navigationState.section = '';
+            
+            // Show sections view
+            showSubjectDetails(subject);
+            updateBreadcrumb();
+        }
+        
         function showGradeContent(grade) {
+            // Update navigation state
+            navigationState = { grade: grade, schoolYear: '', subject: '', section: '' };
+            
             // Hide dashboard content
             document.getElementById('dashboard-content').classList.add('hidden');
             
@@ -896,51 +979,158 @@
             document.getElementById('grade-content').classList.remove('hidden');
             
             // Check if we're currently viewing subjects for this grade
-            const currentYearTitle = document.getElementById('year-title').textContent;
             const subjectsVisible = !document.getElementById('subjects-view').classList.contains('hidden');
             
-            // Check if the current year title contains this grade (e.g., "Grade 2 / 2016-2017" contains "Grade 2")
-            if (subjectsVisible && currentYearTitle.startsWith(grade + ' /')) {
+            // Check if the current breadcrumb contains this grade
+            if (subjectsVisible && navigationState.grade === grade) {
                 // If we're viewing subjects for this grade, go back to school years
                 showSchoolYears();
             } else {
-                // Show school years view first
+                // Show school years view first and hide all other views
                 document.getElementById('school-years-view').classList.remove('hidden');
-                document.getElementById('back-to-dashboard').classList.add('hidden');
                 document.getElementById('subjects-view').classList.add('hidden');
+                document.getElementById('sections-view').classList.add('hidden');
+                document.getElementById('section-details-view').classList.add('hidden');
                 
                 // Update titles
                 document.getElementById('grade-title').textContent = grade;
-                document.getElementById('year-title').textContent = grade;
+                updateBreadcrumb();
             }
         }
         
         function showSchoolYearContent(schoolYear) {
-            // Get current grade from title
-            const currentGrade = document.getElementById('grade-title').textContent;
+            // Update navigation state
+            navigationState.schoolYear = schoolYear;
+            navigationState.subject = '';
+            navigationState.section = '';
             
             // Hide school years view
             document.getElementById('school-years-view').classList.add('hidden');
-            document.getElementById('back-to-dashboard').classList.remove('hidden');
             
             // Show subjects view
             document.getElementById('subjects-view').classList.remove('hidden');
             
-            // Update year title
-            document.getElementById('year-title').textContent = currentGrade + ' / ' + schoolYear;
+            // Hide other views
+            document.getElementById('sections-view').classList.add('hidden');
+            document.getElementById('section-details-view').classList.add('hidden');
+            
+            // Update subjects based on grade level
+            updateSubjectsForGrade(navigationState.grade);
+            
+            // Update breadcrumb
+            updateBreadcrumb();
+        }
+        
+        function updateSubjectsForGrade(grade) {
+            const subjectsGrid = document.querySelector('#subjects-view .grid');
+            subjectsGrid.innerHTML = '';
+            
+            let subjects = [];
+            
+            if (grade === 'Kindergarten') {
+                subjects = [
+                    { name: 'Reading Readiness', icon: 'fas fa-book-reader', description: 'Letter Recognition & Phonics', students: 45, sections: 3 },
+                    { name: 'Number Concepts', icon: 'fas fa-sort-numeric-up', description: 'Basic Math & Counting', students: 45, sections: 3 },
+                    { name: 'Creative Arts', icon: 'fas fa-palette', description: 'Drawing & Crafts', students: 45, sections: 3 },
+                    { name: 'Music & Movement', icon: 'fas fa-music', description: 'Songs & Dance', students: 45, sections: 3 },
+                    { name: 'Social Skills', icon: 'fas fa-users', description: 'Sharing & Cooperation', students: 45, sections: 3 },
+                    { name: 'Physical Development', icon: 'fas fa-running', description: 'Motor Skills & Play', students: 45, sections: 3 },
+                    { name: 'Science Discovery', icon: 'fas fa-seedling', description: 'Nature & Exploration', students: 45, sections: 3 },
+                    { name: 'Story Time', icon: 'fas fa-book-open', description: 'Listening & Comprehension', students: 45, sections: 3 }
+                ];
+            } else if (['Grade 7', 'Grade 8', 'Grade 9', 'Grade 10'].includes(grade)) {
+                // Junior High School subjects
+                subjects = [
+                    { name: 'Mathematics', icon: 'fas fa-calculator', description: 'Algebra & Geometry', students: 180, sections: 6 },
+                    { name: 'Science', icon: 'fas fa-atom', description: 'Biology, Chemistry & Physics', students: 180, sections: 6 },
+                    { name: 'English', icon: 'fas fa-book-open', description: 'Literature & Communication', students: 180, sections: 6 },
+                    { name: 'Filipino', icon: 'fas fa-flag', description: 'Wika at Panitikan', students: 180, sections: 6 },
+                    { name: 'Araling Panlipunan', icon: 'fas fa-globe-asia', description: 'Social Studies & History', students: 180, sections: 6 },
+                    { name: 'Technology and Livelihood Education', icon: 'fas fa-tools', description: 'TLE & Practical Skills', students: 180, sections: 6 },
+                    { name: 'Music, Arts, PE & Health', icon: 'fas fa-heart', description: 'MAPEH Integrated', students: 180, sections: 6 },
+                    { name: 'Edukasyon sa Pagpapakatao', icon: 'fas fa-hands-helping', description: 'Values Education', students: 180, sections: 6 },
+                    { name: 'Computer Education', icon: 'fas fa-laptop', description: 'ICT & Digital Literacy', students: 180, sections: 6 }
+                ];
+            } else if (['Grade 11', 'Grade 12'].includes(grade)) {
+                // Senior High School subjects - Core + Track-based
+                subjects = [
+                    // Core Subjects
+                    { name: 'Oral Communication', icon: 'fas fa-microphone', description: 'Communication Skills', students: 240, sections: 8 },
+                    { name: 'Reading and Writing', icon: 'fas fa-pen-fancy', description: 'Literacy & Composition', students: 240, sections: 8 },
+                    { name: 'Komunikasyon at Pananaliksik', icon: 'fas fa-search', description: 'Filipino Research', students: 240, sections: 8 },
+                    { name: 'General Mathematics', icon: 'fas fa-square-root-alt', description: 'Applied Mathematics', students: 240, sections: 8 },
+                    { name: 'Statistics and Probability', icon: 'fas fa-chart-line', description: 'Data Analysis', students: 240, sections: 8 },
+                    { name: 'Earth and Life Science', icon: 'fas fa-globe', description: 'Environmental Science', students: 240, sections: 8 },
+                    { name: 'Physical Science', icon: 'fas fa-atom', description: 'Physics & Chemistry', students: 240, sections: 8 },
+                    { name: 'Personal Development', icon: 'fas fa-user-graduate', description: 'Life Skills', students: 240, sections: 8 },
+                    // Track Subjects
+                    { name: 'STEM Track', icon: 'fas fa-flask', description: 'Science, Technology, Engineering, Math', students: 90, sections: 3 },
+                    { name: 'ABM Track', icon: 'fas fa-chart-pie', description: 'Accountancy, Business, Management', students: 90, sections: 3 },
+                    { name: 'HUMSS Track', icon: 'fas fa-users', description: 'Humanities & Social Sciences', students: 90, sections: 3 },
+                    { name: 'GAS Track', icon: 'fas fa-graduation-cap', description: 'General Academic Strand', students: 90, sections: 3 },
+                    { name: 'TVL Track', icon: 'fas fa-tools', description: 'Technical-Vocational-Livelihood', students: 90, sections: 3 }
+                ];
+            } else {
+                // Elementary subjects (existing)
+                subjects = [
+                    { name: 'Science', icon: 'fas fa-flask', description: 'Natural Sciences', students: 156, sections: 10 },
+                    { name: 'Mathematics', icon: 'fas fa-calculator', description: 'Numbers & Problem Solving', students: 156, sections: 10 },
+                    { name: 'English', icon: 'fas fa-book-open', description: 'Language & Literature', students: 156, sections: 10 },
+                    { name: 'Filipino', icon: 'fas fa-flag', description: 'Wikang Pambansa', students: 156, sections: 10 },
+                    { name: 'Social Studies', icon: 'fas fa-globe', description: 'History & Geography', students: 156, sections: 10 },
+                    { name: 'Arts', icon: 'fas fa-palette', description: 'Creative Expression', students: 156, sections: 10 },
+                    { name: 'Physical Education', icon: 'fas fa-running', description: 'Health & Fitness', students: 156, sections: 10 },
+                    { name: 'Music', icon: 'fas fa-music', description: 'Rhythm & Melody', students: 156, sections: 10 }
+                ];
+            }
+            
+            subjects.forEach(subject => {
+                const subjectCard = document.createElement('div');
+                subjectCard.className = 'bg-white border border-gray-200 p-6 hover:border-gray-400 cursor-pointer transition-colors';
+                subjectCard.onclick = () => showSubjectDetails(subject.name);
+                
+                subjectCard.innerHTML = `
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-gray-100 flex items-center justify-center mr-4">
+                            <i class="${subject.icon} text-gray-600 text-xl"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-900">${subject.name}</h4>
+                            <p class="text-sm text-gray-600">${subject.description}</p>
+                        </div>
+                    </div>
+                    <div class="text-sm text-gray-600">
+                        <div class="flex justify-between mb-1">
+                            <span>Students:</span>
+                            <span>${subject.students}</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>Sections:</span>
+                            <span>${subject.sections}</span>
+                        </div>
+                    </div>
+                `;
+                
+                subjectsGrid.appendChild(subjectCard);
+            });
         }
         
         function showSchoolYears() {
+            // Update navigation state - keep grade, clear others
+            navigationState.schoolYear = '';
+            navigationState.subject = '';
+            navigationState.section = '';
+            
             // Show school years view
             document.getElementById('school-years-view').classList.remove('hidden');
-            document.getElementById('back-to-dashboard').classList.add('hidden');
             
-            // Hide subjects view
+            // Hide all other views
             document.getElementById('subjects-view').classList.add('hidden');
+            document.getElementById('sections-view').classList.add('hidden');
+            document.getElementById('section-details-view').classList.add('hidden');
             
-            // Reset year title to just grade
-            const currentGrade = document.getElementById('grade-title').textContent;
-            document.getElementById('year-title').textContent = currentGrade;
+            // Update breadcrumb
+            updateBreadcrumb();
         }
         
         function showDashboard() {
@@ -1006,69 +1196,288 @@
             }
         }
         function showSubjectDetails(subject) {
-            // Hide subjects view
+            // Update navigation state
+            navigationState.subject = subject;
+            navigationState.section = '';
+            
+            // Hide other views
             document.getElementById('subjects-view').classList.add('hidden');
-            document.getElementById('back-to-dashboard').classList.add('hidden');
+            document.getElementById('school-years-view').classList.add('hidden');
+            document.getElementById('section-details-view').classList.add('hidden');
             
             // Show sections view
             document.getElementById('sections-view').classList.remove('hidden');
-            document.getElementById('back-to-subjects').classList.remove('hidden');
             
             // Update subject title
             document.getElementById('subject-title').textContent = subject + ' - Sections';
             
-            // Get current grade and school year for context
-            const currentTitle = document.getElementById('year-title').textContent;
+            // Update breadcrumb
+            updateBreadcrumb();
             
             // Define sections and teachers for each subject
             const subjectSections = {
+                // Kindergarten sections
+                'Reading Readiness': [
+                    { section: 'Sunshine', teacher: 'Ms. Maria' },
+                    { section: 'Rainbow', teacher: 'Ms. Ana' },
+                    { section: 'Butterfly', teacher: 'Ms. Rosa' }
+                ],
+                'Number Concepts': [
+                    { section: 'Counting Bears', teacher: 'Ms. Elena' },
+                    { section: 'Number Stars', teacher: 'Ms. Carmen' },
+                    { section: 'Math Wizards', teacher: 'Ms. Sofia' }
+                ],
+                'Creative Arts': [
+                    { section: 'Little Artists', teacher: 'Ms. Grace' },
+                    { section: 'Color Makers', teacher: 'Ms. Joy' },
+                    { section: 'Craft Corner', teacher: 'Ms. Faith' }
+                ],
+                'Music & Movement': [
+                    { section: 'Singing Birds', teacher: 'Ms. Melody' },
+                    { section: 'Dancing Flowers', teacher: 'Ms. Harmony' },
+                    { section: 'Rhythm Kids', teacher: 'Ms. Tune' }
+                ],
+                'Social Skills': [
+                    { section: 'Friendship Circle', teacher: 'Ms. Kind' },
+                    { section: 'Helping Hands', teacher: 'Ms. Care' },
+                    { section: 'Sharing Stars', teacher: 'Ms. Love' }
+                ],
+                'Physical Development': [
+                    { section: 'Active Bees', teacher: 'Coach Fit' },
+                    { section: 'Jumping Frogs', teacher: 'Coach Move' },
+                    { section: 'Running Rabbits', teacher: 'Coach Play' }
+                ],
+                'Science Discovery': [
+                    { section: 'Nature Explorers', teacher: 'Ms. Green' },
+                    { section: 'Little Scientists', teacher: 'Ms. Wonder' },
+                    { section: 'Discovery Kids', teacher: 'Ms. Curious' }
+                ],
+                'Story Time': [
+                    { section: 'Book Worms', teacher: 'Ms. Story' },
+                    { section: 'Tale Tellers', teacher: 'Ms. Read' },
+                    { section: 'Story Circle', teacher: 'Ms. Listen' }
+                ],
+                // Junior High School sections
+                'Mathematics': [
+                    { section: 'Newton', teacher: 'Mr. Algebra' },
+                    { section: 'Einstein', teacher: 'Ms. Geometry' },
+                    { section: 'Pythagoras', teacher: 'Dr. Calculus' },
+                    { section: 'Euler', teacher: 'Ms. Statistics' },
+                    { section: 'Fibonacci', teacher: 'Mr. Numbers' },
+                    { section: 'Gauss', teacher: 'Ms. Equations' }
+                ],
+                'Araling Panlipunan': [
+                    { section: 'Luzon', teacher: 'G. Kasaysayan' },
+                    { section: 'Visayas', teacher: 'Gng. Kultura' },
+                    { section: 'Mindanao', teacher: 'Dr. Lipunan' },
+                    { section: 'Manila', teacher: 'Ms. Bayan' },
+                    { section: 'Cebu', teacher: 'G. Lahi' },
+                    { section: 'Davao', teacher: 'Gng. Mundo' }
+                ],
+                'Technology and Livelihood Education': [
+                    { section: 'Innovators', teacher: 'Mr. Tech' },
+                    { section: 'Builders', teacher: 'Ms. Craft' },
+                    { section: 'Creators', teacher: 'Dr. Skills' },
+                    { section: 'Makers', teacher: 'Ms. Tools' },
+                    { section: 'Engineers', teacher: 'Mr. Build' },
+                    { section: 'Designers', teacher: 'Ms. Create' }
+                ],
+                'Music, Arts, PE & Health': [
+                    { section: 'Harmony', teacher: 'Ms. Melody' },
+                    { section: 'Rhythm', teacher: 'Mr. Beat' },
+                    { section: 'Canvas', teacher: 'Ms. Paint' },
+                    { section: 'Fitness', teacher: 'Coach Strong' },
+                    { section: 'Wellness', teacher: 'Ms. Health' },
+                    { section: 'Athletes', teacher: 'Coach Power' }
+                ],
+                'Edukasyon sa Pagpapakatao': [
+                    { section: 'Mabuting Asal', teacher: 'Gng. Virtue' },
+                    { section: 'Pagkakaisa', teacher: 'G. Unity' },
+                    { section: 'Kapayapaan', teacher: 'Ms. Peace' },
+                    { section: 'Pagmamahal', teacher: 'Gng. Love' },
+                    { section: 'Katapatan', teacher: 'G. Truth' },
+                    { section: 'Respeto', teacher: 'Ms. Honor' }
+                ],
+                'Computer Education': [
+                    { section: 'Coders', teacher: 'Mr. Binary' },
+                    { section: 'Programmers', teacher: 'Ms. Logic' },
+                    { section: 'Developers', teacher: 'Dr. Code' },
+                    { section: 'Techies', teacher: 'Ms. Digital' },
+                    { section: 'Gamers', teacher: 'Mr. Pixel' },
+                    { section: 'Hackers', teacher: 'Ms. Cyber' }
+                ],
+                // Senior High School sections
+                'Oral Communication': [
+                    { section: 'Speakers', teacher: 'Ms. Eloquent' },
+                    { section: 'Orators', teacher: 'Mr. Voice' },
+                    { section: 'Debaters', teacher: 'Dr. Argument' },
+                    { section: 'Presenters', teacher: 'Ms. Stage' },
+                    { section: 'Communicators', teacher: 'Mr. Express' },
+                    { section: 'Rhetoricians', teacher: 'Ms. Persuade' },
+                    { section: 'Articulate', teacher: 'Dr. Clear' },
+                    { section: 'Eloquence', teacher: 'Ms. Fluent' }
+                ],
+                'Reading and Writing': [
+                    { section: 'Authors', teacher: 'Ms. Pen' },
+                    { section: 'Writers', teacher: 'Mr. Ink' },
+                    { section: 'Scribes', teacher: 'Dr. Text' },
+                    { section: 'Poets', teacher: 'Ms. Verse' },
+                    { section: 'Journalists', teacher: 'Mr. News' },
+                    { section: 'Editors', teacher: 'Ms. Revise' },
+                    { section: 'Critics', teacher: 'Dr. Review' },
+                    { section: 'Novelists', teacher: 'Ms. Story' }
+                ],
+                'Komunikasyon at Pananaliksik': [
+                    { section: 'Mananaliksik', teacher: 'Gng. Saliksik' },
+                    { section: 'Tagasuri', teacher: 'G. Pagsusuri' },
+                    { section: 'Manunulat', teacher: 'Dr. Sulat' },
+                    { section: 'Tagapagsalaysay', teacher: 'Ms. Salaysay' },
+                    { section: 'Tagapagbalita', teacher: 'G. Balita' },
+                    { section: 'Tagapagturo', teacher: 'Gng. Turo' },
+                    { section: 'Tagapagbasa', teacher: 'Dr. Basa' },
+                    { section: 'Tagapagsulat', teacher: 'Ms. Akda' }
+                ],
+                'General Mathematics': [
+                    { section: 'Calculators', teacher: 'Mr. Numbers' },
+                    { section: 'Equations', teacher: 'Ms. Formula' },
+                    { section: 'Functions', teacher: 'Dr. Graph' },
+                    { section: 'Algorithms', teacher: 'Ms. Logic' },
+                    { section: 'Theorems', teacher: 'Mr. Proof' },
+                    { section: 'Variables', teacher: 'Ms. Unknown' },
+                    { section: 'Constants', teacher: 'Dr. Fixed' },
+                    { section: 'Solutions', teacher: 'Ms. Answer' }
+                ],
+                'Statistics and Probability': [
+                    { section: 'Data Miners', teacher: 'Mr. Stats' },
+                    { section: 'Analysts', teacher: 'Ms. Data' },
+                    { section: 'Researchers', teacher: 'Dr. Survey' },
+                    { section: 'Statisticians', teacher: 'Ms. Mean' },
+                    { section: 'Probability', teacher: 'Mr. Chance' },
+                    { section: 'Samplers', teacher: 'Ms. Random' },
+                    { section: 'Correlators', teacher: 'Dr. Relate' },
+                    { section: 'Predictors', teacher: 'Ms. Forecast' }
+                ],
+                'STEM Track': [
+                    { section: 'Innovators', teacher: 'Dr. Science' },
+                    { section: 'Engineers', teacher: 'Ms. Tech' },
+                    { section: 'Researchers', teacher: 'Mr. Lab' }
+                ],
+                'ABM Track': [
+                    { section: 'Entrepreneurs', teacher: 'Ms. Business' },
+                    { section: 'Accountants', teacher: 'Mr. Finance' },
+                    { section: 'Managers', teacher: 'Dr. Leadership' }
+                ],
+                'HUMSS Track': [
+                    { section: 'Philosophers', teacher: 'Dr. Wisdom' },
+                    { section: 'Historians', teacher: 'Ms. Past' },
+                    { section: 'Sociologists', teacher: 'Mr. Society' }
+                ],
+                'GAS Track': [
+                    { section: 'Explorers', teacher: 'Ms. Discover' },
+                    { section: 'Learners', teacher: 'Mr. Knowledge' },
+                    { section: 'Scholars', teacher: 'Dr. Academic' }
+                ],
+                'TVL Track': [
+                    { section: 'Craftsmen', teacher: 'Mr. Skills' },
+                    { section: 'Technicians', teacher: 'Ms. Hands' },
+                    { section: 'Artisans', teacher: 'Dr. Craft' }
+                ],
+                // Elementary sections (existing - keeping Science separate for JHS)
                 'Science': [
                     { section: 'Pluto', teacher: 'Mr. Cruz' },
                     { section: 'Mars', teacher: 'Ms. Reyes' },
                     { section: 'Jupiter', teacher: 'Mr. Santos' },
-                    { section: 'Venus', teacher: 'Ms. Garcia' }
+                    { section: 'Venus', teacher: 'Ms. Garcia' },
+                    { section: 'Mercury', teacher: 'Dr. Rodriguez' },
+                    { section: 'Saturn', teacher: 'Ms. Fernandez' },
+                    { section: 'Neptune', teacher: 'Mr. Morales' },
+                    { section: 'Uranus', teacher: 'Ms. Bautista' },
+                    { section: 'Earth', teacher: 'Dr. Castillo' },
+                    { section: 'Sun', teacher: 'Ms. Herrera' }
                 ],
                 'Mathematics': [
                     { section: 'Alpha', teacher: 'Mr. Dela Cruz' },
                     { section: 'Beta', teacher: 'Ms. Villanueva' },
                     { section: 'Gamma', teacher: 'Mr. Mendoza' },
-                    { section: 'Delta', teacher: 'Ms. Torres' }
+                    { section: 'Delta', teacher: 'Ms. Torres' },
+                    { section: 'Epsilon', teacher: 'Dr. Navarro' },
+                    { section: 'Zeta', teacher: 'Ms. Aguilar' },
+                    { section: 'Eta', teacher: 'Mr. Ortega' },
+                    { section: 'Theta', teacher: 'Ms. Ramirez' },
+                    { section: 'Iota', teacher: 'Dr. Flores' },
+                    { section: 'Kappa', teacher: 'Mr. Guerrero' }
                 ],
                 'English': [
                     { section: 'Shakespeare', teacher: 'Ms. Johnson' },
                     { section: 'Dickens', teacher: 'Mr. Brown' },
                     { section: 'Austen', teacher: 'Dr. Wilson' },
-                    { section: 'Twain', teacher: 'Ms. Davis' }
+                    { section: 'Twain', teacher: 'Ms. Davis' },
+                    { section: 'Hemingway', teacher: 'Mr. Miller' },
+                    { section: 'Steinbeck', teacher: 'Ms. Anderson' },
+                    { section: 'Fitzgerald', teacher: 'Dr. Taylor' },
+                    { section: 'Orwell', teacher: 'Ms. Thomas' },
+                    { section: 'Tolkien', teacher: 'Mr. Jackson' },
+                    { section: 'Rowling', teacher: 'Ms. White' }
                 ],
                 'Filipino': [
                     { section: 'Rizal', teacher: 'Gng. Aquino' },
                     { section: 'Bonifacio', teacher: 'G. Ramos' },
                     { section: 'Mabini', teacher: 'Dr. Bautista' },
-                    { section: 'Luna', teacher: 'Gng. Morales' }
+                    { section: 'Luna', teacher: 'Gng. Morales' },
+                    { section: 'Del Pilar', teacher: 'G. Santos' },
+                    { section: 'Jacinto', teacher: 'Gng. Cruz' },
+                    { section: 'Sakay', teacher: 'Dr. Reyes' },
+                    { section: 'Malvar', teacher: 'G. Garcia' },
+                    { section: 'Silang', teacher: 'Gng. Lopez' },
+                    { section: 'Tandang Sora', teacher: 'Ms. Perez' }
                 ],
                 'Social Studies': [
                     { section: 'Asia', teacher: 'Mr. Fernandez' },
                     { section: 'Europe', teacher: 'Ms. Lopez' },
                     { section: 'Americas', teacher: 'Dr. Perez' },
-                    { section: 'Africa', teacher: 'Ms. Gonzales' }
+                    { section: 'Africa', teacher: 'Ms. Gonzales' },
+                    { section: 'Australia', teacher: 'Mr. Martinez' },
+                    { section: 'Antarctica', teacher: 'Ms. Rodriguez' },
+                    { section: 'Pacific', teacher: 'Dr. Sanchez' },
+                    { section: 'Atlantic', teacher: 'Mr. Moreno' },
+                    { section: 'Indian', teacher: 'Ms. Valdez' },
+                    { section: 'Arctic', teacher: 'Dr. Navarro' }
                 ],
                 'Arts': [
                     { section: 'Picasso', teacher: 'Ms. Rivera' },
                     { section: 'Da Vinci', teacher: 'Mr. Castillo' },
                     { section: 'Monet', teacher: 'Dr. Herrera' },
-                    { section: 'Van Gogh', teacher: 'Ms. Jimenez' }
+                    { section: 'Van Gogh', teacher: 'Ms. Jimenez' },
+                    { section: 'Michelangelo', teacher: 'Mr. Vargas' },
+                    { section: 'Rembrandt', teacher: 'Ms. Molina' },
+                    { section: 'Renoir', teacher: 'Dr. Contreras' },
+                    { section: 'Degas', teacher: 'Ms. Sandoval' },
+                    { section: 'Cezanne', teacher: 'Mr. Dominguez' },
+                    { section: 'Matisse', teacher: 'Ms. Paredes' }
                 ],
                 'Physical Education': [
                     { section: 'Eagles', teacher: 'Coach Martinez' },
                     { section: 'Hawks', teacher: 'Coach Rodriguez' },
                     { section: 'Falcons', teacher: 'Coach Sanchez' },
-                    { section: 'Owls', teacher: 'Coach Moreno' }
+                    { section: 'Owls', teacher: 'Coach Moreno' },
+                    { section: 'Lions', teacher: 'Coach Valdez' },
+                    { section: 'Tigers', teacher: 'Coach Navarro' },
+                    { section: 'Panthers', teacher: 'Coach Gutierrez' },
+                    { section: 'Wolves', teacher: 'Coach Aguilar' },
+                    { section: 'Bears', teacher: 'Coach Ortega' },
+                    { section: 'Sharks', teacher: 'Coach Mendez' }
                 ],
                 'Music': [
                     { section: 'Mozart', teacher: 'Ms. Valdez' },
                     { section: 'Beethoven', teacher: 'Mr. Navarro' },
                     { section: 'Bach', teacher: 'Dr. Gutierrez' },
-                    { section: 'Chopin', teacher: 'Ms. Aguilar' }
+                    { section: 'Chopin', teacher: 'Ms. Aguilar' },
+                    { section: 'Vivaldi', teacher: 'Mr. Ortega' },
+                    { section: 'Handel', teacher: 'Ms. Mendez' },
+                    { section: 'Brahms', teacher: 'Dr. Ramirez' },
+                    { section: 'Tchaikovsky', teacher: 'Ms. Flores' },
+                    { section: 'Debussy', teacher: 'Mr. Guerrero' },
+                    { section: 'Schubert', teacher: 'Ms. Medina' }
                 ]
             };
             
@@ -1080,11 +1489,80 @@
                 { section: 'Section D', teacher: 'Teacher 4' }
             ];
             
+            // For JHS subjects that might conflict with elementary, use grade-specific sections
+            let actualSections = sections;
+            if (['Grade 7', 'Grade 8', 'Grade 9', 'Grade 10'].includes(navigationState.grade)) {
+                if (subject === 'Science') {
+                    actualSections = [
+                        { section: 'Atom', teacher: 'Dr. Chemistry' },
+                        { section: 'Molecule', teacher: 'Ms. Biology' },
+                        { section: 'Element', teacher: 'Mr. Physics' },
+                        { section: 'Compound', teacher: 'Ms. Science' },
+                        { section: 'Reaction', teacher: 'Dr. Lab' },
+                        { section: 'Formula', teacher: 'Mr. Experiment' }
+                    ];
+                } else if (subject === 'English') {
+                    actualSections = [
+                        { section: 'Literature', teacher: 'Ms. Shakespeare' },
+                        { section: 'Grammar', teacher: 'Mr. Language' },
+                        { section: 'Writing', teacher: 'Dr. Composition' },
+                        { section: 'Reading', teacher: 'Ms. Comprehension' },
+                        { section: 'Speaking', teacher: 'Mr. Communication' },
+                        { section: 'Listening', teacher: 'Ms. Audio' }
+                    ];
+                } else if (subject === 'Filipino') {
+                    actualSections = [
+                        { section: 'Panitikan', teacher: 'Gng. Literatura' },
+                        { section: 'Gramatika', teacher: 'G. Wika' },
+                        { section: 'Pagbasa', teacher: 'Ms. Unawa' },
+                        { section: 'Pagsulat', teacher: 'Gng. Akda' },
+                        { section: 'Pakikipagtalastasan', teacher: 'G. Salita' },
+                        { section: 'Kultura', teacher: 'Dr. Tradisyon' }
+                    ];
+                }
+            } else if (['Grade 11', 'Grade 12'].includes(navigationState.grade)) {
+                // SHS subjects use the defined sections from subjectSections
+                if (subject === 'Earth and Life Science') {
+                    actualSections = [
+                        { section: 'Biosphere', teacher: 'Dr. Earth' },
+                        { section: 'Ecosystem', teacher: 'Ms. Life' },
+                        { section: 'Geology', teacher: 'Mr. Rock' },
+                        { section: 'Biology', teacher: 'Ms. Living' },
+                        { section: 'Environment', teacher: 'Dr. Green' },
+                        { section: 'Evolution', teacher: 'Ms. Darwin' },
+                        { section: 'Genetics', teacher: 'Mr. DNA' },
+                        { section: 'Ecology', teacher: 'Dr. Nature' }
+                    ];
+                } else if (subject === 'Physical Science') {
+                    actualSections = [
+                        { section: 'Physics', teacher: 'Dr. Newton' },
+                        { section: 'Chemistry', teacher: 'Ms. Element' },
+                        { section: 'Motion', teacher: 'Mr. Force' },
+                        { section: 'Energy', teacher: 'Ms. Power' },
+                        { section: 'Matter', teacher: 'Dr. Particle' },
+                        { section: 'Waves', teacher: 'Ms. Frequency' },
+                        { section: 'Optics', teacher: 'Mr. Light' },
+                        { section: 'Thermodynamics', teacher: 'Dr. Heat' }
+                    ];
+                } else if (subject === 'Personal Development') {
+                    actualSections = [
+                        { section: 'Self-Awareness', teacher: 'Ms. Mind' },
+                        { section: 'Goal Setting', teacher: 'Mr. Target' },
+                        { section: 'Leadership', teacher: 'Dr. Lead' },
+                        { section: 'Communication', teacher: 'Ms. Connect' },
+                        { section: 'Relationships', teacher: 'Mr. Bond' },
+                        { section: 'Career Planning', teacher: 'Ms. Future' },
+                        { section: 'Life Skills', teacher: 'Dr. Practical' },
+                        { section: 'Wellness', teacher: 'Ms. Health' }
+                    ];
+                }
+            }
+            
             // Populate sections grid
             const sectionsGrid = document.getElementById('sections-grid');
             sectionsGrid.innerHTML = '';
             
-            sections.forEach(item => {
+            actualSections.forEach(item => {
                 const sectionCard = document.createElement('div');
                 sectionCard.className = 'bg-white border border-gray-200 hover:border-gray-400 cursor-pointer transition-colors';
                 sectionCard.onclick = () => showSectionDetails(subject, item.section, item.teacher);
@@ -1105,32 +1583,391 @@
         }
         
         function showSubjects() {
+            // Update navigation state - clear subject and section
+            navigationState.subject = '';
+            navigationState.section = '';
+            
             // Show subjects view
             document.getElementById('subjects-view').classList.remove('hidden');
-            document.getElementById('back-to-dashboard').classList.remove('hidden');
             
-            // Hide sections view
+            // Hide other views
             document.getElementById('sections-view').classList.add('hidden');
-            document.getElementById('back-to-subjects').classList.add('hidden');
+            document.getElementById('section-details-view').classList.add('hidden');
+            document.getElementById('school-years-view').classList.add('hidden');
+            
+            // Update breadcrumb
+            updateBreadcrumb();
         }
         
         function showSectionDetails(subject, section, teacher) {
-            // Get current context
-            const currentTitle = document.getElementById('year-title').textContent;
+            // Update navigation state
+            navigationState.section = section;
             
-            let message = `Section Details:\n\n`;
-            message += `Subject: ${subject}\n`;
-            message += `Section: ${section}\n`;
-            message += `Teacher: ${teacher}\n`;
-            message += `Grade & Year: ${currentTitle}\n\n`;
-            message += `This will show:\n`;
-            message += `• Student roster for ${section}\n`;
-            message += `• Grade entry interface\n`;
-            message += `• Attendance management\n`;
-            message += `• Performance reports\n`;
-            message += `• Class schedule`;
+            // Hide other views
+            document.getElementById('sections-view').classList.add('hidden');
+            document.getElementById('subjects-view').classList.add('hidden');
+            document.getElementById('school-years-view').classList.add('hidden');
             
-            alert(message);
+            // Show section details view
+            document.getElementById('section-details-view').classList.remove('hidden');
+            
+            // Update breadcrumb
+            updateBreadcrumb();
+            
+            // Update teacher badge
+            document.getElementById('teacher-badge').textContent = teacher;
+            
+            // Populate students table
+            populateStudentsTable(section);
+        }
+        
+        function populateStudentsTable(section) {
+            // Sample student data for different sections
+            const studentsData = {
+                // Kindergarten students
+                'Sunshine': [
+                    { id: 'K2023-001', lastName: 'Santos', firstName: 'Emma Joy', middleName: 'Cruz', gender: 'Female', status: 'Active' },
+                    { id: 'K2023-002', lastName: 'Garcia', firstName: 'Liam Miguel', middleName: 'Reyes', gender: 'Male', status: 'Active' },
+                    { id: 'K2023-003', lastName: 'Rodriguez', firstName: 'Sophia Grace', middleName: 'Lopez', gender: 'Female', status: 'Active' },
+                    { id: 'K2023-004', lastName: 'Fernandez', firstName: 'Noah James', middleName: 'Torres', gender: 'Male', status: 'Active' },
+                    { id: 'K2023-005', lastName: 'Morales', firstName: 'Olivia Rose', middleName: 'Mendoza', gender: 'Female', status: 'Active' },
+                    { id: 'K2023-006', lastName: 'Castillo', firstName: 'Ethan Luis', middleName: 'Valdez', gender: 'Male', status: 'Active' },
+                    { id: 'K2023-007', lastName: 'Herrera', firstName: 'Ava Marie', middleName: 'Jimenez', gender: 'Female', status: 'Active' },
+                    { id: 'K2023-008', lastName: 'Navarro', firstName: 'Mason Paul', middleName: 'Gutierrez', gender: 'Male', status: 'Active' },
+                    { id: 'K2023-009', lastName: 'Aguilar', firstName: 'Isabella Faith', middleName: 'Moreno', gender: 'Female', status: 'Active' },
+                    { id: 'K2023-010', lastName: 'Ortega', firstName: 'Lucas John', middleName: 'Vargas', gender: 'Male', status: 'Active' },
+                    { id: 'K2023-011', lastName: 'Ramirez', firstName: 'Mia Hope', middleName: 'Silva', gender: 'Female', status: 'Active' },
+                    { id: 'K2023-012', lastName: 'Flores', firstName: 'Jacob Rey', middleName: 'Vega', gender: 'Male', status: 'Active' },
+                    { id: 'K2023-013', lastName: 'Guerrero', firstName: 'Charlotte Belle', middleName: 'Rojas', gender: 'Female', status: 'Active' },
+                    { id: 'K2023-014', lastName: 'Medina', firstName: 'Alexander Jose', middleName: 'Soto', gender: 'Male', status: 'Active' },
+                    { id: 'K2023-015', lastName: 'Ruiz', firstName: 'Amelia Dawn', middleName: 'Pena', gender: 'Female', status: 'Active' }
+                ],
+                'Rainbow': [
+                    { id: 'K2023-016', lastName: 'Jimenez', firstName: 'Benjamin David', middleName: 'Ortiz', gender: 'Male', status: 'Active' },
+                    { id: 'K2023-017', lastName: 'Vargas', firstName: 'Harper Joy', middleName: 'Herrera', gender: 'Female', status: 'Active' },
+                    { id: 'K2023-018', lastName: 'Molina', firstName: 'Henry Luis', middleName: 'Castro', gender: 'Male', status: 'Active' },
+                    { id: 'K2023-019', lastName: 'Contreras', firstName: 'Evelyn Grace', middleName: 'Morales', gender: 'Female', status: 'Active' },
+                    { id: 'K2023-020', lastName: 'Sandoval', firstName: 'Sebastian Rey', middleName: 'Romero', gender: 'Male', status: 'Active' },
+                    { id: 'K2023-021', lastName: 'Dominguez', firstName: 'Abigail Rose', middleName: 'Aguilar', gender: 'Female', status: 'Active' },
+                    { id: 'K2023-022', lastName: 'Paredes', firstName: 'Michael James', middleName: 'Delgado', gender: 'Male', status: 'Active' },
+                    { id: 'K2023-023', lastName: 'Salazar', firstName: 'Emily Faith', middleName: 'Espinoza', gender: 'Female', status: 'Active' },
+                    { id: 'K2023-024', lastName: 'Rivera', firstName: 'Daniel Antonio', middleName: 'Moreno', gender: 'Male', status: 'Active' },
+                    { id: 'K2023-025', lastName: 'Torres', firstName: 'Elizabeth Mae', middleName: 'Valdez', gender: 'Female', status: 'Active' },
+                    { id: 'K2023-026', lastName: 'Ramos', firstName: 'Matthew John', middleName: 'Gutierrez', gender: 'Male', status: 'Active' },
+                    { id: 'K2023-027', lastName: 'Cruz', firstName: 'Sofia Belle', middleName: 'Herrera', gender: 'Female', status: 'Active' },
+                    { id: 'K2023-028', lastName: 'Lopez', firstName: 'Joseph Luis', middleName: 'Jimenez', gender: 'Male', status: 'Active' },
+                    { id: 'K2023-029', lastName: 'Gonzales', firstName: 'Avery Hope', middleName: 'Vargas', gender: 'Female', status: 'Active' },
+                    { id: 'K2023-030', lastName: 'Perez', firstName: 'Samuel David', middleName: 'Ortega', gender: 'Male', status: 'Active' }
+                ],
+                'Butterfly': [
+                    { id: 'K2023-031', lastName: 'Martinez', firstName: 'Scarlett Joy', middleName: 'Silva', gender: 'Female', status: 'Active' },
+                    { id: 'K2023-032', lastName: 'Anderson', firstName: 'David Miguel', middleName: 'Vega', gender: 'Male', status: 'Active' },
+                    { id: 'K2023-033', lastName: 'Taylor', firstName: 'Victoria Grace', middleName: 'Rojas', gender: 'Female', status: 'Active' },
+                    { id: 'K2023-034', lastName: 'Thomas', firstName: 'Christopher Rey', middleName: 'Soto', gender: 'Male', status: 'Active' },
+                    { id: 'K2023-035', lastName: 'Jackson', firstName: 'Luna Marie', middleName: 'Pena', gender: 'Female', status: 'Active' },
+                    { id: 'K2023-036', lastName: 'White', firstName: 'Andrew James', middleName: 'Ortiz', gender: 'Male', status: 'Active' },
+                    { id: 'K2023-037', lastName: 'Harris', firstName: 'Penelope Rose', middleName: 'Herrera', gender: 'Female', status: 'Active' },
+                    { id: 'K2023-038', lastName: 'Martin', firstName: 'Joshua Luis', middleName: 'Castro', gender: 'Male', status: 'Active' },
+                    { id: 'K2023-039', lastName: 'Garcia', firstName: 'Layla Faith', middleName: 'Morales', gender: 'Female', status: 'Active' },
+                    { id: 'K2023-040', lastName: 'Martinez', firstName: 'Ryan Paul', middleName: 'Romero', gender: 'Male', status: 'Active' },
+                    { id: 'K2023-041', lastName: 'Robinson', firstName: 'Chloe Belle', middleName: 'Aguilar', gender: 'Female', status: 'Active' },
+                    { id: 'K2023-042', lastName: 'Clark', firstName: 'Nathan John', middleName: 'Delgado', gender: 'Male', status: 'Active' },
+                    { id: 'K2023-043', lastName: 'Rodriguez', firstName: 'Zoey Dawn', middleName: 'Espinoza', gender: 'Female', status: 'Active' },
+                    { id: 'K2023-044', lastName: 'Lewis', firstName: 'Caleb Antonio', middleName: 'Moreno', gender: 'Male', status: 'Active' },
+                    { id: 'K2023-045', lastName: 'Lee', firstName: 'Nora Hope', middleName: 'Valdez', gender: 'Female', status: 'Active' }
+                ],
+                // Junior High School students
+                'Atom': [
+                    { id: 'JHS2023-001', lastName: 'Mendoza', firstName: 'Adrian Kyle', middleName: 'Santos', gender: 'Male', status: 'Active' },
+                    { id: 'JHS2023-002', lastName: 'Villanueva', firstName: 'Sophia Claire', middleName: 'Reyes', gender: 'Female', status: 'Active' },
+                    { id: 'JHS2023-003', lastName: 'Fernandez', firstName: 'Marcus James', middleName: 'Lopez', gender: 'Male', status: 'Active' },
+                    { id: 'JHS2023-004', lastName: 'Torres', firstName: 'Isabella Mae', middleName: 'Garcia', gender: 'Female', status: 'Active' },
+                    { id: 'JHS2023-005', lastName: 'Morales', firstName: 'Ethan Luis', middleName: 'Cruz', gender: 'Male', status: 'Active' },
+                    { id: 'JHS2023-006', lastName: 'Castillo', firstName: 'Mia Grace', middleName: 'Rodriguez', gender: 'Female', status: 'Active' },
+                    { id: 'JHS2023-007', lastName: 'Herrera', firstName: 'Gabriel Jose', middleName: 'Mendoza', gender: 'Male', status: 'Active' },
+                    { id: 'JHS2023-008', lastName: 'Navarro', firstName: 'Olivia Rose', middleName: 'Valdez', gender: 'Female', status: 'Active' },
+                    { id: 'JHS2023-009', lastName: 'Aguilar', firstName: 'Lucas Miguel', middleName: 'Jimenez', gender: 'Male', status: 'Active' },
+                    { id: 'JHS2023-010', lastName: 'Ortega', firstName: 'Emma Faith', middleName: 'Gutierrez', gender: 'Female', status: 'Active' },
+                    { id: 'JHS2023-011', lastName: 'Ramirez', firstName: 'Noah David', middleName: 'Moreno', gender: 'Male', status: 'Active' },
+                    { id: 'JHS2023-012', lastName: 'Flores', firstName: 'Ava Marie', middleName: 'Vargas', gender: 'Female', status: 'Active' },
+                    { id: 'JHS2023-013', lastName: 'Guerrero', firstName: 'Liam Paul', middleName: 'Silva', gender: 'Male', status: 'Active' },
+                    { id: 'JHS2023-014', lastName: 'Medina', firstName: 'Charlotte Joy', middleName: 'Vega', gender: 'Female', status: 'Active' },
+                    { id: 'JHS2023-015', lastName: 'Ruiz', firstName: 'Mason Rey', middleName: 'Rojas', gender: 'Male', status: 'Active' },
+                    { id: 'JHS2023-016', lastName: 'Jimenez', firstName: 'Amelia Hope', middleName: 'Soto', gender: 'Female', status: 'Active' },
+                    { id: 'JHS2023-017', lastName: 'Vargas', firstName: 'Jacob Antonio', middleName: 'Pena', gender: 'Male', status: 'Active' },
+                    { id: 'JHS2023-018', lastName: 'Molina', firstName: 'Harper Belle', middleName: 'Ortiz', gender: 'Female', status: 'Active' },
+                    { id: 'JHS2023-019', lastName: 'Contreras', firstName: 'Benjamin Luis', middleName: 'Herrera', gender: 'Male', status: 'Active' },
+                    { id: 'JHS2023-020', lastName: 'Sandoval', firstName: 'Evelyn Dawn', middleName: 'Castro', gender: 'Female', status: 'Active' }
+                ],
+                'Newton': [
+                    { id: 'JHS2023-021', lastName: 'Dominguez', firstName: 'Alexander John', middleName: 'Morales', gender: 'Male', status: 'Active' },
+                    { id: 'JHS2023-022', lastName: 'Paredes', firstName: 'Scarlett Grace', middleName: 'Romero', gender: 'Female', status: 'Active' },
+                    { id: 'JHS2023-023', lastName: 'Salazar', firstName: 'Henry James', middleName: 'Aguilar', gender: 'Male', status: 'Active' },
+                    { id: 'JHS2023-024', lastName: 'Rivera', firstName: 'Luna Marie', middleName: 'Delgado', gender: 'Female', status: 'Active' },
+                    { id: 'JHS2023-025', lastName: 'Torres', firstName: 'Sebastian Paul', middleName: 'Espinoza', gender: 'Male', status: 'Active' },
+                    { id: 'JHS2023-026', lastName: 'Ramos', firstName: 'Penelope Rose', middleName: 'Moreno', gender: 'Female', status: 'Active' },
+                    { id: 'JHS2023-027', lastName: 'Cruz', firstName: 'Daniel Antonio', middleName: 'Valdez', gender: 'Male', status: 'Active' },
+                    { id: 'JHS2023-028', lastName: 'Lopez', firstName: 'Layla Faith', middleName: 'Gutierrez', gender: 'Female', status: 'Active' },
+                    { id: 'JHS2023-029', lastName: 'Gonzales', firstName: 'Matthew Rey', middleName: 'Herrera', gender: 'Male', status: 'Active' },
+                    { id: 'JHS2023-030', lastName: 'Perez', firstName: 'Chloe Belle', middleName: 'Jimenez', gender: 'Female', status: 'Active' },
+                    { id: 'JHS2023-031', lastName: 'Martinez', firstName: 'Christopher Luis', middleName: 'Vargas', gender: 'Male', status: 'Active' },
+                    { id: 'JHS2023-032', lastName: 'Anderson', firstName: 'Zoey Hope', middleName: 'Ortega', gender: 'Female', status: 'Active' },
+                    { id: 'JHS2023-033', lastName: 'Taylor', firstName: 'Caleb David', middleName: 'Silva', gender: 'Male', status: 'Active' },
+                    { id: 'JHS2023-034', lastName: 'Thomas', firstName: 'Nora Joy', middleName: 'Vega', gender: 'Female', status: 'Active' },
+                    { id: 'JHS2023-035', lastName: 'Jackson', firstName: 'Ryan Miguel', middleName: 'Rojas', gender: 'Male', status: 'Active' },
+                    { id: 'JHS2023-036', lastName: 'White', firstName: 'Victoria Grace', middleName: 'Soto', gender: 'Female', status: 'Active' },
+                    { id: 'JHS2023-037', lastName: 'Harris', firstName: 'Nathan James', middleName: 'Pena', gender: 'Male', status: 'Active' },
+                    { id: 'JHS2023-038', lastName: 'Martin', firstName: 'Avery Rose', middleName: 'Ortiz', gender: 'Female', status: 'Active' },
+                    { id: 'JHS2023-039', lastName: 'Garcia', firstName: 'Joshua Luis', middleName: 'Herrera', gender: 'Male', status: 'Active' },
+                    { id: 'JHS2023-040', lastName: 'Martinez', firstName: 'Lily Faith', middleName: 'Castro', gender: 'Female', status: 'Active' }
+                ],
+                'Luzon': [
+                    { id: 'JHS2023-041', lastName: 'Robinson', firstName: 'Samuel Rey', middleName: 'Morales', gender: 'Male', status: 'Active' },
+                    { id: 'JHS2023-042', lastName: 'Clark', firstName: 'Stella Mae', middleName: 'Romero', gender: 'Female', status: 'Active' },
+                    { id: 'JHS2023-043', lastName: 'Rodriguez', firstName: 'Owen David', middleName: 'Aguilar', gender: 'Male', status: 'Active' },
+                    { id: 'JHS2023-044', lastName: 'Lewis', firstName: 'Hazel Grace', middleName: 'Delgado', gender: 'Female', status: 'Active' },
+                    { id: 'JHS2023-045', lastName: 'Lee', firstName: 'Eli James', middleName: 'Espinoza', gender: 'Male', status: 'Active' },
+                    { id: 'JHS2023-046', lastName: 'Walker', firstName: 'Violet Rose', middleName: 'Moreno', gender: 'Female', status: 'Active' },
+                    { id: 'JHS2023-047', lastName: 'Hall', firstName: 'Wyatt Luis', middleName: 'Valdez', gender: 'Male', status: 'Active' },
+                    { id: 'JHS2023-048', lastName: 'Allen', firstName: 'Aurora Belle', middleName: 'Gutierrez', gender: 'Female', status: 'Active' },
+                    { id: 'JHS2023-049', lastName: 'Young', firstName: 'Grayson Paul', middleName: 'Herrera', gender: 'Male', status: 'Active' },
+                    { id: 'JHS2023-050', lastName: 'Hernandez', firstName: 'Savannah Joy', middleName: 'Jimenez', gender: 'Female', status: 'Active' },
+                    { id: 'JHS2023-051', lastName: 'King', firstName: 'Leo Antonio', middleName: 'Vargas', gender: 'Male', status: 'Active' },
+                    { id: 'JHS2023-052', lastName: 'Wright', firstName: 'Brooklyn Faith', middleName: 'Ortega', gender: 'Female', status: 'Active' },
+                    { id: 'JHS2023-053', lastName: 'Lopez', firstName: 'Jaxon Rey', middleName: 'Silva', gender: 'Male', status: 'Active' },
+                    { id: 'JHS2023-054', lastName: 'Hill', firstName: 'Bella Hope', middleName: 'Vega', gender: 'Female', status: 'Active' },
+                    { id: 'JHS2023-055', lastName: 'Scott', firstName: 'Carson Miguel', middleName: 'Rojas', gender: 'Male', status: 'Active' },
+                    { id: 'JHS2023-056', lastName: 'Green', firstName: 'Claire Dawn', middleName: 'Soto', gender: 'Female', status: 'Active' },
+                    { id: 'JHS2023-057', lastName: 'Adams', firstName: 'Easton James', middleName: 'Pena', gender: 'Male', status: 'Active' },
+                    { id: 'JHS2023-058', lastName: 'Baker', firstName: 'Skylar Grace', middleName: 'Ortiz', gender: 'Female', status: 'Active' },
+                    { id: 'JHS2023-059', lastName: 'Gonzalez', firstName: 'Colton Luis', middleName: 'Herrera', gender: 'Male', status: 'Active' },
+                    { id: 'JHS2023-060', lastName: 'Nelson', firstName: 'Paisley Rose', middleName: 'Castro', gender: 'Female', status: 'Active' }
+                ],
+                // Senior High School students
+                'Speakers': [
+                    { id: 'SHS2023-001', lastName: 'Villanueva', firstName: 'Alexis Marie', middleName: 'Santos', gender: 'Female', status: 'Active' },
+                    { id: 'SHS2023-002', lastName: 'Fernandez', firstName: 'Ethan Gabriel', middleName: 'Reyes', gender: 'Male', status: 'Active' },
+                    { id: 'SHS2023-003', lastName: 'Torres', firstName: 'Sophia Claire', middleName: 'Lopez', gender: 'Female', status: 'Active' },
+                    { id: 'SHS2023-004', lastName: 'Morales', firstName: 'Lucas James', middleName: 'Garcia', gender: 'Male', status: 'Active' },
+                    { id: 'SHS2023-005', lastName: 'Castillo', firstName: 'Isabella Grace', middleName: 'Cruz', gender: 'Female', status: 'Active' },
+                    { id: 'SHS2023-006', lastName: 'Herrera', firstName: 'Mason Paul', middleName: 'Rodriguez', gender: 'Male', status: 'Active' },
+                    { id: 'SHS2023-007', lastName: 'Navarro', firstName: 'Olivia Rose', middleName: 'Mendoza', gender: 'Female', status: 'Active' },
+                    { id: 'SHS2023-008', lastName: 'Aguilar', firstName: 'Noah David', middleName: 'Valdez', gender: 'Male', status: 'Active' },
+                    { id: 'SHS2023-009', lastName: 'Ortega', firstName: 'Emma Faith', middleName: 'Jimenez', gender: 'Female', status: 'Active' },
+                    { id: 'SHS2023-010', lastName: 'Ramirez', firstName: 'Liam Miguel', middleName: 'Gutierrez', gender: 'Male', status: 'Active' },
+                    { id: 'SHS2023-011', lastName: 'Flores', firstName: 'Ava Marie', middleName: 'Moreno', gender: 'Female', status: 'Active' },
+                    { id: 'SHS2023-012', lastName: 'Guerrero', firstName: 'William Rey', middleName: 'Vargas', gender: 'Male', status: 'Active' },
+                    { id: 'SHS2023-013', lastName: 'Medina', firstName: 'Charlotte Joy', middleName: 'Silva', gender: 'Female', status: 'Active' },
+                    { id: 'SHS2023-014', lastName: 'Ruiz', firstName: 'Benjamin Luis', middleName: 'Vega', gender: 'Male', status: 'Active' },
+                    { id: 'SHS2023-015', lastName: 'Jimenez', firstName: 'Amelia Hope', middleName: 'Rojas', gender: 'Female', status: 'Active' },
+                    { id: 'SHS2023-016', lastName: 'Vargas', firstName: 'James Antonio', middleName: 'Soto', gender: 'Male', status: 'Active' },
+                    { id: 'SHS2023-017', lastName: 'Molina', firstName: 'Harper Belle', middleName: 'Pena', gender: 'Female', status: 'Active' },
+                    { id: 'SHS2023-018', lastName: 'Contreras', firstName: 'Alexander John', middleName: 'Ortiz', gender: 'Male', status: 'Active' },
+                    { id: 'SHS2023-019', lastName: 'Sandoval', firstName: 'Evelyn Dawn', middleName: 'Herrera', gender: 'Female', status: 'Active' },
+                    { id: 'SHS2023-020', lastName: 'Dominguez', firstName: 'Henry James', middleName: 'Castro', gender: 'Male', status: 'Active' },
+                    { id: 'SHS2023-021', lastName: 'Paredes', firstName: 'Scarlett Grace', middleName: 'Morales', gender: 'Female', status: 'Active' },
+                    { id: 'SHS2023-022', lastName: 'Salazar', firstName: 'Sebastian Paul', middleName: 'Romero', gender: 'Male', status: 'Active' },
+                    { id: 'SHS2023-023', lastName: 'Rivera', firstName: 'Luna Marie', middleName: 'Aguilar', gender: 'Female', status: 'Active' },
+                    { id: 'SHS2023-024', lastName: 'Torres', firstName: 'Daniel Antonio', middleName: 'Delgado', gender: 'Male', status: 'Active' },
+                    { id: 'SHS2023-025', lastName: 'Ramos', firstName: 'Penelope Rose', middleName: 'Espinoza', gender: 'Female', status: 'Active' },
+                    { id: 'SHS2023-026', lastName: 'Cruz', firstName: 'Matthew Rey', middleName: 'Moreno', gender: 'Male', status: 'Active' },
+                    { id: 'SHS2023-027', lastName: 'Lopez', firstName: 'Layla Faith', middleName: 'Valdez', gender: 'Female', status: 'Active' },
+                    { id: 'SHS2023-028', lastName: 'Gonzales', firstName: 'Christopher Luis', middleName: 'Gutierrez', gender: 'Male', status: 'Active' },
+                    { id: 'SHS2023-029', lastName: 'Perez', firstName: 'Chloe Belle', middleName: 'Herrera', gender: 'Female', status: 'Active' },
+                    { id: 'SHS2023-030', lastName: 'Martinez', firstName: 'Joshua David', middleName: 'Jimenez', gender: 'Male', status: 'Active' }
+                ],
+                'Innovators': [
+                    { id: 'SHS2023-031', lastName: 'Anderson', firstName: 'Zoey Hope', middleName: 'Vargas', gender: 'Female', status: 'Active' },
+                    { id: 'SHS2023-032', lastName: 'Taylor', firstName: 'Caleb Miguel', middleName: 'Ortega', gender: 'Male', status: 'Active' },
+                    { id: 'SHS2023-033', lastName: 'Thomas', firstName: 'Nora Joy', middleName: 'Silva', gender: 'Female', status: 'Active' },
+                    { id: 'SHS2023-034', lastName: 'Jackson', firstName: 'Ryan James', middleName: 'Vega', gender: 'Male', status: 'Active' },
+                    { id: 'SHS2023-035', lastName: 'White', firstName: 'Victoria Grace', middleName: 'Rojas', gender: 'Female', status: 'Active' },
+                    { id: 'SHS2023-036', lastName: 'Harris', firstName: 'Nathan Paul', middleName: 'Soto', gender: 'Male', status: 'Active' },
+                    { id: 'SHS2023-037', lastName: 'Martin', firstName: 'Avery Rose', middleName: 'Pena', gender: 'Female', status: 'Active' },
+                    { id: 'SHS2023-038', lastName: 'Garcia', firstName: 'Joshua Luis', middleName: 'Ortiz', gender: 'Male', status: 'Active' },
+                    { id: 'SHS2023-039', lastName: 'Martinez', firstName: 'Lily Faith', middleName: 'Herrera', gender: 'Female', status: 'Active' },
+                    { id: 'SHS2023-040', lastName: 'Robinson', firstName: 'Samuel Rey', middleName: 'Castro', gender: 'Male', status: 'Active' },
+                    { id: 'SHS2023-041', lastName: 'Clark', firstName: 'Stella Mae', middleName: 'Morales', gender: 'Female', status: 'Active' },
+                    { id: 'SHS2023-042', lastName: 'Rodriguez', firstName: 'Owen David', middleName: 'Romero', gender: 'Male', status: 'Active' },
+                    { id: 'SHS2023-043', lastName: 'Lewis', firstName: 'Hazel Grace', middleName: 'Aguilar', gender: 'Female', status: 'Active' },
+                    { id: 'SHS2023-044', lastName: 'Lee', firstName: 'Eli James', middleName: 'Delgado', gender: 'Male', status: 'Active' },
+                    { id: 'SHS2023-045', lastName: 'Walker', firstName: 'Violet Rose', middleName: 'Espinoza', gender: 'Female', status: 'Active' },
+                    { id: 'SHS2023-046', lastName: 'Hall', firstName: 'Wyatt Luis', middleName: 'Moreno', gender: 'Male', status: 'Active' },
+                    { id: 'SHS2023-047', lastName: 'Allen', firstName: 'Aurora Belle', middleName: 'Valdez', gender: 'Female', status: 'Active' },
+                    { id: 'SHS2023-048', lastName: 'Young', firstName: 'Grayson Paul', middleName: 'Gutierrez', gender: 'Male', status: 'Active' },
+                    { id: 'SHS2023-049', lastName: 'Hernandez', firstName: 'Savannah Joy', middleName: 'Herrera', gender: 'Female', status: 'Active' },
+                    { id: 'SHS2023-050', lastName: 'King', firstName: 'Leo Antonio', middleName: 'Jimenez', gender: 'Male', status: 'Active' },
+                    { id: 'SHS2023-051', lastName: 'Wright', firstName: 'Brooklyn Faith', middleName: 'Vargas', gender: 'Female', status: 'Active' },
+                    { id: 'SHS2023-052', lastName: 'Lopez', firstName: 'Jaxon Rey', middleName: 'Ortega', gender: 'Male', status: 'Active' },
+                    { id: 'SHS2023-053', lastName: 'Hill', firstName: 'Bella Hope', middleName: 'Silva', gender: 'Female', status: 'Active' },
+                    { id: 'SHS2023-054', lastName: 'Scott', firstName: 'Carson Miguel', middleName: 'Vega', gender: 'Male', status: 'Active' },
+                    { id: 'SHS2023-055', lastName: 'Green', firstName: 'Claire Dawn', middleName: 'Rojas', gender: 'Female', status: 'Active' },
+                    { id: 'SHS2023-056', lastName: 'Adams', firstName: 'Easton James', middleName: 'Soto', gender: 'Male', status: 'Active' },
+                    { id: 'SHS2023-057', lastName: 'Baker', firstName: 'Skylar Grace', middleName: 'Pena', gender: 'Female', status: 'Active' },
+                    { id: 'SHS2023-058', lastName: 'Gonzalez', firstName: 'Colton Luis', middleName: 'Ortiz', gender: 'Male', status: 'Active' },
+                    { id: 'SHS2023-059', lastName: 'Nelson', firstName: 'Paisley Rose', middleName: 'Herrera', gender: 'Female', status: 'Active' },
+                    { id: 'SHS2023-060', lastName: 'Carter', firstName: 'Maverick John', middleName: 'Castro', gender: 'Male', status: 'Active' }
+                ],
+                'Entrepreneurs': [
+                    { id: 'SHS2023-061', lastName: 'Mitchell', firstName: 'Kennedy Mae', middleName: 'Morales', gender: 'Female', status: 'Active' },
+                    { id: 'SHS2023-062', lastName: 'Perez', firstName: 'Declan Paul', middleName: 'Romero', gender: 'Male', status: 'Active' },
+                    { id: 'SHS2023-063', lastName: 'Roberts', firstName: 'Kinsley Joy', middleName: 'Aguilar', gender: 'Female', status: 'Active' },
+                    { id: 'SHS2023-064', lastName: 'Turner', firstName: 'Greyson Luis', middleName: 'Delgado', gender: 'Male', status: 'Active' },
+                    { id: 'SHS2023-065', lastName: 'Phillips', firstName: 'Aubrey Grace', middleName: 'Espinoza', gender: 'Female', status: 'Active' },
+                    { id: 'SHS2023-066', lastName: 'Campbell', firstName: 'Brayden Rey', middleName: 'Moreno', gender: 'Male', status: 'Active' },
+                    { id: 'SHS2023-067', lastName: 'Parker', firstName: 'Adalynn Rose', middleName: 'Valdez', gender: 'Female', status: 'Active' },
+                    { id: 'SHS2023-068', lastName: 'Evans', firstName: 'Landon James', middleName: 'Gutierrez', gender: 'Male', status: 'Active' },
+                    { id: 'SHS2023-069', lastName: 'Edwards', firstName: 'Brielle Faith', middleName: 'Herrera', gender: 'Female', status: 'Active' },
+                    { id: 'SHS2023-070', lastName: 'Collins', firstName: 'Hunter David', middleName: 'Jimenez', gender: 'Male', status: 'Active' },
+                    { id: 'SHS2023-071', lastName: 'Stewart', firstName: 'Rylee Hope', middleName: 'Vargas', gender: 'Female', status: 'Active' },
+                    { id: 'SHS2023-072', lastName: 'Sanchez', firstName: 'Ryder Miguel', middleName: 'Ortega', gender: 'Male', status: 'Active' },
+                    { id: 'SHS2023-073', lastName: 'Morris', firstName: 'Melody Belle', middleName: 'Silva', gender: 'Female', status: 'Active' },
+                    { id: 'SHS2023-074', lastName: 'Rogers', firstName: 'Braxton Paul', middleName: 'Vega', gender: 'Male', status: 'Active' },
+                    { id: 'SHS2023-075', lastName: 'Reed', firstName: 'Piper Dawn', middleName: 'Rojas', gender: 'Female', status: 'Active' },
+                    { id: 'SHS2023-076', lastName: 'Cook', firstName: 'Kaiden Luis', middleName: 'Soto', gender: 'Male', status: 'Active' },
+                    { id: 'SHS2023-077', lastName: 'Morgan', firstName: 'Teagan Joy', middleName: 'Pena', gender: 'Female', status: 'Active' },
+                    { id: 'SHS2023-078', lastName: 'Bell', firstName: 'Jace Antonio', middleName: 'Ortiz', gender: 'Male', status: 'Active' },
+                    { id: 'SHS2023-079', lastName: 'Murphy', firstName: 'Emery Grace', middleName: 'Herrera', gender: 'Female', status: 'Active' },
+                    { id: 'SHS2023-080', lastName: 'Bailey', firstName: 'Knox Rey', middleName: 'Castro', gender: 'Male', status: 'Active' },
+                    { id: 'SHS2023-081', lastName: 'Rivera', firstName: 'Sloane Marie', middleName: 'Morales', gender: 'Female', status: 'Active' },
+                    { id: 'SHS2023-082', lastName: 'Cooper', firstName: 'Zane James', middleName: 'Romero', gender: 'Male', status: 'Active' },
+                    { id: 'SHS2023-083', lastName: 'Richardson', firstName: 'Juniper Rose', middleName: 'Aguilar', gender: 'Female', status: 'Active' },
+                    { id: 'SHS2023-084', lastName: 'Cox', firstName: 'Crew David', middleName: 'Delgado', gender: 'Male', status: 'Active' },
+                    { id: 'SHS2023-085', lastName: 'Howard', firstName: 'Wren Faith', middleName: 'Espinoza', gender: 'Female', status: 'Active' },
+                    { id: 'SHS2023-086', lastName: 'Ward', firstName: 'Kash Luis', middleName: 'Moreno', gender: 'Male', status: 'Active' },
+                    { id: 'SHS2023-087', lastName: 'Torres', firstName: 'Sage Hope', middleName: 'Valdez', gender: 'Female', status: 'Active' },
+                    { id: 'SHS2023-088', lastName: 'Peterson', firstName: 'Rowan Paul', middleName: 'Gutierrez', gender: 'Male', status: 'Active' },
+                    { id: 'SHS2023-089', lastName: 'Gray', firstName: 'Indie Belle', middleName: 'Herrera', gender: 'Female', status: 'Active' },
+                    { id: 'SHS2023-090', lastName: 'Ramirez', firstName: 'Zander Miguel', middleName: 'Jimenez', gender: 'Male', status: 'Active' }
+                ],
+                // Elementary students (existing)
+                'Pluto': [
+                    { id: '2023-001', lastName: 'Dela Cruz', firstName: 'Juan Miguel', middleName: 'Santos', gender: 'Male', status: 'Active' },
+                    { id: '2023-002', lastName: 'Garcia', firstName: 'Maria Elena', middleName: 'Reyes', gender: 'Female', status: 'Active' },
+                    { id: '2023-003', lastName: 'Santos', firstName: 'Carlos Jose', middleName: 'Mendoza', gender: 'Male', status: 'Active' },
+                    { id: '2023-004', lastName: 'Rodriguez', firstName: 'Ana Rose', middleName: 'Torres', gender: 'Female', status: 'Irregular' },
+                    { id: '2023-005', lastName: 'Villanueva', firstName: 'Mark Anthony', middleName: 'Lopez', gender: 'Male', status: 'Active' },
+                    { id: '2023-006', lastName: 'Fernandez', firstName: 'Sofia Marie', middleName: 'Cruz', gender: 'Female', status: 'Active' },
+                    { id: '2023-007', lastName: 'Morales', firstName: 'Gabriel Luis', middleName: 'Ramos', gender: 'Male', status: 'Active' },
+                    { id: '2023-008', lastName: 'Bautista', firstName: 'Isabella Grace', middleName: 'Perez', gender: 'Female', status: 'Active' },
+                    { id: '2023-009', lastName: 'Castillo', firstName: 'Miguel Angel', middleName: 'Valdez', gender: 'Male', status: 'Active' },
+                    { id: '2023-010', lastName: 'Herrera', firstName: 'Camila Rose', middleName: 'Jimenez', gender: 'Female', status: 'Irregular' },
+                    { id: '2023-011', lastName: 'Navarro', firstName: 'Diego Rafael', middleName: 'Gutierrez', gender: 'Male', status: 'Active' },
+                    { id: '2023-012', lastName: 'Aguilar', firstName: 'Valentina Joy', middleName: 'Moreno', gender: 'Female', status: 'Active' },
+                    { id: '2023-013', lastName: 'Ortega', firstName: 'Sebastian Paul', middleName: 'Vargas', gender: 'Male', status: 'Active' },
+                    { id: '2023-014', lastName: 'Mendez', firstName: 'Natalia Faith', middleName: 'Campos', gender: 'Female', status: 'Irregular' }
+                ],
+                'Mars': [
+                    { id: '2023-015', lastName: 'Aquino', firstName: 'Isabella Grace', middleName: 'Perez', gender: 'Female', status: 'Active' },
+                    { id: '2023-016', lastName: 'Castillo', firstName: 'Miguel Angel', middleName: 'Valdez', gender: 'Male', status: 'Active' },
+                    { id: '2023-017', lastName: 'Herrera', firstName: 'Camila Rose', middleName: 'Jimenez', gender: 'Female', status: 'Active' },
+                    { id: '2023-018', lastName: 'Navarro', firstName: 'Diego Rafael', middleName: 'Gutierrez', gender: 'Male', status: 'Irregular' },
+                    { id: '2023-019', lastName: 'Aguilar', firstName: 'Valentina Joy', middleName: 'Moreno', gender: 'Female', status: 'Active' },
+                    { id: '2023-020', lastName: 'Ortega', firstName: 'Sebastian Paul', middleName: 'Vargas', gender: 'Male', status: 'Active' },
+                    { id: '2023-021', lastName: 'Mendez', firstName: 'Natalia Faith', middleName: 'Campos', gender: 'Female', status: 'Active' },
+                    { id: '2023-022', lastName: 'Ramirez', firstName: 'Adrian James', middleName: 'Silva', gender: 'Male', status: 'Active' },
+                    { id: '2023-023', lastName: 'Flores', firstName: 'Lucia Hope', middleName: 'Vega', gender: 'Female', status: 'Irregular' },
+                    { id: '2023-024', lastName: 'Guerrero', firstName: 'Mateo John', middleName: 'Rojas', gender: 'Male', status: 'Active' },
+                    { id: '2023-025', lastName: 'Medina', firstName: 'Ariana Belle', middleName: 'Soto', gender: 'Female', status: 'Active' },
+                    { id: '2023-026', lastName: 'Ruiz', firstName: 'Leonardo Jose', middleName: 'Pena', gender: 'Male', status: 'Active' },
+                    { id: '2023-027', lastName: 'Jimenez', firstName: 'Valeria Dawn', middleName: 'Ortiz', gender: 'Female', status: 'Irregular' },
+                    { id: '2023-028', lastName: 'Vargas', firstName: 'Nicolas Rey', middleName: 'Herrera', gender: 'Male', status: 'Active' }
+                ],
+                'Jupiter': [
+                    { id: '2023-029', lastName: 'Ramirez', firstName: 'Adrian James', middleName: 'Silva', gender: 'Male', status: 'Active' },
+                    { id: '2023-030', lastName: 'Flores', firstName: 'Lucia Hope', middleName: 'Vega', gender: 'Female', status: 'Active' },
+                    { id: '2023-031', lastName: 'Guerrero', firstName: 'Mateo John', middleName: 'Rojas', gender: 'Male', status: 'Active' },
+                    { id: '2023-032', lastName: 'Medina', firstName: 'Ariana Belle', middleName: 'Soto', gender: 'Female', status: 'Active' },
+                    { id: '2023-033', lastName: 'Ruiz', firstName: 'Leonardo Jose', middleName: 'Pena', gender: 'Male', status: 'Irregular' },
+                    { id: '2023-034', lastName: 'Jimenez', firstName: 'Valeria Dawn', middleName: 'Ortiz', gender: 'Female', status: 'Active' },
+                    { id: '2023-035', lastName: 'Vargas', firstName: 'Nicolas Rey', middleName: 'Herrera', gender: 'Male', status: 'Active' },
+                    { id: '2023-036', lastName: 'Molina', firstName: 'Daniela Mae', middleName: 'Castro', gender: 'Female', status: 'Active' },
+                    { id: '2023-037', lastName: 'Contreras', firstName: 'Alejandro Luis', middleName: 'Morales', gender: 'Male', status: 'Active' },
+                    { id: '2023-038', lastName: 'Sandoval', firstName: 'Gabriela Joy', middleName: 'Romero', gender: 'Female', status: 'Irregular' },
+                    { id: '2023-039', lastName: 'Dominguez', firstName: 'Samuel David', middleName: 'Aguilar', gender: 'Male', status: 'Active' },
+                    { id: '2023-040', lastName: 'Guerrero', firstName: 'Antonella Rose', middleName: 'Nunez', gender: 'Female', status: 'Active' },
+                    { id: '2023-041', lastName: 'Paredes', firstName: 'Emilio Jose', middleName: 'Delgado', gender: 'Male', status: 'Active' },
+                    { id: '2023-042', lastName: 'Salazar', firstName: 'Regina Faith', middleName: 'Espinoza', gender: 'Female', status: 'Irregular' }
+                ],
+                'Venus': [
+                    { id: '2023-043', lastName: 'Molina', firstName: 'Daniela Mae', middleName: 'Castro', gender: 'Female', status: 'Active' },
+                    { id: '2023-044', lastName: 'Contreras', firstName: 'Alejandro Luis', middleName: 'Morales', gender: 'Male', status: 'Active' },
+                    { id: '2023-045', lastName: 'Sandoval', firstName: 'Gabriela Joy', middleName: 'Romero', gender: 'Female', status: 'Active' },
+                    { id: '2023-046', lastName: 'Dominguez', firstName: 'Samuel David', middleName: 'Aguilar', gender: 'Male', status: 'Active' },
+                    { id: '2023-047', lastName: 'Guerrero', firstName: 'Antonella Rose', middleName: 'Nunez', gender: 'Female', status: 'Irregular' },
+                    { id: '2023-048', lastName: 'Paredes', firstName: 'Emilio Jose', middleName: 'Delgado', gender: 'Male', status: 'Active' },
+                    { id: '2023-049', lastName: 'Salazar', firstName: 'Regina Faith', middleName: 'Espinoza', gender: 'Female', status: 'Active' },
+                    { id: '2023-050', lastName: 'Rivera', firstName: 'Carlos Eduardo', middleName: 'Moreno', gender: 'Male', status: 'Active' },
+                    { id: '2023-051', lastName: 'Torres', firstName: 'Sophia Grace', middleName: 'Valdez', gender: 'Female', status: 'Active' },
+                    { id: '2023-052', lastName: 'Ramos', firstName: 'Alexander John', middleName: 'Gutierrez', gender: 'Male', status: 'Irregular' },
+                    { id: '2023-053', lastName: 'Cruz', firstName: 'Olivia Marie', middleName: 'Herrera', gender: 'Female', status: 'Active' },
+                    { id: '2023-054', lastName: 'Lopez', firstName: 'Daniel Antonio', middleName: 'Jimenez', gender: 'Male', status: 'Active' },
+                    { id: '2023-055', lastName: 'Gonzales', firstName: 'Emma Rose', middleName: 'Vargas', gender: 'Female', status: 'Active' },
+                    { id: '2023-056', lastName: 'Perez', firstName: 'Matthew Luis', middleName: 'Ortega', gender: 'Male', status: 'Irregular' }
+                ]
+            };
+            
+            // Get students for the selected section
+            const students = studentsData[section] || studentsData['Pluto'];
+            
+            // Populate table
+            const tableBody = document.getElementById('students-table-body');
+            tableBody.innerHTML = '';
+            
+            students.forEach(student => {
+                const row = document.createElement('tr');
+                row.className = 'border-b border-gray-200 hover:bg-gray-50';
+                
+                const statusClass = student.status === 'Active' ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800';
+                
+                row.innerHTML = `
+                    <td class="py-3 px-4 text-gray-900">${student.id}</td>
+                    <td class="py-3 px-4 text-gray-900">${student.lastName}</td>
+                    <td class="py-3 px-4 text-gray-900">${student.firstName}</td>
+                    <td class="py-3 px-4 text-gray-900">${student.middleName}</td>
+                    <td class="py-3 px-4 text-gray-900">${student.gender}</td>
+                    <td class="py-3 px-4">
+                        <span class="${statusClass} px-2 py-1 text-xs font-medium">${student.status}</span>
+                    </td>
+                    <td class="py-3 px-4">
+                        <button class="text-blue-600 hover:text-blue-800 text-sm mr-2" onclick="viewStudentDetails('${student.id}')">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                        <button class="text-gray-600 hover:text-gray-800 text-sm" onclick="editStudent('${student.id}')">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                    </td>
+                `;
+                
+                tableBody.appendChild(row);
+            });
+            
+            // Update student count
+            document.getElementById('student-count').textContent = `Showing ${students.length} students`;
+        }
+        
+        function viewStudentDetails(studentId) {
+            alert(`View details for student: ${studentId}\n\nThis will show:\n• Complete student profile\n• Academic history\n• Grade records\n• Attendance summary`);
+        }
+        
+        function editStudent(studentId) {
+            alert(`Edit student: ${studentId}\n\nThis will open:\n• Student information form\n• Contact details\n• Emergency contacts\n• Academic status`);
+        }
+        
+        function showSections() {
+            // Update navigation state - clear section
+            navigationState.section = '';
+            
+            // Show sections view
+            document.getElementById('sections-view').classList.remove('hidden');
+            
+            // Hide other views
+            document.getElementById('section-details-view').classList.add('hidden');
+            document.getElementById('subjects-view').classList.add('hidden');
+            document.getElementById('school-years-view').classList.add('hidden');
+            
+            // Update breadcrumb
+            updateBreadcrumb();
         }
         
         function showSubjectYears(program, subject) {
