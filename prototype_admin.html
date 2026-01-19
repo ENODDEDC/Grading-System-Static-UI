@@ -158,6 +158,17 @@
             text-align: center;
             border-bottom: 3px solid #3b82f6;
         }
+        
+        /* Breadcrumb Styles */
+        .breadcrumb-item {
+            transition: all 0.2s ease;
+            padding: 2px 4px;
+            border-radius: 4px;
+        }
+        
+        .breadcrumb-item:hover {
+            background-color: rgba(59, 130, 246, 0.1);
+        }
     </style>
 </head>
 <body class="bg-gray-100 overflow-hidden h-screen">
@@ -566,7 +577,10 @@
                     <div class="bg-white border-b border-gray-200 p-6 flex items-center justify-between">
                         <div>
                             <h2 id="grade-title" class="text-2xl font-semibold text-gray-900">Grade 1</h2>
-                            <p id="year-title" class="text-gray-600">Grade 1</p>
+                            <!-- Clickable Breadcrumb -->
+                            <nav id="breadcrumb-nav" class="text-gray-600 text-sm mt-1">
+                                <span id="breadcrumb-content">Grade 1</span>
+                            </nav>
                         </div>
                         <button onclick="showDashboard()" class="bg-gray-100 text-gray-700 px-4 py-2 border border-gray-300 hover:bg-gray-200 transition-colors">
                             <i class="fas fa-arrow-left mr-2"></i>← Back to Dashboard
@@ -623,12 +637,7 @@
                         </div>
                     </div>
 
-                    <!-- Back to Dashboard Button (Hidden by default) -->
-                    <div id="back-to-dashboard" class="hidden p-6 border-b border-gray-200">
-                        <button onclick="showSchoolYears()" class="bg-gray-100 text-gray-700 px-4 py-2 border border-gray-300 hover:bg-gray-200 transition-colors">
-                            <i class="fas fa-arrow-left mr-2"></i>← Back to School Years
-                        </button>
-                    </div>
+
 
                     <!-- Subjects View (Hidden by default) -->
                     <div id="subjects-view" class="hidden p-8">
@@ -824,12 +833,7 @@
                         </div>
                     </div>
 
-                    <!-- Back to Subjects Button (Hidden by default) -->
-                    <div id="back-to-subjects" class="hidden p-6 border-b border-gray-200">
-                        <button onclick="showSubjects()" class="bg-gray-100 text-gray-700 px-4 py-2 border border-gray-300 hover:bg-gray-200 transition-colors">
-                            <i class="fas fa-arrow-left mr-2"></i>← Back to Subjects
-                        </button>
-                    </div>
+
 
                     <!-- Sections View (Hidden by default) -->
                     <div id="sections-view" class="hidden p-8">
@@ -843,12 +847,7 @@
                         </div>
                     </div>
 
-                    <!-- Back to Sections Button (Hidden by default) -->
-                    <div id="back-to-sections" class="hidden p-6 border-b border-gray-200">
-                        <button onclick="showSections()" class="bg-gray-100 text-gray-700 px-4 py-2 border border-gray-300 hover:bg-gray-200 transition-colors">
-                            <i class="fas fa-arrow-left mr-2"></i>← Back to Sections
-                        </button>
-                    </div>
+
 
                     <!-- Section Details View (Hidden by default) -->
                     <div id="section-details-view" class="hidden p-8">
@@ -950,7 +949,73 @@
             }
         }
         
+        // Breadcrumb navigation system
+        let navigationState = {
+            grade: '',
+            schoolYear: '',
+            subject: '',
+            section: ''
+        };
+        
+        function updateBreadcrumb() {
+            const breadcrumbContent = document.getElementById('breadcrumb-content');
+            let breadcrumbHTML = '';
+            
+            // Grade level (always present)
+            if (navigationState.grade) {
+                breadcrumbHTML += `<span class="breadcrumb-item cursor-pointer text-blue-600 hover:text-blue-800 hover:underline" onclick="navigateToGrade('${navigationState.grade}')">${navigationState.grade}</span>`;
+            }
+            
+            // School year
+            if (navigationState.schoolYear) {
+                breadcrumbHTML += ` <span class="text-gray-400">/</span> <span class="breadcrumb-item cursor-pointer text-blue-600 hover:text-blue-800 hover:underline" onclick="navigateToSchoolYear('${navigationState.schoolYear}')">${navigationState.schoolYear}</span>`;
+            }
+            
+            // Subject
+            if (navigationState.subject) {
+                breadcrumbHTML += ` <span class="text-gray-400">/</span> <span class="breadcrumb-item cursor-pointer text-blue-600 hover:text-blue-800 hover:underline" onclick="navigateToSubject('${navigationState.subject}')">${navigationState.subject}</span>`;
+            }
+            
+            // Section (current level, not clickable)
+            if (navigationState.section) {
+                breadcrumbHTML += ` <span class="text-gray-400">/</span> <span class="text-gray-900 font-medium">${navigationState.section}</span>`;
+            }
+            
+            breadcrumbContent.innerHTML = breadcrumbHTML;
+        }
+        
+        function navigateToGrade(grade) {
+            // Reset navigation state to grade level
+            navigationState = { grade: grade, schoolYear: '', subject: '', section: '' };
+            
+            // Show school years view
+            showSchoolYears();
+            updateBreadcrumb();
+        }
+        
+        function navigateToSchoolYear(schoolYear) {
+            // Reset navigation state to school year level
+            navigationState.subject = '';
+            navigationState.section = '';
+            
+            // Show subjects view
+            showSchoolYearContent(schoolYear);
+            updateBreadcrumb();
+        }
+        
+        function navigateToSubject(subject) {
+            // Reset navigation state to subject level
+            navigationState.section = '';
+            
+            // Show sections view
+            showSubjectDetails(subject);
+            updateBreadcrumb();
+        }
+        
         function showGradeContent(grade) {
+            // Update navigation state
+            navigationState = { grade: grade, schoolYear: '', subject: '', section: '' };
+            
             // Hide dashboard content
             document.getElementById('dashboard-content').classList.add('hidden');
             
@@ -958,51 +1023,53 @@
             document.getElementById('grade-content').classList.remove('hidden');
             
             // Check if we're currently viewing subjects for this grade
-            const currentYearTitle = document.getElementById('year-title').textContent;
             const subjectsVisible = !document.getElementById('subjects-view').classList.contains('hidden');
             
-            // Check if the current year title contains this grade (e.g., "Grade 2 / 2016-2017" contains "Grade 2")
-            if (subjectsVisible && currentYearTitle.startsWith(grade + ' /')) {
+            // Check if the current breadcrumb contains this grade
+            if (subjectsVisible && navigationState.grade === grade) {
                 // If we're viewing subjects for this grade, go back to school years
                 showSchoolYears();
             } else {
                 // Show school years view first
                 document.getElementById('school-years-view').classList.remove('hidden');
-                document.getElementById('back-to-dashboard').classList.add('hidden');
                 document.getElementById('subjects-view').classList.add('hidden');
                 
                 // Update titles
                 document.getElementById('grade-title').textContent = grade;
-                document.getElementById('year-title').textContent = grade;
+                updateBreadcrumb();
             }
         }
         
         function showSchoolYearContent(schoolYear) {
-            // Get current grade from title
-            const currentGrade = document.getElementById('grade-title').textContent;
+            // Update navigation state
+            navigationState.schoolYear = schoolYear;
+            navigationState.subject = '';
+            navigationState.section = '';
             
             // Hide school years view
             document.getElementById('school-years-view').classList.add('hidden');
-            document.getElementById('back-to-dashboard').classList.remove('hidden');
             
             // Show subjects view
             document.getElementById('subjects-view').classList.remove('hidden');
             
-            // Update year title
-            document.getElementById('year-title').textContent = currentGrade + ' / ' + schoolYear;
+            // Update breadcrumb
+            updateBreadcrumb();
         }
         
         function showSchoolYears() {
+            // Update navigation state - keep grade, clear others
+            navigationState.schoolYear = '';
+            navigationState.subject = '';
+            navigationState.section = '';
+            
             // Show school years view
             document.getElementById('school-years-view').classList.remove('hidden');
-            document.getElementById('back-to-dashboard').classList.add('hidden');
             
             // Hide subjects view
             document.getElementById('subjects-view').classList.add('hidden');
             
-            // Reset year title to just grade
-            const currentGrade = document.getElementById('grade-title').textContent;
-            document.getElementById('year-title').textContent = currentGrade;
+            // Update breadcrumb
+            updateBreadcrumb();
         }
         
         function showDashboard() {
@@ -1068,25 +1135,21 @@
             }
         }
         function showSubjectDetails(subject) {
+            // Update navigation state
+            navigationState.subject = subject;
+            navigationState.section = '';
+            
             // Hide subjects view
             document.getElementById('subjects-view').classList.add('hidden');
-            document.getElementById('back-to-dashboard').classList.add('hidden');
             
             // Show sections view
             document.getElementById('sections-view').classList.remove('hidden');
-            document.getElementById('back-to-subjects').classList.remove('hidden');
             
             // Update subject title
             document.getElementById('subject-title').textContent = subject + ' - Sections';
             
-            // Get current grade and school year for context and update breadcrumb
-            const currentTitle = document.getElementById('year-title').textContent;
-            const parts = currentTitle.split(' / ');
-            const grade = parts[0];
-            const schoolYear = parts[1];
-            
-            // Update the main header breadcrumb to include the subject
-            document.getElementById('year-title').textContent = `${grade} / ${schoolYear} / ${subject}`;
+            // Update breadcrumb
+            updateBreadcrumb();
             
             // Define sections and teachers for each subject
             const subjectSections = {
@@ -1173,32 +1236,32 @@
         }
         
         function showSubjects() {
+            // Update navigation state - clear subject and section
+            navigationState.subject = '';
+            navigationState.section = '';
+            
             // Show subjects view
             document.getElementById('subjects-view').classList.remove('hidden');
-            document.getElementById('back-to-dashboard').classList.remove('hidden');
             
             // Hide sections view
             document.getElementById('sections-view').classList.add('hidden');
-            document.getElementById('back-to-subjects').classList.add('hidden');
+            
+            // Update breadcrumb
+            updateBreadcrumb();
         }
         
         function showSectionDetails(subject, section, teacher) {
+            // Update navigation state
+            navigationState.section = section;
+            
             // Hide sections view
             document.getElementById('sections-view').classList.add('hidden');
-            document.getElementById('back-to-subjects').classList.add('hidden');
             
             // Show section details view
             document.getElementById('section-details-view').classList.remove('hidden');
-            document.getElementById('back-to-sections').classList.remove('hidden');
             
-            // Get current context for breadcrumb
-            const currentTitle = document.getElementById('year-title').textContent;
-            const parts = currentTitle.split(' / ');
-            const grade = parts[0];
-            const schoolYear = parts[1];
-            
-            // Update the main header breadcrumb (year-title) instead of separate breadcrumb
-            document.getElementById('year-title').textContent = `${grade} / ${schoolYear} / ${subject} / ${section}`;
+            // Update breadcrumb
+            updateBreadcrumb();
             
             // Update teacher badge
             document.getElementById('teacher-badge').textContent = teacher;
@@ -1296,21 +1359,17 @@
         }
         
         function showSections() {
+            // Update navigation state - clear section
+            navigationState.section = '';
+            
             // Show sections view
             document.getElementById('sections-view').classList.remove('hidden');
-            document.getElementById('back-to-subjects').classList.remove('hidden');
             
             // Hide section details view
             document.getElementById('section-details-view').classList.add('hidden');
-            document.getElementById('back-to-sections').classList.add('hidden');
             
-            // Reset the main header to show only grade/year/subject (remove section part)
-            const currentTitle = document.getElementById('year-title').textContent;
-            const parts = currentTitle.split(' / ');
-            if (parts.length > 3) {
-                // Remove the section part, keep grade/year/subject
-                document.getElementById('year-title').textContent = `${parts[0]} / ${parts[1]} / ${parts[2]}`;
-            }
+            // Update breadcrumb
+            updateBreadcrumb();
         }
         
         function showSubjectYears(program, subject) {
