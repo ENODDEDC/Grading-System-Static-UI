@@ -1030,9 +1030,11 @@
                 // If we're viewing subjects for this grade, go back to school years
                 showSchoolYears();
             } else {
-                // Show school years view first
+                // Show school years view first and hide all other views
                 document.getElementById('school-years-view').classList.remove('hidden');
                 document.getElementById('subjects-view').classList.add('hidden');
+                document.getElementById('sections-view').classList.add('hidden');
+                document.getElementById('section-details-view').classList.add('hidden');
                 
                 // Update titles
                 document.getElementById('grade-title').textContent = grade;
@@ -1052,6 +1054,10 @@
             // Show subjects view
             document.getElementById('subjects-view').classList.remove('hidden');
             
+            // Hide other views
+            document.getElementById('sections-view').classList.add('hidden');
+            document.getElementById('section-details-view').classList.add('hidden');
+            
             // Update breadcrumb
             updateBreadcrumb();
         }
@@ -1065,8 +1071,10 @@
             // Show school years view
             document.getElementById('school-years-view').classList.remove('hidden');
             
-            // Hide subjects view
+            // Hide all other views
             document.getElementById('subjects-view').classList.add('hidden');
+            document.getElementById('sections-view').classList.add('hidden');
+            document.getElementById('section-details-view').classList.add('hidden');
             
             // Update breadcrumb
             updateBreadcrumb();
@@ -1139,8 +1147,10 @@
             navigationState.subject = subject;
             navigationState.section = '';
             
-            // Hide subjects view
+            // Hide other views
             document.getElementById('subjects-view').classList.add('hidden');
+            document.getElementById('school-years-view').classList.add('hidden');
+            document.getElementById('section-details-view').classList.add('hidden');
             
             // Show sections view
             document.getElementById('sections-view').classList.remove('hidden');
@@ -1243,8 +1253,10 @@
             // Show subjects view
             document.getElementById('subjects-view').classList.remove('hidden');
             
-            // Hide sections view
+            // Hide other views
             document.getElementById('sections-view').classList.add('hidden');
+            document.getElementById('section-details-view').classList.add('hidden');
+            document.getElementById('school-years-view').classList.add('hidden');
             
             // Update breadcrumb
             updateBreadcrumb();
@@ -1254,8 +1266,10 @@
             // Update navigation state
             navigationState.section = section;
             
-            // Hide sections view
+            // Hide other views
             document.getElementById('sections-view').classList.add('hidden');
+            document.getElementById('subjects-view').classList.add('hidden');
+            document.getElementById('school-years-view').classList.add('hidden');
             
             // Show section details view
             document.getElementById('section-details-view').classList.remove('hidden');
@@ -1365,8 +1379,10 @@
             // Show sections view
             document.getElementById('sections-view').classList.remove('hidden');
             
-            // Hide section details view
+            // Hide other views
             document.getElementById('section-details-view').classList.add('hidden');
+            document.getElementById('subjects-view').classList.add('hidden');
+            document.getElementById('school-years-view').classList.add('hidden');
             
             // Update breadcrumb
             updateBreadcrumb();
