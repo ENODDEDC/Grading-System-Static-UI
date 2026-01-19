@@ -336,150 +336,377 @@
         <!-- Main Content -->
         <div class="flex-1 ml-72 overflow-hidden" style="height: calc(100vh - 64px);">
             <!-- Default Dashboard Content -->
-            <div id="dashboard-content" class="h-full overflow-y-auto p-8">
+            <div id="dashboard-content" class="h-full overflow-y-auto p-8 bg-gray-50">
                 <!-- Header -->
                 <div class="mb-8">
-                    <h2 class="text-3xl font-bold text-gray-900 mb-2">Administrator Dashboard</h2>
-                    <p class="text-gray-600">Manage your education system with comprehensive administrative tools</p>
-                </div>
-
-                <!-- Shortcuts Section -->
-                <div class="mb-8">
-                    <h3 class="text-xl font-semibold text-gray-900 mb-6 text-center">Shortcuts</h3>
-                    
-                    <!-- Admin Feature Shortcuts Grid -->
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                        
-                        <!-- Student Management -->
-                        <a href="student-records.html" class="shortcut-card bg-white border border-gray-200 p-6 text-center hover:border-blue-300">
-                            <div class="inline-flex items-center justify-center w-12 h-12 bg-blue-100 rounded-lg mb-4">
-                                <i class="fas fa-user-graduate text-blue-600 text-xl"></i>
-                            </div>
-                            <h4 class="font-semibold text-gray-900 mb-2">Student Records</h4>
-                            <p class="text-sm text-gray-600">Manage student information and enrollment</p>
-                        </a>
-
-                        <!-- K-12 Management -->
-                        <a href="k12-management.html" class="shortcut-card bg-white border border-gray-200 p-6 text-center hover:border-green-300">
-                            <div class="inline-flex items-center justify-center w-12 h-12 bg-green-100 rounded-lg mb-4">
-                                <i class="fas fa-school text-green-600 text-xl"></i>
-                            </div>
-                            <h4 class="font-semibold text-gray-900 mb-2">K-12 Management</h4>
-                            <p class="text-sm text-gray-600">Kindergarten to Grade 12 administration</p>
-                        </a>
-
-                        <!-- College Management -->
-                        <a href="college-management.html" class="shortcut-card bg-white border border-gray-200 p-6 text-center hover:border-purple-300">
-                            <div class="inline-flex items-center justify-center w-12 h-12 bg-purple-100 rounded-lg mb-4">
-                                <i class="fas fa-university text-purple-600 text-xl"></i>
-                            </div>
-                            <h4 class="font-semibold text-gray-900 mb-2">College Management</h4>
-                            <p class="text-sm text-gray-600">Higher education and irregular students</p>
-                        </a>
-
-                        <!-- User Management -->
-                        <a href="user-management.html" class="shortcut-card bg-white border border-gray-200 p-6 text-center hover:border-yellow-300">
-                            <div class="inline-flex items-center justify-center w-12 h-12 bg-yellow-100 rounded-lg mb-4">
-                                <i class="fas fa-users-cog text-yellow-600 text-xl"></i>
-                            </div>
-                            <h4 class="font-semibold text-gray-900 mb-2">User Management</h4>
-                            <p class="text-sm text-gray-600">Teachers, staff, and admin accounts</p>
-                        </a>
-
-                        <!-- Course Management -->
-                        <a href="course-management.html" class="shortcut-card bg-white border border-gray-200 p-6 text-center hover:border-red-300">
-                            <div class="inline-flex items-center justify-center w-12 h-12 bg-red-100 rounded-lg mb-4">
-                                <i class="fas fa-book text-red-600 text-xl"></i>
-                            </div>
-                            <h4 class="font-semibold text-gray-900 mb-2">Course Management</h4>
-                            <p class="text-sm text-gray-600">Subjects, curriculum, and schedules</p>
-                        </a>
-
-                        <!-- Section Management -->
-                        <a href="section-management.html" class="shortcut-card bg-white border border-gray-200 p-6 text-center hover:border-indigo-300">
-                            <div class="inline-flex items-center justify-center w-12 h-12 bg-indigo-100 rounded-lg mb-4">
-                                <i class="fas fa-layer-group text-indigo-600 text-xl"></i>
-                            </div>
-                            <h4 class="font-semibold text-gray-900 mb-2">Section Management</h4>
-                            <p class="text-sm text-gray-600">Class sections and room assignments</p>
-                        </a>
-
-                        <!-- Grading System -->
-                        <a href="grading-system.html" class="shortcut-card bg-white border border-gray-200 p-6 text-center hover:border-teal-300">
-                            <div class="inline-flex items-center justify-center w-12 h-12 bg-teal-100 rounded-lg mb-4">
-                                <i class="fas fa-calculator text-teal-600 text-xl"></i>
-                            </div>
-                            <h4 class="font-semibold text-gray-900 mb-2">Grading System</h4>
-                            <p class="text-sm text-gray-600">Grade computation and standards</p>
-                        </a>
-
-                        <!-- Reports & Analytics -->
-                        <a href="reports.html" class="shortcut-card bg-white border border-gray-200 p-6 text-center hover:border-pink-300">
-                            <div class="inline-flex items-center justify-center w-12 h-12 bg-pink-100 rounded-lg mb-4">
-                                <i class="fas fa-chart-bar text-pink-600 text-xl"></i>
-                            </div>
-                            <h4 class="font-semibold text-gray-900 mb-2">Reports & Analytics</h4>
-                            <p class="text-sm text-gray-600">Academic performance reports</p>
-                        </a>
-
-                        <!-- System Settings -->
-                        <a href="system-settings.html" class="shortcut-card bg-white border border-gray-200 p-6 text-center hover:border-gray-400">
-                            <div class="inline-flex items-center justify-center w-12 h-12 bg-gray-100 rounded-lg mb-4">
-                                <i class="fas fa-cog text-gray-600 text-xl"></i>
-                            </div>
-                            <h4 class="font-semibold text-gray-900 mb-2">System Settings</h4>
-                            <p class="text-sm text-gray-600">Configuration and preferences</p>
-                        </a>
-
-                        <!-- Grade Cards -->
-                        <a href="grade-cards.html" class="shortcut-card bg-white border border-gray-200 p-6 text-center hover:border-orange-300">
-                            <div class="inline-flex items-center justify-center w-12 h-12 bg-orange-100 rounded-lg mb-4">
-                                <i class="fas fa-file-alt text-orange-600 text-xl"></i>
-                            </div>
-                            <h4 class="font-semibold text-gray-900 mb-2">Grade Cards</h4>
-                            <p class="text-sm text-gray-600">Generate and print grade cards</p>
-                        </a>
-
-                        <!-- Academic Calendar -->
-                        <div class="shortcut-card bg-white border border-gray-200 p-6 text-center hover:border-cyan-300 cursor-pointer">
-                            <div class="inline-flex items-center justify-center w-12 h-12 bg-cyan-100 rounded-lg mb-4">
-                                <i class="fas fa-calendar-alt text-cyan-600 text-xl"></i>
-                            </div>
-                            <h4 class="font-semibold text-gray-900 mb-2">Academic Calendar</h4>
-                            <p class="text-sm text-gray-600">Manage academic year and terms</p>
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <h2 class="text-3xl font-bold text-gray-900 mb-2">Administrator Dashboard</h2>
+                            <p class="text-gray-600">Manage academic levels, sections, and student records across your institution.</p>
                         </div>
-
-                        <!-- Enrollment Management -->
-                        <div class="shortcut-card bg-white border border-gray-200 p-6 text-center hover:border-emerald-300 cursor-pointer">
-                            <div class="inline-flex items-center justify-center w-12 h-12 bg-emerald-100 rounded-lg mb-4">
-                                <i class="fas fa-user-plus text-emerald-600 text-xl"></i>
-                            </div>
-                            <h4 class="font-semibold text-gray-900 mb-2">Enrollment</h4>
-                            <p class="text-sm text-gray-600">Student enrollment and registration</p>
+                        <div class="text-right">
+                            <div class="text-sm text-gray-500">Today</div>
+                            <div class="text-lg font-semibold text-gray-900" id="current-date"></div>
                         </div>
-
                     </div>
                 </div>
 
-                <!-- Quick Stats -->
-                <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mt-12">
-                    <div class="bg-white border border-gray-200 p-6 text-center">
-                        <div class="text-3xl font-bold text-blue-600 mb-2">1,247</div>
+                <!-- System Overview -->
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+                    <!-- Total Students -->
+                    <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center">
+                                <i class="fas fa-user-graduate text-gray-600 text-xl"></i>
+                            </div>
+                            <span class="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded">Active</span>
+                        </div>
+                        <div class="text-3xl font-bold text-gray-900 mb-1">1,247</div>
                         <div class="text-sm text-gray-600">Total Students</div>
+                        <div class="text-xs text-gray-500 mt-1">Across all levels</div>
                     </div>
-                    <div class="bg-white border border-gray-200 p-6 text-center">
-                        <div class="text-3xl font-bold text-green-600 mb-2">89</div>
-                        <div class="text-sm text-gray-600">Teachers</div>
+
+                    <!-- Irregular Students -->
+                    <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center">
+                                <i class="fas fa-exclamation-triangle text-gray-600 text-xl"></i>
+                            </div>
+                            <span class="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded">College</span>
+                        </div>
+                        <div class="text-3xl font-bold text-gray-900 mb-1">47</div>
+                        <div class="text-sm text-gray-600">Irregular Students</div>
+                        <div class="text-xs text-gray-500 mt-1">Across all programs</div>
                     </div>
-                    <div class="bg-white border border-gray-200 p-6 text-center">
-                        <div class="text-3xl font-bold text-purple-600 mb-2">45</div>
-                        <div class="text-sm text-gray-600">Sections</div>
+
+                    <!-- Active Sections -->
+                    <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center">
+                                <i class="fas fa-door-open text-gray-600 text-xl"></i>
+                            </div>
+                            <span class="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded">Active</span>
+                        </div>
+                        <div class="text-3xl font-bold text-gray-900 mb-1">156</div>
+                        <div class="text-sm text-gray-600">Class Sections</div>
+                        <div class="text-xs text-gray-500 mt-1">All subjects</div>
                     </div>
-                    <div class="bg-white border border-gray-200 p-6 text-center">
-                        <div class="text-3xl font-bold text-orange-600 mb-2">156</div>
-                        <div class="text-sm text-gray-600">Courses</div>
+
+                    <!-- College Programs -->
+                    <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center">
+                                <i class="fas fa-university text-gray-600 text-xl"></i>
+                            </div>
+                            <span class="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded">Programs</span>
+                        </div>
+                        <div class="text-3xl font-bold text-gray-900 mb-1">9</div>
+                        <div class="text-sm text-gray-600">College Programs</div>
+                        <div class="text-xs text-gray-500 mt-1">HRM, IT, BSBA, etc.</div>
                     </div>
                 </div>
+
+                <!-- Quick Navigation -->
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8">
+                    <!-- Academic Level Access -->
+                    <div class="lg:col-span-2 bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+                        <div class="flex items-center justify-between mb-6">
+                            <h3 class="text-lg font-bold text-gray-900">Academic Level Management</h3>
+                            <span class="text-sm text-gray-500">Navigate to manage students and sections</span>
+                        </div>
+                        <div class="grid grid-cols-2 gap-4">
+                            <!-- Preschool -->
+                            <div class="p-4 border border-gray-200 rounded-lg hover:border-gray-300 cursor-pointer transition-colors" onclick="toggleSection('preschool')">
+                                <div class="flex items-center mb-3">
+                                    <div class="w-10 h-10 bg-gray-100 rounded-lg flex items-center justify-center mr-3">
+                                        <i class="fas fa-baby text-gray-600"></i>
+                                    </div>
+                                    <div>
+                                        <div class="font-semibold text-gray-900">Preschool</div>
+                                        <div class="text-sm text-gray-500">Kindergarten</div>
+                                    </div>
+                                </div>
+                                <div class="text-xs text-gray-500">1 grade level • View students & sections</div>
+                            </div>
+
+                            <!-- Elementary -->
+                            <div class="p-4 border border-gray-200 rounded-lg hover:border-gray-300 cursor-pointer transition-colors" onclick="toggleSection('elementary')">
+                                <div class="flex items-center mb-3">
+                                    <div class="w-10 h-10 bg-gray-100 rounded-lg flex items-center justify-center mr-3">
+                                        <i class="fas fa-child text-gray-600"></i>
+                                    </div>
+                                    <div>
+                                        <div class="font-semibold text-gray-900">Elementary</div>
+                                        <div class="text-sm text-gray-500">Grades 1-6</div>
+                                    </div>
+                                </div>
+                                <div class="text-xs text-gray-500">6 grade levels • View students & sections</div>
+                            </div>
+
+                            <!-- High School -->
+                            <div class="p-4 border border-gray-200 rounded-lg hover:border-gray-300 cursor-pointer transition-colors" onclick="toggleSection('highschool')">
+                                <div class="flex items-center mb-3">
+                                    <div class="w-10 h-10 bg-gray-100 rounded-lg flex items-center justify-center mr-3">
+                                        <i class="fas fa-user-graduate text-gray-600"></i>
+                                    </div>
+                                    <div>
+                                        <div class="font-semibold text-gray-900">High School</div>
+                                        <div class="text-sm text-gray-500">JHS & SHS</div>
+                                    </div>
+                                </div>
+                                <div class="text-xs text-gray-500">4 grade levels • View students & sections</div>
+                            </div>
+
+                            <!-- College -->
+                            <div class="p-4 border border-gray-200 rounded-lg hover:border-gray-300 cursor-pointer transition-colors" onclick="toggleSection('college')">
+                                <div class="flex items-center mb-3">
+                                    <div class="w-10 h-10 bg-gray-100 rounded-lg flex items-center justify-center mr-3">
+                                        <i class="fas fa-university text-gray-600"></i>
+                                    </div>
+                                    <div>
+                                        <div class="font-semibold text-gray-900">College</div>
+                                        <div class="text-sm text-gray-500">9 Programs</div>
+                                    </div>
+                                </div>
+                                <div class="text-xs text-gray-500">HRM, IT, BSBA, BSN, etc. • View students & sections</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- System Functions -->
+                    <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+                        <h3 class="text-lg font-bold text-gray-900 mb-6">System Functions</h3>
+                        <div class="space-y-3">
+                            <div class="p-3 border border-gray-200 rounded-lg hover:border-gray-300 cursor-pointer transition-colors">
+                                <div class="flex items-center">
+                                    <div class="w-8 h-8 bg-gray-100 rounded-lg flex items-center justify-center mr-3">
+                                        <i class="fas fa-search text-gray-600 text-sm"></i>
+                                    </div>
+                                    <div>
+                                        <div class="font-medium text-gray-900 text-sm">Browse Students</div>
+                                        <div class="text-xs text-gray-500">Navigate through academic levels</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="p-3 border border-gray-200 rounded-lg hover:border-gray-300 cursor-pointer transition-colors">
+                                <div class="flex items-center">
+                                    <div class="w-8 h-8 bg-gray-100 rounded-lg flex items-center justify-center mr-3">
+                                        <i class="fas fa-list text-gray-600 text-sm"></i>
+                                    </div>
+                                    <div>
+                                        <div class="font-medium text-gray-900 text-sm">View Sections</div>
+                                        <div class="text-xs text-gray-500">Access class sections by subject</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="p-3 border border-gray-200 rounded-lg hover:border-gray-300 cursor-pointer transition-colors">
+                                <div class="flex items-center">
+                                    <div class="w-8 h-8 bg-gray-100 rounded-lg flex items-center justify-center mr-3">
+                                        <i class="fas fa-users text-gray-600 text-sm"></i>
+                                    </div>
+                                    <div>
+                                        <div class="font-medium text-gray-900 text-sm">Student Lists</div>
+                                        <div class="text-xs text-gray-500">Regular & irregular students</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="p-3 border border-gray-200 rounded-lg hover:border-gray-300 cursor-pointer transition-colors">
+                                <div class="flex items-center">
+                                    <div class="w-8 h-8 bg-gray-100 rounded-lg flex items-center justify-center mr-3">
+                                        <i class="fas fa-graduation-cap text-gray-600 text-sm"></i>
+                                    </div>
+                                    <div>
+                                        <div class="font-medium text-gray-900 text-sm">College Programs</div>
+                                        <div class="text-xs text-gray-500">Manage higher education</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Navigation Tip -->
+                        <div class="mt-6 p-3 bg-gray-50 rounded-lg">
+                            <div class="text-sm font-medium text-gray-900 mb-1">Navigation Tip</div>
+                            <div class="text-xs text-gray-600">Use the left sidebar to navigate through academic levels, then drill down to subjects, sections, and student lists.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Activity & System Information -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+                    <!-- Recent Activity -->
+                    <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+                        <h3 class="text-lg font-bold text-gray-900 mb-6">Recent Activity</h3>
+                        <div class="space-y-4">
+                            <div class="flex items-start space-x-3 p-3 bg-gray-50 rounded-lg">
+                                <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0">
+                                    <i class="fas fa-user-plus text-blue-600 text-sm"></i>
+                                </div>
+                                <div class="flex-1 min-w-0">
+                                    <div class="text-sm font-medium text-gray-900">New student enrolled</div>
+                                    <div class="text-xs text-gray-500">Maria Santos joined Grade 7 - Newton section</div>
+                                    <div class="text-xs text-gray-400 mt-1">2 hours ago</div>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start space-x-3 p-3 bg-gray-50 rounded-lg">
+                                <div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0">
+                                    <i class="fas fa-check text-green-600 text-sm"></i>
+                                </div>
+                                <div class="flex-1 min-w-0">
+                                    <div class="text-sm font-medium text-gray-900">Section updated</div>
+                                    <div class="text-xs text-gray-500">HRM 1st Year - Section A teacher changed</div>
+                                    <div class="text-xs text-gray-400 mt-1">4 hours ago</div>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start space-x-3 p-3 bg-gray-50 rounded-lg">
+                                <div class="w-8 h-8 bg-yellow-100 rounded-full flex items-center justify-center flex-shrink-0">
+                                    <i class="fas fa-edit text-yellow-600 text-sm"></i>
+                                </div>
+                                <div class="flex-1 min-w-0">
+                                    <div class="text-sm font-medium text-gray-900">Student record modified</div>
+                                    <div class="text-xs text-gray-500">Updated contact information for 15 students</div>
+                                    <div class="text-xs text-gray-400 mt-1">6 hours ago</div>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start space-x-3 p-3 bg-gray-50 rounded-lg">
+                                <div class="w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center flex-shrink-0">
+                                    <i class="fas fa-calendar text-purple-600 text-sm"></i>
+                                </div>
+                                <div class="flex-1 min-w-0">
+                                    <div class="text-sm font-medium text-gray-900">School year preparation</div>
+                                    <div class="text-xs text-gray-500">2024-2025 academic year setup initiated</div>
+                                    <div class="text-xs text-gray-400 mt-1">1 day ago</div>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start space-x-3 p-3 bg-gray-50 rounded-lg">
+                                <div class="w-8 h-8 bg-red-100 rounded-full flex items-center justify-center flex-shrink-0">
+                                    <i class="fas fa-exclamation-triangle text-red-600 text-sm"></i>
+                                </div>
+                                <div class="flex-1 min-w-0">
+                                    <div class="text-sm font-medium text-gray-900">Attention required</div>
+                                    <div class="text-xs text-gray-500">3 irregular students need academic advising</div>
+                                    <div class="text-xs text-gray-400 mt-1">2 days ago</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- System Information -->
+                    <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+                        <h3 class="text-lg font-bold text-gray-900 mb-6">System Information</h3>
+                        <div class="space-y-4">
+                            <!-- Current Academic Year -->
+                            <div class="p-4 bg-blue-50 border border-blue-200 rounded-lg">
+                                <div class="flex items-center justify-between mb-2">
+                                    <div class="text-sm font-medium text-blue-900">Current Academic Year</div>
+                                    <i class="fas fa-calendar-alt text-blue-600"></i>
+                                </div>
+                                <div class="text-lg font-bold text-blue-900">2023-2024</div>
+                                <div class="text-xs text-blue-700">Second Semester</div>
+                            </div>
+
+                            <!-- Database Status -->
+                            <div class="p-4 bg-green-50 border border-green-200 rounded-lg">
+                                <div class="flex items-center justify-between mb-2">
+                                    <div class="text-sm font-medium text-green-900">Database Status</div>
+                                    <i class="fas fa-database text-green-600"></i>
+                                </div>
+                                <div class="text-lg font-bold text-green-900">Online</div>
+                                <div class="text-xs text-green-700">Last backup: Today 3:00 AM</div>
+                            </div>
+
+                            <!-- User Sessions -->
+                            <div class="p-4 bg-gray-50 border border-gray-200 rounded-lg">
+                                <div class="flex items-center justify-between mb-2">
+                                    <div class="text-sm font-medium text-gray-900">Active Sessions</div>
+                                    <i class="fas fa-users text-gray-600"></i>
+                                </div>
+                                <div class="text-lg font-bold text-gray-900">12</div>
+                                <div class="text-xs text-gray-700">Teachers and staff online</div>
+                            </div>
+
+                            <!-- System Version -->
+                            <div class="p-4 bg-gray-50 border border-gray-200 rounded-lg">
+                                <div class="flex items-center justify-between mb-2">
+                                    <div class="text-sm font-medium text-gray-900">EduManage Version</div>
+                                    <i class="fas fa-code text-gray-600"></i>
+                                </div>
+                                <div class="text-lg font-bold text-gray-900">v2.1.4</div>
+                                <div class="text-xs text-gray-700">Updated January 2024</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Access Actions -->
+                <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+                    <h3 class="text-lg font-bold text-gray-900 mb-6">Quick Access</h3>
+                    <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
+                        <button class="p-4 border border-gray-200 rounded-lg hover:border-gray-300 hover:bg-gray-50 transition-colors text-center">
+                            <div class="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center mx-auto mb-3">
+                                <i class="fas fa-user-plus text-gray-600"></i>
+                            </div>
+                            <div class="text-sm font-medium text-gray-900">Add Student</div>
+                            <div class="text-xs text-gray-500 mt-1">Enroll new student</div>
+                        </button>
+
+                        <button class="p-4 border border-gray-200 rounded-lg hover:border-gray-300 hover:bg-gray-50 transition-colors text-center">
+                            <div class="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center mx-auto mb-3">
+                                <i class="fas fa-door-open text-gray-600"></i>
+                            </div>
+                            <div class="text-sm font-medium text-gray-900">New Section</div>
+                            <div class="text-xs text-gray-500 mt-1">Create class section</div>
+                        </button>
+
+                        <button class="p-4 border border-gray-200 rounded-lg hover:border-gray-300 hover:bg-gray-50 transition-colors text-center">
+                            <div class="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center mx-auto mb-3">
+                                <i class="fas fa-file-export text-gray-600"></i>
+                            </div>
+                            <div class="text-sm font-medium text-gray-900">Export Data</div>
+                            <div class="text-xs text-gray-500 mt-1">Generate reports</div>
+                        </button>
+
+                        <button class="p-4 border border-gray-200 rounded-lg hover:border-gray-300 hover:bg-gray-50 transition-colors text-center">
+                            <div class="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center mx-auto mb-3">
+                                <i class="fas fa-cog text-gray-600"></i>
+                            </div>
+                            <div class="text-sm font-medium text-gray-900">Settings</div>
+                            <div class="text-xs text-gray-500 mt-1">System configuration</div>
+                        </button>
+
+                        <button class="p-4 border border-gray-200 rounded-lg hover:border-gray-300 hover:bg-gray-50 transition-colors text-center">
+                            <div class="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center mx-auto mb-3">
+                                <i class="fas fa-backup text-gray-600"></i>
+                            </div>
+                            <div class="text-sm font-medium text-gray-900">Backup</div>
+                            <div class="text-xs text-gray-500 mt-1">Data backup</div>
+                        </button>
+
+                        <button class="p-4 border border-gray-200 rounded-lg hover:border-gray-300 hover:bg-gray-50 transition-colors text-center">
+                            <div class="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center mx-auto mb-3">
+                                <i class="fas fa-question-circle text-gray-600"></i>
+                            </div>
+                            <div class="text-sm font-medium text-gray-900">Help</div>
+                            <div class="text-xs text-gray-500 mt-1">User guide</div>
+                        </button>
+                    </div>
+                </div>
+
+                <script>
+                    // Set current date
+                    document.getElementById('current-date').textContent = new Date().toLocaleDateString('en-US', {
+                        weekday: 'long',
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric'
+                    });
+                </script>
             </div>
 
             <!-- Grade Content (Hidden by default) -->
