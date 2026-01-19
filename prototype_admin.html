@@ -273,7 +273,7 @@
                         <div class="space-y-3 px-2">
                             <!-- HRM Program -->
                             <div class="bg-gray-50 border border-gray-200 p-3">
-                                <div class="sidebar-item py-1 cursor-pointer flex items-center mb-2" onclick="toggleProgram('hrm')">
+                                <div class="sidebar-item py-1 cursor-pointer flex items-center mb-2" onclick="showCollegeProgram('HRM')">
                                     <div class="program-badge">HRM</div>
                                     <span class="font-medium text-gray-800">Hotel & Restaurant Management</span>
                                     <i class="fas fa-chevron-right ml-auto transition-transform duration-200 text-gray-400" id="hrm-chevron"></i>
@@ -819,18 +819,33 @@
                             <h4 class="text-lg font-semibold text-gray-900">Students List</h4>
                         </div>
 
+                        <!-- Student Tabs -->
+                        <div class="mb-4">
+                            <div class="border-b border-gray-200">
+                                <nav class="-mb-px flex space-x-8">
+                                    <button id="regular-tab" class="student-tab active-tab py-2 px-1 border-b-2 border-blue-500 font-medium text-sm text-blue-600" onclick="switchStudentTab('regular')">
+                                        <i class="fas fa-users mr-2"></i>Regular Students
+                                        <span id="regular-count" class="ml-2 bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded-full">0</span>
+                                    </button>
+                                    <button id="irregular-tab" class="student-tab py-2 px-1 border-b-2 border-transparent font-medium text-sm text-gray-500 hover:text-gray-700 hover:border-gray-300" onclick="switchStudentTab('irregular')">
+                                        <i class="fas fa-exclamation-triangle mr-2"></i>Irregular Students
+                                        <span id="irregular-count" class="ml-2 bg-gray-100 text-gray-800 text-xs font-medium px-2.5 py-0.5 rounded-full">0</span>
+                                    </button>
+                                </nav>
+                            </div>
+                        </div>
+
                         <!-- Students Table Container -->
                         <div class="bg-white border border-gray-200 overflow-hidden">
                             <div class="overflow-x-auto overflow-y-auto" style="max-height: 350px;">
                                 <table class="w-full">
-                                    <thead class="bg-gray-50 border-b border-gray-200 sticky top-0">
+                                    <thead class="bg-gray-50 border-b border-gray-200 sticky top-0" id="students-table-header">
                                         <tr>
                                             <th class="text-left py-3 px-4 font-semibold text-gray-900">Student ID</th>
                                             <th class="text-left py-3 px-4 font-semibold text-gray-900">Last Name</th>
                                             <th class="text-left py-3 px-4 font-semibold text-gray-900">First Name</th>
                                             <th class="text-left py-3 px-4 font-semibold text-gray-900">Middle Name</th>
                                             <th class="text-left py-3 px-4 font-semibold text-gray-900">Gender</th>
-                                            <th class="text-left py-3 px-4 font-semibold text-gray-900">Status</th>
                                             <th class="text-left py-3 px-4 font-semibold text-gray-900">Actions</th>
                                         </tr>
                                     </thead>
@@ -841,21 +856,41 @@
                             </div>
                             
                             <!-- Table Footer -->
-                            <div class="bg-gray-50 px-4 py-3 border-t border-gray-200 flex justify-between items-center">
+                            <div class="bg-gray-50 px-4 py-3 border-t border-gray-200 flex justify-between items-center" id="students-table-footer">
                                 <div class="text-sm text-gray-600">
-                                    <span id="student-count">Showing 14 students</span>
+                                    <span id="student-count">Showing 0 students</span>
                                 </div>
-                                <div class="flex space-x-2">
-                                    <button class="bg-white text-gray-700 px-4 py-2 text-sm border border-gray-300 hover:bg-gray-50 transition-colors">
-                                        <i class="fas fa-plus mr-1"></i>Add Student
-                                    </button>
-                                    <button class="bg-white text-gray-700 px-4 py-2 text-sm border border-gray-300 hover:bg-gray-50 transition-colors">
-                                        <i class="fas fa-edit mr-1"></i>Manage Grades
-                                    </button>
-                                    <button class="bg-white text-gray-700 px-4 py-2 text-sm border border-gray-300 hover:bg-gray-50 transition-colors">
-                                        <i class="fas fa-download mr-1"></i>Export List
-                                    </button>
+                                <div class="flex space-x-2" id="table-actions">
+                                    <!-- Actions will be populated based on active tab -->
                                 </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- College Year Levels View (Hidden by default) -->
+                    <div id="college-years-view" class="hidden overflow-y-auto" style="max-height: calc(100vh - 200px);">
+                        <div class="p-8">
+                            <div class="mb-6">
+                                <h3 class="text-xl font-semibold text-gray-900 mb-4">Year Levels</h3>
+                                <p class="text-gray-600">Select a year level to view courses and academic requirements</p>
+                            </div>
+                            
+                            <div id="college-years-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                                <!-- Year levels will be populated dynamically -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- College Courses View (Hidden by default) -->
+                    <div id="college-courses-view" class="hidden overflow-y-auto" style="max-height: calc(100vh - 200px);">
+                        <div class="p-8">
+                            <div class="mb-6">
+                                <h3 class="text-xl font-semibold text-gray-900 mb-4">Courses</h3>
+                                <p class="text-gray-600">Manage courses for the selected year level and program</p>
+                            </div>
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                                <!-- Courses will be populated dynamically -->
                             </div>
                         </div>
                     </div>
@@ -944,8 +979,14 @@
             // Reset navigation state to grade level
             navigationState = { grade: grade, schoolYear: '', subject: '', section: '' };
             
-            // Show school years view
-            showSchoolYears();
+            // Check if it's a college program
+            if (['HRM', 'IT', 'BSBA'].includes(grade)) {
+                // Show college year levels
+                showCollegeProgram(grade);
+            } else {
+                // Show school years view for K-12
+                showSchoolYears();
+            }
             updateBreadcrumb();
         }
         
@@ -954,8 +995,14 @@
             navigationState.subject = '';
             navigationState.section = '';
             
-            // Show subjects view
-            showSchoolYearContent(schoolYear);
+            // Check if it's a college program
+            if (['HRM', 'IT', 'BSBA'].includes(navigationState.grade)) {
+                // Show college courses view
+                showCollegeYearContent(navigationState.grade, schoolYear);
+            } else {
+                // Show subjects view for K-12
+                showSchoolYearContent(schoolYear);
+            }
             updateBreadcrumb();
         }
         
@@ -968,8 +1015,255 @@
             updateBreadcrumb();
         }
         
-        function showGradeContent(grade) {
+        function showCollegeProgram(program) {
+            // Update navigation state for college
+            navigationState = { 
+                grade: program, 
+                schoolYear: '', 
+                subject: '', 
+                section: '' 
+            };
+            
+            // Hide dashboard content
+            document.getElementById('dashboard-content').classList.add('hidden');
+            
+            // Show grade content (we'll reuse this container for college)
+            document.getElementById('grade-content').classList.remove('hidden');
+            
+            // Hide all other views and show college year levels
+            document.getElementById('school-years-view').classList.add('hidden');
+            document.getElementById('subjects-view').classList.add('hidden');
+            document.getElementById('sections-view').classList.add('hidden');
+            document.getElementById('section-details-view').classList.add('hidden');
+            document.getElementById('college-courses-view').classList.add('hidden');
+            
+            // Show college year levels view
+            document.getElementById('college-years-view').classList.remove('hidden');
+            
+            // Update titles
+            document.getElementById('grade-title').textContent = getFullProgramName(program);
+            updateBreadcrumb();
+            
+            // Populate year levels for the program
+            populateCollegeYearLevels(program);
+        }
+        
+        function getFullProgramName(program) {
+            const programNames = {
+                'HRM': 'Bachelor of Science in Hotel & Restaurant Management',
+                'IT': 'Bachelor of Science in Information Technology',
+                'BSBA': 'Bachelor of Science in Business Administration'
+            };
+            return programNames[program] || program;
+        }
+        
+        function populateCollegeYearLevels(program) {
+            const yearLevelsGrid = document.getElementById('college-years-grid');
+            yearLevelsGrid.innerHTML = '';
+            
+            const yearLevels = [
+                { year: '1st Year', description: 'Foundation Courses', students: 120, sections: 4 },
+                { year: '2nd Year', description: 'Core Subjects', students: 110, sections: 4 },
+                { year: '3rd Year', description: 'Major Courses', students: 105, sections: 4 },
+                { year: '4th Year', description: 'Specialization & Practicum', students: 95, sections: 3 }
+            ];
+            
+            yearLevels.forEach(level => {
+                const yearCard = document.createElement('div');
+                yearCard.className = 'bg-white border border-gray-200 p-6 hover:border-gray-400 cursor-pointer transition-colors';
+                yearCard.onclick = () => showCollegeYearContent(program, level.year);
+                
+                yearCard.innerHTML = `
+                    <div class="text-center">
+                        <div class="text-2xl font-bold text-gray-900 mb-2">${level.year}</div>
+                        <div class="text-sm text-gray-600 mb-4">${level.description}</div>
+                        <div class="text-sm text-gray-500">
+                            <div class="flex justify-between mb-1">
+                                <span>Students:</span>
+                                <span>${level.students}</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span>Sections:</span>
+                                <span>${level.sections}</span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                
+                yearLevelsGrid.appendChild(yearCard);
+            });
+        }
+        
+        function showCollegeYearContent(program, yearLevel) {
             // Update navigation state
+            navigationState.schoolYear = yearLevel;
+            navigationState.subject = '';
+            navigationState.section = '';
+            
+            // Hide college years view
+            document.getElementById('college-years-view').classList.add('hidden');
+            
+            // Show college courses view
+            document.getElementById('college-courses-view').classList.remove('hidden');
+            
+            // Hide other views
+            document.getElementById('school-years-view').classList.add('hidden');
+            document.getElementById('subjects-view').classList.add('hidden');
+            document.getElementById('sections-view').classList.add('hidden');
+            document.getElementById('section-details-view').classList.add('hidden');
+            
+            // Update courses based on program and year level
+            updateCollegeCourses(program, yearLevel);
+            
+            // Update breadcrumb
+            updateBreadcrumb();
+        }
+        
+        function updateCollegeCourses(program, yearLevel) {
+            const coursesGrid = document.querySelector('#college-courses-view .grid');
+            coursesGrid.innerHTML = '';
+            
+            let courses = [];
+            
+            if (program === 'HRM') {
+                if (yearLevel === '1st Year') {
+                    courses = [
+                        { code: 'HRM 101', name: 'Introduction to Hospitality Industry', units: 3, students: 120, sections: 4 },
+                        { code: 'HRM 102', name: 'Food Service Operations', units: 3, students: 120, sections: 4 },
+                        { code: 'HRM 103', name: 'Front Office Operations', units: 3, students: 120, sections: 4 },
+                        { code: 'HRM 104', name: 'Housekeeping Operations', units: 3, students: 120, sections: 4 },
+                        { code: 'HRM 105', name: 'Basic Food Preparation', units: 4, students: 120, sections: 4 },
+                        { code: 'HRM 106', name: 'Tourism Geography', units: 3, students: 120, sections: 4 },
+                        { code: 'GE 101', name: 'English Communication', units: 3, students: 120, sections: 4 },
+                        { code: 'GE 102', name: 'Mathematics in Modern World', units: 3, students: 120, sections: 4 }
+                    ];
+                } else if (yearLevel === '2nd Year') {
+                    courses = [
+                        { code: 'HRM 201', name: 'Food & Beverage Service', units: 4, students: 110, sections: 4 },
+                        { code: 'HRM 202', name: 'Culinary Arts & Kitchen Management', units: 4, students: 110, sections: 4 },
+                        { code: 'HRM 203', name: 'Hotel & Restaurant Accounting', units: 3, students: 110, sections: 4 },
+                        { code: 'HRM 204', name: 'Hospitality Marketing', units: 3, students: 110, sections: 4 },
+                        { code: 'HRM 205', name: 'Event Management', units: 3, students: 110, sections: 4 },
+                        { code: 'HRM 206', name: 'Bar & Beverage Management', units: 3, students: 110, sections: 4 },
+                        { code: 'GE 201', name: 'Filipino Literature', units: 3, students: 110, sections: 4 },
+                        { code: 'GE 202', name: 'Philippine History', units: 3, students: 110, sections: 4 }
+                    ];
+                } else if (yearLevel === '3rd Year') {
+                    courses = [
+                        { code: 'HRM 301', name: 'Hotel Operations Management', units: 4, students: 105, sections: 4 },
+                        { code: 'HRM 302', name: 'Restaurant Management', units: 4, students: 105, sections: 4 },
+                        { code: 'HRM 303', name: 'Hospitality Human Resource Management', units: 3, students: 105, sections: 4 },
+                        { code: 'HRM 304', name: 'Cost Control in Food Service', units: 3, students: 105, sections: 4 },
+                        { code: 'HRM 305', name: 'International Cuisine', units: 4, students: 105, sections: 4 },
+                        { code: 'HRM 306', name: 'Hospitality Law & Ethics', units: 3, students: 105, sections: 4 },
+                        { code: 'HRM 307', name: 'Research Methods in Hospitality', units: 3, students: 105, sections: 4 },
+                        { code: 'GE 301', name: 'Social Science & Philosophy', units: 3, students: 105, sections: 4 }
+                    ];
+                } else if (yearLevel === '4th Year') {
+                    courses = [
+                        { code: 'HRM 401', name: 'Strategic Management in Hospitality', units: 3, students: 95, sections: 3 },
+                        { code: 'HRM 402', name: 'Hospitality Entrepreneurship', units: 3, students: 95, sections: 3 },
+                        { code: 'HRM 403', name: 'Quality Service Management', units: 3, students: 95, sections: 3 },
+                        { code: 'HRM 404', name: 'Hospitality Facilities Management', units: 3, students: 95, sections: 3 },
+                        { code: 'HRM 405', name: 'Thesis Writing', units: 6, students: 95, sections: 3 },
+                        { code: 'HRM 406', name: 'On-the-Job Training (OJT)', units: 6, students: 95, sections: 3 },
+                        { code: 'HRM 407', name: 'Hospitality Capstone Project', units: 3, students: 95, sections: 3 }
+                    ];
+                }
+            }
+            
+            courses.forEach(course => {
+                const courseCard = document.createElement('div');
+                courseCard.className = 'bg-white border border-gray-200 p-6 hover:border-gray-400 cursor-pointer transition-colors';
+                courseCard.onclick = () => showCourseDetails(course.code, course.name);
+                
+                courseCard.innerHTML = `
+                    <div class="mb-4">
+                        <div class="flex items-center justify-between mb-2">
+                            <h4 class="font-semibold text-gray-900">${course.code}</h4>
+                            <span class="text-sm bg-gray-100 text-gray-700 px-2 py-1 rounded">${course.units} units</span>
+                        </div>
+                        <p class="text-sm text-gray-600 mb-3">${course.name}</p>
+                    </div>
+                    <div class="text-sm text-gray-600">
+                        <div class="flex justify-between mb-1">
+                            <span>Students:</span>
+                            <span>${course.students}</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>Sections:</span>
+                            <span>${course.sections}</span>
+                        </div>
+                    </div>
+                `;
+                
+                coursesGrid.appendChild(courseCard);
+            });
+        }
+        
+        function showCourseDetails(courseCode, courseName) {
+            // Update navigation state
+            navigationState.subject = `${courseCode} - ${courseName}`;
+            navigationState.section = '';
+            
+            // Hide college courses view
+            document.getElementById('college-courses-view').classList.add('hidden');
+            
+            // Show sections view (reuse existing)
+            document.getElementById('sections-view').classList.remove('hidden');
+            
+            // Hide other views
+            document.getElementById('school-years-view').classList.add('hidden');
+            document.getElementById('subjects-view').classList.add('hidden');
+            document.getElementById('section-details-view').classList.add('hidden');
+            document.getElementById('college-years-view').classList.add('hidden');
+            
+            // Update subject title
+            document.getElementById('subject-title').textContent = `${courseCode} - Sections`;
+            
+            // Update breadcrumb
+            updateBreadcrumb();
+            
+            // Get college sections for the course
+            const collegeSections = [
+                { section: 'HRM-A', teacher: 'Prof. Chef Martinez' },
+                { section: 'HRM-B', teacher: 'Dr. Hotel Manager' },
+                { section: 'HRM-C', teacher: 'Ms. Service Expert' },
+                { section: 'HRM-D', teacher: 'Mr. Culinary Master' }
+            ];
+            
+            // Populate sections grid
+            const sectionsGrid = document.getElementById('sections-grid');
+            sectionsGrid.innerHTML = '';
+            
+            collegeSections.forEach(item => {
+                const sectionCard = document.createElement('div');
+                sectionCard.className = 'bg-white border border-gray-200 hover:border-gray-400 cursor-pointer transition-colors';
+                sectionCard.onclick = () => showSectionDetails(`${courseCode} - ${courseName}`, item.section, item.teacher);
+                
+                sectionCard.innerHTML = `
+                    <div class="p-6 text-center">
+                        <div class="bg-gray-100 text-gray-700 font-semibold py-3 px-4 mb-3">
+                            ${item.section}
+                        </div>
+                        <div class="text-gray-600 font-medium">
+                            ${item.teacher}
+                        </div>
+                    </div>
+                `;
+                
+                sectionsGrid.appendChild(sectionCard);
+            });
+        }
+        
+        function showGradeContent(grade) {
+            // Check if it's a college program
+            if (['HRM', 'IT', 'BSBA'].includes(grade)) {
+                showCollegeProgram(grade);
+                return;
+            }
+            
+            // Update navigation state for K-12
             navigationState = { grade: grade, schoolYear: '', subject: '', section: '' };
             
             // Hide dashboard content
@@ -991,6 +1285,8 @@
                 document.getElementById('subjects-view').classList.add('hidden');
                 document.getElementById('sections-view').classList.add('hidden');
                 document.getElementById('section-details-view').classList.add('hidden');
+                document.getElementById('college-years-view').classList.add('hidden');
+                document.getElementById('college-courses-view').classList.add('hidden');
                 
                 // Update titles
                 document.getElementById('grade-title').textContent = grade;
@@ -1013,6 +1309,8 @@
             // Hide other views
             document.getElementById('sections-view').classList.add('hidden');
             document.getElementById('section-details-view').classList.add('hidden');
+            document.getElementById('college-years-view').classList.add('hidden');
+            document.getElementById('college-courses-view').classList.add('hidden');
             
             // Update subjects based on grade level
             updateSubjectsForGrade(navigationState.grade);
@@ -1128,6 +1426,8 @@
             document.getElementById('subjects-view').classList.add('hidden');
             document.getElementById('sections-view').classList.add('hidden');
             document.getElementById('section-details-view').classList.add('hidden');
+            document.getElementById('college-years-view').classList.add('hidden');
+            document.getElementById('college-courses-view').classList.add('hidden');
             
             // Update breadcrumb
             updateBreadcrumb();
@@ -1204,6 +1504,8 @@
             document.getElementById('subjects-view').classList.add('hidden');
             document.getElementById('school-years-view').classList.add('hidden');
             document.getElementById('section-details-view').classList.add('hidden');
+            document.getElementById('college-years-view').classList.add('hidden');
+            document.getElementById('college-courses-view').classList.add('hidden');
             
             // Show sections view
             document.getElementById('sections-view').classList.remove('hidden');
@@ -1594,6 +1896,8 @@
             document.getElementById('sections-view').classList.add('hidden');
             document.getElementById('section-details-view').classList.add('hidden');
             document.getElementById('school-years-view').classList.add('hidden');
+            document.getElementById('college-years-view').classList.add('hidden');
+            document.getElementById('college-courses-view').classList.add('hidden');
             
             // Update breadcrumb
             updateBreadcrumb();
@@ -1607,6 +1911,8 @@
             document.getElementById('sections-view').classList.add('hidden');
             document.getElementById('subjects-view').classList.add('hidden');
             document.getElementById('school-years-view').classList.add('hidden');
+            document.getElementById('college-years-view').classList.add('hidden');
+            document.getElementById('college-courses-view').classList.add('hidden');
             
             // Show section details view
             document.getElementById('section-details-view').classList.remove('hidden');
@@ -1619,6 +1925,150 @@
             
             // Populate students table
             populateStudentsTable(section);
+        }
+        
+        // Global variables to store student data
+        let currentRegularStudents = [];
+        let currentIrregularStudents = [];
+        let activeStudentTab = 'regular';
+        
+        function switchStudentTab(tabType) {
+            activeStudentTab = tabType;
+            
+            // Update tab styling
+            const regularTab = document.getElementById('regular-tab');
+            const irregularTab = document.getElementById('irregular-tab');
+            
+            if (tabType === 'regular') {
+                regularTab.className = 'student-tab active-tab py-2 px-1 border-b-2 border-blue-500 font-medium text-sm text-blue-600';
+                irregularTab.className = 'student-tab py-2 px-1 border-b-2 border-transparent font-medium text-sm text-gray-500 hover:text-gray-700 hover:border-gray-300';
+                
+                // Update table styling for regular students
+                updateTableStyling('regular');
+                populateCurrentTable(currentRegularStudents, 'regular');
+            } else {
+                regularTab.className = 'student-tab py-2 px-1 border-b-2 border-transparent font-medium text-sm text-gray-500 hover:text-gray-700 hover:border-gray-300';
+                irregularTab.className = 'student-tab active-tab py-2 px-1 border-b-2 border-orange-500 font-medium text-sm text-orange-600';
+                
+                // Update table styling for irregular students
+                updateTableStyling('irregular');
+                populateCurrentTable(currentIrregularStudents, 'irregular');
+            }
+        }
+        
+        function updateTableStyling(type) {
+            const header = document.getElementById('students-table-header');
+            const footer = document.getElementById('students-table-footer');
+            
+            if (type === 'regular') {
+                header.className = 'bg-gray-50 border-b border-gray-200 sticky top-0';
+                header.innerHTML = `
+                    <tr>
+                        <th class="text-left py-3 px-4 font-semibold text-gray-900">Student ID</th>
+                        <th class="text-left py-3 px-4 font-semibold text-gray-900">Last Name</th>
+                        <th class="text-left py-3 px-4 font-semibold text-gray-900">First Name</th>
+                        <th class="text-left py-3 px-4 font-semibold text-gray-900">Middle Name</th>
+                        <th class="text-left py-3 px-4 font-semibold text-gray-900">Gender</th>
+                        <th class="text-left py-3 px-4 font-semibold text-gray-900">Actions</th>
+                    </tr>
+                `;
+                footer.className = 'bg-gray-50 px-4 py-3 border-t border-gray-200 flex justify-between items-center';
+            } else {
+                header.className = 'bg-orange-50 border-b border-orange-200 sticky top-0';
+                header.innerHTML = `
+                    <tr>
+                        <th class="text-left py-3 px-4 font-semibold text-orange-900">Student ID</th>
+                        <th class="text-left py-3 px-4 font-semibold text-orange-900">Last Name</th>
+                        <th class="text-left py-3 px-4 font-semibold text-orange-900">First Name</th>
+                        <th class="text-left py-3 px-4 font-semibold text-orange-900">Middle Name</th>
+                        <th class="text-left py-3 px-4 font-semibold text-orange-900">Gender</th>
+                        <th class="text-left py-3 px-4 font-semibold text-orange-900">Actions</th>
+                    </tr>
+                `;
+                footer.className = 'bg-orange-50 px-4 py-3 border-t border-orange-200 flex justify-between items-center';
+            }
+            
+            updateTableActions(type);
+        }
+        
+        function updateTableActions(type) {
+            const actionsContainer = document.getElementById('table-actions');
+            
+            if (type === 'regular') {
+                actionsContainer.innerHTML = `
+                    <button class="bg-white text-gray-700 px-4 py-2 text-sm border border-gray-300 hover:bg-gray-50 transition-colors">
+                        <i class="fas fa-plus mr-1"></i>Add Student
+                    </button>
+                    <button class="bg-white text-gray-700 px-4 py-2 text-sm border border-gray-300 hover:bg-gray-50 transition-colors">
+                        <i class="fas fa-edit mr-1"></i>Manage Grades
+                    </button>
+                    <button class="bg-white text-gray-700 px-4 py-2 text-sm border border-gray-300 hover:bg-gray-50 transition-colors">
+                        <i class="fas fa-download mr-1"></i>Export List
+                    </button>
+                `;
+            } else {
+                actionsContainer.innerHTML = `
+                    <button class="bg-white text-orange-700 px-4 py-2 text-sm border border-orange-300 hover:bg-orange-50 transition-colors">
+                        <i class="fas fa-user-edit mr-1"></i>Manage Status
+                    </button>
+                    <button class="bg-white text-orange-700 px-4 py-2 text-sm border border-orange-300 hover:bg-orange-50 transition-colors">
+                        <i class="fas fa-calendar-alt mr-1"></i>Academic Plan
+                    </button>
+                    <button class="bg-white text-orange-700 px-4 py-2 text-sm border border-orange-300 hover:bg-orange-50 transition-colors">
+                        <i class="fas fa-download mr-1"></i>Export List
+                    </button>
+                `;
+            }
+        }
+        
+        function populateCurrentTable(students, type) {
+            const tableBody = document.getElementById('students-table-body');
+            const studentCount = document.getElementById('student-count');
+            
+            tableBody.innerHTML = '';
+            
+            if (students.length === 0) {
+                const emptyMessage = type === 'regular' ? 'No regular students found' : 'No irregular students found';
+                tableBody.innerHTML = `
+                    <tr>
+                        <td colspan="6" class="py-8 px-4 text-center text-gray-500">
+                            <i class="fas fa-info-circle mr-2"></i>${emptyMessage}
+                        </td>
+                    </tr>
+                `;
+                studentCount.textContent = emptyMessage;
+                return;
+            }
+            
+            students.forEach(student => {
+                const row = document.createElement('tr');
+                const rowClass = type === 'regular' ? 'border-b border-gray-200 hover:bg-gray-50' : 'border-b border-orange-200 hover:bg-orange-50';
+                const textClass = type === 'regular' ? 'text-gray-900' : 'text-orange-900';
+                const buttonClass = type === 'regular' ? 'text-blue-600 hover:text-blue-800' : 'text-orange-600 hover:text-orange-800';
+                
+                row.className = rowClass;
+                
+                row.innerHTML = `
+                    <td class="py-3 px-4 ${textClass}">${student.id}</td>
+                    <td class="py-3 px-4 ${textClass}">${student.lastName}</td>
+                    <td class="py-3 px-4 ${textClass}">${student.firstName}</td>
+                    <td class="py-3 px-4 ${textClass}">${student.middleName}</td>
+                    <td class="py-3 px-4 ${textClass}">${student.gender}</td>
+                    <td class="py-3 px-4">
+                        <button class="${buttonClass} text-sm mr-2" onclick="viewStudentDetails('${student.id}')">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                        <button class="${buttonClass} text-sm" onclick="editStudent('${student.id}')">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                    </td>
+                `;
+                
+                tableBody.appendChild(row);
+            });
+            
+            const countText = type === 'regular' ? `Showing ${students.length} regular students` : `Showing ${students.length} irregular students`;
+            studentCount.textContent = countText;
         }
         
         function populateStudentsTable(section) {
@@ -1840,6 +2290,103 @@
                     { id: 'SHS2023-089', lastName: 'Gray', firstName: 'Indie Belle', middleName: 'Herrera', gender: 'Female', status: 'Active' },
                     { id: 'SHS2023-090', lastName: 'Ramirez', firstName: 'Zander Miguel', middleName: 'Jimenez', gender: 'Male', status: 'Active' }
                 ],
+                // College HRM students
+                'HRM-A': [
+                    { id: 'HRM2023-001', lastName: 'Dela Cruz', firstName: 'Alexandra Marie', middleName: 'Santos', gender: 'Female', status: 'Active' },
+                    { id: 'HRM2023-002', lastName: 'Villanueva', firstName: 'Christian James', middleName: 'Reyes', gender: 'Male', status: 'Active' },
+                    { id: 'HRM2023-003', lastName: 'Fernandez', firstName: 'Samantha Grace', middleName: 'Lopez', gender: 'Female', status: 'Irregular' },
+                    { id: 'HRM2023-004', lastName: 'Torres', firstName: 'Miguel Antonio', middleName: 'Garcia', gender: 'Male', status: 'Active' },
+                    { id: 'HRM2023-005', lastName: 'Morales', firstName: 'Bianca Rose', middleName: 'Cruz', gender: 'Female', status: 'Active' },
+                    { id: 'HRM2023-006', lastName: 'Castillo', firstName: 'Rafael Luis', middleName: 'Rodriguez', gender: 'Male', status: 'Irregular' },
+                    { id: 'HRM2023-007', lastName: 'Herrera', firstName: 'Camille Joy', middleName: 'Mendoza', gender: 'Female', status: 'Active' },
+                    { id: 'HRM2023-008', lastName: 'Navarro', firstName: 'Joshua David', middleName: 'Valdez', gender: 'Male', status: 'Active' },
+                    { id: 'HRM2023-009', lastName: 'Aguilar', firstName: 'Stephanie Faith', middleName: 'Jimenez', gender: 'Female', status: 'Irregular' },
+                    { id: 'HRM2023-010', lastName: 'Ortega', firstName: 'Kenneth Paul', middleName: 'Gutierrez', gender: 'Male', status: 'Active' },
+                    { id: 'HRM2023-011', lastName: 'Ramirez', firstName: 'Angelica Hope', middleName: 'Moreno', gender: 'Female', status: 'Active' },
+                    { id: 'HRM2023-012', lastName: 'Flores', firstName: 'Patrick Rey', middleName: 'Vargas', gender: 'Male', status: 'Irregular' },
+                    { id: 'HRM2023-013', lastName: 'Guerrero', firstName: 'Kristine Belle', middleName: 'Silva', gender: 'Female', status: 'Active' },
+                    { id: 'HRM2023-014', lastName: 'Medina', firstName: 'Anthony Miguel', middleName: 'Vega', gender: 'Male', status: 'Active' },
+                    { id: 'HRM2023-015', lastName: 'Ruiz', firstName: 'Jasmine Dawn', middleName: 'Rojas', gender: 'Female', status: 'Irregular' },
+                    { id: 'HRM2023-016', lastName: 'Jimenez', firstName: 'Carlos Eduardo', middleName: 'Soto', gender: 'Male', status: 'Active' },
+                    { id: 'HRM2023-017', lastName: 'Vargas', firstName: 'Michelle Grace', middleName: 'Pena', gender: 'Female', status: 'Active' },
+                    { id: 'HRM2023-018', lastName: 'Molina', firstName: 'Gabriel Jose', middleName: 'Ortiz', gender: 'Male', status: 'Irregular' },
+                    { id: 'HRM2023-019', lastName: 'Contreras', firstName: 'Vanessa Marie', middleName: 'Herrera', gender: 'Female', status: 'Active' },
+                    { id: 'HRM2023-020', lastName: 'Sandoval', firstName: 'Jerome Luis', middleName: 'Castro', gender: 'Male', status: 'Active' },
+                    { id: 'HRM2023-021', lastName: 'Dominguez', firstName: 'Catherine Joy', middleName: 'Morales', gender: 'Female', status: 'Irregular' },
+                    { id: 'HRM2023-022', lastName: 'Paredes', firstName: 'Vincent Paul', middleName: 'Romero', gender: 'Male', status: 'Active' },
+                    { id: 'HRM2023-023', lastName: 'Salazar', firstName: 'Francine Hope', middleName: 'Aguilar', gender: 'Female', status: 'Active' },
+                    { id: 'HRM2023-024', lastName: 'Rivera', firstName: 'Dominic Rey', middleName: 'Delgado', gender: 'Male', status: 'Irregular' },
+                    { id: 'HRM2023-025', lastName: 'Torres', firstName: 'Clarisse Belle', middleName: 'Espinoza', gender: 'Female', status: 'Active' },
+                    { id: 'HRM2023-026', lastName: 'Ramos', firstName: 'Aldrin James', middleName: 'Moreno', gender: 'Male', status: 'Active' },
+                    { id: 'HRM2023-027', lastName: 'Cruz', firstName: 'Marianne Faith', middleName: 'Valdez', gender: 'Female', status: 'Irregular' },
+                    { id: 'HRM2023-028', lastName: 'Lopez', firstName: 'Roderick Luis', middleName: 'Gutierrez', gender: 'Male', status: 'Active' },
+                    { id: 'HRM2023-029', lastName: 'Gonzales', firstName: 'Tricia Rose', middleName: 'Herrera', gender: 'Female', status: 'Active' },
+                    { id: 'HRM2023-030', lastName: 'Perez', firstName: 'Marvin David', middleName: 'Jimenez', gender: 'Male', status: 'Irregular' }
+                ],
+                'HRM-B': [
+                    { id: 'HRM2023-031', lastName: 'Martinez', firstName: 'Sophia Claire', middleName: 'Anderson', gender: 'Female', status: 'Active' },
+                    { id: 'HRM2023-032', lastName: 'Taylor', firstName: 'Marcus James', middleName: 'Thomas', gender: 'Male', status: 'Irregular' },
+                    { id: 'HRM2023-033', lastName: 'Jackson', firstName: 'Isabella Rose', middleName: 'White', gender: 'Female', status: 'Active' },
+                    { id: 'HRM2023-034', lastName: 'Harris', firstName: 'Ethan Luis', middleName: 'Martin', gender: 'Male', status: 'Active' },
+                    { id: 'HRM2023-035', lastName: 'Garcia', firstName: 'Olivia Grace', middleName: 'Robinson', gender: 'Female', status: 'Irregular' },
+                    { id: 'HRM2023-036', lastName: 'Clark', firstName: 'Noah David', middleName: 'Lewis', gender: 'Male', status: 'Active' },
+                    { id: 'HRM2023-037', lastName: 'Rodriguez', firstName: 'Emma Faith', middleName: 'Lee', gender: 'Female', status: 'Active' },
+                    { id: 'HRM2023-038', lastName: 'Walker', firstName: 'Liam Miguel', middleName: 'Hall', gender: 'Male', status: 'Irregular' },
+                    { id: 'HRM2023-039', lastName: 'Allen', firstName: 'Ava Marie', middleName: 'Young', gender: 'Female', status: 'Active' },
+                    { id: 'HRM2023-040', lastName: 'King', firstName: 'William Rey', middleName: 'Wright', gender: 'Male', status: 'Active' },
+                    { id: 'HRM2023-041', lastName: 'Scott', firstName: 'Charlotte Joy', middleName: 'Hill', gender: 'Female', status: 'Irregular' },
+                    { id: 'HRM2023-042', lastName: 'Green', firstName: 'Benjamin Luis', middleName: 'Adams', gender: 'Male', status: 'Active' },
+                    { id: 'HRM2023-043', lastName: 'Baker', firstName: 'Amelia Hope', middleName: 'Nelson', gender: 'Female', status: 'Active' },
+                    { id: 'HRM2023-044', lastName: 'Gonzalez', firstName: 'James Antonio', middleName: 'Carter', gender: 'Male', status: 'Irregular' },
+                    { id: 'HRM2023-045', lastName: 'Mitchell', firstName: 'Harper Belle', middleName: 'Roberts', gender: 'Female', status: 'Active' },
+                    { id: 'HRM2023-046', lastName: 'Perez', firstName: 'Alexander John', middleName: 'Turner', gender: 'Male', status: 'Active' },
+                    { id: 'HRM2023-047', lastName: 'Roberts', firstName: 'Evelyn Dawn', middleName: 'Phillips', gender: 'Female', status: 'Irregular' },
+                    { id: 'HRM2023-048', lastName: 'Turner', firstName: 'Henry James', middleName: 'Campbell', gender: 'Male', status: 'Active' },
+                    { id: 'HRM2023-049', lastName: 'Phillips', firstName: 'Scarlett Grace', middleName: 'Parker', gender: 'Female', status: 'Active' },
+                    { id: 'HRM2023-050', lastName: 'Campbell', firstName: 'Sebastian Paul', middleName: 'Evans', gender: 'Male', status: 'Irregular' },
+                    { id: 'HRM2023-051', lastName: 'Parker', firstName: 'Luna Marie', middleName: 'Edwards', gender: 'Female', status: 'Active' },
+                    { id: 'HRM2023-052', lastName: 'Evans', firstName: 'Daniel Antonio', middleName: 'Collins', gender: 'Male', status: 'Active' },
+                    { id: 'HRM2023-053', lastName: 'Edwards', firstName: 'Penelope Rose', middleName: 'Stewart', gender: 'Female', status: 'Irregular' },
+                    { id: 'HRM2023-054', lastName: 'Collins', firstName: 'Matthew Rey', middleName: 'Sanchez', gender: 'Male', status: 'Active' },
+                    { id: 'HRM2023-055', lastName: 'Stewart', firstName: 'Layla Faith', middleName: 'Morris', gender: 'Female', status: 'Active' },
+                    { id: 'HRM2023-056', lastName: 'Sanchez', firstName: 'Christopher Luis', middleName: 'Rogers', gender: 'Male', status: 'Irregular' },
+                    { id: 'HRM2023-057', lastName: 'Morris', firstName: 'Chloe Belle', middleName: 'Reed', gender: 'Female', status: 'Active' },
+                    { id: 'HRM2023-058', lastName: 'Rogers', firstName: 'Joshua David', middleName: 'Cook', gender: 'Male', status: 'Active' },
+                    { id: 'HRM2023-059', lastName: 'Reed', firstName: 'Zoey Hope', middleName: 'Morgan', gender: 'Female', status: 'Irregular' },
+                    { id: 'HRM2023-060', lastName: 'Cook', firstName: 'Caleb Miguel', middleName: 'Bell', gender: 'Male', status: 'Active' }
+                ],
+                'HRM-C': [
+                    { id: 'HRM2023-061', lastName: 'Morgan', firstName: 'Nora Joy', middleName: 'Murphy', gender: 'Female', status: 'Active' },
+                    { id: 'HRM2023-062', lastName: 'Bell', firstName: 'Ryan James', middleName: 'Bailey', gender: 'Male', status: 'Irregular' },
+                    { id: 'HRM2023-063', lastName: 'Murphy', firstName: 'Victoria Grace', middleName: 'Rivera', gender: 'Female', status: 'Active' },
+                    { id: 'HRM2023-064', lastName: 'Bailey', firstName: 'Nathan Paul', middleName: 'Cooper', gender: 'Male', status: 'Active' },
+                    { id: 'HRM2023-065', lastName: 'Rivera', firstName: 'Avery Rose', middleName: 'Richardson', gender: 'Female', status: 'Irregular' },
+                    { id: 'HRM2023-066', lastName: 'Cooper', firstName: 'Joshua Luis', middleName: 'Cox', gender: 'Male', status: 'Active' },
+                    { id: 'HRM2023-067', lastName: 'Richardson', firstName: 'Lily Faith', middleName: 'Howard', gender: 'Female', status: 'Active' },
+                    { id: 'HRM2023-068', lastName: 'Cox', firstName: 'Samuel Rey', middleName: 'Ward', gender: 'Male', status: 'Irregular' },
+                    { id: 'HRM2023-069', lastName: 'Howard', firstName: 'Stella Mae', middleName: 'Peterson', gender: 'Female', status: 'Active' },
+                    { id: 'HRM2023-070', lastName: 'Ward', firstName: 'Owen David', middleName: 'Gray', gender: 'Male', status: 'Active' },
+                    { id: 'HRM2023-071', lastName: 'Peterson', firstName: 'Hazel Grace', middleName: 'Watson', gender: 'Female', status: 'Irregular' },
+                    { id: 'HRM2023-072', lastName: 'Gray', firstName: 'Eli James', middleName: 'Brooks', gender: 'Male', status: 'Active' },
+                    { id: 'HRM2023-073', lastName: 'Watson', firstName: 'Violet Rose', middleName: 'Kelly', gender: 'Female', status: 'Active' },
+                    { id: 'HRM2023-074', lastName: 'Brooks', firstName: 'Wyatt Luis', middleName: 'Sanders', gender: 'Male', status: 'Irregular' },
+                    { id: 'HRM2023-075', lastName: 'Kelly', firstName: 'Aurora Belle', middleName: 'Price', gender: 'Female', status: 'Active' },
+                    { id: 'HRM2023-076', lastName: 'Sanders', firstName: 'Grayson Paul', middleName: 'Bennett', gender: 'Male', status: 'Active' },
+                    { id: 'HRM2023-077', lastName: 'Price', firstName: 'Savannah Joy', middleName: 'Wood', gender: 'Female', status: 'Irregular' },
+                    { id: 'HRM2023-078', lastName: 'Bennett', firstName: 'Leo Antonio', middleName: 'Barnes', gender: 'Male', status: 'Active' },
+                    { id: 'HRM2023-079', lastName: 'Wood', firstName: 'Brooklyn Faith', middleName: 'Ross', gender: 'Female', status: 'Active' },
+                    { id: 'HRM2023-080', lastName: 'Barnes', firstName: 'Jaxon Rey', middleName: 'Henderson', gender: 'Male', status: 'Irregular' },
+                    { id: 'HRM2023-081', lastName: 'Ross', firstName: 'Bella Hope', middleName: 'Coleman', gender: 'Female', status: 'Active' },
+                    { id: 'HRM2023-082', lastName: 'Henderson', firstName: 'Carson Miguel', middleName: 'Jenkins', gender: 'Male', status: 'Active' },
+                    { id: 'HRM2023-083', lastName: 'Coleman', firstName: 'Claire Dawn', middleName: 'Perry', gender: 'Female', status: 'Irregular' },
+                    { id: 'HRM2023-084', lastName: 'Jenkins', firstName: 'Easton James', middleName: 'Powell', gender: 'Male', status: 'Active' },
+                    { id: 'HRM2023-085', lastName: 'Perry', firstName: 'Skylar Grace', middleName: 'Long', gender: 'Female', status: 'Active' },
+                    { id: 'HRM2023-086', lastName: 'Powell', firstName: 'Colton Luis', middleName: 'Patterson', gender: 'Male', status: 'Irregular' },
+                    { id: 'HRM2023-087', lastName: 'Long', firstName: 'Paisley Rose', middleName: 'Hughes', gender: 'Female', status: 'Active' },
+                    { id: 'HRM2023-088', lastName: 'Patterson', firstName: 'Maverick John', middleName: 'Flores', gender: 'Male', status: 'Active' },
+                    { id: 'HRM2023-089', lastName: 'Hughes', firstName: 'Kennedy Mae', middleName: 'Washington', gender: 'Female', status: 'Irregular' },
+                    { id: 'HRM2023-090', lastName: 'Flores', firstName: 'Declan Paul', middleName: 'Butler', gender: 'Male', status: 'Active' }
+                ],
                 // Elementary students (existing)
                 'Pluto': [
                     { id: '2023-001', lastName: 'Dela Cruz', firstName: 'Juan Miguel', middleName: 'Santos', gender: 'Male', status: 'Active' },
@@ -1910,15 +2457,17 @@
             // Get students for the selected section
             const students = studentsData[section] || studentsData['Pluto'];
             
-            // Populate table
+            // Separate regular and irregular students
+            const regularStudents = students.filter(student => student.status === 'Active');
+            const irregularStudents = students.filter(student => student.status === 'Irregular');
+            
+            // Populate regular students table
             const tableBody = document.getElementById('students-table-body');
             tableBody.innerHTML = '';
             
-            students.forEach(student => {
+            regularStudents.forEach(student => {
                 const row = document.createElement('tr');
                 row.className = 'border-b border-gray-200 hover:bg-gray-50';
-                
-                const statusClass = student.status === 'Active' ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800';
                 
                 row.innerHTML = `
                     <td class="py-3 px-4 text-gray-900">${student.id}</td>
@@ -1926,9 +2475,6 @@
                     <td class="py-3 px-4 text-gray-900">${student.firstName}</td>
                     <td class="py-3 px-4 text-gray-900">${student.middleName}</td>
                     <td class="py-3 px-4 text-gray-900">${student.gender}</td>
-                    <td class="py-3 px-4">
-                        <span class="${statusClass} px-2 py-1 text-xs font-medium">${student.status}</span>
-                    </td>
                     <td class="py-3 px-4">
                         <button class="text-blue-600 hover:text-blue-800 text-sm mr-2" onclick="viewStudentDetails('${student.id}')">
                             <i class="fas fa-eye"></i>
@@ -1942,8 +2488,49 @@
                 tableBody.appendChild(row);
             });
             
-            // Update student count
-            document.getElementById('student-count').textContent = `Showing ${students.length} students`;
+            // Update regular student count
+            document.getElementById('student-count').textContent = `Showing ${regularStudents.length} regular students`;
+            
+            // Handle irregular students table
+            const irregularSection = document.getElementById('irregular-students-section');
+            const irregularTableBody = document.getElementById('irregular-students-table-body');
+            
+            if (irregularStudents.length > 0) {
+                // Show irregular students section
+                irregularSection.style.display = 'block';
+                
+                // Clear and populate irregular students table
+                irregularTableBody.innerHTML = '';
+                
+                irregularStudents.forEach(student => {
+                    const row = document.createElement('tr');
+                    row.className = 'border-b border-orange-200 hover:bg-orange-50';
+                    
+                    row.innerHTML = `
+                        <td class="py-3 px-4 text-orange-900">${student.id}</td>
+                        <td class="py-3 px-4 text-orange-900">${student.lastName}</td>
+                        <td class="py-3 px-4 text-orange-900">${student.firstName}</td>
+                        <td class="py-3 px-4 text-orange-900">${student.middleName}</td>
+                        <td class="py-3 px-4 text-orange-900">${student.gender}</td>
+                        <td class="py-3 px-4">
+                            <button class="text-orange-600 hover:text-orange-800 text-sm mr-2" onclick="viewStudentDetails('${student.id}')">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                            <button class="text-orange-600 hover:text-orange-800 text-sm" onclick="editStudent('${student.id}')">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                        </td>
+                    `;
+                    
+                    irregularTableBody.appendChild(row);
+                });
+                
+                // Update irregular student count
+                document.getElementById('irregular-student-count').textContent = `Showing ${irregularStudents.length} irregular students`;
+            } else {
+                // Hide irregular students section if no irregular students
+                irregularSection.style.display = 'none';
+            }
         }
         
         function viewStudentDetails(studentId) {
@@ -1965,6 +2552,8 @@
             document.getElementById('section-details-view').classList.add('hidden');
             document.getElementById('subjects-view').classList.add('hidden');
             document.getElementById('school-years-view').classList.add('hidden');
+            document.getElementById('college-years-view').classList.add('hidden');
+            document.getElementById('college-courses-view').classList.add('hidden');
             
             // Update breadcrumb
             updateBreadcrumb();
