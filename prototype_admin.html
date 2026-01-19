@@ -592,13 +592,14 @@
 
 
                     <!-- Subjects View (Hidden by default) -->
-                    <div id="subjects-view" class="hidden p-8">
-                        <div class="mb-6">
-                            <h3 class="text-xl font-semibold text-gray-900 mb-4">Subjects</h3>
-                            <p class="text-gray-600">Manage subjects for the selected grade and school year</p>
-                        </div>
-                        
-                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div id="subjects-view" class="hidden overflow-y-auto" style="max-height: calc(100vh - 200px);">
+                        <div class="p-8">
+                            <div class="mb-6">
+                                <h3 class="text-xl font-semibold text-gray-900 mb-4">Subjects</h3>
+                                <p class="text-gray-600">Manage subjects for the selected grade and school year</p>
+                            </div>
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                             <!-- Science -->
                             <div class="bg-white border border-gray-200 p-6 hover:border-gray-400 cursor-pointer transition-colors" onclick="showSubjectDetails('Science')">
                                 <div class="flex items-center mb-4">
@@ -782,20 +783,23 @@
                                     </div>
                                 </div>
                             </div>
+                            </div>
                         </div>
                     </div>
 
 
 
                     <!-- Sections View (Hidden by default) -->
-                    <div id="sections-view" class="hidden p-8">
-                        <div class="mb-6">
-                            <h3 id="subject-title" class="text-xl font-semibold text-gray-900 mb-4">Science - Sections</h3>
-                            <p class="text-gray-600">Select a section to manage students and grades</p>
-                        </div>
-                        
-                        <div id="sections-grid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                            <!-- Sections will be populated dynamically -->
+                    <div id="sections-view" class="hidden overflow-y-auto" style="max-height: calc(100vh - 200px);">
+                        <div class="p-8">
+                            <div class="mb-6">
+                                <h3 id="subject-title" class="text-xl font-semibold text-gray-900 mb-4">Science - Sections</h3>
+                                <p class="text-gray-600">Select a section to manage students and grades</p>
+                            </div>
+                            
+                            <div id="sections-grid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                                <!-- Sections will be populated dynamically -->
+                            </div>
                         </div>
                     </div>
 
@@ -1119,49 +1123,97 @@
                     { section: 'Pluto', teacher: 'Mr. Cruz' },
                     { section: 'Mars', teacher: 'Ms. Reyes' },
                     { section: 'Jupiter', teacher: 'Mr. Santos' },
-                    { section: 'Venus', teacher: 'Ms. Garcia' }
+                    { section: 'Venus', teacher: 'Ms. Garcia' },
+                    { section: 'Mercury', teacher: 'Dr. Rodriguez' },
+                    { section: 'Saturn', teacher: 'Ms. Fernandez' },
+                    { section: 'Neptune', teacher: 'Mr. Morales' },
+                    { section: 'Uranus', teacher: 'Ms. Bautista' },
+                    { section: 'Earth', teacher: 'Dr. Castillo' },
+                    { section: 'Sun', teacher: 'Ms. Herrera' }
                 ],
                 'Mathematics': [
                     { section: 'Alpha', teacher: 'Mr. Dela Cruz' },
                     { section: 'Beta', teacher: 'Ms. Villanueva' },
                     { section: 'Gamma', teacher: 'Mr. Mendoza' },
-                    { section: 'Delta', teacher: 'Ms. Torres' }
+                    { section: 'Delta', teacher: 'Ms. Torres' },
+                    { section: 'Epsilon', teacher: 'Dr. Navarro' },
+                    { section: 'Zeta', teacher: 'Ms. Aguilar' },
+                    { section: 'Eta', teacher: 'Mr. Ortega' },
+                    { section: 'Theta', teacher: 'Ms. Ramirez' },
+                    { section: 'Iota', teacher: 'Dr. Flores' },
+                    { section: 'Kappa', teacher: 'Mr. Guerrero' }
                 ],
                 'English': [
                     { section: 'Shakespeare', teacher: 'Ms. Johnson' },
                     { section: 'Dickens', teacher: 'Mr. Brown' },
                     { section: 'Austen', teacher: 'Dr. Wilson' },
-                    { section: 'Twain', teacher: 'Ms. Davis' }
+                    { section: 'Twain', teacher: 'Ms. Davis' },
+                    { section: 'Hemingway', teacher: 'Mr. Miller' },
+                    { section: 'Steinbeck', teacher: 'Ms. Anderson' },
+                    { section: 'Fitzgerald', teacher: 'Dr. Taylor' },
+                    { section: 'Orwell', teacher: 'Ms. Thomas' },
+                    { section: 'Tolkien', teacher: 'Mr. Jackson' },
+                    { section: 'Rowling', teacher: 'Ms. White' }
                 ],
                 'Filipino': [
                     { section: 'Rizal', teacher: 'Gng. Aquino' },
                     { section: 'Bonifacio', teacher: 'G. Ramos' },
                     { section: 'Mabini', teacher: 'Dr. Bautista' },
-                    { section: 'Luna', teacher: 'Gng. Morales' }
+                    { section: 'Luna', teacher: 'Gng. Morales' },
+                    { section: 'Del Pilar', teacher: 'G. Santos' },
+                    { section: 'Jacinto', teacher: 'Gng. Cruz' },
+                    { section: 'Sakay', teacher: 'Dr. Reyes' },
+                    { section: 'Malvar', teacher: 'G. Garcia' },
+                    { section: 'Silang', teacher: 'Gng. Lopez' },
+                    { section: 'Tandang Sora', teacher: 'Ms. Perez' }
                 ],
                 'Social Studies': [
                     { section: 'Asia', teacher: 'Mr. Fernandez' },
                     { section: 'Europe', teacher: 'Ms. Lopez' },
                     { section: 'Americas', teacher: 'Dr. Perez' },
-                    { section: 'Africa', teacher: 'Ms. Gonzales' }
+                    { section: 'Africa', teacher: 'Ms. Gonzales' },
+                    { section: 'Australia', teacher: 'Mr. Martinez' },
+                    { section: 'Antarctica', teacher: 'Ms. Rodriguez' },
+                    { section: 'Pacific', teacher: 'Dr. Sanchez' },
+                    { section: 'Atlantic', teacher: 'Mr. Moreno' },
+                    { section: 'Indian', teacher: 'Ms. Valdez' },
+                    { section: 'Arctic', teacher: 'Dr. Navarro' }
                 ],
                 'Arts': [
                     { section: 'Picasso', teacher: 'Ms. Rivera' },
                     { section: 'Da Vinci', teacher: 'Mr. Castillo' },
                     { section: 'Monet', teacher: 'Dr. Herrera' },
-                    { section: 'Van Gogh', teacher: 'Ms. Jimenez' }
+                    { section: 'Van Gogh', teacher: 'Ms. Jimenez' },
+                    { section: 'Michelangelo', teacher: 'Mr. Vargas' },
+                    { section: 'Rembrandt', teacher: 'Ms. Molina' },
+                    { section: 'Renoir', teacher: 'Dr. Contreras' },
+                    { section: 'Degas', teacher: 'Ms. Sandoval' },
+                    { section: 'Cezanne', teacher: 'Mr. Dominguez' },
+                    { section: 'Matisse', teacher: 'Ms. Paredes' }
                 ],
                 'Physical Education': [
                     { section: 'Eagles', teacher: 'Coach Martinez' },
                     { section: 'Hawks', teacher: 'Coach Rodriguez' },
                     { section: 'Falcons', teacher: 'Coach Sanchez' },
-                    { section: 'Owls', teacher: 'Coach Moreno' }
+                    { section: 'Owls', teacher: 'Coach Moreno' },
+                    { section: 'Lions', teacher: 'Coach Valdez' },
+                    { section: 'Tigers', teacher: 'Coach Navarro' },
+                    { section: 'Panthers', teacher: 'Coach Gutierrez' },
+                    { section: 'Wolves', teacher: 'Coach Aguilar' },
+                    { section: 'Bears', teacher: 'Coach Ortega' },
+                    { section: 'Sharks', teacher: 'Coach Mendez' }
                 ],
                 'Music': [
                     { section: 'Mozart', teacher: 'Ms. Valdez' },
                     { section: 'Beethoven', teacher: 'Mr. Navarro' },
                     { section: 'Bach', teacher: 'Dr. Gutierrez' },
-                    { section: 'Chopin', teacher: 'Ms. Aguilar' }
+                    { section: 'Chopin', teacher: 'Ms. Aguilar' },
+                    { section: 'Vivaldi', teacher: 'Mr. Ortega' },
+                    { section: 'Handel', teacher: 'Ms. Mendez' },
+                    { section: 'Brahms', teacher: 'Dr. Ramirez' },
+                    { section: 'Tchaikovsky', teacher: 'Ms. Flores' },
+                    { section: 'Debussy', teacher: 'Mr. Guerrero' },
+                    { section: 'Schubert', teacher: 'Ms. Medina' }
                 ]
             };
             
