@@ -163,7 +163,7 @@
                     
                     <div id="preschool-content" class="section-content mt-3">
                         <div class="space-y-1 px-2">
-                            <div class="sidebar-item py-2 px-3 cursor-pointer flex items-center">
+                            <div class="sidebar-item py-2 px-3 cursor-pointer flex items-center" onclick="showGradeContent('Kindergarten')">
                                 <div class="grade-badge">K</div>
                                 <span class="font-medium text-gray-700">Kindergarten</span>
                             </div>
@@ -1014,8 +1014,73 @@
             document.getElementById('sections-view').classList.add('hidden');
             document.getElementById('section-details-view').classList.add('hidden');
             
+            // Update subjects based on grade level
+            updateSubjectsForGrade(navigationState.grade);
+            
             // Update breadcrumb
             updateBreadcrumb();
+        }
+        
+        function updateSubjectsForGrade(grade) {
+            const subjectsGrid = document.querySelector('#subjects-view .grid');
+            subjectsGrid.innerHTML = '';
+            
+            let subjects = [];
+            
+            if (grade === 'Kindergarten') {
+                subjects = [
+                    { name: 'Reading Readiness', icon: 'fas fa-book-reader', description: 'Letter Recognition & Phonics', students: 45, sections: 3 },
+                    { name: 'Number Concepts', icon: 'fas fa-sort-numeric-up', description: 'Basic Math & Counting', students: 45, sections: 3 },
+                    { name: 'Creative Arts', icon: 'fas fa-palette', description: 'Drawing & Crafts', students: 45, sections: 3 },
+                    { name: 'Music & Movement', icon: 'fas fa-music', description: 'Songs & Dance', students: 45, sections: 3 },
+                    { name: 'Social Skills', icon: 'fas fa-users', description: 'Sharing & Cooperation', students: 45, sections: 3 },
+                    { name: 'Physical Development', icon: 'fas fa-running', description: 'Motor Skills & Play', students: 45, sections: 3 },
+                    { name: 'Science Discovery', icon: 'fas fa-seedling', description: 'Nature & Exploration', students: 45, sections: 3 },
+                    { name: 'Story Time', icon: 'fas fa-book-open', description: 'Listening & Comprehension', students: 45, sections: 3 }
+                ];
+            } else {
+                // Elementary subjects (existing)
+                subjects = [
+                    { name: 'Science', icon: 'fas fa-flask', description: 'Natural Sciences', students: 156, sections: 10 },
+                    { name: 'Mathematics', icon: 'fas fa-calculator', description: 'Numbers & Problem Solving', students: 156, sections: 10 },
+                    { name: 'English', icon: 'fas fa-book-open', description: 'Language & Literature', students: 156, sections: 10 },
+                    { name: 'Filipino', icon: 'fas fa-flag', description: 'Wikang Pambansa', students: 156, sections: 10 },
+                    { name: 'Social Studies', icon: 'fas fa-globe', description: 'History & Geography', students: 156, sections: 10 },
+                    { name: 'Arts', icon: 'fas fa-palette', description: 'Creative Expression', students: 156, sections: 10 },
+                    { name: 'Physical Education', icon: 'fas fa-running', description: 'Health & Fitness', students: 156, sections: 10 },
+                    { name: 'Music', icon: 'fas fa-music', description: 'Rhythm & Melody', students: 156, sections: 10 }
+                ];
+            }
+            
+            subjects.forEach(subject => {
+                const subjectCard = document.createElement('div');
+                subjectCard.className = 'bg-white border border-gray-200 p-6 hover:border-gray-400 cursor-pointer transition-colors';
+                subjectCard.onclick = () => showSubjectDetails(subject.name);
+                
+                subjectCard.innerHTML = `
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-gray-100 flex items-center justify-center mr-4">
+                            <i class="${subject.icon} text-gray-600 text-xl"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-900">${subject.name}</h4>
+                            <p class="text-sm text-gray-600">${subject.description}</p>
+                        </div>
+                    </div>
+                    <div class="text-sm text-gray-600">
+                        <div class="flex justify-between mb-1">
+                            <span>Students:</span>
+                            <span>${subject.students}</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>Sections:</span>
+                            <span>${subject.sections}</span>
+                        </div>
+                    </div>
+                `;
+                
+                subjectsGrid.appendChild(subjectCard);
+            });
         }
         
         function showSchoolYears() {
@@ -1119,6 +1184,48 @@
             
             // Define sections and teachers for each subject
             const subjectSections = {
+                // Kindergarten sections
+                'Reading Readiness': [
+                    { section: 'Sunshine', teacher: 'Ms. Maria' },
+                    { section: 'Rainbow', teacher: 'Ms. Ana' },
+                    { section: 'Butterfly', teacher: 'Ms. Rosa' }
+                ],
+                'Number Concepts': [
+                    { section: 'Counting Bears', teacher: 'Ms. Elena' },
+                    { section: 'Number Stars', teacher: 'Ms. Carmen' },
+                    { section: 'Math Wizards', teacher: 'Ms. Sofia' }
+                ],
+                'Creative Arts': [
+                    { section: 'Little Artists', teacher: 'Ms. Grace' },
+                    { section: 'Color Makers', teacher: 'Ms. Joy' },
+                    { section: 'Craft Corner', teacher: 'Ms. Faith' }
+                ],
+                'Music & Movement': [
+                    { section: 'Singing Birds', teacher: 'Ms. Melody' },
+                    { section: 'Dancing Flowers', teacher: 'Ms. Harmony' },
+                    { section: 'Rhythm Kids', teacher: 'Ms. Tune' }
+                ],
+                'Social Skills': [
+                    { section: 'Friendship Circle', teacher: 'Ms. Kind' },
+                    { section: 'Helping Hands', teacher: 'Ms. Care' },
+                    { section: 'Sharing Stars', teacher: 'Ms. Love' }
+                ],
+                'Physical Development': [
+                    { section: 'Active Bees', teacher: 'Coach Fit' },
+                    { section: 'Jumping Frogs', teacher: 'Coach Move' },
+                    { section: 'Running Rabbits', teacher: 'Coach Play' }
+                ],
+                'Science Discovery': [
+                    { section: 'Nature Explorers', teacher: 'Ms. Green' },
+                    { section: 'Little Scientists', teacher: 'Ms. Wonder' },
+                    { section: 'Discovery Kids', teacher: 'Ms. Curious' }
+                ],
+                'Story Time': [
+                    { section: 'Book Worms', teacher: 'Ms. Story' },
+                    { section: 'Tale Tellers', teacher: 'Ms. Read' },
+                    { section: 'Story Circle', teacher: 'Ms. Listen' }
+                ],
+                // Elementary sections (existing)
                 'Science': [
                     { section: 'Pluto', teacher: 'Mr. Cruz' },
                     { section: 'Mars', teacher: 'Ms. Reyes' },
@@ -1291,6 +1398,59 @@
         function populateStudentsTable(section) {
             // Sample student data for different sections
             const studentsData = {
+                // Kindergarten students
+                'Sunshine': [
+                    { id: 'K2023-001', lastName: 'Santos', firstName: 'Emma Joy', middleName: 'Cruz', gender: 'Female', status: 'Active' },
+                    { id: 'K2023-002', lastName: 'Garcia', firstName: 'Liam Miguel', middleName: 'Reyes', gender: 'Male', status: 'Active' },
+                    { id: 'K2023-003', lastName: 'Rodriguez', firstName: 'Sophia Grace', middleName: 'Lopez', gender: 'Female', status: 'Active' },
+                    { id: 'K2023-004', lastName: 'Fernandez', firstName: 'Noah James', middleName: 'Torres', gender: 'Male', status: 'Active' },
+                    { id: 'K2023-005', lastName: 'Morales', firstName: 'Olivia Rose', middleName: 'Mendoza', gender: 'Female', status: 'Active' },
+                    { id: 'K2023-006', lastName: 'Castillo', firstName: 'Ethan Luis', middleName: 'Valdez', gender: 'Male', status: 'Active' },
+                    { id: 'K2023-007', lastName: 'Herrera', firstName: 'Ava Marie', middleName: 'Jimenez', gender: 'Female', status: 'Active' },
+                    { id: 'K2023-008', lastName: 'Navarro', firstName: 'Mason Paul', middleName: 'Gutierrez', gender: 'Male', status: 'Active' },
+                    { id: 'K2023-009', lastName: 'Aguilar', firstName: 'Isabella Faith', middleName: 'Moreno', gender: 'Female', status: 'Active' },
+                    { id: 'K2023-010', lastName: 'Ortega', firstName: 'Lucas John', middleName: 'Vargas', gender: 'Male', status: 'Active' },
+                    { id: 'K2023-011', lastName: 'Ramirez', firstName: 'Mia Hope', middleName: 'Silva', gender: 'Female', status: 'Active' },
+                    { id: 'K2023-012', lastName: 'Flores', firstName: 'Jacob Rey', middleName: 'Vega', gender: 'Male', status: 'Active' },
+                    { id: 'K2023-013', lastName: 'Guerrero', firstName: 'Charlotte Belle', middleName: 'Rojas', gender: 'Female', status: 'Active' },
+                    { id: 'K2023-014', lastName: 'Medina', firstName: 'Alexander Jose', middleName: 'Soto', gender: 'Male', status: 'Active' },
+                    { id: 'K2023-015', lastName: 'Ruiz', firstName: 'Amelia Dawn', middleName: 'Pena', gender: 'Female', status: 'Active' }
+                ],
+                'Rainbow': [
+                    { id: 'K2023-016', lastName: 'Jimenez', firstName: 'Benjamin David', middleName: 'Ortiz', gender: 'Male', status: 'Active' },
+                    { id: 'K2023-017', lastName: 'Vargas', firstName: 'Harper Joy', middleName: 'Herrera', gender: 'Female', status: 'Active' },
+                    { id: 'K2023-018', lastName: 'Molina', firstName: 'Henry Luis', middleName: 'Castro', gender: 'Male', status: 'Active' },
+                    { id: 'K2023-019', lastName: 'Contreras', firstName: 'Evelyn Grace', middleName: 'Morales', gender: 'Female', status: 'Active' },
+                    { id: 'K2023-020', lastName: 'Sandoval', firstName: 'Sebastian Rey', middleName: 'Romero', gender: 'Male', status: 'Active' },
+                    { id: 'K2023-021', lastName: 'Dominguez', firstName: 'Abigail Rose', middleName: 'Aguilar', gender: 'Female', status: 'Active' },
+                    { id: 'K2023-022', lastName: 'Paredes', firstName: 'Michael James', middleName: 'Delgado', gender: 'Male', status: 'Active' },
+                    { id: 'K2023-023', lastName: 'Salazar', firstName: 'Emily Faith', middleName: 'Espinoza', gender: 'Female', status: 'Active' },
+                    { id: 'K2023-024', lastName: 'Rivera', firstName: 'Daniel Antonio', middleName: 'Moreno', gender: 'Male', status: 'Active' },
+                    { id: 'K2023-025', lastName: 'Torres', firstName: 'Elizabeth Mae', middleName: 'Valdez', gender: 'Female', status: 'Active' },
+                    { id: 'K2023-026', lastName: 'Ramos', firstName: 'Matthew John', middleName: 'Gutierrez', gender: 'Male', status: 'Active' },
+                    { id: 'K2023-027', lastName: 'Cruz', firstName: 'Sofia Belle', middleName: 'Herrera', gender: 'Female', status: 'Active' },
+                    { id: 'K2023-028', lastName: 'Lopez', firstName: 'Joseph Luis', middleName: 'Jimenez', gender: 'Male', status: 'Active' },
+                    { id: 'K2023-029', lastName: 'Gonzales', firstName: 'Avery Hope', middleName: 'Vargas', gender: 'Female', status: 'Active' },
+                    { id: 'K2023-030', lastName: 'Perez', firstName: 'Samuel David', middleName: 'Ortega', gender: 'Male', status: 'Active' }
+                ],
+                'Butterfly': [
+                    { id: 'K2023-031', lastName: 'Martinez', firstName: 'Scarlett Joy', middleName: 'Silva', gender: 'Female', status: 'Active' },
+                    { id: 'K2023-032', lastName: 'Anderson', firstName: 'David Miguel', middleName: 'Vega', gender: 'Male', status: 'Active' },
+                    { id: 'K2023-033', lastName: 'Taylor', firstName: 'Victoria Grace', middleName: 'Rojas', gender: 'Female', status: 'Active' },
+                    { id: 'K2023-034', lastName: 'Thomas', firstName: 'Christopher Rey', middleName: 'Soto', gender: 'Male', status: 'Active' },
+                    { id: 'K2023-035', lastName: 'Jackson', firstName: 'Luna Marie', middleName: 'Pena', gender: 'Female', status: 'Active' },
+                    { id: 'K2023-036', lastName: 'White', firstName: 'Andrew James', middleName: 'Ortiz', gender: 'Male', status: 'Active' },
+                    { id: 'K2023-037', lastName: 'Harris', firstName: 'Penelope Rose', middleName: 'Herrera', gender: 'Female', status: 'Active' },
+                    { id: 'K2023-038', lastName: 'Martin', firstName: 'Joshua Luis', middleName: 'Castro', gender: 'Male', status: 'Active' },
+                    { id: 'K2023-039', lastName: 'Garcia', firstName: 'Layla Faith', middleName: 'Morales', gender: 'Female', status: 'Active' },
+                    { id: 'K2023-040', lastName: 'Martinez', firstName: 'Ryan Paul', middleName: 'Romero', gender: 'Male', status: 'Active' },
+                    { id: 'K2023-041', lastName: 'Robinson', firstName: 'Chloe Belle', middleName: 'Aguilar', gender: 'Female', status: 'Active' },
+                    { id: 'K2023-042', lastName: 'Clark', firstName: 'Nathan John', middleName: 'Delgado', gender: 'Male', status: 'Active' },
+                    { id: 'K2023-043', lastName: 'Rodriguez', firstName: 'Zoey Dawn', middleName: 'Espinoza', gender: 'Female', status: 'Active' },
+                    { id: 'K2023-044', lastName: 'Lewis', firstName: 'Caleb Antonio', middleName: 'Moreno', gender: 'Male', status: 'Active' },
+                    { id: 'K2023-045', lastName: 'Lee', firstName: 'Nora Hope', middleName: 'Valdez', gender: 'Female', status: 'Active' }
+                ],
+                // Elementary students (existing)
                 'Pluto': [
                     { id: '2023-001', lastName: 'Dela Cruz', firstName: 'Juan Miguel', middleName: 'Santos', gender: 'Male', status: 'Active' },
                     { id: '2023-002', lastName: 'Garcia', firstName: 'Maria Elena', middleName: 'Reyes', gender: 'Female', status: 'Active' },
