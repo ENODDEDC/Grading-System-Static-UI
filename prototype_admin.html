@@ -842,6 +842,68 @@
                             <!-- Sections will be populated dynamically -->
                         </div>
                     </div>
+
+                    <!-- Back to Sections Button (Hidden by default) -->
+                    <div id="back-to-sections" class="hidden p-6 border-b border-gray-200">
+                        <button onclick="showSections()" class="bg-gray-100 text-gray-700 px-4 py-2 border border-gray-300 hover:bg-gray-200 transition-colors">
+                            <i class="fas fa-arrow-left mr-2"></i>← Back to Sections
+                        </button>
+                    </div>
+
+                    <!-- Section Details View (Hidden by default) -->
+                    <div id="section-details-view" class="hidden p-8">
+                        <!-- Teacher Badge -->
+                        <div class="mb-6">
+                            <div id="teacher-badge" class="inline-block bg-gray-400 text-white px-4 py-2 font-medium">
+                                Mr. Cruz
+                            </div>
+                        </div>
+
+                        <!-- Students List Section -->
+                        <div class="mb-4">
+                            <h4 class="text-lg font-semibold text-gray-900">Students List</h4>
+                        </div>
+
+                        <!-- Students Table Container -->
+                        <div class="bg-white border border-gray-200 overflow-hidden">
+                            <div class="overflow-x-auto">
+                                <table class="w-full">
+                                    <thead class="bg-gray-50 border-b border-gray-200">
+                                        <tr>
+                                            <th class="text-left py-3 px-4 font-semibold text-gray-900">Student ID</th>
+                                            <th class="text-left py-3 px-4 font-semibold text-gray-900">Last Name</th>
+                                            <th class="text-left py-3 px-4 font-semibold text-gray-900">First Name</th>
+                                            <th class="text-left py-3 px-4 font-semibold text-gray-900">Middle Name</th>
+                                            <th class="text-left py-3 px-4 font-semibold text-gray-900">Gender</th>
+                                            <th class="text-left py-3 px-4 font-semibold text-gray-900">Status</th>
+                                            <th class="text-left py-3 px-4 font-semibold text-gray-900">Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="students-table-body">
+                                        <!-- Students will be populated dynamically -->
+                                    </tbody>
+                                </table>
+                            </div>
+                            
+                            <!-- Table Footer -->
+                            <div class="bg-gray-50 px-4 py-3 border-t border-gray-200 flex justify-between items-center">
+                                <div class="text-sm text-gray-600">
+                                    <span id="student-count">Showing 28 students</span>
+                                </div>
+                                <div class="flex space-x-2">
+                                    <button class="bg-gray-100 text-gray-700 px-3 py-1 text-sm border border-gray-300 hover:bg-gray-200 transition-colors">
+                                        <i class="fas fa-plus mr-1"></i>Add Student
+                                    </button>
+                                    <button class="bg-gray-100 text-gray-700 px-3 py-1 text-sm border border-gray-300 hover:bg-gray-200 transition-colors">
+                                        <i class="fas fa-edit mr-1"></i>Manage Grades
+                                    </button>
+                                    <button class="bg-gray-100 text-gray-700 px-3 py-1 text-sm border border-gray-300 hover:bg-gray-200 transition-colors">
+                                        <i class="fas fa-download mr-1"></i>Export List
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1017,8 +1079,14 @@
             // Update subject title
             document.getElementById('subject-title').textContent = subject + ' - Sections';
             
-            // Get current grade and school year for context
+            // Get current grade and school year for context and update breadcrumb
             const currentTitle = document.getElementById('year-title').textContent;
+            const parts = currentTitle.split(' / ');
+            const grade = parts[0];
+            const schoolYear = parts[1];
+            
+            // Update the main header breadcrumb to include the subject
+            document.getElementById('year-title').textContent = `${grade} / ${schoolYear} / ${subject}`;
             
             // Define sections and teachers for each subject
             const subjectSections = {
@@ -1115,22 +1183,134 @@
         }
         
         function showSectionDetails(subject, section, teacher) {
-            // Get current context
+            // Hide sections view
+            document.getElementById('sections-view').classList.add('hidden');
+            document.getElementById('back-to-subjects').classList.add('hidden');
+            
+            // Show section details view
+            document.getElementById('section-details-view').classList.remove('hidden');
+            document.getElementById('back-to-sections').classList.remove('hidden');
+            
+            // Get current context for breadcrumb
             const currentTitle = document.getElementById('year-title').textContent;
+            const parts = currentTitle.split(' / ');
+            const grade = parts[0];
+            const schoolYear = parts[1];
             
-            let message = `Section Details:\n\n`;
-            message += `Subject: ${subject}\n`;
-            message += `Section: ${section}\n`;
-            message += `Teacher: ${teacher}\n`;
-            message += `Grade & Year: ${currentTitle}\n\n`;
-            message += `This will show:\n`;
-            message += `• Student roster for ${section}\n`;
-            message += `• Grade entry interface\n`;
-            message += `• Attendance management\n`;
-            message += `• Performance reports\n`;
-            message += `• Class schedule`;
+            // Update the main header breadcrumb (year-title) instead of separate breadcrumb
+            document.getElementById('year-title').textContent = `${grade} / ${schoolYear} / ${subject} / ${section}`;
             
-            alert(message);
+            // Update teacher badge
+            document.getElementById('teacher-badge').textContent = teacher;
+            
+            // Populate students table
+            populateStudentsTable(section);
+        }
+        
+        function populateStudentsTable(section) {
+            // Sample student data for different sections
+            const studentsData = {
+                'Pluto': [
+                    { id: '2023-001', lastName: 'Dela Cruz', firstName: 'Juan Miguel', middleName: 'Santos', gender: 'Male', status: 'Active' },
+                    { id: '2023-002', lastName: 'Garcia', firstName: 'Maria Elena', middleName: 'Reyes', gender: 'Female', status: 'Active' },
+                    { id: '2023-003', lastName: 'Santos', firstName: 'Carlos Jose', middleName: 'Mendoza', gender: 'Male', status: 'Active' },
+                    { id: '2023-004', lastName: 'Rodriguez', firstName: 'Ana Rose', middleName: 'Torres', gender: 'Female', status: 'Irregular' },
+                    { id: '2023-005', lastName: 'Villanueva', firstName: 'Mark Anthony', middleName: 'Lopez', gender: 'Male', status: 'Active' },
+                    { id: '2023-006', lastName: 'Fernandez', firstName: 'Sofia Marie', middleName: 'Cruz', gender: 'Female', status: 'Active' },
+                    { id: '2023-007', lastName: 'Morales', firstName: 'Gabriel Luis', middleName: 'Ramos', gender: 'Male', status: 'Active' }
+                ],
+                'Mars': [
+                    { id: '2023-008', lastName: 'Aquino', firstName: 'Isabella Grace', middleName: 'Perez', gender: 'Female', status: 'Active' },
+                    { id: '2023-009', lastName: 'Castillo', firstName: 'Miguel Angel', middleName: 'Valdez', gender: 'Male', status: 'Active' },
+                    { id: '2023-010', lastName: 'Herrera', firstName: 'Camila Rose', middleName: 'Jimenez', gender: 'Female', status: 'Active' },
+                    { id: '2023-011', lastName: 'Navarro', firstName: 'Diego Rafael', middleName: 'Gutierrez', gender: 'Male', status: 'Irregular' },
+                    { id: '2023-012', lastName: 'Aguilar', firstName: 'Valentina Joy', middleName: 'Moreno', gender: 'Female', status: 'Active' },
+                    { id: '2023-013', lastName: 'Ortega', firstName: 'Sebastian Paul', middleName: 'Vargas', gender: 'Male', status: 'Active' },
+                    { id: '2023-014', lastName: 'Mendez', firstName: 'Natalia Faith', middleName: 'Campos', gender: 'Female', status: 'Active' }
+                ],
+                'Jupiter': [
+                    { id: '2023-015', lastName: 'Ramirez', firstName: 'Adrian James', middleName: 'Silva', gender: 'Male', status: 'Active' },
+                    { id: '2023-016', lastName: 'Flores', firstName: 'Lucia Hope', middleName: 'Vega', gender: 'Female', status: 'Active' },
+                    { id: '2023-017', lastName: 'Guerrero', firstName: 'Mateo John', middleName: 'Rojas', gender: 'Male', status: 'Active' },
+                    { id: '2023-018', lastName: 'Medina', firstName: 'Ariana Belle', middleName: 'Soto', gender: 'Female', status: 'Active' },
+                    { id: '2023-019', lastName: 'Ruiz', firstName: 'Leonardo Jose', middleName: 'Pena', gender: 'Male', status: 'Irregular' },
+                    { id: '2023-020', lastName: 'Jimenez', firstName: 'Valeria Dawn', middleName: 'Ortiz', gender: 'Female', status: 'Active' },
+                    { id: '2023-021', lastName: 'Vargas', firstName: 'Nicolas Rey', middleName: 'Herrera', gender: 'Male', status: 'Active' }
+                ],
+                'Venus': [
+                    { id: '2023-022', lastName: 'Molina', firstName: 'Daniela Mae', middleName: 'Castro', gender: 'Female', status: 'Active' },
+                    { id: '2023-023', lastName: 'Contreras', firstName: 'Alejandro Luis', middleName: 'Morales', gender: 'Male', status: 'Active' },
+                    { id: '2023-024', lastName: 'Sandoval', firstName: 'Gabriela Joy', middleName: 'Romero', gender: 'Female', status: 'Active' },
+                    { id: '2023-025', lastName: 'Dominguez', firstName: 'Samuel David', middleName: 'Aguilar', gender: 'Male', status: 'Active' },
+                    { id: '2023-026', lastName: 'Guerrero', firstName: 'Antonella Rose', middleName: 'Nunez', gender: 'Female', status: 'Irregular' },
+                    { id: '2023-027', lastName: 'Paredes', firstName: 'Emilio Jose', middleName: 'Delgado', gender: 'Male', status: 'Active' },
+                    { id: '2023-028', lastName: 'Salazar', firstName: 'Regina Faith', middleName: 'Espinoza', gender: 'Female', status: 'Active' }
+                ]
+            };
+            
+            // Get students for the selected section
+            const students = studentsData[section] || studentsData['Pluto'];
+            
+            // Populate table
+            const tableBody = document.getElementById('students-table-body');
+            tableBody.innerHTML = '';
+            
+            students.forEach(student => {
+                const row = document.createElement('tr');
+                row.className = 'border-b border-gray-200 hover:bg-gray-50';
+                
+                const statusClass = student.status === 'Active' ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800';
+                
+                row.innerHTML = `
+                    <td class="py-3 px-4 text-gray-900">${student.id}</td>
+                    <td class="py-3 px-4 text-gray-900">${student.lastName}</td>
+                    <td class="py-3 px-4 text-gray-900">${student.firstName}</td>
+                    <td class="py-3 px-4 text-gray-900">${student.middleName}</td>
+                    <td class="py-3 px-4 text-gray-900">${student.gender}</td>
+                    <td class="py-3 px-4">
+                        <span class="${statusClass} px-2 py-1 text-xs font-medium">${student.status}</span>
+                    </td>
+                    <td class="py-3 px-4">
+                        <button class="text-blue-600 hover:text-blue-800 text-sm mr-2" onclick="viewStudentDetails('${student.id}')">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                        <button class="text-gray-600 hover:text-gray-800 text-sm" onclick="editStudent('${student.id}')">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                    </td>
+                `;
+                
+                tableBody.appendChild(row);
+            });
+            
+            // Update student count
+            document.getElementById('student-count').textContent = `Showing ${students.length} students`;
+        }
+        
+        function viewStudentDetails(studentId) {
+            alert(`View details for student: ${studentId}\n\nThis will show:\n• Complete student profile\n• Academic history\n• Grade records\n• Attendance summary`);
+        }
+        
+        function editStudent(studentId) {
+            alert(`Edit student: ${studentId}\n\nThis will open:\n• Student information form\n• Contact details\n• Emergency contacts\n• Academic status`);
+        }
+        
+        function showSections() {
+            // Show sections view
+            document.getElementById('sections-view').classList.remove('hidden');
+            document.getElementById('back-to-subjects').classList.remove('hidden');
+            
+            // Hide section details view
+            document.getElementById('section-details-view').classList.add('hidden');
+            document.getElementById('back-to-sections').classList.add('hidden');
+            
+            // Reset the main header to show only grade/year/subject (remove section part)
+            const currentTitle = document.getElementById('year-title').textContent;
+            const parts = currentTitle.split(' / ');
+            if (parts.length > 3) {
+                // Remove the section part, keep grade/year/subject
+                document.getElementById('year-title').textContent = `${parts[0]} / ${parts[1]} / ${parts[2]}`;
+            }
         }
         
         function showSubjectYears(program, subject) {
