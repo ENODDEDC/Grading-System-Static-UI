@@ -1917,6 +1917,24 @@
             // Show section details view
             document.getElementById('section-details-view').classList.remove('hidden');
             
+            // Control irregular students tab visibility based on education level
+            // Irregular students are only applicable to College level education
+            // K-12 levels (Preschool, Elementary, High School, SHS) should not have irregular students
+            const irregularTab = document.getElementById('irregular-tab');
+            const isCollegeLevel = ['HRM', 'IT', 'BSBA'].includes(navigationState.grade);
+            
+            if (isCollegeLevel) {
+                // Show irregular tab for college levels
+                irregularTab.style.display = 'block';
+            } else {
+                // Hide irregular tab for K-12 levels (Preschool, Elementary, High School, SHS)
+                irregularTab.style.display = 'none';
+                // If currently on irregular tab, switch to regular tab
+                if (activeStudentTab === 'irregular') {
+                    switchStudentTab('regular');
+                }
+            }
+            
             // Update breadcrumb
             updateBreadcrumb();
             
@@ -2461,76 +2479,16 @@
             const regularStudents = students.filter(student => student.status === 'Active');
             const irregularStudents = students.filter(student => student.status === 'Irregular');
             
-            // Populate regular students table
-            const tableBody = document.getElementById('students-table-body');
-            tableBody.innerHTML = '';
+            // Update global variables for tab switching functionality
+            currentRegularStudents = regularStudents;
+            currentIrregularStudents = irregularStudents;
             
-            regularStudents.forEach(student => {
-                const row = document.createElement('tr');
-                row.className = 'border-b border-gray-200 hover:bg-gray-50';
-                
-                row.innerHTML = `
-                    <td class="py-3 px-4 text-gray-900">${student.id}</td>
-                    <td class="py-3 px-4 text-gray-900">${student.lastName}</td>
-                    <td class="py-3 px-4 text-gray-900">${student.firstName}</td>
-                    <td class="py-3 px-4 text-gray-900">${student.middleName}</td>
-                    <td class="py-3 px-4 text-gray-900">${student.gender}</td>
-                    <td class="py-3 px-4">
-                        <button class="text-blue-600 hover:text-blue-800 text-sm mr-2" onclick="viewStudentDetails('${student.id}')">
-                            <i class="fas fa-eye"></i>
-                        </button>
-                        <button class="text-gray-600 hover:text-gray-800 text-sm" onclick="editStudent('${student.id}')">
-                            <i class="fas fa-edit"></i>
-                        </button>
-                    </td>
-                `;
-                
-                tableBody.appendChild(row);
-            });
+            // Update tab counts
+            document.getElementById('regular-count').textContent = regularStudents.length;
+            document.getElementById('irregular-count').textContent = irregularStudents.length;
             
-            // Update regular student count
-            document.getElementById('student-count').textContent = `Showing ${regularStudents.length} regular students`;
-            
-            // Handle irregular students table
-            const irregularSection = document.getElementById('irregular-students-section');
-            const irregularTableBody = document.getElementById('irregular-students-table-body');
-            
-            if (irregularStudents.length > 0) {
-                // Show irregular students section
-                irregularSection.style.display = 'block';
-                
-                // Clear and populate irregular students table
-                irregularTableBody.innerHTML = '';
-                
-                irregularStudents.forEach(student => {
-                    const row = document.createElement('tr');
-                    row.className = 'border-b border-orange-200 hover:bg-orange-50';
-                    
-                    row.innerHTML = `
-                        <td class="py-3 px-4 text-orange-900">${student.id}</td>
-                        <td class="py-3 px-4 text-orange-900">${student.lastName}</td>
-                        <td class="py-3 px-4 text-orange-900">${student.firstName}</td>
-                        <td class="py-3 px-4 text-orange-900">${student.middleName}</td>
-                        <td class="py-3 px-4 text-orange-900">${student.gender}</td>
-                        <td class="py-3 px-4">
-                            <button class="text-orange-600 hover:text-orange-800 text-sm mr-2" onclick="viewStudentDetails('${student.id}')">
-                                <i class="fas fa-eye"></i>
-                            </button>
-                            <button class="text-orange-600 hover:text-orange-800 text-sm" onclick="editStudent('${student.id}')">
-                                <i class="fas fa-edit"></i>
-                            </button>
-                        </td>
-                    `;
-                    
-                    irregularTableBody.appendChild(row);
-                });
-                
-                // Update irregular student count
-                document.getElementById('irregular-student-count').textContent = `Showing ${irregularStudents.length} irregular students`;
-            } else {
-                // Hide irregular students section if no irregular students
-                irregularSection.style.display = 'none';
-            }
+            // Initialize with regular students tab active
+            switchStudentTab('regular');
         }
         
         function viewStudentDetails(studentId) {
