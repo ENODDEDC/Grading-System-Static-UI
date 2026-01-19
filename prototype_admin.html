@@ -865,9 +865,9 @@
 
                         <!-- Students Table Container -->
                         <div class="bg-white border border-gray-200 overflow-hidden">
-                            <div class="overflow-x-auto">
+                            <div class="overflow-x-auto overflow-y-auto" style="max-height: 350px;">
                                 <table class="w-full">
-                                    <thead class="bg-gray-50 border-b border-gray-200">
+                                    <thead class="bg-gray-50 border-b border-gray-200 sticky top-0">
                                         <tr>
                                             <th class="text-left py-3 px-4 font-semibold text-gray-900">Student ID</th>
                                             <th class="text-left py-3 px-4 font-semibold text-gray-900">Last Name</th>
@@ -887,16 +887,16 @@
                             <!-- Table Footer -->
                             <div class="bg-gray-50 px-4 py-3 border-t border-gray-200 flex justify-between items-center">
                                 <div class="text-sm text-gray-600">
-                                    <span id="student-count">Showing 28 students</span>
+                                    <span id="student-count">Showing 14 students</span>
                                 </div>
                                 <div class="flex space-x-2">
-                                    <button class="bg-gray-100 text-gray-700 px-3 py-1 text-sm border border-gray-300 hover:bg-gray-200 transition-colors">
+                                    <button class="bg-white text-gray-700 px-4 py-2 text-sm border border-gray-300 hover:bg-gray-50 transition-colors">
                                         <i class="fas fa-plus mr-1"></i>Add Student
                                     </button>
-                                    <button class="bg-gray-100 text-gray-700 px-3 py-1 text-sm border border-gray-300 hover:bg-gray-200 transition-colors">
+                                    <button class="bg-white text-gray-700 px-4 py-2 text-sm border border-gray-300 hover:bg-gray-50 transition-colors">
                                         <i class="fas fa-edit mr-1"></i>Manage Grades
                                     </button>
-                                    <button class="bg-gray-100 text-gray-700 px-3 py-1 text-sm border border-gray-300 hover:bg-gray-200 transition-colors">
+                                    <button class="bg-white text-gray-700 px-4 py-2 text-sm border border-gray-300 hover:bg-gray-50 transition-colors">
                                         <i class="fas fa-download mr-1"></i>Export List
                                     </button>
                                 </div>
@@ -1294,34 +1294,62 @@
                     { id: '2023-004', lastName: 'Rodriguez', firstName: 'Ana Rose', middleName: 'Torres', gender: 'Female', status: 'Irregular' },
                     { id: '2023-005', lastName: 'Villanueva', firstName: 'Mark Anthony', middleName: 'Lopez', gender: 'Male', status: 'Active' },
                     { id: '2023-006', lastName: 'Fernandez', firstName: 'Sofia Marie', middleName: 'Cruz', gender: 'Female', status: 'Active' },
-                    { id: '2023-007', lastName: 'Morales', firstName: 'Gabriel Luis', middleName: 'Ramos', gender: 'Male', status: 'Active' }
-                ],
-                'Mars': [
-                    { id: '2023-008', lastName: 'Aquino', firstName: 'Isabella Grace', middleName: 'Perez', gender: 'Female', status: 'Active' },
+                    { id: '2023-007', lastName: 'Morales', firstName: 'Gabriel Luis', middleName: 'Ramos', gender: 'Male', status: 'Active' },
+                    { id: '2023-008', lastName: 'Bautista', firstName: 'Isabella Grace', middleName: 'Perez', gender: 'Female', status: 'Active' },
                     { id: '2023-009', lastName: 'Castillo', firstName: 'Miguel Angel', middleName: 'Valdez', gender: 'Male', status: 'Active' },
-                    { id: '2023-010', lastName: 'Herrera', firstName: 'Camila Rose', middleName: 'Jimenez', gender: 'Female', status: 'Active' },
-                    { id: '2023-011', lastName: 'Navarro', firstName: 'Diego Rafael', middleName: 'Gutierrez', gender: 'Male', status: 'Irregular' },
+                    { id: '2023-010', lastName: 'Herrera', firstName: 'Camila Rose', middleName: 'Jimenez', gender: 'Female', status: 'Irregular' },
+                    { id: '2023-011', lastName: 'Navarro', firstName: 'Diego Rafael', middleName: 'Gutierrez', gender: 'Male', status: 'Active' },
                     { id: '2023-012', lastName: 'Aguilar', firstName: 'Valentina Joy', middleName: 'Moreno', gender: 'Female', status: 'Active' },
                     { id: '2023-013', lastName: 'Ortega', firstName: 'Sebastian Paul', middleName: 'Vargas', gender: 'Male', status: 'Active' },
-                    { id: '2023-014', lastName: 'Mendez', firstName: 'Natalia Faith', middleName: 'Campos', gender: 'Female', status: 'Active' }
+                    { id: '2023-014', lastName: 'Mendez', firstName: 'Natalia Faith', middleName: 'Campos', gender: 'Female', status: 'Irregular' }
+                ],
+                'Mars': [
+                    { id: '2023-015', lastName: 'Aquino', firstName: 'Isabella Grace', middleName: 'Perez', gender: 'Female', status: 'Active' },
+                    { id: '2023-016', lastName: 'Castillo', firstName: 'Miguel Angel', middleName: 'Valdez', gender: 'Male', status: 'Active' },
+                    { id: '2023-017', lastName: 'Herrera', firstName: 'Camila Rose', middleName: 'Jimenez', gender: 'Female', status: 'Active' },
+                    { id: '2023-018', lastName: 'Navarro', firstName: 'Diego Rafael', middleName: 'Gutierrez', gender: 'Male', status: 'Irregular' },
+                    { id: '2023-019', lastName: 'Aguilar', firstName: 'Valentina Joy', middleName: 'Moreno', gender: 'Female', status: 'Active' },
+                    { id: '2023-020', lastName: 'Ortega', firstName: 'Sebastian Paul', middleName: 'Vargas', gender: 'Male', status: 'Active' },
+                    { id: '2023-021', lastName: 'Mendez', firstName: 'Natalia Faith', middleName: 'Campos', gender: 'Female', status: 'Active' },
+                    { id: '2023-022', lastName: 'Ramirez', firstName: 'Adrian James', middleName: 'Silva', gender: 'Male', status: 'Active' },
+                    { id: '2023-023', lastName: 'Flores', firstName: 'Lucia Hope', middleName: 'Vega', gender: 'Female', status: 'Irregular' },
+                    { id: '2023-024', lastName: 'Guerrero', firstName: 'Mateo John', middleName: 'Rojas', gender: 'Male', status: 'Active' },
+                    { id: '2023-025', lastName: 'Medina', firstName: 'Ariana Belle', middleName: 'Soto', gender: 'Female', status: 'Active' },
+                    { id: '2023-026', lastName: 'Ruiz', firstName: 'Leonardo Jose', middleName: 'Pena', gender: 'Male', status: 'Active' },
+                    { id: '2023-027', lastName: 'Jimenez', firstName: 'Valeria Dawn', middleName: 'Ortiz', gender: 'Female', status: 'Irregular' },
+                    { id: '2023-028', lastName: 'Vargas', firstName: 'Nicolas Rey', middleName: 'Herrera', gender: 'Male', status: 'Active' }
                 ],
                 'Jupiter': [
-                    { id: '2023-015', lastName: 'Ramirez', firstName: 'Adrian James', middleName: 'Silva', gender: 'Male', status: 'Active' },
-                    { id: '2023-016', lastName: 'Flores', firstName: 'Lucia Hope', middleName: 'Vega', gender: 'Female', status: 'Active' },
-                    { id: '2023-017', lastName: 'Guerrero', firstName: 'Mateo John', middleName: 'Rojas', gender: 'Male', status: 'Active' },
-                    { id: '2023-018', lastName: 'Medina', firstName: 'Ariana Belle', middleName: 'Soto', gender: 'Female', status: 'Active' },
-                    { id: '2023-019', lastName: 'Ruiz', firstName: 'Leonardo Jose', middleName: 'Pena', gender: 'Male', status: 'Irregular' },
-                    { id: '2023-020', lastName: 'Jimenez', firstName: 'Valeria Dawn', middleName: 'Ortiz', gender: 'Female', status: 'Active' },
-                    { id: '2023-021', lastName: 'Vargas', firstName: 'Nicolas Rey', middleName: 'Herrera', gender: 'Male', status: 'Active' }
+                    { id: '2023-029', lastName: 'Ramirez', firstName: 'Adrian James', middleName: 'Silva', gender: 'Male', status: 'Active' },
+                    { id: '2023-030', lastName: 'Flores', firstName: 'Lucia Hope', middleName: 'Vega', gender: 'Female', status: 'Active' },
+                    { id: '2023-031', lastName: 'Guerrero', firstName: 'Mateo John', middleName: 'Rojas', gender: 'Male', status: 'Active' },
+                    { id: '2023-032', lastName: 'Medina', firstName: 'Ariana Belle', middleName: 'Soto', gender: 'Female', status: 'Active' },
+                    { id: '2023-033', lastName: 'Ruiz', firstName: 'Leonardo Jose', middleName: 'Pena', gender: 'Male', status: 'Irregular' },
+                    { id: '2023-034', lastName: 'Jimenez', firstName: 'Valeria Dawn', middleName: 'Ortiz', gender: 'Female', status: 'Active' },
+                    { id: '2023-035', lastName: 'Vargas', firstName: 'Nicolas Rey', middleName: 'Herrera', gender: 'Male', status: 'Active' },
+                    { id: '2023-036', lastName: 'Molina', firstName: 'Daniela Mae', middleName: 'Castro', gender: 'Female', status: 'Active' },
+                    { id: '2023-037', lastName: 'Contreras', firstName: 'Alejandro Luis', middleName: 'Morales', gender: 'Male', status: 'Active' },
+                    { id: '2023-038', lastName: 'Sandoval', firstName: 'Gabriela Joy', middleName: 'Romero', gender: 'Female', status: 'Irregular' },
+                    { id: '2023-039', lastName: 'Dominguez', firstName: 'Samuel David', middleName: 'Aguilar', gender: 'Male', status: 'Active' },
+                    { id: '2023-040', lastName: 'Guerrero', firstName: 'Antonella Rose', middleName: 'Nunez', gender: 'Female', status: 'Active' },
+                    { id: '2023-041', lastName: 'Paredes', firstName: 'Emilio Jose', middleName: 'Delgado', gender: 'Male', status: 'Active' },
+                    { id: '2023-042', lastName: 'Salazar', firstName: 'Regina Faith', middleName: 'Espinoza', gender: 'Female', status: 'Irregular' }
                 ],
                 'Venus': [
-                    { id: '2023-022', lastName: 'Molina', firstName: 'Daniela Mae', middleName: 'Castro', gender: 'Female', status: 'Active' },
-                    { id: '2023-023', lastName: 'Contreras', firstName: 'Alejandro Luis', middleName: 'Morales', gender: 'Male', status: 'Active' },
-                    { id: '2023-024', lastName: 'Sandoval', firstName: 'Gabriela Joy', middleName: 'Romero', gender: 'Female', status: 'Active' },
-                    { id: '2023-025', lastName: 'Dominguez', firstName: 'Samuel David', middleName: 'Aguilar', gender: 'Male', status: 'Active' },
-                    { id: '2023-026', lastName: 'Guerrero', firstName: 'Antonella Rose', middleName: 'Nunez', gender: 'Female', status: 'Irregular' },
-                    { id: '2023-027', lastName: 'Paredes', firstName: 'Emilio Jose', middleName: 'Delgado', gender: 'Male', status: 'Active' },
-                    { id: '2023-028', lastName: 'Salazar', firstName: 'Regina Faith', middleName: 'Espinoza', gender: 'Female', status: 'Active' }
+                    { id: '2023-043', lastName: 'Molina', firstName: 'Daniela Mae', middleName: 'Castro', gender: 'Female', status: 'Active' },
+                    { id: '2023-044', lastName: 'Contreras', firstName: 'Alejandro Luis', middleName: 'Morales', gender: 'Male', status: 'Active' },
+                    { id: '2023-045', lastName: 'Sandoval', firstName: 'Gabriela Joy', middleName: 'Romero', gender: 'Female', status: 'Active' },
+                    { id: '2023-046', lastName: 'Dominguez', firstName: 'Samuel David', middleName: 'Aguilar', gender: 'Male', status: 'Active' },
+                    { id: '2023-047', lastName: 'Guerrero', firstName: 'Antonella Rose', middleName: 'Nunez', gender: 'Female', status: 'Irregular' },
+                    { id: '2023-048', lastName: 'Paredes', firstName: 'Emilio Jose', middleName: 'Delgado', gender: 'Male', status: 'Active' },
+                    { id: '2023-049', lastName: 'Salazar', firstName: 'Regina Faith', middleName: 'Espinoza', gender: 'Female', status: 'Active' },
+                    { id: '2023-050', lastName: 'Rivera', firstName: 'Carlos Eduardo', middleName: 'Moreno', gender: 'Male', status: 'Active' },
+                    { id: '2023-051', lastName: 'Torres', firstName: 'Sophia Grace', middleName: 'Valdez', gender: 'Female', status: 'Active' },
+                    { id: '2023-052', lastName: 'Ramos', firstName: 'Alexander John', middleName: 'Gutierrez', gender: 'Male', status: 'Irregular' },
+                    { id: '2023-053', lastName: 'Cruz', firstName: 'Olivia Marie', middleName: 'Herrera', gender: 'Female', status: 'Active' },
+                    { id: '2023-054', lastName: 'Lopez', firstName: 'Daniel Antonio', middleName: 'Jimenez', gender: 'Male', status: 'Active' },
+                    { id: '2023-055', lastName: 'Gonzales', firstName: 'Emma Rose', middleName: 'Vargas', gender: 'Female', status: 'Active' },
+                    { id: '2023-056', lastName: 'Perez', firstName: 'Matthew Luis', middleName: 'Ortega', gender: 'Male', status: 'Irregular' }
                 ]
             };
             
