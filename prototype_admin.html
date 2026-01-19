@@ -138,6 +138,27 @@
         .breadcrumb-item:hover {
             background-color: rgba(59, 130, 246, 0.1);
         }
+        
+        /* Quarter Tab Styles for Admin Grades View */
+        .quarter-tab-admin {
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            background: #f1f5f9;
+            color: #64748b;
+        }
+        
+        .quarter-tab-admin.active-quarter {
+            background: #3b82f6;
+            color: white;
+        }
+        
+        .quarter-tab-admin:not(.active-quarter):hover {
+            background: #e2e8f0;
+        }
     </style>
 </head>
 <body class="bg-gray-100 overflow-hidden h-screen">
@@ -1019,12 +1040,16 @@
                                         <i class="fas fa-exclamation-triangle mr-2"></i>Irregular Students
                                         <span id="irregular-count" class="ml-2 bg-gray-100 text-gray-800 text-xs font-medium px-2.5 py-0.5 rounded-full">0</span>
                                     </button>
+                                    <button id="grades-tab" class="student-tab py-2 px-1 border-b-2 border-transparent font-medium text-sm text-gray-500 hover:text-gray-700 hover:border-gray-300" onclick="switchStudentTab('grades')">
+                                        <i class="fas fa-chart-line mr-2"></i>View Grades
+                                        <span class="ml-2 bg-gray-100 text-gray-800 text-xs font-medium px-2.5 py-0.5 rounded-full">Read Only</span>
+                                    </button>
                                 </nav>
                             </div>
                         </div>
 
                         <!-- Students Table Container -->
-                        <div class="bg-white border border-gray-200 overflow-hidden">
+                        <div class="bg-white border border-gray-200 overflow-hidden" id="students-table-container">
                             <div class="overflow-x-auto overflow-y-auto" style="max-height: 350px;">
                                 <table class="w-full">
                                     <thead class="bg-gray-50 border-b border-gray-200 sticky top-0" id="students-table-header">
@@ -1050,6 +1075,177 @@
                                 </div>
                                 <div class="flex space-x-2" id="table-actions">
                                     <!-- Actions will be populated based on active tab -->
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Grades View Container (Hidden by default) -->
+                        <div class="bg-white border border-gray-200 overflow-hidden hidden" id="grades-view-container">
+                            <!-- Quarter Selection -->
+                            <div class="bg-gray-50 px-6 py-4 border-b border-gray-200">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center space-x-4">
+                                        <h4 class="text-lg font-semibold text-gray-900">Student Grades</h4>
+                                        <span class="text-sm text-gray-500">Read-only view for administrative oversight</span>
+                                    </div>
+                                    <div class="flex items-center space-x-4">
+                                        <div class="bg-white rounded-lg p-1 border border-gray-200">
+                                            <button class="quarter-tab-admin active-quarter" data-quarter="1">1st Quarter</button>
+                                            <button class="quarter-tab-admin" data-quarter="2">2nd Quarter</button>
+                                            <button class="quarter-tab-admin" data-quarter="3">3rd Quarter</button>
+                                            <button class="quarter-tab-admin" data-quarter="4">4th Quarter</button>
+                                        </div>
+                                        <div class="text-sm text-gray-500">
+                                            <i class="fas fa-info-circle mr-1"></i>
+                                            Admin View Only
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Grades Table -->
+                            <div class="overflow-x-auto overflow-y-auto" style="max-height: 400px;">
+                                <div class="min-w-full">
+                                    <!-- Table Header -->
+                                    <div class="bg-gray-50 border-b border-gray-200 sticky top-0">
+                                        <div class="px-6 py-3">
+                                            <div class="flex items-center space-x-4 min-w-max" id="grades-table-header">
+                                                <div class="w-48 text-sm font-medium text-gray-700 flex-shrink-0">Student</div>
+                                                
+                                                <!-- Written Works -->
+                                                <div class="bg-green-50 border-l-3 border-green-500 px-3 py-2 text-xs font-semibold text-gray-700 w-32 flex-shrink-0">WRITTEN WORKS (30%)</div>
+                                                <div class="w-14 text-center text-xs font-medium text-gray-600 flex-shrink-0">Quiz 1</div>
+                                                <div class="w-14 text-center text-xs font-medium text-gray-600 flex-shrink-0">Quiz 2</div>
+                                                <div class="w-14 text-center text-xs font-medium text-gray-600 flex-shrink-0">Assign 1</div>
+                                                <div class="w-14 text-center text-xs font-semibold text-gray-700 flex-shrink-0">AVG</div>
+                                                
+                                                <!-- Performance Tasks -->
+                                                <div class="bg-yellow-50 border-l-3 border-yellow-500 px-3 py-2 text-xs font-semibold text-gray-700 w-32 flex-shrink-0">PERFORMANCE TASKS (50%)</div>
+                                                <div class="w-14 text-center text-xs font-medium text-gray-600 flex-shrink-0">Project 1</div>
+                                                <div class="w-14 text-center text-xs font-medium text-gray-600 flex-shrink-0">Lab Act</div>
+                                                <div class="w-14 text-center text-xs font-semibold text-gray-700 flex-shrink-0">AVG</div>
+                                                
+                                                <!-- Quarterly Assessment -->
+                                                <div class="bg-red-50 border-l-3 border-red-500 px-3 py-2 text-xs font-semibold text-gray-700 w-32 flex-shrink-0">QUARTERLY ASSESSMENT (20%)</div>
+                                                <div class="w-14 text-center text-xs font-medium text-gray-600 flex-shrink-0">Final Exam</div>
+                                                <div class="w-14 text-center text-xs font-semibold text-gray-700 flex-shrink-0">AVG</div>
+                                                
+                                                <!-- Final Grade -->
+                                                <div class="w-16 text-center text-xs font-semibold text-gray-700 flex-shrink-0">FINAL</div>
+                                                <div class="w-16 text-center text-xs font-semibold text-gray-700 flex-shrink-0">STATUS</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Table Body -->
+                                    <div class="divide-y divide-gray-200" id="grades-table-body">
+                                        <!-- Sample student grades -->
+                                        <div class="px-6 py-3">
+                                            <div class="flex items-center space-x-4 min-w-max">
+                                                <div class="w-48 flex-shrink-0">
+                                                    <div class="font-semibold text-gray-900 text-sm">Maria Clara Santos</div>
+                                                    <div class="text-xs text-gray-500">2024-001</div>
+                                                </div>
+                                                
+                                                <!-- Written Works -->
+                                                <div class="w-32 flex-shrink-0"></div>
+                                                <div class="w-14 flex-shrink-0 text-center text-sm font-medium text-gray-900">95</div>
+                                                <div class="w-14 flex-shrink-0 text-center text-sm font-medium text-gray-900">88</div>
+                                                <div class="w-14 flex-shrink-0 text-center text-sm font-medium text-gray-900">92</div>
+                                                <div class="w-14 flex-shrink-0 text-center text-sm font-semibold bg-gray-100 text-gray-900 rounded">91.7</div>
+                                                
+                                                <!-- Performance Tasks -->
+                                                <div class="w-32 flex-shrink-0"></div>
+                                                <div class="w-14 flex-shrink-0 text-center text-sm font-medium text-gray-900">90</div>
+                                                <div class="w-14 flex-shrink-0 text-center text-sm font-medium text-gray-900">85</div>
+                                                <div class="w-14 flex-shrink-0 text-center text-sm font-semibold bg-gray-100 text-gray-900 rounded">87.5</div>
+                                                
+                                                <!-- Quarterly Assessment -->
+                                                <div class="w-32 flex-shrink-0"></div>
+                                                <div class="w-14 flex-shrink-0 text-center text-sm font-medium text-gray-900">88</div>
+                                                <div class="w-14 flex-shrink-0 text-center text-sm font-semibold bg-gray-100 text-gray-900 rounded">88.0</div>
+                                                
+                                                <!-- Final Grade -->
+                                                <div class="w-16 flex-shrink-0 text-center text-sm font-bold bg-blue-600 text-white rounded">88.3</div>
+                                                <div class="w-16 text-center text-xs font-semibold text-green-600 flex-shrink-0">PASS</div>
+                                            </div>
+                                        </div>
+
+                                        <div class="px-6 py-3">
+                                            <div class="flex items-center space-x-4 min-w-max">
+                                                <div class="w-48 flex-shrink-0">
+                                                    <div class="font-semibold text-gray-900 text-sm">Juan Carlos Dela Cruz</div>
+                                                    <div class="text-xs text-gray-500">2024-002</div>
+                                                </div>
+                                                
+                                                <!-- Written Works -->
+                                                <div class="w-32 flex-shrink-0"></div>
+                                                <div class="w-14 flex-shrink-0 text-center text-sm font-medium text-gray-900">82</div>
+                                                <div class="w-14 flex-shrink-0 text-center text-sm font-medium text-gray-900">79</div>
+                                                <div class="w-14 flex-shrink-0 text-center text-sm font-medium text-gray-900">85</div>
+                                                <div class="w-14 flex-shrink-0 text-center text-sm font-semibold bg-gray-100 text-gray-900 rounded">82.0</div>
+                                                
+                                                <!-- Performance Tasks -->
+                                                <div class="w-32 flex-shrink-0"></div>
+                                                <div class="w-14 flex-shrink-0 text-center text-sm font-medium text-gray-900">78</div>
+                                                <div class="w-14 flex-shrink-0 text-center text-sm font-medium text-gray-900">80</div>
+                                                <div class="w-14 flex-shrink-0 text-center text-sm font-semibold bg-gray-100 text-gray-900 rounded">79.0</div>
+                                                
+                                                <!-- Quarterly Assessment -->
+                                                <div class="w-32 flex-shrink-0"></div>
+                                                <div class="w-14 flex-shrink-0 text-center text-sm font-medium text-gray-900">75</div>
+                                                <div class="w-14 flex-shrink-0 text-center text-sm font-semibold bg-gray-100 text-gray-900 rounded">75.0</div>
+                                                
+                                                <!-- Final Grade -->
+                                                <div class="w-16 flex-shrink-0 text-center text-sm font-bold bg-blue-600 text-white rounded">78.1</div>
+                                                <div class="w-16 text-center text-xs font-semibold text-green-600 flex-shrink-0">PASS</div>
+                                            </div>
+                                        </div>
+
+                                        <div class="px-6 py-3">
+                                            <div class="flex items-center space-x-4 min-w-max">
+                                                <div class="w-48 flex-shrink-0">
+                                                    <div class="font-semibold text-gray-900 text-sm">Ana Marie Reyes</div>
+                                                    <div class="text-xs text-gray-500">2024-003</div>
+                                                </div>
+                                                
+                                                <!-- Written Works -->
+                                                <div class="w-32 flex-shrink-0"></div>
+                                                <div class="w-14 flex-shrink-0 text-center text-sm font-medium text-gray-900">--</div>
+                                                <div class="w-14 flex-shrink-0 text-center text-sm font-medium text-gray-900">72</div>
+                                                <div class="w-14 flex-shrink-0 text-center text-sm font-medium text-gray-900">68</div>
+                                                <div class="w-14 flex-shrink-0 text-center text-sm font-semibold bg-gray-100 text-gray-900 rounded">70.0</div>
+                                                
+                                                <!-- Performance Tasks -->
+                                                <div class="w-32 flex-shrink-0"></div>
+                                                <div class="w-14 flex-shrink-0 text-center text-sm font-medium text-gray-900">65</div>
+                                                <div class="w-14 flex-shrink-0 text-center text-sm font-medium text-gray-900">70</div>
+                                                <div class="w-14 flex-shrink-0 text-center text-sm font-semibold bg-gray-100 text-gray-900 rounded">67.5</div>
+                                                
+                                                <!-- Quarterly Assessment -->
+                                                <div class="w-32 flex-shrink-0"></div>
+                                                <div class="w-14 flex-shrink-0 text-center text-sm font-medium text-gray-900">72</div>
+                                                <div class="w-14 flex-shrink-0 text-center text-sm font-semibold bg-gray-100 text-gray-900 rounded">72.0</div>
+                                                
+                                                <!-- Final Grade -->
+                                                <div class="w-16 flex-shrink-0 text-center text-sm font-bold bg-red-600 text-white rounded">69.3</div>
+                                                <div class="w-16 text-center text-xs font-semibold text-red-600 flex-shrink-0">FAIL</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Grades Footer -->
+                            <div class="bg-gray-50 px-6 py-3 border-t border-gray-200">
+                                <div class="flex justify-between items-center">
+                                    <div class="text-sm text-gray-600">
+                                        <span>Showing grades for 1st Quarter • Class Average: 78.6</span>
+                                    </div>
+                                    <div class="flex items-center space-x-4 text-sm text-gray-500">
+                                        <span><i class="fas fa-eye mr-1"></i>Read-only access</span>
+                                        <span><i class="fas fa-user-shield mr-1"></i>Admin oversight</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -2144,22 +2340,65 @@
             // Update tab styling
             const regularTab = document.getElementById('regular-tab');
             const irregularTab = document.getElementById('irregular-tab');
+            const gradesTab = document.getElementById('grades-tab');
+            
+            // Hide/show containers
+            const studentsContainer = document.getElementById('students-table-container');
+            const gradesContainer = document.getElementById('grades-view-container');
             
             if (tabType === 'regular') {
                 regularTab.className = 'student-tab active-tab py-2 px-1 border-b-2 border-blue-500 font-medium text-sm text-blue-600';
                 irregularTab.className = 'student-tab py-2 px-1 border-b-2 border-transparent font-medium text-sm text-gray-500 hover:text-gray-700 hover:border-gray-300';
+                gradesTab.className = 'student-tab py-2 px-1 border-b-2 border-transparent font-medium text-sm text-gray-500 hover:text-gray-700 hover:border-gray-300';
+                
+                // Show students table, hide grades view
+                studentsContainer.classList.remove('hidden');
+                gradesContainer.classList.add('hidden');
                 
                 // Update table styling for regular students
                 updateTableStyling('regular');
                 populateCurrentTable(currentRegularStudents, 'regular');
-            } else {
+            } else if (tabType === 'irregular') {
                 regularTab.className = 'student-tab py-2 px-1 border-b-2 border-transparent font-medium text-sm text-gray-500 hover:text-gray-700 hover:border-gray-300';
                 irregularTab.className = 'student-tab active-tab py-2 px-1 border-b-2 border-orange-500 font-medium text-sm text-orange-600';
+                gradesTab.className = 'student-tab py-2 px-1 border-b-2 border-transparent font-medium text-sm text-gray-500 hover:text-gray-700 hover:border-gray-300';
+                
+                // Show students table, hide grades view
+                studentsContainer.classList.remove('hidden');
+                gradesContainer.classList.add('hidden');
                 
                 // Update table styling for irregular students
                 updateTableStyling('irregular');
                 populateCurrentTable(currentIrregularStudents, 'irregular');
+            } else if (tabType === 'grades') {
+                regularTab.className = 'student-tab py-2 px-1 border-b-2 border-transparent font-medium text-sm text-gray-500 hover:text-gray-700 hover:border-gray-300';
+                irregularTab.className = 'student-tab py-2 px-1 border-b-2 border-transparent font-medium text-sm text-gray-500 hover:text-gray-700 hover:border-gray-300';
+                gradesTab.className = 'student-tab active-tab py-2 px-1 border-b-2 border-green-500 font-medium text-sm text-green-600';
+                
+                // Hide students table, show grades view
+                studentsContainer.classList.add('hidden');
+                gradesContainer.classList.remove('hidden');
+                
+                // Setup quarter tab functionality for grades view
+                setupGradesQuarterTabs();
             }
+        }
+        
+        function setupGradesQuarterTabs() {
+            // Add event listeners to quarter tabs in grades view
+            document.querySelectorAll('.quarter-tab-admin').forEach(tab => {
+                tab.addEventListener('click', function() {
+                    // Update active quarter tab
+                    document.querySelectorAll('.quarter-tab-admin').forEach(t => {
+                        t.classList.remove('active-quarter');
+                    });
+                    this.classList.add('active-quarter');
+                    
+                    // Here you could load different quarter data
+                    const quarter = this.dataset.quarter;
+                    console.log('Switched to quarter:', quarter);
+                });
+            });
         }
         
         function updateTableStyling(type) {
