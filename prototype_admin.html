@@ -823,6 +823,25 @@
                             </div>
                         </div>
                     </div>
+
+                    <!-- Back to Subjects Button (Hidden by default) -->
+                    <div id="back-to-subjects" class="hidden p-6 border-b border-gray-200">
+                        <button onclick="showSubjects()" class="bg-gray-100 text-gray-700 px-4 py-2 border border-gray-300 hover:bg-gray-200 transition-colors">
+                            <i class="fas fa-arrow-left mr-2"></i>← Back to Subjects
+                        </button>
+                    </div>
+
+                    <!-- Sections View (Hidden by default) -->
+                    <div id="sections-view" class="hidden p-8">
+                        <div class="mb-6">
+                            <h3 id="subject-title" class="text-xl font-semibold text-gray-900 mb-4">Science - Sections</h3>
+                            <p class="text-gray-600">Select a section to manage students and grades</p>
+                        </div>
+                        
+                        <div id="sections-grid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                            <!-- Sections will be populated dynamically -->
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -986,23 +1005,130 @@
                 }, 300);
             }
         }
-        
         function showSubjectDetails(subject) {
-            // Get current grade and school year
-            const currentTitle = document.getElementById('year-title').textContent;
-            const parts = currentTitle.split(' / ');
-            const currentGrade = parts[0];
-            const currentSchoolYear = parts[1] || 'Not selected';
+            // Hide subjects view
+            document.getElementById('subjects-view').classList.add('hidden');
+            document.getElementById('back-to-dashboard').classList.add('hidden');
             
-            // Simple subject details
-            let message = `Subject: ${subject}\n`;
-            message += `Grade Level: ${currentGrade}\n`;
-            message += `School Year: ${currentSchoolYear}\n\n`;
+            // Show sections view
+            document.getElementById('sections-view').classList.remove('hidden');
+            document.getElementById('back-to-subjects').classList.remove('hidden');
+            
+            // Update subject title
+            document.getElementById('subject-title').textContent = subject + ' - Sections';
+            
+            // Get current grade and school year for context
+            const currentTitle = document.getElementById('year-title').textContent;
+            
+            // Define sections and teachers for each subject
+            const subjectSections = {
+                'Science': [
+                    { section: 'Pluto', teacher: 'Mr. Cruz' },
+                    { section: 'Mars', teacher: 'Ms. Reyes' },
+                    { section: 'Jupiter', teacher: 'Mr. Santos' },
+                    { section: 'Venus', teacher: 'Ms. Garcia' }
+                ],
+                'Mathematics': [
+                    { section: 'Alpha', teacher: 'Mr. Dela Cruz' },
+                    { section: 'Beta', teacher: 'Ms. Villanueva' },
+                    { section: 'Gamma', teacher: 'Mr. Mendoza' },
+                    { section: 'Delta', teacher: 'Ms. Torres' }
+                ],
+                'English': [
+                    { section: 'Shakespeare', teacher: 'Ms. Johnson' },
+                    { section: 'Dickens', teacher: 'Mr. Brown' },
+                    { section: 'Austen', teacher: 'Dr. Wilson' },
+                    { section: 'Twain', teacher: 'Ms. Davis' }
+                ],
+                'Filipino': [
+                    { section: 'Rizal', teacher: 'Gng. Aquino' },
+                    { section: 'Bonifacio', teacher: 'G. Ramos' },
+                    { section: 'Mabini', teacher: 'Dr. Bautista' },
+                    { section: 'Luna', teacher: 'Gng. Morales' }
+                ],
+                'Social Studies': [
+                    { section: 'Asia', teacher: 'Mr. Fernandez' },
+                    { section: 'Europe', teacher: 'Ms. Lopez' },
+                    { section: 'Americas', teacher: 'Dr. Perez' },
+                    { section: 'Africa', teacher: 'Ms. Gonzales' }
+                ],
+                'Arts': [
+                    { section: 'Picasso', teacher: 'Ms. Rivera' },
+                    { section: 'Da Vinci', teacher: 'Mr. Castillo' },
+                    { section: 'Monet', teacher: 'Dr. Herrera' },
+                    { section: 'Van Gogh', teacher: 'Ms. Jimenez' }
+                ],
+                'Physical Education': [
+                    { section: 'Eagles', teacher: 'Coach Martinez' },
+                    { section: 'Hawks', teacher: 'Coach Rodriguez' },
+                    { section: 'Falcons', teacher: 'Coach Sanchez' },
+                    { section: 'Owls', teacher: 'Coach Moreno' }
+                ],
+                'Music': [
+                    { section: 'Mozart', teacher: 'Ms. Valdez' },
+                    { section: 'Beethoven', teacher: 'Mr. Navarro' },
+                    { section: 'Bach', teacher: 'Dr. Gutierrez' },
+                    { section: 'Chopin', teacher: 'Ms. Aguilar' }
+                ]
+            };
+            
+            // Get sections for the selected subject
+            const sections = subjectSections[subject] || [
+                { section: 'Section A', teacher: 'Teacher 1' },
+                { section: 'Section B', teacher: 'Teacher 2' },
+                { section: 'Section C', teacher: 'Teacher 3' },
+                { section: 'Section D', teacher: 'Teacher 4' }
+            ];
+            
+            // Populate sections grid
+            const sectionsGrid = document.getElementById('sections-grid');
+            sectionsGrid.innerHTML = '';
+            
+            sections.forEach(item => {
+                const sectionCard = document.createElement('div');
+                sectionCard.className = 'bg-white border border-gray-200 hover:border-gray-400 cursor-pointer transition-colors';
+                sectionCard.onclick = () => showSectionDetails(subject, item.section, item.teacher);
+                
+                sectionCard.innerHTML = `
+                    <div class="p-6 text-center">
+                        <div class="bg-gray-100 text-gray-700 font-semibold py-3 px-4 mb-3">
+                            ${item.section}
+                        </div>
+                        <div class="text-gray-600 font-medium">
+                            ${item.teacher}
+                        </div>
+                    </div>
+                `;
+                
+                sectionsGrid.appendChild(sectionCard);
+            });
+        }
+        
+        function showSubjects() {
+            // Show subjects view
+            document.getElementById('subjects-view').classList.remove('hidden');
+            document.getElementById('back-to-dashboard').classList.remove('hidden');
+            
+            // Hide sections view
+            document.getElementById('sections-view').classList.add('hidden');
+            document.getElementById('back-to-subjects').classList.add('hidden');
+        }
+        
+        function showSectionDetails(subject, section, teacher) {
+            // Get current context
+            const currentTitle = document.getElementById('year-title').textContent;
+            
+            let message = `Section Details:\n\n`;
+            message += `Subject: ${subject}\n`;
+            message += `Section: ${section}\n`;
+            message += `Teacher: ${teacher}\n`;
+            message += `Grade & Year: ${currentTitle}\n\n`;
             message += `This will show:\n`;
-            message += `• Student lists and sections\n`;
-            message += `• Grade management interface\n`;
-            message += `• Performance analytics\n`;
-            message += `• Teacher assignments`;
+            message += `• Student roster for ${section}\n`;
+            message += `• Grade entry interface\n`;
+            message += `• Attendance management\n`;
+            message += `• Performance reports\n`;
+            message += `• Class schedule`;
             
             alert(message);
         }
