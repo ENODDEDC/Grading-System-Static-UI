@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teacher Dashboard - EduManage PH</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .section-card {
+            transition: all 0.2s ease;
+            border: 1px solid #e5e7eb;
+        }
+        
+        .section-card:hover {
+            border-color: #3730a3;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <!-- Header -->
+    <header class="bg-white border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <!-- Empty left side or could add logo later -->
+                <div></div>
+                
+                <!-- User Info -->
+                <div class="flex items-center space-x-4">
+                    <span class="text-sm font-medium text-gray-900">Prof. Maria Santos</span>
+                    <button class="text-gray-500 hover:text-gray-700 text-sm">
+                        <i class="fas fa-sign-out-alt mr-1"></i>
+                        Logout
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Subject Info Panel -->
+    <div class="bg-white border-b border-gray-100">
+        <div class="max-w-7xl mx-auto px-6 py-6">
+            <div class="flex items-center justify-between">
+                <!-- Subject Selector -->
+                <div class="flex items-center space-x-6">
+                    <div class="relative">
+                        <button class="flex items-center space-x-3 bg-blue-50 hover:bg-blue-100 px-6 py-3 rounded-lg border border-blue-200 transition-colors">
+                            <i class="fas fa-flask text-blue-600 text-lg"></i>
+                            <div class="text-left">
+                                <div class="font-semibold text-gray-900 text-lg">Science</div>
+                                <div class="text-xs text-gray-500">Select Subject</div>
+                            </div>
+                            <i class="fas fa-chevron-down text-gray-500"></i>
+                        </button>
+                    </div>
+                    
+                    <!-- Academic Info -->
+                    <div class="flex items-center space-x-6">
+                        <div class="flex items-center space-x-2">
+                            <i class="fas fa-calendar text-gray-400"></i>
+                            <div>
+                                <div class="text-sm font-medium text-gray-900">SY 2024-2025</div>
+                                <div class="text-xs text-gray-500">School Year</div>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <i class="fas fa-clock text-gray-400"></i>
+                            <div>
+                                <div class="text-sm font-medium text-gray-900">1st Semester</div>
+                                <div class="text-xs text-gray-500">Current Period</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-6 py-8">
+        <!-- Sections Panel -->
+        <div class="bg-white rounded-lg border border-gray-200 p-6">
+            <div class="mb-6">
+                <h2 class="text-xl font-semibold text-gray-900">Class Sections</h2>
+            </div>
+            
+            <!-- Sections Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+                <!-- Section A -->
+                <div class="section-card bg-gray-50 rounded-lg p-5 cursor-pointer">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-lg font-semibold text-gray-900">Section A</h3>
+                        <span class="text-sm text-gray-500">30 students</span>
+                    </div>
+                    <div class="space-y-2">
+                        <div class="flex justify-between text-sm">
+                            <span class="text-gray-600">Grades completed</span>
+                            <span class="font-medium text-green-600">28/30</span>
+                        </div>
+                        <div class="flex justify-between text-sm">
+                            <span class="text-gray-600">Class average</span>
+                            <span class="font-medium">87.5</span>
+                        </div>
+                        <div class="flex justify-between text-sm">
+                            <span class="text-gray-600">Last updated</span>
+                            <span class="text-gray-500">2 hours ago</span>
+                        </div>
+                    </div>
+                    <button class="w-full mt-4 bg-blue-600 text-white py-2 rounded text-sm font-medium hover:bg-blue-700 transition-colors">
+                        Enter Grades
+                    </button>
+                </div>
+
+                <!-- Section B -->
+                <div class="section-card bg-gray-50 rounded-lg p-5 cursor-pointer">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-lg font-semibold text-gray-900">Section B</h3>
+                        <span class="text-sm text-gray-500">30 students</span>
+                    </div>
+                    <div class="space-y-2">
+                        <div class="flex justify-between text-sm">
+                            <span class="text-gray-600">Grades completed</span>
+                            <span class="font-medium text-green-600">30/30</span>
+                        </div>
+                        <div class="flex justify-between text-sm">
+                            <span class="text-gray-600">Class average</span>
+                            <span class="font-medium">91.2</span>
+                        </div>
+                        <div class="flex justify-between text-sm">
+                            <span class="text-gray-600">Last updated</span>
+                            <span class="text-gray-500">1 day ago</span>
+                        </div>
+                    </div>
+                    <button class="w-full mt-4 bg-blue-600 text-white py-2 rounded text-sm font-medium hover:bg-blue-700 transition-colors">
+                        Enter Grades
+                    </button>
+                </div>
+
+                <!-- Section C -->
+                <div class="section-card bg-gray-50 rounded-lg p-5 cursor-pointer">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-lg font-semibold text-gray-900">Section C</h3>
+                        <span class="text-sm text-gray-500">30 students</span>
+                    </div>
+                    <div class="space-y-2">
+                        <div class="flex justify-between text-sm">
+                            <span class="text-gray-600">Grades completed</span>
+                            <span class="font-medium text-yellow-600">25/30</span>
+                        </div>
+                        <div class="flex justify-between text-sm">
+                            <span class="text-gray-600">Class average</span>
+                            <span class="font-medium">84.8</span>
+                        </div>
+                        <div class="flex justify-between text-sm">
+                            <span class="text-gray-600">Last updated</span>
+                            <span class="text-gray-500">3 hours ago</span>
+                        </div>
+                    </div>
+                    <button class="w-full mt-4 bg-blue-600 text-white py-2 rounded text-sm font-medium hover:bg-blue-700 transition-colors">
+                        Enter Grades
+                    </button>
+                </div>
+
+                <!-- Section D -->
+                <div class="section-card bg-gray-50 rounded-lg p-5 cursor-pointer">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-lg font-semibold text-gray-900">Section D</h3>
+                        <span class="text-sm text-gray-500">30 students</span>
+                    </div>
+                    <div class="space-y-2">
+                        <div class="flex justify-between text-sm">
+                            <span class="text-gray-600">Grades completed</span>
+                            <span class="font-medium text-red-600">18/30</span>
+                        </div>
+                        <div class="flex justify-between text-sm">
+                            <span class="text-gray-600">Class average</span>
+                            <span class="font-medium">89.1</span>
+                        </div>
+                        <div class="flex justify-between text-sm">
+                            <span class="text-gray-600">Last updated</span>
+                            <span class="text-gray-500">5 hours ago</span>
+                        </div>
+                    </div>
+                    <button class="w-full mt-4 bg-blue-600 text-white py-2 rounded text-sm font-medium hover:bg-blue-700 transition-colors">
+                        Enter Grades
+                    </button>
+                </div>
+
+                <!-- Section E -->
+                <div class="section-card bg-gray-50 rounded-lg p-5 cursor-pointer">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-lg font-semibold text-gray-900">Section E</h3>
+                        <span class="text-sm text-gray-500">30 students</span>
+                    </div>
+                    <div class="space-y-2">
+                        <div class="flex justify-between text-sm">
+                            <span class="text-gray-600">Grades completed</span>
+                            <span class="font-medium text-green-600">29/30</span>
+                        </div>
+                        <div class="flex justify-between text-sm">
+                            <span class="text-gray-600">Class average</span>
+                            <span class="font-medium">86.7</span>
+                        </div>
+                        <div class="flex justify-between text-sm">
+                            <span class="text-gray-600">Last updated</span>
+                            <span class="text-gray-500">4 hours ago</span>
+                        </div>
+                    </div>
+                    <button class="w-full mt-4 bg-blue-600 text-white py-2 rounded text-sm font-medium hover:bg-blue-700 transition-colors">
+                        Enter Grades
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
