@@ -88,6 +88,23 @@
             background-color: #f3f4f6;
         }
         
+        .college-program-card {
+            min-height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+        }
+        
+        .college-program-card:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
         .sidebar-container {
             background: #ffffff;
             border-right: 1px solid #e5e7eb;
@@ -270,82 +287,44 @@
                     </div>
                     
                     <div id="college-content" class="section-content mt-3">
-                        <div class="space-y-3 px-2">
-                            <!-- HRM Program -->
-                            <div class="bg-gray-50 border border-gray-200 p-3">
-                                <div class="sidebar-item py-1 cursor-pointer flex items-center mb-2" onclick="showCollegeProgram('HRM')">
-                                    <div class="program-badge">HRM</div>
-                                    <span class="font-medium text-gray-800">Hotel & Restaurant Management</span>
-                                    <i class="fas fa-chevron-right ml-auto transition-transform duration-200 text-gray-400" id="hrm-chevron"></i>
+                        <!-- Compact Grid Layout for College Programs -->
+                        <div class="px-2">
+                            <div class="grid grid-cols-3 gap-2 mb-3">
+                                <!-- Row 1 -->
+                                <div class="college-program-card bg-white border border-gray-200 p-2 text-center cursor-pointer hover:border-blue-300 hover:bg-blue-50 transition-all duration-200" onclick="showCollegeProgram('HRM')">
+                                    <div class="text-xs font-bold text-gray-800">HRM</div>
                                 </div>
-                                
-                                <div id="hrm-subjects" class="hidden mt-2 space-y-1">
-                                    <!-- Core Subjects -->
-                                    <div class="text-xs font-medium text-gray-500 uppercase tracking-wider px-2 mb-1">Core Subjects</div>
-                                    <div class="sidebar-item py-1 px-2 cursor-pointer text-sm text-gray-700 hover:text-gray-900" onclick="showSubjectYears('hrm', 'food-service')">Food Service Management</div>
-                                    <div class="sidebar-item py-1 px-2 cursor-pointer text-sm text-gray-700 hover:text-gray-900" onclick="showSubjectYears('hrm', 'hotel-operations')">Hotel Operations</div>
-                                    <div class="sidebar-item py-1 px-2 cursor-pointer text-sm text-gray-700 hover:text-gray-900" onclick="showSubjectYears('hrm', 'culinary-arts')">Culinary Arts</div>
-                                    <div class="sidebar-item py-1 px-2 cursor-pointer text-sm text-gray-700 hover:text-gray-900" onclick="showSubjectYears('hrm', 'tourism-management')">Tourism Management</div>
-                                    <div class="sidebar-item py-1 px-2 cursor-pointer text-sm text-gray-700 hover:text-gray-900" onclick="showSubjectYears('hrm', 'event-management')">Event Management</div>
-                                    <div class="sidebar-item py-1 px-2 cursor-pointer text-sm text-gray-700 hover:text-gray-900" onclick="showSubjectYears('hrm', 'hospitality-marketing')">Hospitality Marketing</div>
-                                    
-                                    <!-- Subject Year Levels (Hidden by default) -->
-                                    <div id="hrm-subject-years" class="hidden mt-3 p-2 bg-white border border-gray-300">
-                                        <div class="text-sm font-medium text-gray-800 mb-2" id="hrm-subject-title">Subject Year Levels</div>
-                                        <div class="grid grid-cols-2 gap-1">
-                                            <div class="year-item text-sm text-gray-700 hover:text-gray-900 text-center">1st Year</div>
-                                            <div class="year-item text-sm text-gray-700 hover:text-gray-900 text-center">2nd Year</div>
-                                            <div class="year-item text-sm text-gray-700 hover:text-gray-900 text-center">3rd Year</div>
-                                            <div class="year-item text-sm text-gray-700 hover:text-gray-900 text-center">4th Year</div>
-                                        </div>
-                                        <button onclick="hideSubjectYears('hrm')" class="mt-2 text-xs text-gray-600 hover:text-gray-800 underline">← Back to Subjects</button>
-                                    </div>
+                                <div class="college-program-card bg-white border border-gray-200 p-2 text-center cursor-pointer hover:border-blue-300 hover:bg-blue-50 transition-all duration-200" onclick="toggleProgram('it')">
+                                    <div class="text-xs font-bold text-gray-800">IT</div>
+                                </div>
+                                <div class="college-program-card bg-white border border-gray-200 p-2 text-center cursor-pointer hover:border-blue-300 hover:bg-blue-50 transition-all duration-200" onclick="toggleProgram('bsba')">
+                                    <div class="text-xs font-bold text-gray-800">BSBA</div>
                                 </div>
                             </div>
                             
-                            <!-- IT Program -->
-                            <div class="bg-gray-50 border border-gray-200 p-3">
-                                <div class="sidebar-item py-1 cursor-pointer flex items-center mb-2" onclick="toggleProgram('it')">
-                                    <div class="program-badge">IT</div>
-                                    <span class="font-medium text-gray-800">Information Technology</span>
-                                    <i class="fas fa-chevron-right ml-auto transition-transform duration-200 text-gray-400" id="it-chevron"></i>
+                            <div class="grid grid-cols-3 gap-2 mb-3">
+                                <!-- Row 2 -->
+                                <div class="college-program-card bg-white border border-gray-200 p-2 text-center cursor-pointer hover:border-blue-300 hover:bg-blue-50 transition-all duration-200" onclick="toggleProgram('bsn')">
+                                    <div class="text-xs font-bold text-gray-800">BSN</div>
                                 </div>
-                                
-                                <div id="it-subjects" class="hidden mt-2 space-y-1">
-                                    <!-- Subject Year Levels (Hidden by default) -->
-                                    <div id="it-subject-years" class="hidden mt-3 p-2 bg-white border border-gray-300">
-                                        <div class="text-sm font-medium text-gray-800 mb-2" id="it-subject-title">Subject Year Levels</div>
-                                        <div class="grid grid-cols-2 gap-1">
-                                            <div class="year-item text-sm text-gray-700 hover:text-gray-900 text-center">1st Year</div>
-                                            <div class="year-item text-sm text-gray-700 hover:text-gray-900 text-center">2nd Year</div>
-                                            <div class="year-item text-sm text-gray-700 hover:text-gray-900 text-center">3rd Year</div>
-                                            <div class="year-item text-sm text-gray-700 hover:text-gray-900 text-center">4th Year</div>
-                                        </div>
-                                        <button onclick="hideSubjectYears('it')" class="mt-2 text-xs text-gray-600 hover:text-gray-800 underline">← Back to Subjects</button>
-                                    </div>
+                                <div class="college-program-card bg-white border border-gray-200 p-2 text-center cursor-pointer hover:border-blue-300 hover:bg-blue-50 transition-all duration-200" onclick="toggleProgram('bscs')">
+                                    <div class="text-xs font-bold text-gray-800">BSCS</div>
+                                </div>
+                                <div class="college-program-card bg-white border border-gray-200 p-2 text-center cursor-pointer hover:border-blue-300 hover:bg-blue-50 transition-all duration-200" onclick="toggleProgram('bsed')">
+                                    <div class="text-xs font-bold text-gray-800">BSED</div>
                                 </div>
                             </div>
-
-                            <!-- Business Administration Program -->
-                            <div class="bg-gray-50 border border-gray-200 p-3">
-                                <div class="sidebar-item py-1 cursor-pointer flex items-center mb-2" onclick="toggleProgram('bsba')">
-                                    <div class="program-badge">BSBA</div>
-                                    <span class="font-medium text-gray-800">Business Administration</span>
-                                    <i class="fas fa-chevron-right ml-auto transition-transform duration-200 text-gray-400" id="bsba-chevron"></i>
+                            
+                            <div class="grid grid-cols-3 gap-2">
+                                <!-- Row 3 -->
+                                <div class="college-program-card bg-white border border-gray-200 p-2 text-center cursor-pointer hover:border-blue-300 hover:bg-blue-50 transition-all duration-200" onclick="toggleProgram('bspsych')">
+                                    <div class="text-xs font-bold text-gray-800">BSPSYCH</div>
                                 </div>
-                                
-                                <div id="bsba-subjects" class="hidden mt-2 space-y-1">
-                                    <!-- Subject Year Levels (Hidden by default) -->
-                                    <div id="bsba-subject-years" class="hidden mt-3 p-2 bg-white border border-gray-300">
-                                        <div class="text-sm font-medium text-gray-800 mb-2" id="bsba-subject-title">Subject Year Levels</div>
-                                        <div class="grid grid-cols-2 gap-1">
-                                            <div class="year-item text-sm text-gray-700 hover:text-gray-900 text-center">1st Year</div>
-                                            <div class="year-item text-sm text-gray-700 hover:text-gray-900 text-center">2nd Year</div>
-                                            <div class="year-item text-sm text-gray-700 hover:text-gray-900 text-center">3rd Year</div>
-                                            <div class="year-item text-sm text-gray-700 hover:text-gray-900 text-center">4th Year</div>
-                                        </div>
-                                        <button onclick="hideSubjectYears('bsba')" class="mt-2 text-xs text-gray-600 hover:text-gray-800 underline">← Back to Subjects</button>
-                                    </div>
+                                <div class="college-program-card bg-white border border-gray-200 p-2 text-center cursor-pointer hover:border-blue-300 hover:bg-blue-50 transition-all duration-200" onclick="toggleProgram('bscrim')">
+                                    <div class="text-xs font-bold text-gray-800">BSCRIM</div>
+                                </div>
+                                <div class="college-program-card bg-white border border-gray-200 p-2 text-center cursor-pointer hover:border-blue-300 hover:bg-blue-50 transition-all duration-200" onclick="toggleProgram('bseng')">
+                                    <div class="text-xs font-bold text-gray-800">BSENG</div>
                                 </div>
                             </div>
                         </div>
@@ -962,7 +941,7 @@
             navigationState = { grade: grade, schoolYear: '', subject: '', section: '' };
             
             // Check if it's a college program
-            if (['HRM', 'IT', 'BSBA'].includes(grade)) {
+            if (['HRM', 'IT', 'BSBA', 'BSN', 'BSCS', 'BSED', 'BSPSYCH', 'BSCRIM', 'BSENG'].includes(grade)) {
                 // Show college year levels
                 showCollegeProgram(grade);
             } else {
@@ -978,7 +957,7 @@
             navigationState.section = '';
             
             // Check if it's a college program
-            if (['HRM', 'IT', 'BSBA'].includes(navigationState.grade)) {
+            if (['HRM', 'IT', 'BSBA', 'BSN', 'BSCS', 'BSED', 'BSPSYCH', 'BSCRIM', 'BSENG'].includes(navigationState.grade)) {
                 // Show college courses view
                 showCollegeYearContent(navigationState.grade, schoolYear);
             } else {
@@ -1240,7 +1219,7 @@
         
         function showGradeContent(grade) {
             // Check if it's a college program
-            if (['HRM', 'IT', 'BSBA'].includes(grade)) {
+            if (['HRM', 'IT', 'BSBA', 'BSN', 'BSCS', 'BSED', 'BSPSYCH', 'BSCRIM', 'BSENG'].includes(grade)) {
                 showCollegeProgram(grade);
                 return;
             }
@@ -1903,7 +1882,7 @@
             // Irregular students are only applicable to College level education
             // K-12 levels (Preschool, Elementary, High School, SHS) should not have irregular students
             const irregularTab = document.getElementById('irregular-tab');
-            const isCollegeLevel = ['HRM', 'IT', 'BSBA'].includes(navigationState.grade);
+            const isCollegeLevel = ['HRM', 'IT', 'BSBA', 'BSN', 'BSCS', 'BSED', 'BSPSYCH', 'BSCRIM', 'BSENG'].includes(navigationState.grade);
             
             if (isCollegeLevel) {
                 // Show irregular tab for college levels
@@ -2501,7 +2480,7 @@
         
         function showSubjectYears(program, subject) {
             // Hide all subject year sections first
-            const allPrograms = ['hrm', 'it', 'bsba'];
+            const allPrograms = ['hrm', 'it', 'bsba', 'bsn', 'bscs', 'bsed', 'bspsych', 'bscrim', 'bseng'];
             allPrograms.forEach(prog => {
                 const yearSection = document.getElementById(prog + '-subject-years');
                 if (yearSection) {
