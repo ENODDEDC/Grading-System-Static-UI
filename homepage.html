@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduManage PH - Education Management System</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .hero-bg {
+            background: linear-gradient(135deg, #1e3a8a 0%, #3730a3 50%, #581c87 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><pattern id="grid" width="50" height="50" patternUnits="userSpaceOnUse"><path d="M 50 0 L 0 0 0 50" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/></pattern></defs><rect width="100%" height="100%" fill="url(%23grid)"/></svg>');
+            opacity: 0.3;
+        }
+        
+        .school-silhouette {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 60%;
+            height: 70%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600"><rect x="100" y="300" width="600" height="300" fill="rgba(0,0,0,0.2)"/><rect x="200" y="200" width="400" height="100" fill="rgba(0,0,0,0.15)"/><rect x="300" y="100" width="200" height="100" fill="rgba(0,0,0,0.1)"/><rect x="150" y="350" width="80" height="120" fill="rgba(0,0,0,0.25)"/><rect x="250" y="350" width="80" height="120" fill="rgba(0,0,0,0.25)"/><rect x="350" y="350" width="80" height="120" fill="rgba(0,0,0,0.25)"/><rect x="450" y="350" width="80" height="120" fill="rgba(0,0,0,0.25)"/><rect x="550" y="350" width="80" height="120" fill="rgba(0,0,0,0.25)"/></svg>') no-repeat center bottom;
+            background-size: contain;
+            opacity: 0.4;
+        }
+        
+        .feature-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-sm border-b relative z-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0 flex items-center">
+                        <div class="h-8 w-8 bg-blue-700 rounded flex items-center justify-center mr-3">
+                            <i class="fas fa-graduation-cap text-white text-sm"></i>
+                        </div>
+                        <h1 class="text-lg font-semibold text-gray-900">EduManage PH</h1>
+                    </div>
+                    <div class="hidden md:ml-8 md:flex md:space-x-8">
+                        <a href="#features" class="text-gray-600 hover:text-gray-900 px-3 py-2 text-sm font-medium">Features</a>
+                        <a href="#about" class="text-gray-600 hover:text-gray-900 px-3 py-2 text-sm font-medium">About</a>
+                        <a href="#contact" class="text-gray-600 hover:text-gray-900 px-3 py-2 text-sm font-medium">Contact</a>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <a href="login.html" class="text-gray-600 hover:text-gray-900 text-sm font-medium">Log In</a>
+                    <a href="index.html" class="bg-blue-700 text-white px-4 py-2 text-sm font-medium hover:bg-blue-800 transition-colors">
+                        Get Started
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-bg min-h-screen flex items-center relative">
+        <div class="school-silhouette"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="max-w-3xl">
+                <h1 class="text-5xl md:text-6xl font-bold text-white mb-6 leading-tight">
+                    Education Management System
+                </h1>
+                <p class="text-xl md:text-2xl text-blue-100 mb-8 leading-relaxed">
+                    A secure and standardized platform for recording, computing, and reporting student grades across Philippines K-12 to College education system.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <a href="index.html" class="bg-white text-blue-700 px-8 py-4 text-lg font-semibold hover:bg-gray-100 transition-colors inline-flex items-center justify-center">
+                        <i class="fas fa-rocket mr-3"></i>
+                        Start Managing Grades
+                    </a>
+                    <a href="#features" class="border-2 border-white text-white px-8 py-4 text-lg font-semibold hover:bg-white hover:text-blue-700 transition-colors inline-flex items-center justify-center">
+                        <i class="fas fa-play mr-3"></i>
+                        Learn More
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">Comprehensive Education Management</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Built specifically for Philippines education standards, supporting both K-12 and College grading systems with advanced features for modern academic institutions.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Feature 1 -->
+                <div class="feature-card bg-white border border-gray-200 p-8 text-center">
+                    <div class="inline-flex items-center justify-center w-16 h-16 bg-blue-100 rounded-lg mb-6">
+                        <i class="fas fa-calculator text-blue-700 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-4">Advanced Grading System</h3>
+                    <p class="text-gray-600">
+                        Excel-style grade entry with automatic calculations. Supports K-12 (Outstanding to Did Not Meet) and College (1.00-5.00) grading scales.
+                    </p>
+                </div>
+
+                <!-- Feature 2 -->
+                <div class="feature-card bg-white border border-gray-200 p-8 text-center">
+                    <div class="inline-flex items-center justify-center w-16 h-16 bg-green-100 rounded-lg mb-6">
+                        <i class="fas fa-users text-green-700 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-4">Student Management</h3>
+                    <p class="text-gray-600">
+                        Complete student records management including irregular students, back subjects, and academic tracking from Kindergarten to College.
+                    </p>
+                </div>
+
+                <!-- Feature 3 -->
+                <div class="feature-card bg-white border border-gray-200 p-8 text-center">
+                    <div class="inline-flex items-center justify-center w-16 h-16 bg-purple-100 rounded-lg mb-6">
+                        <i class="fas fa-chart-bar text-purple-700 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-4">Analytics & Reports</h3>
+                    <p class="text-gray-600">
+                        Comprehensive reporting system with grade cards, class performance analytics, and academic progress tracking for informed decision-making.
+                    </p>
+                </div>
+
+                <!-- Feature 4 -->
+                <div class="feature-card bg-white border border-gray-200 p-8 text-center">
+                    <div class="inline-flex items-center justify-center w-16 h-16 bg-yellow-100 rounded-lg mb-6">
+                        <i class="fas fa-shield-alt text-yellow-700 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-4">Role-Based Access</h3>
+                    <p class="text-gray-600">
+                        Secure access control with separate interfaces for Teachers and Administrators, ensuring data privacy and appropriate permissions.
+                    </p>
+                </div>
+
+                <!-- Feature 5 -->
+                <div class="feature-card bg-white border border-gray-200 p-8 text-center">
+                    <div class="inline-flex items-center justify-center w-16 h-16 bg-red-100 rounded-lg mb-6">
+                        <i class="fas fa-school text-red-700 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-4">Philippines Standards</h3>
+                    <p class="text-gray-600">
+                        Fully compliant with Department of Education standards, supporting proper grade computation and academic calendar management.
+                    </p>
+                </div>
+
+                <!-- Feature 6 -->
+                <div class="feature-card bg-white border border-gray-200 p-8 text-center">
+                    <div class="inline-flex items-center justify-center w-16 h-16 bg-indigo-100 rounded-lg mb-6">
+                        <i class="fas fa-table text-indigo-700 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-4">Excel-Like Interface</h3>
+                    <p class="text-gray-600">
+                        Familiar spreadsheet-style grade entry with horizontal scrolling, sticky columns, and unlimited grade components for flexible grading.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Statistics Section -->
+    <section class="py-20 bg-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">Trusted by Educational Institutions</h2>
+                <p class="text-xl text-gray-600">Supporting academic excellence across the Philippines</p>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+                <div class="text-center">
+                    <div class="text-4xl font-bold text-blue-700 mb-2">K-12</div>
+                    <div class="text-gray-600">Education Levels</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-4xl font-bold text-blue-700 mb-2">100%</div>
+                    <div class="text-gray-600">DepEd Compliant</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-4xl font-bold text-blue-700 mb-2">24/7</div>
+                    <div class="text-gray-600">System Availability</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-4xl font-bold text-blue-700 mb-2">∞</div>
+                    <div class="text-gray-600">Grade Components</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h2 class="text-4xl font-bold text-gray-900 mb-6">Built for Philippines Education</h2>
+                    <p class="text-lg text-gray-600 mb-6">
+                        EduManage PH is specifically designed to meet the unique requirements of the Philippines education system, from Kindergarten through College level. Our platform understands the complexities of academic management in Philippine institutions.
+                    </p>
+                    <div class="space-y-4">
+                        <div class="flex items-center">
+                            <i class="fas fa-check-circle text-green-600 mr-3"></i>
+                            <span class="text-gray-700">K-12 and College grading system support</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-check-circle text-green-600 mr-3"></i>
+                            <span class="text-gray-700">Irregular student and back subject management</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-check-circle text-green-600 mr-3"></i>
+                            <span class="text-gray-700">Department of Education standards compliance</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-check-circle text-green-600 mr-3"></i>
+                            <span class="text-gray-700">Academic calendar and quarter system support</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-gray-100 p-8 rounded-lg">
+                    <div class="text-center">
+                        <div class="inline-flex items-center justify-center w-24 h-24 bg-blue-700 rounded-full mb-6">
+                            <i class="fas fa-graduation-cap text-white text-3xl"></i>
+                        </div>
+                        <h3 class="text-2xl font-semibold text-gray-900 mb-4">Academic Excellence</h3>
+                        <p class="text-gray-600">
+                            Empowering educators with the tools they need to focus on what matters most - student success and academic achievement.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20 bg-blue-700">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-4xl font-bold text-white mb-6">Ready to Transform Your Academic Management?</h2>
+            <p class="text-xl text-blue-100 mb-8 max-w-3xl mx-auto">
+                Join educational institutions across the Philippines in modernizing their grading and student management systems with EduManage PH.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="index.html" class="bg-white text-blue-700 px-8 py-4 text-lg font-semibold hover:bg-gray-100 transition-colors inline-flex items-center justify-center">
+                    <i class="fas fa-arrow-right mr-3"></i>
+                    Access System
+                </a>
+                <a href="#contact" class="border-2 border-white text-white px-8 py-4 text-lg font-semibold hover:bg-white hover:text-blue-700 transition-colors inline-flex items-center justify-center">
+                    <i class="fas fa-envelope mr-3"></i>
+                    Contact Us
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact" class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div class="col-span-1 md:col-span-2">
+                    <div class="flex items-center mb-4">
+                        <div class="h-8 w-8 bg-blue-600 rounded flex items-center justify-center mr-3">
+                            <i class="fas fa-graduation-cap text-white text-sm"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold">EduManage PH</h3>
+                    </div>
+                    <p class="text-gray-400 mb-4 max-w-md">
+                        Comprehensive education management system designed specifically for Philippines K-12 to College institutions, ensuring academic excellence and administrative efficiency.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white">
+                            <i class="fab fa-facebook text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white">
+                            <i class="fab fa-twitter text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white">
+                            <i class="fab fa-linkedin text-xl"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="text-gray-400 hover:text-white">System Access</a></li>
+                        <li><a href="login.html" class="text-gray-400 hover:text-white">Login</a></li>
+                        <li><a href="#features" class="text-gray-400 hover:text-white">Features</a></li>
+                        <li><a href="#about" class="text-gray-400 hover:text-white">About</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Contact Info</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li class="flex items-center">
+                            <i class="fas fa-envelope mr-2"></i>
+                            info@edumanageph.com
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-phone mr-2"></i>
+                            +63 (02) 123-4567
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-map-marker-alt mr-2"></i>
+                            Philippines
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center">
+                <p class="text-gray-400">
+                    © 2024 EduManage PH. All rights reserved. | Built for Philippines Department of Education Standards
+                </p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

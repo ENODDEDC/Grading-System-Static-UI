@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - EduManage PH</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .sidebar-item {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .sidebar-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 3px;
+            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+            transform: scaleY(0);
+            transition: transform 0.3s ease;
+        }
+        
+        .sidebar-item:hover::before {
+            transform: scaleY(1);
+        }
+        
+        .sidebar-item:hover {
+            background: linear-gradient(90deg, rgba(59, 130, 246, 0.1), rgba(59, 130, 246, 0.05));
+            transform: translateX(8px);
+            color: #1d4ed8;
+        }
+        
+        .sidebar-section {
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            background: linear-gradient(135deg, #374151, #4b5563);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        
+        .sidebar-section:hover {
+            background: linear-gradient(135deg, #4b5563, #6b7280);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 15px -3px rgba(0, 0, 0, 0.2);
+        }
+        
+        .sidebar-section.collapsed .fa-chevron-down {
+            transform: rotate(-90deg);
+        }
+        
+        .sidebar-section::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #3b82f6, #1d4ed8);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+        
+        .sidebar-section:hover::after {
+            width: 80%;
+        }
+        
+        .shortcut-card {
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        
+        .shortcut-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        .grade-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #e5e7eb, #f3f4f6);
+            color: #374151;
+            font-weight: 600;
+            font-size: 12px;
+            margin-right: 12px;
+            transition: all 0.3s ease;
+        }
+        
+        .sidebar-item:hover .grade-badge {
+            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+            color: white;
+            transform: scale(1.1);
+        }
+        
+        .program-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 4px 12px;
+            border-radius: 20px;
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            color: white;
+            font-weight: 600;
+            font-size: 11px;
+            margin-right: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .year-item {
+            position: relative;
+            padding-left: 20px;
+        }
+        
+        .year-item::before {
+            content: '';
+            position: absolute;
+            left: 8px;
+            top: 50%;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: #9ca3af;
+            transform: translateY(-50%);
+            transition: all 0.3s ease;
+        }
+        
+        .year-item:hover::before {
+            background: #3b82f6;
+            transform: translateY(-50%) scale(1.5);
+        }
+        
+        .sidebar-container {
+            background: linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%);
+            border-right: 1px solid #e2e8f0;
+        }
+        
+        .section-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .section-content.expanded {
+            max-height: 1000px;
+        }
+        
+        .sidebar-header {
+            background: linear-gradient(135deg, #1e293b, #334155);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            border-bottom: 3px solid #3b82f6;
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+    <!-- Top Navigation -->
+    <nav class="bg-white shadow-sm border-b h-16 fixed top-0 left-0 right-0 z-30">
+        <div class="flex justify-between items-center h-full px-6">
+            <div class="flex items-center">
+                <div class="h-8 w-8 bg-gray-700 rounded flex items-center justify-center mr-3">
+                    <i class="fas fa-graduation-cap text-white text-sm"></i>
+                </div>
+                <h1 class="text-lg font-medium text-gray-900">EduManage PH</h1>
+            </div>
+            <div class="flex items-center space-x-4">
+                <span class="px-3 py-1 bg-gray-100 text-gray-700 text-sm font-medium rounded">Admin</span>
+                <button class="text-gray-600 hover:text-gray-900 text-sm">Log out</button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="flex pt-16">
+        <!-- Sidebar -->
+        <div class="w-72 sidebar-container min-h-screen fixed left-0 top-16 overflow-y-auto shadow-xl">
+            <!-- Sidebar Header -->
+            <div class="sidebar-header">
+                <i class="fas fa-graduation-cap text-2xl mb-2"></i>
+                <h3 class="font-bold text-lg">Academic Levels</h3>
+                <p class="text-sm opacity-80">Manage Education System</p>
+            </div>
+            
+            <div class="p-6">
+                <!-- Preschool Section -->
+                <div class="mb-6 preschool-section">
+                    <div class="sidebar-section rounded-xl p-4 cursor-pointer flex items-center justify-between text-white" onclick="toggleSection('preschool')">
+                        <div class="flex items-center">
+                            <i class="fas fa-baby mr-3 text-lg"></i>
+                            <span class="font-semibold text-lg">Preschool</span>
+                        </div>
+                        <i class="fas fa-chevron-down transition-transform duration-300"></i>
+                    </div>
+                    
+                    <div id="preschool-content" class="section-content mt-4">
+                        <div class="space-y-2 pl-2">
+                            <div class="sidebar-item py-3 px-4 cursor-pointer rounded-lg flex items-center">
+                                <div class="grade-badge">K</div>
+                                <span class="font-medium">Kindergarten</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Elementary Section -->
+                <div class="mb-6 elementary-section">
+                    <div class="sidebar-section rounded-xl p-4 cursor-pointer flex items-center justify-between text-white" onclick="toggleSection('elementary')">
+                        <div class="flex items-center">
+                            <i class="fas fa-child mr-3 text-lg"></i>
+                            <span class="font-semibold text-lg">Elementary</span>
+                        </div>
+                        <i class="fas fa-chevron-down transition-transform duration-300"></i>
+                    </div>
+                    
+                    <div id="elementary-content" class="section-content mt-4">
+                        <div class="space-y-2 pl-2">
+                            <div class="sidebar-item py-3 px-4 cursor-pointer rounded-lg flex items-center">
+                                <div class="grade-badge">1</div>
+                                <span class="font-medium">Grade 1</span>
+                            </div>
+                            
+                            <div class="sidebar-item py-3 px-4 cursor-pointer rounded-lg flex items-center">
+                                <div class="grade-badge">2</div>
+                                <span class="font-medium">Grade 2</span>
+                            </div>
+                            
+                            <div class="sidebar-item py-3 px-4 cursor-pointer rounded-lg flex items-center">
+                                <div class="grade-badge">3</div>
+                                <span class="font-medium">Grade 3</span>
+                            </div>
+                            
+                            <div class="sidebar-item py-3 px-4 cursor-pointer rounded-lg flex items-center">
+                                <div class="grade-badge">4</div>
+                                <span class="font-medium">Grade 4</span>
+                            </div>
+                            
+                            <div class="sidebar-item py-3 px-4 cursor-pointer rounded-lg flex items-center">
+                                <div class="grade-badge">5</div>
+                                <span class="font-medium">Grade 5</span>
+                            </div>
+                            
+                            <div class="sidebar-item py-3 px-4 cursor-pointer rounded-lg flex items-center">
+                                <div class="grade-badge">6</div>
+                                <span class="font-medium">Grade 6</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- High School Section -->
+                <div class="mb-6 highschool-section">
+                    <div class="sidebar-section rounded-xl p-4 cursor-pointer flex items-center justify-between text-white" onclick="toggleSection('highschool')">
+                        <div class="flex items-center">
+                            <i class="fas fa-user-graduate mr-3 text-lg"></i>
+                            <span class="font-semibold text-lg">High School</span>
+                        </div>
+                        <i class="fas fa-chevron-down transition-transform duration-300"></i>
+                    </div>
+                    
+                    <div id="highschool-content" class="section-content mt-4">
+                        <div class="space-y-4 pl-2">
+                            <!-- Junior High School -->
+                            <div class="bg-white rounded-lg p-4 shadow-sm border border-gray-100">
+                                <div class="flex items-center mb-3">
+                                    <div class="program-badge" style="background: linear-gradient(135deg, #8b5cf6, #7c3aed);">JHS</div>
+                                    <span class="font-semibold text-gray-800">Junior High School</span>
+                                </div>
+                                
+                                <div class="grid grid-cols-2 gap-2">
+                                    <div class="sidebar-item year-item py-2 px-3 cursor-pointer rounded text-sm text-gray-600 hover:text-blue-600 text-center">Grade 7</div>
+                                    <div class="sidebar-item year-item py-2 px-3 cursor-pointer rounded text-sm text-gray-600 hover:text-blue-600 text-center">Grade 8</div>
+                                    <div class="sidebar-item year-item py-2 px-3 cursor-pointer rounded text-sm text-gray-600 hover:text-blue-600 text-center">Grade 9</div>
+                                    <div class="sidebar-item year-item py-2 px-3 cursor-pointer rounded text-sm text-gray-600 hover:text-blue-600 text-center">Grade 10</div>
+                                </div>
+                            </div>
+                            
+                            <!-- Senior High School -->
+                            <div class="bg-white rounded-lg p-4 shadow-sm border border-gray-100">
+                                <div class="flex items-center mb-3">
+                                    <div class="program-badge" style="background: linear-gradient(135deg, #ef4444, #dc2626);">SHS</div>
+                                    <span class="font-semibold text-gray-800">Senior High School</span>
+                                </div>
+                                
+                                <div class="grid grid-cols-2 gap-2">
+                                    <div class="sidebar-item year-item py-2 px-3 cursor-pointer rounded text-sm text-gray-600 hover:text-blue-600 text-center">Grade 11</div>
+                                    <div class="sidebar-item year-item py-2 px-3 cursor-pointer rounded text-sm text-gray-600 hover:text-blue-600 text-center">Grade 12</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="flex-1 ml-72 p-8">
+            <!-- Header -->
+            <div class="mb-8">
+                <h2 class="text-3xl font-bold text-gray-900 mb-2">Administrator Dashboard</h2>
+                <p class="text-gray-600">Manage your education system with comprehensive administrative tools</p>
+            </div>
+
+            <!-- Shortcuts Section -->
+            <div class="mb-8">
+                <h3 class="text-xl font-semibold text-gray-900 mb-6 text-center">Shortcuts</h3>
+                
+                <!-- Admin Feature Shortcuts Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                    
+                    <!-- Student Management -->
+                    <a href="student-records.html" class="shortcut-card bg-white border border-gray-200 p-6 text-center hover:border-blue-300">
+                        <div class="inline-flex items-center justify-center w-12 h-12 bg-blue-100 rounded-lg mb-4">
+                            <i class="fas fa-user-graduate text-blue-600 text-xl"></i>
+                        </div>
+                        <h4 class="font-semibold text-gray-900 mb-2">Student Records</h4>
+                        <p class="text-sm text-gray-600">Manage student information and enrollment</p>
+                    </a>
+
+                    <!-- K-12 Management -->
+                    <a href="k12-management.html" class="shortcut-card bg-white border border-gray-200 p-6 text-center hover:border-green-300">
+                        <div class="inline-flex items-center justify-center w-12 h-12 bg-green-100 rounded-lg mb-4">
+                            <i class="fas fa-school text-green-600 text-xl"></i>
+                        </div>
+                        <h4 class="font-semibold text-gray-900 mb-2">K-12 Management</h4>
+                        <p class="text-sm text-gray-600">Kindergarten to Grade 12 administration</p>
+                    </a>
+
+                    <!-- College Management -->
+                    <a href="college-management.html" class="shortcut-card bg-white border border-gray-200 p-6 text-center hover:border-purple-300">
+                        <div class="inline-flex items-center justify-center w-12 h-12 bg-purple-100 rounded-lg mb-4">
+                            <i class="fas fa-university text-purple-600 text-xl"></i>
+                        </div>
+                        <h4 class="font-semibold text-gray-900 mb-2">College Management</h4>
+                        <p class="text-sm text-gray-600">Higher education and irregular students</p>
+                    </a>
+
+                    <!-- User Management -->
+                    <a href="user-management.html" class="shortcut-card bg-white border border-gray-200 p-6 text-center hover:border-yellow-300">
+                        <div class="inline-flex items-center justify-center w-12 h-12 bg-yellow-100 rounded-lg mb-4">
+                            <i class="fas fa-users-cog text-yellow-600 text-xl"></i>
+                        </div>
+                        <h4 class="font-semibold text-gray-900 mb-2">User Management</h4>
+                        <p class="text-sm text-gray-600">Teachers, staff, and admin accounts</p>
+                    </a>
+
+                    <!-- Course Management -->
+                    <a href="course-management.html" class="shortcut-card bg-white border border-gray-200 p-6 text-center hover:border-red-300">
+                        <div class="inline-flex items-center justify-center w-12 h-12 bg-red-100 rounded-lg mb-4">
+                            <i class="fas fa-book text-red-600 text-xl"></i>
+                        </div>
+                        <h4 class="font-semibold text-gray-900 mb-2">Course Management</h4>
+                        <p class="text-sm text-gray-600">Subjects, curriculum, and schedules</p>
+                    </a>
+
+                    <!-- Section Management -->
+                    <a href="section-management.html" class="shortcut-card bg-white border border-gray-200 p-6 text-center hover:border-indigo-300">
+                        <div class="inline-flex items-center justify-center w-12 h-12 bg-indigo-100 rounded-lg mb-4">
+                            <i class="fas fa-layer-group text-indigo-600 text-xl"></i>
+                        </div>
+                        <h4 class="font-semibold text-gray-900 mb-2">Section Management</h4>
+                        <p class="text-sm text-gray-600">Class sections and room assignments</p>
+                    </a>
+
+                    <!-- Grading System -->
+                    <a href="grading-system.html" class="shortcut-card bg-white border border-gray-200 p-6 text-center hover:border-teal-300">
+                        <div class="inline-flex items-center justify-center w-12 h-12 bg-teal-100 rounded-lg mb-4">
+                            <i class="fas fa-calculator text-teal-600 text-xl"></i>
+                        </div>
+                        <h4 class="font-semibold text-gray-900 mb-2">Grading System</h4>
+                        <p class="text-sm text-gray-600">Grade computation and standards</p>
+                    </a>
+
+                    <!-- Reports & Analytics -->
+                    <a href="reports.html" class="shortcut-card bg-white border border-gray-200 p-6 text-center hover:border-pink-300">
+                        <div class="inline-flex items-center justify-center w-12 h-12 bg-pink-100 rounded-lg mb-4">
+                            <i class="fas fa-chart-bar text-pink-600 text-xl"></i>
+                        </div>
+                        <h4 class="font-semibold text-gray-900 mb-2">Reports & Analytics</h4>
+                        <p class="text-sm text-gray-600">Academic performance reports</p>
+                    </a>
+
+                    <!-- System Settings -->
+                    <a href="system-settings.html" class="shortcut-card bg-white border border-gray-200 p-6 text-center hover:border-gray-400">
+                        <div class="inline-flex items-center justify-center w-12 h-12 bg-gray-100 rounded-lg mb-4">
+                            <i class="fas fa-cog text-gray-600 text-xl"></i>
+                        </div>
+                        <h4 class="font-semibold text-gray-900 mb-2">System Settings</h4>
+                        <p class="text-sm text-gray-600">Configuration and preferences</p>
+                    </a>
+
+                    <!-- Grade Cards -->
+                    <a href="grade-cards.html" class="shortcut-card bg-white border border-gray-200 p-6 text-center hover:border-orange-300">
+                        <div class="inline-flex items-center justify-center w-12 h-12 bg-orange-100 rounded-lg mb-4">
+                            <i class="fas fa-file-alt text-orange-600 text-xl"></i>
+                        </div>
+                        <h4 class="font-semibold text-gray-900 mb-2">Grade Cards</h4>
+                        <p class="text-sm text-gray-600">Generate and print grade cards</p>
+                    </a>
+
+                    <!-- Academic Calendar -->
+                    <div class="shortcut-card bg-white border border-gray-200 p-6 text-center hover:border-cyan-300 cursor-pointer">
+                        <div class="inline-flex items-center justify-center w-12 h-12 bg-cyan-100 rounded-lg mb-4">
+                            <i class="fas fa-calendar-alt text-cyan-600 text-xl"></i>
+                        </div>
+                        <h4 class="font-semibold text-gray-900 mb-2">Academic Calendar</h4>
+                        <p class="text-sm text-gray-600">Manage academic year and terms</p>
+                    </div>
+
+                    <!-- Enrollment Management -->
+                    <div class="shortcut-card bg-white border border-gray-200 p-6 text-center hover:border-emerald-300 cursor-pointer">
+                        <div class="inline-flex items-center justify-center w-12 h-12 bg-emerald-100 rounded-lg mb-4">
+                            <i class="fas fa-user-plus text-emerald-600 text-xl"></i>
+                        </div>
+                        <h4 class="font-semibold text-gray-900 mb-2">Enrollment</h4>
+                        <p class="text-sm text-gray-600">Student enrollment and registration</p>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Quick Stats -->
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mt-12">
+                <div class="bg-white border border-gray-200 p-6 text-center">
+                    <div class="text-3xl font-bold text-blue-600 mb-2">1,247</div>
+                    <div class="text-sm text-gray-600">Total Students</div>
+                </div>
+                <div class="bg-white border border-gray-200 p-6 text-center">
+                    <div class="text-3xl font-bold text-green-600 mb-2">89</div>
+                    <div class="text-sm text-gray-600">Teachers</div>
+                </div>
+                <div class="bg-white border border-gray-200 p-6 text-center">
+                    <div class="text-3xl font-bold text-purple-600 mb-2">45</div>
+                    <div class="text-sm text-gray-600">Sections</div>
+                </div>
+                <div class="bg-white border border-gray-200 p-6 text-center">
+                    <div class="text-3xl font-bold text-orange-600 mb-2">156</div>
+                    <div class="text-sm text-gray-600">Courses</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleSection(sectionId) {
+            // Get all section containers (the entire div blocks)
+            const allSectionContainers = {
+                'preschool': document.querySelector('.preschool-section'),
+                'elementary': document.querySelector('.elementary-section'),
+                'highschool': document.querySelector('.highschool-section')
+            };
+            
+            const clickedContainer = allSectionContainers[sectionId];
+            const content = document.getElementById(sectionId + '-content');
+            const section = content.previousElementSibling;
+            
+            // Check if the clicked section is currently expanded
+            const isCurrentlyExpanded = content.classList.contains('expanded');
+            
+            if (isCurrentlyExpanded) {
+                // If collapsing, show all sections again
+                Object.values(allSectionContainers).forEach(container => {
+                    container.style.display = 'block';
+                });
+                
+                // Collapse the clicked section
+                content.classList.remove('expanded');
+                section.classList.add('collapsed');
+            } else {
+                // If expanding, hide all other sections
+                Object.keys(allSectionContainers).forEach(id => {
+                    if (id !== sectionId) {
+                        allSectionContainers[id].style.display = 'none';
+                    }
+                });
+                
+                // Show and expand the clicked section
+                clickedContainer.style.display = 'block';
+                content.classList.add('expanded');
+                section.classList.remove('collapsed');
+            }
+        }
+        
+        // Add smooth scroll behavior and enhanced interactions
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add ripple effect to sidebar items
+            const sidebarItems = document.querySelectorAll('.sidebar-item');
+            sidebarItems.forEach(item => {
+                item.addEventListener('click', function(e) {
+                    const ripple = document.createElement('span');
+                    const rect = this.getBoundingClientRect();
+                    const size = Math.max(rect.width, rect.height);
+                    const x = e.clientX - rect.left - size / 2;
+                    const y = e.clientY - rect.top - size / 2;
+                    
+                    ripple.style.width = ripple.style.height = size + 'px';
+                    ripple.style.left = x + 'px';
+                    ripple.style.top = y + 'px';
+                    ripple.classList.add('ripple');
+                    
+                    this.appendChild(ripple);
+                    
+                    setTimeout(() => {
+                        ripple.remove();
+                    }, 600);
+                });
+            });
+        });
+    </script>
+    
+    <style>
+        .ripple {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(59, 130, 246, 0.3);
+            transform: scale(0);
+            animation: ripple-animation 0.6s linear;
+            pointer-events: none;
+        }
+        
+        @keyframes ripple-animation {
+            to {
+                transform: scale(4);
+                opacity: 0;
+            }
+        }
+    </style>
+</body>
+</html>
