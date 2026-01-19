@@ -560,40 +560,269 @@
 
             <!-- Grade Content (Hidden by default) -->
             <div id="grade-content" class="hidden h-full">
-                <div class="bg-white border-4 border-blue-400 h-full p-8 overflow-hidden box-border">
-                    <h2 id="grade-title" class="text-3xl font-bold text-gray-900 mb-8">Grade 1</h2>
+                <div class="bg-white border-4 border-blue-400 h-full overflow-hidden box-border">
                     
-                    <!-- School Years in Horizontal Layout -->
-                    <div class="flex flex-wrap gap-4 mb-8">
-                        <div class="bg-gray-400 text-white px-6 py-3 cursor-pointer hover:bg-gray-500 transition-colors" onclick="showSchoolYearContent('2016-2017')">
-                            2016-2017
+                    <!-- Header -->
+                    <div class="bg-white border-b border-gray-200 p-6 flex items-center justify-between">
+                        <div>
+                            <h2 id="grade-title" class="text-2xl font-semibold text-gray-900">Grade 1</h2>
+                            <p id="year-title" class="text-gray-600">Grade 1</p>
                         </div>
-                        <div class="bg-gray-400 text-white px-6 py-3 cursor-pointer hover:bg-gray-500 transition-colors" onclick="showSchoolYearContent('2017-2018')">
-                            2017-2018
+                        <button onclick="showDashboard()" class="bg-gray-100 text-gray-700 px-4 py-2 border border-gray-300 hover:bg-gray-200 transition-colors">
+                            <i class="fas fa-arrow-left mr-2"></i>← Back to Dashboard
+                        </button>
+                    </div>
+
+                    <!-- School Years View -->
+                    <div id="school-years-view" class="p-8">
+                        <div class="mb-6">
+                            <h3 class="text-xl font-semibold text-gray-900 mb-4">Select School Year</h3>
+                            <p class="text-gray-600">Choose a school year to view subjects and academic data</p>
                         </div>
-                        <div class="bg-gray-400 text-white px-6 py-3 cursor-pointer hover:bg-gray-500 transition-colors" onclick="showSchoolYearContent('2018-2019')">
-                            2018-2019
-                        </div>
-                        <div class="bg-gray-400 text-white px-6 py-3 cursor-pointer hover:bg-gray-500 transition-colors" onclick="showSchoolYearContent('2019-2020')">
-                            2019-2020
-                        </div>
-                        <div class="bg-gray-400 text-white px-6 py-3 cursor-pointer hover:bg-gray-500 transition-colors" onclick="showSchoolYearContent('2020-2021')">
-                            2020-2021
-                        </div>
-                        <div class="bg-gray-400 text-white px-6 py-3 cursor-pointer hover:bg-gray-500 transition-colors" onclick="showSchoolYearContent('2021-2022')">
-                            2021-2022
-                        </div>
-                        <div class="bg-gray-400 text-white px-6 py-3 cursor-pointer hover:bg-gray-500 transition-colors" onclick="showSchoolYearContent('2022-2023')">
-                            2022-2023
-                        </div>
-                        <div class="bg-gray-400 text-white px-6 py-3 cursor-pointer hover:bg-gray-500 transition-colors" onclick="showSchoolYearContent('2023-2024')">
-                            2023-2024
+                        
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                            <div class="bg-white border border-gray-200 p-6 text-center hover:border-gray-400 cursor-pointer transition-colors" onclick="showSchoolYearContent('2023-2024')">
+                                <div class="text-lg font-semibold text-gray-900 mb-2">2023-2024</div>
+                                <div class="text-sm text-gray-600">Current Year</div>
+                            </div>
+                            
+                            <div class="bg-white border border-gray-200 p-6 text-center hover:border-gray-400 cursor-pointer transition-colors" onclick="showSchoolYearContent('2022-2023')">
+                                <div class="text-lg font-semibold text-gray-900 mb-2">2022-2023</div>
+                                <div class="text-sm text-gray-600">Previous Year</div>
+                            </div>
+                            
+                            <div class="bg-white border border-gray-200 p-6 text-center hover:border-gray-400 cursor-pointer transition-colors" onclick="showSchoolYearContent('2021-2022')">
+                                <div class="text-lg font-semibold text-gray-900 mb-2">2021-2022</div>
+                                <div class="text-sm text-gray-600">Archive</div>
+                            </div>
+                            
+                            <div class="bg-white border border-gray-200 p-6 text-center hover:border-gray-400 cursor-pointer transition-colors" onclick="showSchoolYearContent('2020-2021')">
+                                <div class="text-lg font-semibold text-gray-900 mb-2">2020-2021</div>
+                                <div class="text-sm text-gray-600">Archive</div>
+                            </div>
+                            
+                            <div class="bg-white border border-gray-200 p-6 text-center hover:border-gray-400 cursor-pointer transition-colors" onclick="showSchoolYearContent('2019-2020')">
+                                <div class="text-lg font-semibold text-gray-900 mb-2">2019-2020</div>
+                                <div class="text-sm text-gray-600">Archive</div>
+                            </div>
+                            
+                            <div class="bg-white border border-gray-200 p-6 text-center hover:border-gray-400 cursor-pointer transition-colors" onclick="showSchoolYearContent('2018-2019')">
+                                <div class="text-lg font-semibold text-gray-900 mb-2">2018-2019</div>
+                                <div class="text-sm text-gray-600">Archive</div>
+                            </div>
+                            
+                            <div class="bg-white border border-gray-200 p-6 text-center hover:border-gray-400 cursor-pointer transition-colors" onclick="showSchoolYearContent('2017-2018')">
+                                <div class="text-lg font-semibold text-gray-900 mb-2">2017-2018</div>
+                                <div class="text-sm text-gray-600">Archive</div>
+                            </div>
+                            
+                            <div class="bg-white border border-gray-200 p-6 text-center hover:border-gray-400 cursor-pointer transition-colors" onclick="showSchoolYearContent('2016-2017')">
+                                <div class="text-lg font-semibold text-gray-900 mb-2">2016-2017</div>
+                                <div class="text-sm text-gray-600">Archive</div>
+                            </div>
                         </div>
                     </div>
-                    
-                    <button onclick="showDashboard()" class="text-blue-600 hover:text-blue-800 underline">
-                        ← Back to Dashboard
-                    </button>
+
+                    <!-- Back to Dashboard Button (Hidden by default) -->
+                    <div id="back-to-dashboard" class="hidden p-6 border-b border-gray-200">
+                        <button onclick="showSchoolYears()" class="bg-gray-100 text-gray-700 px-4 py-2 border border-gray-300 hover:bg-gray-200 transition-colors">
+                            <i class="fas fa-arrow-left mr-2"></i>← Back to School Years
+                        </button>
+                    </div>
+
+                    <!-- Subjects View (Hidden by default) -->
+                    <div id="subjects-view" class="hidden p-8">
+                        <div class="mb-6">
+                            <h3 class="text-xl font-semibold text-gray-900 mb-4">Subjects</h3>
+                            <p class="text-gray-600">Manage subjects for the selected grade and school year</p>
+                        </div>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                            <!-- Science -->
+                            <div class="bg-white border border-gray-200 p-6 hover:border-gray-400 cursor-pointer transition-colors" onclick="showSubjectDetails('Science')">
+                                <div class="flex items-center mb-4">
+                                    <div class="w-12 h-12 bg-gray-100 flex items-center justify-center mr-4">
+                                        <i class="fas fa-flask text-gray-600 text-xl"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-semibold text-gray-900">Science</h4>
+                                        <p class="text-sm text-gray-600">Natural Sciences</p>
+                                    </div>
+                                </div>
+                                <div class="text-sm text-gray-600">
+                                    <div class="flex justify-between mb-1">
+                                        <span>Students:</span>
+                                        <span>156</span>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <span>Sections:</span>
+                                        <span>4</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Mathematics -->
+                            <div class="bg-white border border-gray-200 p-6 hover:border-gray-400 cursor-pointer transition-colors" onclick="showSubjectDetails('Mathematics')">
+                                <div class="flex items-center mb-4">
+                                    <div class="w-12 h-12 bg-gray-100 flex items-center justify-center mr-4">
+                                        <i class="fas fa-calculator text-gray-600 text-xl"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-semibold text-gray-900">Mathematics</h4>
+                                        <p class="text-sm text-gray-600">Numbers & Problem Solving</p>
+                                    </div>
+                                </div>
+                                <div class="text-sm text-gray-600">
+                                    <div class="flex justify-between mb-1">
+                                        <span>Students:</span>
+                                        <span>156</span>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <span>Sections:</span>
+                                        <span>4</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- English -->
+                            <div class="bg-white border border-gray-200 p-6 hover:border-gray-400 cursor-pointer transition-colors" onclick="showSubjectDetails('English')">
+                                <div class="flex items-center mb-4">
+                                    <div class="w-12 h-12 bg-gray-100 flex items-center justify-center mr-4">
+                                        <i class="fas fa-book-open text-gray-600 text-xl"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-semibold text-gray-900">English</h4>
+                                        <p class="text-sm text-gray-600">Language & Literature</p>
+                                    </div>
+                                </div>
+                                <div class="text-sm text-gray-600">
+                                    <div class="flex justify-between mb-1">
+                                        <span>Students:</span>
+                                        <span>156</span>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <span>Sections:</span>
+                                        <span>4</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Filipino -->
+                            <div class="bg-white border border-gray-200 p-6 hover:border-gray-400 cursor-pointer transition-colors" onclick="showSubjectDetails('Filipino')">
+                                <div class="flex items-center mb-4">
+                                    <div class="w-12 h-12 bg-gray-100 flex items-center justify-center mr-4">
+                                        <i class="fas fa-flag text-gray-600 text-xl"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-semibold text-gray-900">Filipino</h4>
+                                        <p class="text-sm text-gray-600">Wikang Pambansa</p>
+                                    </div>
+                                </div>
+                                <div class="text-sm text-gray-600">
+                                    <div class="flex justify-between mb-1">
+                                        <span>Students:</span>
+                                        <span>156</span>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <span>Sections:</span>
+                                        <span>4</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Social Studies -->
+                            <div class="bg-white border border-gray-200 p-6 hover:border-gray-400 cursor-pointer transition-colors" onclick="showSubjectDetails('Social Studies')">
+                                <div class="flex items-center mb-4">
+                                    <div class="w-12 h-12 bg-gray-100 flex items-center justify-center mr-4">
+                                        <i class="fas fa-globe text-gray-600 text-xl"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-semibold text-gray-900">Social Studies</h4>
+                                        <p class="text-sm text-gray-600">History & Geography</p>
+                                    </div>
+                                </div>
+                                <div class="text-sm text-gray-600">
+                                    <div class="flex justify-between mb-1">
+                                        <span>Students:</span>
+                                        <span>156</span>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <span>Sections:</span>
+                                        <span>4</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Arts -->
+                            <div class="bg-white border border-gray-200 p-6 hover:border-gray-400 cursor-pointer transition-colors" onclick="showSubjectDetails('Arts')">
+                                <div class="flex items-center mb-4">
+                                    <div class="w-12 h-12 bg-gray-100 flex items-center justify-center mr-4">
+                                        <i class="fas fa-palette text-gray-600 text-xl"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-semibold text-gray-900">Arts</h4>
+                                        <p class="text-sm text-gray-600">Creative Expression</p>
+                                    </div>
+                                </div>
+                                <div class="text-sm text-gray-600">
+                                    <div class="flex justify-between mb-1">
+                                        <span>Students:</span>
+                                        <span>156</span>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <span>Sections:</span>
+                                        <span>4</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Physical Education -->
+                            <div class="bg-white border border-gray-200 p-6 hover:border-gray-400 cursor-pointer transition-colors" onclick="showSubjectDetails('Physical Education')">
+                                <div class="flex items-center mb-4">
+                                    <div class="w-12 h-12 bg-gray-100 flex items-center justify-center mr-4">
+                                        <i class="fas fa-running text-gray-600 text-xl"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-semibold text-gray-900">Physical Education</h4>
+                                        <p class="text-sm text-gray-600">Health & Fitness</p>
+                                    </div>
+                                </div>
+                                <div class="text-sm text-gray-600">
+                                    <div class="flex justify-between mb-1">
+                                        <span>Students:</span>
+                                        <span>156</span>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <span>Sections:</span>
+                                        <span>4</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Music -->
+                            <div class="bg-white border border-gray-200 p-6 hover:border-gray-400 cursor-pointer transition-colors" onclick="showSubjectDetails('Music')">
+                                <div class="flex items-center mb-4">
+                                    <div class="w-12 h-12 bg-gray-100 flex items-center justify-center mr-4">
+                                        <i class="fas fa-music text-gray-600 text-xl"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-semibold text-gray-900">Music</h4>
+                                        <p class="text-sm text-gray-600">Rhythm & Melody</p>
+                                    </div>
+                                </div>
+                                <div class="text-sm text-gray-600">
+                                    <div class="flex justify-between mb-1">
+                                        <span>Students:</span>
+                                        <span>156</span>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <span>Sections:</span>
+                                        <span>4</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -647,8 +876,52 @@
             // Show grade content
             document.getElementById('grade-content').classList.remove('hidden');
             
-            // Update grade title
-            document.getElementById('grade-title').textContent = grade;
+            // Check if we're currently viewing subjects for this grade
+            const currentYearTitle = document.getElementById('year-title').textContent;
+            const subjectsVisible = !document.getElementById('subjects-view').classList.contains('hidden');
+            
+            // Check if the current year title contains this grade (e.g., "Grade 2 / 2016-2017" contains "Grade 2")
+            if (subjectsVisible && currentYearTitle.startsWith(grade + ' /')) {
+                // If we're viewing subjects for this grade, go back to school years
+                showSchoolYears();
+            } else {
+                // Show school years view first
+                document.getElementById('school-years-view').classList.remove('hidden');
+                document.getElementById('back-to-dashboard').classList.add('hidden');
+                document.getElementById('subjects-view').classList.add('hidden');
+                
+                // Update titles
+                document.getElementById('grade-title').textContent = grade;
+                document.getElementById('year-title').textContent = grade;
+            }
+        }
+        
+        function showSchoolYearContent(schoolYear) {
+            // Get current grade from title
+            const currentGrade = document.getElementById('grade-title').textContent;
+            
+            // Hide school years view
+            document.getElementById('school-years-view').classList.add('hidden');
+            document.getElementById('back-to-dashboard').classList.remove('hidden');
+            
+            // Show subjects view
+            document.getElementById('subjects-view').classList.remove('hidden');
+            
+            // Update year title
+            document.getElementById('year-title').textContent = currentGrade + ' / ' + schoolYear;
+        }
+        
+        function showSchoolYears() {
+            // Show school years view
+            document.getElementById('school-years-view').classList.remove('hidden');
+            document.getElementById('back-to-dashboard').classList.add('hidden');
+            
+            // Hide subjects view
+            document.getElementById('subjects-view').classList.add('hidden');
+            
+            // Reset year title to just grade
+            const currentGrade = document.getElementById('grade-title').textContent;
+            document.getElementById('year-title').textContent = currentGrade;
         }
         
         function showDashboard() {
@@ -659,9 +932,79 @@
             document.getElementById('grade-content').classList.add('hidden');
         }
         
-        function showSchoolYearContent(schoolYear) {
-            // This function can be expanded later to show specific school year content
-            alert('Selected School Year: ' + schoolYear + '\n\nThis will show sections, students, and academic data for this year.');
+        function changeSchoolYear(schoolYear) {
+            // Get current grade from title
+            const currentGrade = document.getElementById('grade-title').textContent;
+            
+            // Update the display to show we're viewing this school year
+            console.log(`Switched to ${currentGrade} for school year ${schoolYear}`);
+            
+            // Update page title
+            document.title = `${currentGrade} (${schoolYear}) - Academic Management - EduManage PH`;
+            
+            // Simulate loading different data for different school years
+            updateStatsForSchoolYear(schoolYear);
+        }
+        
+        function updateStatsForSchoolYear(schoolYear) {
+            // Simulate different stats for different school years
+            const statsData = {
+                '2023-2024': { students: 156, sections: 4, subjects: 8, passRate: '92%' },
+                '2022-2023': { students: 148, sections: 4, subjects: 8, passRate: '89%' },
+                '2021-2022': { students: 142, sections: 4, subjects: 7, passRate: '91%' },
+                '2020-2021': { students: 138, sections: 3, subjects: 7, passRate: '87%' },
+                '2019-2020': { students: 145, sections: 4, subjects: 7, passRate: '90%' },
+                '2018-2019': { students: 151, sections: 4, subjects: 8, passRate: '88%' },
+                '2017-2018': { students: 149, sections: 4, subjects: 8, passRate: '93%' },
+                '2016-2017': { students: 144, sections: 4, subjects: 7, passRate: '86%' }
+            };
+            
+            const data = statsData[schoolYear] || statsData['2023-2024'];
+            
+            // Update the stats cards with animation
+            const statsCards = document.querySelectorAll('.grid.grid-cols-4.gap-6.mb-8 .bg-white');
+            
+            if (statsCards.length >= 4) {
+                // Add loading animation
+                statsCards.forEach(card => card.style.opacity = '0.6');
+                
+                setTimeout(() => {
+                    // Update students
+                    statsCards[0].querySelector('.text-3xl').textContent = data.students;
+                    
+                    // Update sections
+                    statsCards[1].querySelector('.text-3xl').textContent = data.sections;
+                    
+                    // Update subjects
+                    statsCards[2].querySelector('.text-3xl').textContent = data.subjects;
+                    
+                    // Update pass rate
+                    statsCards[3].querySelector('.text-3xl').textContent = data.passRate;
+                    
+                    // Remove loading animation
+                    statsCards.forEach(card => card.style.opacity = '1');
+                }, 300);
+            }
+        }
+        
+        function showSubjectDetails(subject) {
+            // Get current grade and school year
+            const currentTitle = document.getElementById('year-title').textContent;
+            const parts = currentTitle.split(' / ');
+            const currentGrade = parts[0];
+            const currentSchoolYear = parts[1] || 'Not selected';
+            
+            // Simple subject details
+            let message = `Subject: ${subject}\n`;
+            message += `Grade Level: ${currentGrade}\n`;
+            message += `School Year: ${currentSchoolYear}\n\n`;
+            message += `This will show:\n`;
+            message += `• Student lists and sections\n`;
+            message += `• Grade management interface\n`;
+            message += `• Performance analytics\n`;
+            message += `• Teacher assignments`;
+            
+            alert(message);
         }
         
         function showSubjectYears(program, subject) {
@@ -758,6 +1101,17 @@
                         ripple.remove();
                     }, 600);
                 });
+            });
+            
+            // Add keyboard navigation support
+            document.addEventListener('keydown', function(e) {
+                // ESC key to go back to dashboard
+                if (e.key === 'Escape') {
+                    const gradeContent = document.getElementById('grade-content');
+                    if (!gradeContent.classList.contains('hidden')) {
+                        showDashboard();
+                    }
+                }
             });
         });
     </script>
