@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Authentication & Permission Loading Visual Flow</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .flow-box {
+            transition: all 0.3s ease;
+        }
+        .flow-box:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+        .arrow-down {
+            position: relative;
+        }
+        .arrow-down::after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 8px solid transparent;
+            border-right: 8px solid transparent;
+            border-top: 12px solid #6b7280;
+        }
+        .arrow-right {
+            position: relative;
+        }
+        .arrow-right::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            right: -15px;
+            transform: translateY(-50%);
+            width: 0;
+            height: 0;
+            border-left: 12px solid #6b7280;
+            border-top: 8px solid transparent;
+            border-bottom: 8px solid transparent;
+        }
+        .credential-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .database-box {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+        }
+        .permission-box {
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+        }
+        .token-box {
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+        }
+        .process-box {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 p-8">
+    <div class="max-w-7xl mx-auto">
+        <h1 class="text-3xl font-bold text-center text-gray-800 mb-8">
+            <i class="fas fa-shield-alt mr-3 text-blue-600"></i>
+            Authentication & Permission Loading Visual Flow
+        </h1>
+
+        <!-- Main Authentication Flow -->
+        <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+            <h2 class="text-2xl font-bold text-center text-gray-800 mb-8">
+                Step-by-Step Authentication Process
+            </h2>
+
+            <!-- Step 1: Login Request -->
+            <div class="flex flex-col items-center mb-8">
+                <div class="credential-box flow-box rounded-lg p-6 text-center text-white shadow-md w-80">
+                    <i class="fas fa-sign-in-alt text-3xl mb-3"></i>
+                    <h3 class="text-lg font-bold">1. Login Request</h3>
+                    <div class="text-sm mt-2 bg-white bg-opacity-20 rounded p-2">
+                        <div>Username: prof.maria.santos</div>
+                        <div>Password: ••••••••••••</div>
+                        <div>Role: teacher</div>
+                    </div>
+                </div>
+                <div class="arrow-down mt-4 mb-4 h-8"></div>
+            </div>
+
+            <!-- Step 2: Database Lookup -->
+            <div class="flex justify-center items-center mb-8">
+                <div class="database-box flow-box rounded-lg p-6 text-center text-white shadow-md w-64">
+                    <i class="fas fa-search text-3xl mb-3"></i>
+                    <h3 class="text-lg font-bold">2. User Lookup</h3>
+                    <div class="text-sm mt-2">Find user in database</div>
+                </div>
+                <div class="arrow-right mx-8 w-16 h-1"></div>
+                <div class="bg-gray-100 border-2 border-gray-300 rounded-lg p-4 text-center w-64">
+                    <i class="fas fa-database text-gray-600 text-2xl mb-2"></i>
+                    <div class="font-bold text-gray-800">Users Table</div>
+                    <div class="text-xs text-gray-600 mt-2">
+                        <div>✓ Username exists</div>
+                        <div>✓ Account active</div>
+                        <div>✓ Not locked</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex justify-center mb-8">
+                <div class="arrow-down h-8"></div>
+            </div>
+
+            <!-- Step 3: Password Verification -->
+            <div class="flex justify-center items-center mb-8">
+                <div class="process-box flow-box rounded-lg p-6 text-center text-gray-800 shadow-md w-80">
+                    <i class="fas fa-key text-3xl mb-3"></i>
+                    <h3 class="text-lg font-bold">3. Password Verification</h3>
+                    <div class="grid grid-cols-2 gap-4 mt-4 text-sm">
+                        <div class="bg-white bg-opacity-50 rounded p-2">
+                            <div class="font-semibold">Input:</div>
+                            <div>password + salt</div>
+                        </div>
+                        <div class="bg-white bg-opacity-50 rounded p-2">
+                            <div class="font-semibold">Compare:</div>
+                            <div>bcrypt hash</div>
+                        </div>
+                    </div>
+                    <div class="mt-3 text-green-600 font-bold">✓ Password Match</div>
+                </div>
+            </div>
+
+            <div class="flex justify-center mb-8">
+                <div class="arrow-down h-8"></div>
+            </div>
+
+            <!-- Step 4: Permission Loading -->
+            <div class="permission-box flow-box rounded-lg p-6 text-center text-white shadow-md mx-auto w-80 mb-8">
+                <i class="fas fa-cogs text-3xl mb-3"></i>
+                <h3 class="text-lg font-bold">4. Load Permissions</h3>
+                <div class="text-sm mt-2">Fetch teacher's access rights</div>
+            </div>
+
+            <!-- Permission Loading Details -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                <div class="bg-blue-50 border-2 border-blue-200 rounded-lg p-4">
+                    <h4 class="font-bold text-blue-800 mb-3">
+                        <i class="fas fa-user-tag mr-2"></i>Role Permissions
+                    </h4>
+                    <div class="space-y-2 text-sm">
+                        <div class="bg-white rounded p-2">
+                            <div class="font-semibold">Resource: grades</div>
+                            <div class="text-blue-600">Actions: read, write</div>
+                        </div>
+                        <div class="bg-white rounded p-2">
+                            <div class="font-semibold">Resource: students</div>
+                            <div class="text-blue-600">Actions: read</div>
+                        </div>
+                        <div class="bg-white rounded p-2">
+                            <div class="font-semibold">Resource: reports</div>
+                            <div class="text-blue-600">Actions: read</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-green-50 border-2 border-green-200 rounded-lg p-4">
+                    <h4 class="font-bold text-green-800 mb-3">
+                        <i class="fas fa-book mr-2"></i>Subject Assignments
+                    </h4>
+                    <div class="space-y-2 text-sm">
+                        <div class="bg-white rounded p-2">
+                            <div class="font-semibold">CS 101</div>
+                            <div class="text-green-600">Section: CS-A, CS-B</div>
+                        </div>
+                        <div class="bg-white rounded p-2">
+                            <div class="font-semibold">CS 201</div>
+                            <div class="text-green-600">Section: CS-A</div>
+                        </div>
+                        <div class="bg-white rounded p-2">
+                            <div class="font-semibold">CS 301</div>
+                            <div class="text-green-600">Section: CS-A</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-purple-50 border-2 border-purple-200 rounded-lg p-4">
+                    <h4 class="font-bold text-purple-800 mb-3">
+                        <i class="fas fa-users mr-2"></i>Accessible Students
+                    </h4>
+                    <div class="space-y-2 text-sm">
+                        <div class="bg-white rounded p-2">
+                            <div class="font-semibold">CS 101 Students</div>
+                            <div class="text-purple-600">24 enrolled</div>
+                        </div>
+                        <div class="bg-white rounded p-2">
+                            <div class="font-semibold">CS 201 Students</div>
+                            <div class="text-purple-600">18 enrolled</div>
+                        </div>
+                        <div class="bg-white rounded p-2">
+                            <div class="font-semibold">CS 301 Students</div>
+                            <div class="text-purple-600">15 enrolled</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex justify-center mb-8">
+                <div class="arrow-down h-8"></div>
+            </div>
+
+            <!-- Step 5: Token Creation -->
+            <div class="token-box flow-box rounded-lg p-6 text-center text-gray-800 shadow-md mx-auto w-80">
+                <i class="fas fa-ticket-alt text-3xl mb-3"></i>
+                <h3 class="text-lg font-bold">5. Create JWT Token</h3>
+                <div class="text-sm mt-2">Package all permissions into secure token</div>
+            </div>
+        </div>
+
+        <!-- Database Query Visualization -->
+        <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+            <h2 class="text-2xl font-bold text-center text-gray-800 mb-8">
+                <i class="fas fa-database mr-2 text-green-600"></i>
+                Database Queries During Authentication
+            </h2>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- Query 1: User Lookup -->
+                <div class="bg-gray-50 rounded-lg p-6">
+                    <h3 class="text-lg font-bold text-gray-800 mb-4">
+                        <span class="bg-blue-500 text-white rounded-full w-8 h-8 inline-flex items-center justify-center text-sm mr-3">1</span>
+                        User Credential Lookup
+                    </h3>
+                    <div class="bg-gray-800 text-green-400 p-4 rounded text-sm font-mono">
+                        <div class="text-yellow-400">SELECT</div>
+                        <div class="ml-4">id, username, password_hash,</div>
+                        <div class="ml-4">salt, status, role, failed_attempts</div>
+                        <div class="text-yellow-400">FROM</div>
+                        <div class="ml-4">users</div>
+                        <div class="text-yellow-400">WHERE</div>
+                        <div class="ml-4">username = 'prof.maria.santos'</div>
+                        <div class="ml-4">AND role = 'teacher'</div>
+                    </div>
+                    <div class="mt-3 text-sm text-gray-600">
+                        <strong>Result:</strong> User found, account active, password hash retrieved
+                    </div>
+                </div>
+
+                <!-- Query 2: Role Permissions -->
+                <div class="bg-gray-50 rounded-lg p-6">
+                    <h3 class="text-lg font-bold text-gray-800 mb-4">
+                        <span class="bg-green-500 text-white rounded-full w-8 h-8 inline-flex items-center justify-center text-sm mr-3">2</span>
+                        Role Permissions
+                    </h3>
+                    <div class="bg-gray-800 text-green-400 p-4 rounded text-sm font-mono">
+                        <div class="text-yellow-400">SELECT</div>
+                        <div class="ml-4">p.resource, p.action, p.conditions</div>
+                        <div class="text-yellow-400">FROM</div>
+                        <div class="ml-4">users u</div>
+                        <div class="ml-4">JOIN roles r ON u.role_id = r.id</div>
+                        <div class="ml-4">JOIN role_permissions rp ON r.id = rp.role_id</div>
+                        <div class="ml-4">JOIN permissions p ON rp.permission_id = p.id</div>
+                        <div class="text-yellow-400">WHERE</div>
+                        <div class="ml-4">u.id = 123</div>
+                    </div>
+                    <div class="mt-3 text-sm text-gray-600">
+                        <strong>Result:</strong> Teacher can read/write grades, read students
+                    </div>
+                </div>
+
+                <!-- Query 3: Subject Assignments -->
+                <div class="bg-gray-50 rounded-lg p-6">
+                    <h3 class="text-lg font-bold text-gray-800 mb-4">
+                        <span class="bg-purple-500 text-white rounded-full w-8 h-8 inline-flex items-center justify-center text-sm mr-3">3</span>
+                        Subject Assignments
+                    </h3>
+                    <div class="bg-gray-800 text-green-400 p-4 rounded text-sm font-mono">
+                        <div class="text-yellow-400">SELECT</div>
+                        <div class="ml-4">s.id, s.code, s.name,</div>
+                        <div class="ml-4">ts.section, ts.can_edit_grades</div>
+                        <div class="text-yellow-400">FROM</div>
+                        <div class="ml-4">teacher_subjects ts</div>
+                        <div class="ml-4">JOIN subjects s ON ts.subject_id = s.id</div>
+                        <div class="text-yellow-400">WHERE</div>
+                        <div class="ml-4">ts.teacher_id = 123</div>
+                        <div class="ml-4">AND ts.status = 'active'</div>
+                    </div>
+                    <div class="mt-3 text-sm text-gray-600">
+                        <strong>Result:</strong> CS 101, CS 201, CS 301 assigned
+                    </div>
+                </div>
+
+                <!-- Query 4: Accessible Students -->
+                <div class="bg-gray-50 rounded-lg p-6">
+                    <h3 class="text-lg font-bold text-gray-800 mb-4">
+                        <span class="bg-red-500 text-white rounded-full w-8 h-8 inline-flex items-center justify-center text-sm mr-3">4</span>
+                        Accessible Students
+                    </h3>
+                    <div class="bg-gray-800 text-green-400 p-4 rounded text-sm font-mono">
+                        <div class="text-yellow-400">SELECT DISTINCT</div>
+                        <div class="ml-4">st.id, st.student_number,</div>
+                        <div class="ml-4">st.first_name, st.last_name</div>
+                        <div class="text-yellow-400">FROM</div>
+                        <div class="ml-4">students st</div>
+                        <div class="ml-4">JOIN enrollments e ON st.id = e.student_id</div>
+                        <div class="ml-4">JOIN teacher_subjects ts ON e.subject_id = ts.subject_id</div>
+                        <div class="text-yellow-400">WHERE</div>
+                        <div class="ml-4">ts.teacher_id = 123</div>
+                        <div class="ml-4">AND e.status = 'enrolled'</div>
+                    </div>
+                    <div class="mt-3 text-sm text-gray-600">
+                        <strong>Result:</strong> 57 students across all assigned subjects
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- JWT Token Structure -->
+        <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+            <h2 class="text-2xl font-bold text-center text-gray-800 mb-8">
+                <i class="fas fa-key mr-2 text-yellow-600"></i>
+                JWT Token Structure
+            </h2>
+
+            <div class="bg-gray-800 text-white p-6 rounded-lg">
+                <div class="text-yellow-400 mb-4">// JWT Token Payload</div>
+                <div class="text-green-400">{</div>
+                <div class="ml-4 text-blue-400">"user_id"<span class="text-white">:</span> <span class="text-orange-400">123</span>,</div>
+                <div class="ml-4 text-blue-400">"username"<span class="text-white">:</span> <span class="text-orange-400">"prof.maria.santos"</span>,</div>
+                <div class="ml-4 text-blue-400">"role"<span class="text-white">:</span> <span class="text-orange-400">"teacher"</span>,</div>
+                <div class="ml-4 text-blue-400">"permissions"<span class="text-white">:</span> [</div>
+                <div class="ml-8 text-green-400">{</div>
+                <div class="ml-12 text-blue-400">"resource"<span class="text-white">:</span> <span class="text-orange-400">"grades"</span>,</div>
+                <div class="ml-12 text-blue-400">"actions"<span class="text-white">:</span> [<span class="text-orange-400">"read", "write"</span>]</div>
+                <div class="ml-8 text-green-400">},</div>
+                <div class="ml-8 text-green-400">{</div>
+                <div class="ml-12 text-blue-400">"resource"<span class="text-white">:</span> <span class="text-orange-400">"students"</span>,</div>
+                <div class="ml-12 text-blue-400">"actions"<span class="text-white">:</span> [<span class="text-orange-400">"read"</span>]</div>
+                <div class="ml-8 text-green-400">}</div>
+                <div class="ml-4 text-white">],</div>
+                <div class="ml-4 text-blue-400">"assigned_subjects"<span class="text-white">:</span> [<span class="text-orange-400">101, 201, 301</span>],</div>
+                <div class="ml-4 text-blue-400">"accessible_students"<span class="text-white">:</span> [<span class="text-orange-400">1001, 1002, 1003, ...</span>],</div>
+                <div class="ml-4 text-blue-400">"expires_at"<span class="text-white">:</span> <span class="text-orange-400">1640995200000</span></div>
+                <div class="text-green-400">}</div>
+            </div>
+
+            <div class="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div class="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                    <h4 class="font-bold text-blue-800 mb-2">
+                        <i class="fas fa-user mr-2"></i>User Info
+                    </h4>
+                    <div class="text-sm text-blue-700">
+                        ID, username, role embedded in token for quick access
+                    </div>
+                </div>
+                <div class="bg-green-50 border border-green-200 rounded-lg p-4">
+                    <h4 class="font-bold text-green-800 mb-2">
+                        <i class="fas fa-shield-alt mr-2"></i>Permissions
+                    </h4>
+                    <div class="text-sm text-green-700">
+                        All allowed actions on resources included for authorization
+                    </div>
+                </div>
+                <div class="bg-purple-50 border border-purple-200 rounded-lg p-4">
+                    <h4 class="font-bold text-purple-800 mb-2">
+                        <i class="fas fa-clock mr-2"></i>Security
+                    </h4>
+                    <div class="text-sm text-purple-700">
+                        Expiration time and session ID for token management
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Security Checks -->
+        <div class="bg-gray-800 text-white rounded-lg p-6">
+            <h3 class="text-xl font-bold mb-4">
+                <i class="fas fa-shield-alt mr-2 text-red-400"></i>
+                Security Validations During Login
+            </h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm">
+                <div>
+                    <div class="flex items-center mb-2">
+                        <i class="fas fa-check-circle text-green-400 mr-2"></i>
+                        <strong>Password Security</strong>
+                    </div>
+                    <div class="ml-6 text-gray-300">
+                        • Bcrypt hashing with salt<br>
+                        • Failed attempt tracking<br>
+                        • Account lockout after 5 failures
+                    </div>
+                </div>
+                <div>
+                    <div class="flex items-center mb-2">
+                        <i class="fas fa-check-circle text-green-400 mr-2"></i>
+                        <strong>Account Status</strong>
+                    </div>
+                    <div class="ml-6 text-gray-300">
+                        • Active account verification<br>
+                        • Role validation<br>
+                        • Suspension check
+                    </div>
+                </div>
+                <div>
+                    <div class="flex items-center mb-2">
+                        <i class="fas fa-check-circle text-green-400 mr-2"></i>
+                        <strong>Permission Validation</strong>
+                    </div>
+                    <div class="ml-6 text-gray-300">
+                        • Subject assignment verification<br>
+                        • Student access validation<br>
+                        • Role-based permissions
+                    </div>
+                </div>
+                <div>
+                    <div class="flex items-center mb-2">
+                        <i class="fas fa-check-circle text-green-400 mr-2"></i>
+                        <strong>Session Security</strong>
+                    </div>
+                    <div class="ml-6 text-gray-300">
+                        • JWT token signing<br>
+                        • Session tracking<br>
+                        • Audit logging
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

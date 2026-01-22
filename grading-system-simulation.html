@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grading System - API Provider</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-900 text-white min-h-screen">
+    <!-- Header -->
+    <div class="bg-green-600 p-4">
+        <div class="max-w-6xl mx-auto">
+            <h1 class="text-2xl font-bold">
+                <i class="fas fa-server mr-2"></i>Grading System API Provider
+            </h1>
+            <p class="text-green-100 text-sm mt-1">Your Grading System - Providing API Services</p>
+        </div>
+    </div>
+
+    <div class="max-w-6xl mx-auto p-6">
+        <!-- API Status Dashboard -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            <div class="bg-gray-800 rounded-lg p-6 border border-gray-700">
+                <h3 class="text-lg font-semibold mb-2 text-green-400">
+                    <i class="fas fa-check-circle mr-2"></i>API Status
+                </h3>
+                <div class="flex items-center">
+                    <div class="w-3 h-3 bg-green-500 rounded-full mr-2 animate-pulse"></div>
+                    <span class="text-green-300">Online & Ready</span>
+                </div>
+                <p class="text-gray-400 text-sm mt-2">Accepting requests from student portals</p>
+            </div>
+
+            <div class="bg-gray-800 rounded-lg p-6 border border-gray-700">
+                <h3 class="text-lg font-semibold mb-2 text-blue-400">
+                    <i class="fas fa-database mr-2"></i>Database
+                </h3>
+                <div class="flex items-center">
+                    <div class="w-3 h-3 bg-blue-500 rounded-full mr-2"></div>
+                    <span class="text-blue-300">Connected</span>
+                </div>
+                <p class="text-gray-400 text-sm mt-2">Grade data ready for API calls</p>
+            </div>
+
+            <div class="bg-gray-800 rounded-lg p-6 border border-gray-700">
+                <h3 class="text-lg font-semibold mb-2 text-purple-400">
+                    <i class="fas fa-shield-alt mr-2"></i>Security
+                </h3>
+                <div class="flex items-center">
+                    <div class="w-3 h-3 bg-purple-500 rounded-full mr-2"></div>
+                    <span class="text-purple-300">API Key Active</span>
+                </div>
+                <p class="text-gray-400 text-sm mt-2">API keys validated</p>
+            </div>
+        </div>
+
+        <!-- API Endpoints -->
+        <div class="bg-gray-800 rounded-lg p-6 border border-gray-700 mb-8">
+            <h3 class="text-xl font-semibold mb-4 text-white">
+                <i class="fas fa-code mr-2 text-yellow-400"></i>Available API Endpoints
+            </h3>
+            
+            <div class="space-y-4">
+                <div class="bg-gray-700 rounded p-4">
+                    <div class="flex items-center mb-2">
+                        <span class="bg-red-600 text-white px-2 py-1 rounded text-xs font-bold mr-3">POST</span>
+                        <code class="text-yellow-300">/auth/token</code>
+                    </div>
+                    <p class="text-gray-300 text-sm">Authentication endpoint - Get JWT token</p>
+                </div>
+
+                <div class="bg-gray-700 rounded p-4">
+                    <div class="flex items-center mb-2">
+                        <span class="bg-green-600 text-white px-2 py-1 rounded text-xs font-bold mr-3">GET</span>
+                        <code class="text-yellow-300">/students/{id}/grades</code>
+                    </div>
+                    <p class="text-gray-300 text-sm">Get student grades with filters (SY, SEM, YEAR LEVEL, SECTION)</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Live API Requests Monitor -->
+        <div class="bg-gray-800 rounded-lg p-6 border border-gray-700 mb-8">
+            <h3 class="text-xl font-semibold mb-4 text-white">
+                <i class="fas fa-eye mr-2 text-cyan-400"></i>Live API Requests Monitor
+            </h3>
+            
+            <div id="requests-log" class="space-y-3 max-h-96 overflow-y-auto">
+                <div class="text-gray-400 text-center py-4">
+                    <i class="fas fa-clock text-2xl mb-2"></i>
+                    <p>Waiting for API requests from student portals...</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sample Data -->
+        <div class="bg-gray-800 rounded-lg p-6 border border-gray-700">
+            <h3 class="text-xl font-semibold mb-4 text-white">
+                <i class="fas fa-table mr-2 text-orange-400"></i>Sample Grade Data in System
+            </h3>
+            
+            <div class="overflow-x-auto">
+                <table class="min-w-full table-auto">
+                    <thead class="bg-gray-700">
+                        <tr>
+                            <th class="px-4 py-2 text-left text-sm font-semibold text-gray-300">Student ID</th>
+                            <th class="px-4 py-2 text-left text-sm font-semibold text-gray-300">Name</th>
+                            <th class="px-4 py-2 text-left text-sm font-semibold text-gray-300">Program</th>
+                            <th class="px-4 py-2 text-left text-sm font-semibold text-gray-300">Year Level</th>
+                            <th class="px-4 py-2 text-left text-sm font-semibold text-gray-300">Section</th>
+                            <th class="px-4 py-2 text-center text-sm font-semibold text-gray-300">Subjects</th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-gray-800">
+                        <tr class="border-b border-gray-700">
+                            <td class="px-4 py-3 text-sm font-mono text-yellow-300">HRM2023-001</td>
+                            <td class="px-4 py-3 text-sm text-gray-300">Alexandra Marie Santos</td>
+                            <td class="px-4 py-3 text-sm text-gray-300">BS Hotel & Restaurant Management</td>
+                            <td class="px-4 py-3 text-sm text-gray-300">1st Year</td>
+                            <td class="px-4 py-3 text-sm text-gray-300">HRM-A</td>
+                            <td class="px-4 py-3 text-center text-sm text-green-400">4 subjects</td>
+                        </tr>
+                        <tr class="border-b border-gray-700">
+                            <td class="px-4 py-3 text-sm font-mono text-yellow-300">2024-001</td>
+                            <td class="px-4 py-3 text-sm text-gray-300">Juan Carlos Mendoza</td>
+                            <td class="px-4 py-3 text-sm text-gray-300">Grade 4</td>
+                            <td class="px-4 py-3 text-sm text-gray-300">Grade 4</td>
+                            <td class="px-4 py-3 text-sm text-gray-300">Grade4-A</td>
+                            <td class="px-4 py-3 text-center text-sm text-green-400">4 subjects</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Test API Button -->
+        <div class="mt-8 text-center">
+            <button onclick="simulateAPIRequest()" class="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-lg">
+                <i class="fas fa-play mr-2"></i>Simulate API Request from Student Portal
+            </button>
+            <p class="text-gray-400 text-sm mt-2">This will simulate a student portal requesting grades</p>
+        </div>
+    </div>
+
+    <script>
+        let requestCounter = 0;
+
+        function addRequestLog(method, endpoint, status, details) {
+            requestCounter++;
+            const timestamp = new Date().toLocaleTimeString();
+            const logContainer = document.getElementById('requests-log');
+            
+            // Remove "waiting" message if it exists
+            if (logContainer.children.length === 1 && logContainer.children[0].querySelector('.fa-clock')) {
+                logContainer.innerHTML = '';
+            }
+
+            const statusColor = status === 200 ? 'text-green-400' : 'text-red-400';
+            const methodColor = method === 'GET' ? 'bg-green-600' : 'bg-red-600';
+            
+            const logEntry = document.createElement('div');
+            logEntry.className = 'bg-gray-700 rounded p-4 border-l-4 border-cyan-500';
+            logEntry.innerHTML = `
+                <div class="flex items-center justify-between mb-2">
+                    <div class="flex items-center">
+                        <span class="text-cyan-400 font-mono text-sm mr-3">#${requestCounter}</span>
+                        <span class="${methodColor} text-white px-2 py-1 rounded text-xs font-bold mr-3">${method}</span>
+                        <code class="text-yellow-300 text-sm">${endpoint}</code>
+                    </div>
+                    <div class="flex items-center">
+                        <span class="${statusColor} font-bold mr-2">${status}</span>
+                        <span class="text-gray-400 text-sm">${timestamp}</span>
+                    </div>
+                </div>
+                <div class="text-gray-300 text-sm">
+                    <div class="mb-1"><strong>Request:</strong> ${details.request}</div>
+                    <div class="mb-1"><strong>Response:</strong> ${details.response}</div>
+                    <div><strong>Token:</strong> <span class="text-blue-400">${details.token}</span></div>
+                </div>
+            `;
+            
+            logContainer.insertBefore(logEntry, logContainer.firstChild);
+            
+            // Keep only last 10 requests
+            while (logContainer.children.length > 10) {
+                logContainer.removeChild(logContainer.lastChild);
+            }
+        }
+
+        function simulateAPIRequest() {
+            // Simulate authentication request first
+            setTimeout(() => {
+                addRequestLog('POST', '/auth/token', 200, {
+                    request: 'Student portal requesting authentication token',
+                    response: 'JWT token generated successfully',
+                    token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...'
+                });
+            }, 500);
+
+            // Simulate grade request
+            setTimeout(() => {
+                addRequestLog('GET', '/students/HRM2023-001/grades?school_year_id=1&semester=1st&year_level=1st%20Year&section=HRM-A', 200, {
+                    request: 'Student portal requesting grades for HRM2023-001',
+                    response: 'Grade data returned (4 subjects, JSON format)',
+                    token: 'Valid JWT token verified'
+                });
+            }, 1500);
+
+            // Add some more realistic requests
+            setTimeout(() => {
+                addRequestLog('GET', '/students/2024-001/grades?school_year_id=1&semester=1st&year_level=Grade%204&section=Grade4-A', 200, {
+                    request: 'Student portal requesting grades for 2024-001',
+                    response: 'Grade data returned (4 subjects, JSON format)',
+                    token: 'Valid JWT token verified'
+                });
+            }, 3000);
+        }
+
+        // Auto-simulate some requests on page load
+        window.addEventListener('load', function() {
+            setTimeout(() => {
+                addRequestLog('POST', '/auth/token', 200, {
+                    request: 'Initial authentication from student portal',
+                    response: 'JWT token generated',
+                    token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...'
+                });
+            }, 2000);
+        });
+    </script>
+</body>
+</html>

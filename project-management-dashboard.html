@@ -1,0 +1,2674 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduManage PH - Project Management Proposal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .task-card {
+            transition: all 0.3s ease;
+            min-height: 400px;
+            width: 320px !important;
+            padding: 24px !important;
+        }
+        
+        .task-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+        
+        .task-card .w-8 {
+            width: 48px !important;
+            height: 48px !important;
+        }
+        
+        .task-card .w-4 {
+            width: 20px !important;
+            height: 20px !important;
+        }
+        
+        .task-card .text-xs {
+            font-size: 14px !important;
+        }
+        
+        .task-card .text-sm {
+            font-size: 18px !important;
+        }
+        
+        .task-card .mb-2 {
+            margin-bottom: 16px !important;
+        }
+        
+        .task-card .mb-1 {
+            margin-bottom: 8px !important;
+        }
+        
+        .task-card .p-2 {
+            padding: 12px !important;
+        }
+        
+        .task-card .px-2 {
+            padding-left: 12px !important;
+            padding-right: 12px !important;
+        }
+        
+        .task-card .py-1 {
+            padding-top: 4px !important;
+            padding-bottom: 4px !important;
+        }
+        
+        .epic-progress {
+            background: linear-gradient(90deg, #10b981 0%, #10b981 var(--progress), #e5e7eb var(--progress), #e5e7eb 100%);
+        }
+        
+        .task-item {
+            transition: all 0.2s ease;
+        }
+        
+        .task-item:hover {
+            background-color: #f8fafc;
+        }
+        
+        .priority-high { border-left: 4px solid #ef4444; }
+        .priority-medium { border-left: 4px solid #f59e0b; }
+        .priority-low { border-left: 4px solid #10b981; }
+        
+        .timeline-item {
+            position: relative;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 15px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: #e5e7eb;
+        }
+        
+        .timeline-item:last-child::before {
+            display: none;
+        }
+        
+        .timeline-dot {
+            position: relative;
+            z-index: 10;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 12px;
+        }
+        
+        .gantt-bar {
+            height: 24px;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            padding: 0 8px;
+            font-size: 11px;
+            font-weight: 500;
+            color: white;
+        }
+        
+        .week-header {
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            font-size: 10px;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <!-- Main Content -->
+    <main class="h-screen overflow-hidden">
+        <!-- Individual Task Cards View -->
+        <div id="tasks-view" class="h-full flex flex-col">
+            
+            <!-- Horizontal Scrolling Task Board -->
+            <div class="flex-1 overflow-x-auto overflow-y-hidden">
+                <div class="flex space-x-6 h-full min-w-max p-6" style="width: 12000px;">
+                
+                <!-- Milestone 1 Tasks -->
+                <!-- Task 1.1.1 -->
+                <div class="task-card bg-white rounded-lg border border-gray-200 p-6 w-80 h-full flex flex-col shadow-sm hover:shadow-md transition-shadow">
+                    <div class="flex items-center justify-between mb-4 flex-shrink-0">
+                        <div class="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold text-sm">1.1.1</div>
+                        <input type="checkbox" class="task-checkbox w-5 h-5" onchange="updateProgress()">
+                    </div>
+                    
+                    <div class="mb-4 flex-shrink-0">
+                        <div class="text-sm text-gray-500 mb-2">Milestone 1 → Epic 1.1 → Task 1.1.1</div>
+                        <h3 class="text-lg font-semibold text-gray-900 mb-2">Users & Roles Tables</h3>
+                        <div class="text-sm text-blue-600 font-medium">Backend Infrastructure</div>
+                    </div>
+                    
+                    <div class="flex-1 flex flex-col justify-between">
+                        <div class="text-sm text-gray-600 mb-4">
+                            <div class="mb-2"><i class="fas fa-database mr-2"></i>Database Schema Design</div>
+                            <div class="text-gray-500">Create user authentication and role management tables for admin and teacher access control</div>
+                        </div>
+                        
+                        <div class="flex items-center justify-between text-sm bg-blue-50 p-3 rounded">
+                            <span class="text-blue-700 font-semibold">20 minutes</span>
+                            <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full">High Priority</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Task 1.1.2 -->
+                <div class="task-card bg-white rounded-lg border border-gray-200 p-6 w-80 h-full flex flex-col shadow-sm hover:shadow-md transition-shadow">
+                    <div class="flex items-center justify-between mb-4 flex-shrink-0">
+                        <div class="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold text-sm">1.1.2</div>
+                        <input type="checkbox" class="task-checkbox w-5 h-5" onchange="updateProgress()">
+                    </div>
+                    
+                    <div class="mb-4 flex-shrink-0">
+                        <div class="text-sm text-gray-500 mb-2">Milestone 1 → Epic 1.1 → Task 1.1.2</div>
+                        <h3 class="text-lg font-semibold text-gray-900 mb-2">Academic Structure Tables</h3>
+                        <div class="text-sm text-blue-600 font-medium">Backend Infrastructure</div>
+                    </div>
+                    
+                    <div class="flex-1 flex flex-col justify-between">
+                        <div class="text-sm text-gray-600 mb-4">
+                            <div class="mb-2"><i class="fas fa-school mr-2"></i>Database Schema Design</div>
+                            <div class="text-gray-500">Create tables for schools, academic levels, programs, subjects, and sections</div>
+                        </div>
+                        
+                        <div class="flex items-center justify-between text-sm bg-blue-50 p-3 rounded">
+                            <span class="text-blue-700 font-semibold">20 minutes</span>
+                            <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full">High Priority</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Task 1.1.3 -->
+                <div class="task-card bg-white rounded-lg border border-gray-200 p-6 w-80 h-full flex flex-col shadow-sm hover:shadow-md transition-shadow">
+                    <div class="flex items-center justify-between mb-4 flex-shrink-0">
+                        <div class="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold text-sm">1.1.3</div>
+                        <input type="checkbox" class="task-checkbox w-5 h-5" onchange="updateProgress()">
+                    </div>
+                    
+                    <div class="mb-4 flex-shrink-0">
+                        <div class="text-sm text-gray-500 mb-2">Milestone 1 → Epic 1.1 → Task 1.1.3</div>
+                        <h3 class="text-lg font-semibold text-gray-900 mb-2">Students & Grades Tables</h3>
+                        <div class="text-sm text-blue-600 font-medium">Backend Infrastructure</div>
+                    </div>
+                    
+                    <div class="flex-1 flex flex-col justify-between">
+                        <div class="text-sm text-gray-600 mb-4">
+                            <div class="mb-2"><i class="fas fa-user-graduate mr-2"></i>Database Schema Design</div>
+                            <div class="text-gray-500">Create student records, enrollment, and grading tables with relationships</div>
+                        </div>
+                        
+                        <div class="flex items-center justify-between text-sm bg-blue-50 p-3 rounded">
+                            <span class="text-blue-700 font-semibold">20 minutes</span>
+                            <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full">High Priority</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Task 1.2.1 -->
+                <div class="task-card bg-white rounded-lg border border-gray-200 p-3 w-64 h-full flex flex-col shadow-sm hover:shadow-md transition-shadow">
+                    <div class="flex items-center justify-between mb-2 flex-shrink-0">
+                        <div class="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold text-xs">1.2.1</div>
+                        <input type="checkbox" class="task-checkbox w-4 h-4" onchange="updateProgress()">
+                    </div>
+                    
+                    <div class="mb-2 flex-shrink-0">
+                        <div class="text-xs text-gray-500 mb-1">Milestone 1 → Epic 1.2 → Task 1.2.1</div>
+                        <h3 class="text-sm font-semibold text-gray-900 mb-1">Node.js/Express Setup</h3>
+                        <div class="text-xs text-blue-600 font-medium">Backend Infrastructure</div>
+                    </div>
+                    
+                    <div class="flex-1 flex flex-col justify-between">
+                        <div class="text-xs text-gray-600 mb-2">
+                            <div class="mb-1"><i class="fas fa-server mr-1"></i>Backend Server Setup</div>
+                            <div class="text-gray-500">Initialize Node.js project with Express framework and basic routing structure</div>
+                        </div>
+                        
+                        <div class="flex items-center justify-between text-xs bg-blue-50 p-2 rounded">
+                            <span class="text-blue-700 font-semibold">20 minutes</span>
+                            <span class="px-2 py-1 bg-blue-100 text-blue-800 rounded-full">High Priority</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Task 1.2.2 -->
+                <div class="task-card bg-white rounded-lg border border-gray-200 p-3 w-64 h-full flex flex-col shadow-sm hover:shadow-md transition-shadow">
+                    <div class="flex items-center justify-between mb-2 flex-shrink-0">
+                        <div class="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold text-xs">1.2.2</div>
+                        <input type="checkbox" class="task-checkbox w-4 h-4" onchange="updateProgress()">
+                    </div>
+                    
+                    <div class="mb-2 flex-shrink-0">
+                        <div class="text-xs text-gray-500 mb-1">Milestone 1 → Epic 1.2 → Task 1.2.2</div>
+                        <h3 class="text-sm font-semibold text-gray-900 mb-1">Database Connection</h3>
+                        <div class="text-xs text-blue-600 font-medium">Backend Infrastructure</div>
+                    </div>
+                    
+                    <div class="flex-1 flex flex-col justify-between">
+                        <div class="text-xs text-gray-600 mb-2">
+                            <div class="mb-1"><i class="fas fa-plug mr-1"></i>Backend Server Setup</div>
+                            <div class="text-gray-500">Configure database connection with connection pooling and error handling</div>
+                        </div>
+                        
+                        <div class="flex items-center justify-between text-xs bg-blue-50 p-2 rounded">
+                            <span class="text-blue-700 font-semibold">20 minutes</span>
+                            <span class="px-2 py-1 bg-blue-100 text-blue-800 rounded-full">High Priority</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Task 1.2.3 -->
+                <div class="task-card bg-white rounded-lg border border-gray-200 p-3 w-64 h-full flex flex-col shadow-sm hover:shadow-md transition-shadow">
+                    <div class="flex items-center justify-between mb-2 flex-shrink-0">
+                        <div class="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold text-xs">1.2.3</div>
+                        <input type="checkbox" class="task-checkbox w-4 h-4" onchange="updateProgress()">
+                    </div>
+                    
+                    <div class="mb-2 flex-shrink-0">
+                        <div class="text-xs text-gray-500 mb-1">Milestone 1 → Epic 1.2 → Task 1.2.3</div>
+                        <h3 class="text-sm font-semibold text-gray-900 mb-1">Environment Configuration</h3>
+                        <div class="text-xs text-blue-600 font-medium">Backend Infrastructure</div>
+                    </div>
+                    
+                    <div class="flex-1 flex flex-col justify-between">
+                        <div class="text-xs text-gray-600 mb-2">
+                            <div class="mb-1"><i class="fas fa-cogs mr-1"></i>Backend Server Setup</div>
+                            <div class="text-gray-500">Setup environment variables, configuration files, and deployment settings</div>
+                        </div>
+                        
+                        <div class="flex items-center justify-between text-xs bg-blue-50 p-2 rounded">
+                            <span class="text-blue-700 font-semibold">10 minutes</span>
+                            <span class="px-2 py-1 bg-yellow-100 text-yellow-800 rounded-full">Medium Priority</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Task 1.2.4 -->
+                <div class="task-card bg-white rounded-lg border border-gray-200 p-3 w-64 h-full flex flex-col shadow-sm hover:shadow-md transition-shadow">
+                    <div class="flex items-center justify-between mb-2 flex-shrink-0">
+                        <div class="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold text-xs">1.2.4</div>
+                        <input type="checkbox" class="task-checkbox w-4 h-4" onchange="updateProgress()">
+                    </div>
+                    
+                    <div class="mb-2 flex-shrink-0">
+                        <div class="text-xs text-gray-500 mb-1">Milestone 1 → Epic 1.2 → Task 1.2.4</div>
+                        <h3 class="text-sm font-semibold text-gray-900 mb-1">Security Middleware</h3>
+                        <div class="text-xs text-blue-600 font-medium">Backend Infrastructure</div>
+                    </div>
+                    
+                    <div class="flex-1 flex flex-col justify-between">
+                        <div class="text-xs text-gray-600 mb-2">
+                            <div class="mb-1"><i class="fas fa-shield-alt mr-1"></i>Backend Server Setup</div>
+                            <div class="text-gray-500">Implement authentication, authorization, CORS, and security headers</div>
+                        </div>
+                        
+                        <div class="flex items-center justify-between text-xs bg-blue-50 p-2 rounded">
+                            <span class="text-blue-700 font-semibold">1 hour</span>
+                            <span class="px-2 py-1 bg-yellow-100 text-yellow-800 rounded-full">Medium Priority</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Milestone 2 Tasks -->
+                <!-- Task 2.1.1 -->
+                <div class="task-card bg-white rounded-lg border border-gray-200 p-3 w-64 h-full flex flex-col shadow-sm hover:shadow-md transition-shadow">
+                    <div class="flex items-center justify-between mb-2 flex-shrink-0">
+                        <div class="w-8 h-8 bg-green-600 rounded-full flex items-center justify-center text-white font-bold text-xs">2.1.1</div>
+                        <input type="checkbox" class="task-checkbox w-4 h-4" onchange="updateProgress()">
+                    </div>
+                    
+                    <div class="mb-2 flex-shrink-0">
+                        <div class="text-xs text-gray-500 mb-1">Milestone 2 → Epic 2.1 → Task 2.1.1</div>
+                        <h3 class="text-sm font-semibold text-gray-900 mb-1">Admin Role-Based Auth</h3>
+                        <div class="text-xs text-green-600 font-medium">Authentication & Dashboard</div>
+                    </div>
+                    
+                    <div class="flex-1 flex flex-col justify-between">
+                        <div class="text-xs text-gray-600 mb-2">
+                            <div class="mb-1"><i class="fas fa-shield-alt mr-1"></i>Admin Authentication System</div>
+                            <div class="text-gray-500">Implement role-based access control for admin users with JWT tokens</div>
+                        </div>
+                        
+                        <div class="flex items-center justify-between text-xs bg-green-50 p-2 rounded">
+                            <span class="text-green-700 font-semibold">20 minutes</span>
+                            <span class="px-2 py-1 bg-green-100 text-green-800 rounded-full">High Priority</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Task 2.1.1 -->
+                <div class="task-card bg-white rounded-lg border border-gray-200 p-3 w-64 h-full flex flex-col shadow-sm hover:shadow-md transition-shadow">
+                    <div class="flex items-center justify-between mb-2 flex-shrink-0">
+                        <div class="w-8 h-8 bg-green-600 rounded-full flex items-center justify-center text-white font-bold text-xs">2.1.1</div>
+                        <input type="checkbox" class="task-checkbox w-4 h-4" onchange="updateProgress()">
+                    </div>
+                    
+                    <div class="mb-2 flex-shrink-0">
+                        <div class="text-xs text-gray-500 mb-1">Milestone 2 → Epic 2.1 → Task 2.1.1</div>
+                        <h3 class="text-sm font-semibold text-gray-900 mb-1">Admin Role-Based Auth</h3>
+                        <div class="text-xs text-green-600 font-medium">Authentication & Dashboard</div>
+                    </div>
+                    
+                    <div class="flex-1 flex flex-col justify-between">
+                        <div class="text-xs text-gray-600 mb-2">
+                            <div class="mb-1"><i class="fas fa-shield-alt mr-1"></i>Admin Authentication System</div>
+                            <div class="text-gray-500">Implement role-based access control for admin users with JWT tokens</div>
+                        </div>
+                        
+                        <div class="flex items-center justify-between text-xs bg-green-50 p-2 rounded">
+                            <span class="text-green-700 font-semibold">20 minutes</span>
+                            <span class="px-2 py-1 bg-green-100 text-green-800 rounded-full">High Priority</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Task 2.1.2 -->
+                <div class="task-card bg-white rounded-lg border border-gray-200 p-3 w-64 h-full flex flex-col shadow-sm hover:shadow-md transition-shadow">
+                    <div class="flex items-center justify-between mb-2 flex-shrink-0">
+                        <div class="w-8 h-8 bg-green-600 rounded-full flex items-center justify-center text-white font-bold text-xs">2.1.2</div>
+                        <input type="checkbox" class="task-checkbox w-4 h-4" onchange="updateProgress()">
+                    </div>
+                    
+                    <div class="mb-2 flex-shrink-0">
+                        <div class="text-xs text-gray-500 mb-1">Milestone 2 → Epic 2.1 → Task 2.1.2</div>
+                        <h3 class="text-sm font-semibold text-gray-900 mb-1">Admin Login Page</h3>
+                        <div class="text-xs text-green-600 font-medium">Authentication & Dashboard</div>
+                    </div>
+                    
+                    <div class="flex-1 flex flex-col justify-between">
+                        <div class="text-xs text-gray-600 mb-2">
+                            <div class="mb-1"><i class="fas fa-sign-in-alt mr-1"></i>Admin Authentication System</div>
+                            <div class="text-gray-500">Create admin login form with validation and error handling</div>
+                        </div>
+                        
+                        <div class="flex items-center justify-between text-xs bg-green-50 p-2 rounded">
+                            <span class="text-green-700 font-semibold">5 minutes</span>
+                            <span class="px-2 py-1 bg-green-100 text-green-800 rounded-full">High Priority</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Task 2.1.3 -->
+                <div class="task-card bg-white rounded-lg border border-gray-200 p-3 w-64 h-full flex flex-col shadow-sm hover:shadow-md transition-shadow">
+                    <div class="flex items-center justify-between mb-2 flex-shrink-0">
+                        <div class="w-8 h-8 bg-green-600 rounded-full flex items-center justify-center text-white font-bold text-xs">2.1.3</div>
+                        <input type="checkbox" class="task-checkbox w-4 h-4" onchange="updateProgress()">
+                    </div>
+                    
+                    <div class="mb-2 flex-shrink-0">
+                        <div class="text-xs text-gray-500 mb-1">Milestone 2 → Epic 2.1 → Task 2.1.3</div>
+                        <h3 class="text-sm font-semibold text-gray-900 mb-1">Session Management</h3>
+                        <div class="text-xs text-green-600 font-medium">Authentication & Dashboard</div>
+                    </div>
+                    
+                    <div class="flex-1 flex flex-col justify-between">
+                        <div class="text-xs text-gray-600 mb-2">
+                            <div class="mb-1"><i class="fas fa-user-shield mr-1"></i>Admin Authentication System</div>
+                            <div class="text-gray-500">Implement session management with secure token storage and logout</div>
+                        </div>
+                        
+                        <div class="flex items-center justify-between text-xs bg-green-50 p-2 rounded">
+                            <span class="text-green-700 font-semibold">5 minutes</span>
+                            <span class="px-2 py-1 bg-yellow-100 text-yellow-800 rounded-full">Medium Priority</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Task 2.2.1 -->
+                <div class="task-card bg-white rounded-lg border border-gray-200 p-3 w-64 h-full flex flex-col shadow-sm hover:shadow-md transition-shadow">
+                    <div class="flex items-center justify-between mb-2 flex-shrink-0">
+                        <div class="w-8 h-8 bg-green-600 rounded-full flex items-center justify-center text-white font-bold text-xs">2.2.1</div>
+                        <input type="checkbox" class="task-checkbox w-4 h-4" onchange="updateProgress()">
+                    </div>
+                    
+                    <div class="mb-2 flex-shrink-0">
+                        <div class="text-xs text-gray-500 mb-1">Milestone 2 → Epic 2.2 → Task 2.2.1</div>
+                        <h3 class="text-sm font-semibold text-gray-900 mb-1">Dashboard Layout</h3>
+                        <div class="text-xs text-green-600 font-medium">Authentication & Dashboard</div>
+                    </div>
+                    
+                    <div class="flex-1 flex flex-col justify-between">
+                        <div class="text-xs text-gray-600 mb-2">
+                            <div class="mb-1"><i class="fas fa-layout-dashboard mr-1"></i>Main Dashboard Interface</div>
+                            <div class="text-gray-500">Create main dashboard layout with navigation and content areas</div>
+                        </div>
+                        
+                        <div class="flex items-center justify-between text-xs bg-green-50 p-2 rounded">
+                            <span class="text-green-700 font-semibold">30 minutes</span>
+                            <span class="px-2 py-1 bg-green-100 text-green-800 rounded-full">High Priority</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Task 2.2.2 -->
+                <div class="task-card bg-white rounded-lg border border-gray-200 p-3 w-64 h-full flex flex-col shadow-sm hover:shadow-md transition-shadow">
+                    <div class="flex items-center justify-between mb-2 flex-shrink-0">
+                        <div class="w-8 h-8 bg-green-600 rounded-full flex items-center justify-center text-white font-bold text-xs">2.2.2</div>
+                        <input type="checkbox" class="task-checkbox w-4 h-4" onchange="updateProgress()">
+                    </div>
+                    
+                    <div class="mb-2 flex-shrink-0">
+                        <div class="text-xs text-gray-500 mb-1">Milestone 2 → Epic 2.2 → Task 2.2.2</div>
+                        <h3 class="text-sm font-semibold text-gray-900 mb-1">System Overview Cards</h3>
+                        <div class="text-xs text-green-600 font-medium">Authentication & Dashboard</div>
+                    </div>
+                    
+                    <div class="flex-1 flex flex-col justify-between">
+                        <div class="text-xs text-gray-600 mb-2">
+                            <div class="mb-1"><i class="fas fa-chart-bar mr-1"></i>Main Dashboard Interface</div>
+                            <div class="text-gray-500">Create overview cards showing system statistics and quick access</div>
+                        </div>
+                        
+                        <div class="flex items-center justify-between text-xs bg-green-50 p-2 rounded">
+                            <span class="text-green-700 font-semibold">5 minutes</span>
+                            <span class="px-2 py-1 bg-green-100 text-green-800 rounded-full">High Priority</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Task 2.2.3 -->
+                <div class="task-card bg-white rounded-lg border border-gray-200 p-3 w-64 h-full flex flex-col shadow-sm hover:shadow-md transition-shadow">
+                    <div class="flex items-center justify-between mb-2 flex-shrink-0">
+                        <div class="w-8 h-8 bg-green-600 rounded-full flex items-center justify-center text-white font-bold text-xs">2.2.3</div>
+                        <input type="checkbox" class="task-checkbox w-4 h-4" onchange="updateProgress()">
+                    </div>
+                    
+                    <div class="mb-2 flex-shrink-0">
+                        <div class="text-xs text-gray-500 mb-1">Milestone 2 → Epic 2.2 → Task 2.2.3</div>
+                        <h3 class="text-sm font-semibold text-gray-900 mb-1">Dark/Light Theme</h3>
+                        <div class="text-xs text-green-600 font-medium">Authentication & Dashboard</div>
+                    </div>
+                    
+                    <div class="flex-1 flex flex-col justify-between">
+                        <div class="text-xs text-gray-600 mb-2">
+                            <div class="mb-1"><i class="fas fa-moon mr-1"></i>Main Dashboard Interface</div>
+                            <div class="text-gray-500">Implement theme toggle with dark and light mode support</div>
+                        </div>
+                        
+                        <div class="flex items-center justify-between text-xs bg-green-50 p-2 rounded">
+                            <span class="text-green-700 font-semibold">5 minutes</span>
+                            <span class="px-2 py-1 bg-yellow-100 text-yellow-800 rounded-full">Medium Priority</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Task 2.2.4 -->
+                <div class="task-card bg-white rounded-lg border border-gray-200 p-3 w-64 h-full flex flex-col shadow-sm hover:shadow-md transition-shadow">
+                    <div class="flex items-center justify-between mb-2 flex-shrink-0">
+                        <div class="w-8 h-8 bg-green-600 rounded-full flex items-center justify-center text-white font-bold text-xs">2.2.4</div>
+                        <input type="checkbox" class="task-checkbox w-4 h-4" onchange="updateProgress()">
+                    </div>
+                    
+                    <div class="mb-2 flex-shrink-0">
+                        <div class="text-xs text-gray-500 mb-1">Milestone 2 → Epic 2.2 → Task 2.2.4</div>
+                        <h3 class="text-sm font-semibold text-gray-900 mb-1">Responsive Design</h3>
+                        <div class="text-xs text-green-600 font-medium">Authentication & Dashboard</div>
+                    </div>
+                    
+                    <div class="flex-1 flex flex-col justify-between">
+                        <div class="text-xs text-gray-600 mb-2">
+                            <div class="mb-1"><i class="fas fa-mobile-alt mr-1"></i>Main Dashboard Interface</div>
+                            <div class="text-gray-500">Make dashboard responsive for mobile, tablet, and desktop devices</div>
+                        </div>
+                        
+                        <div class="flex items-center justify-between text-xs bg-green-50 p-2 rounded">
+                            <span class="text-green-700 font-semibold">2 hours</span>
+                            <span class="px-2 py-1 bg-gray-100 text-gray-800 rounded-full">Low Priority</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Milestone 3 Tasks -->
+                <!-- Task 3.1.1 -->
+                <div class="task-card bg-white rounded-lg border border-gray-200 p-3 w-64 h-full flex flex-col shadow-sm hover:shadow-md transition-shadow">
+                    <div class="flex items-center justify-between mb-2 flex-shrink-0">
+                        <div class="w-8 h-8 bg-purple-600 rounded-full flex items-center justify-center text-white font-bold text-xs">3.1.1</div>
+                        <input type="checkbox" class="task-checkbox w-4 h-4" onchange="updateProgress()">
+                    </div>
+                    
+                    <div class="mb-2 flex-shrink-0">
+                        <div class="text-xs text-gray-500 mb-1">Milestone 3 → Epic 3.1 → Task 3.1.1</div>
+                        <h3 class="text-sm font-semibold text-gray-900 mb-1">Collapsible Sidebar</h3>
+                        <div class="text-xs text-purple-600 font-medium">Academic Structure</div>
+                    </div>
+                    
+                    <div class="flex-1 flex flex-col justify-between">
+                        <div class="text-xs text-gray-600 mb-2">
+                            <div class="mb-1"><i class="fas fa-sitemap mr-1"></i>Academic Levels Navigation</div>
+                            <div class="text-gray-500">Create collapsible sidebar navigation for academic level selection</div>
+                        </div>
+                        
+                        <div class="flex items-center justify-between text-xs bg-purple-50 p-2 rounded">
+                            <span class="text-purple-700 font-semibold">15 minutes</span>
+                            <span class="px-2 py-1 bg-purple-100 text-purple-800 rounded-full">High Priority</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Task 3.1.2 -->
+                <div class="task-card bg-white rounded-lg border border-gray-200 p-3 w-64 h-full flex flex-col shadow-sm hover:shadow-md transition-shadow">
+                    <div class="flex items-center justify-between mb-2 flex-shrink-0">
+                        <div class="w-8 h-8 bg-purple-600 rounded-full flex items-center justify-center text-white font-bold text-xs">3.1.2</div>
+                        <input type="checkbox" class="task-checkbox w-4 h-4" onchange="updateProgress()">
+                    </div>
+                    
+                    <div class="mb-2 flex-shrink-0">
+                        <div class="text-xs text-gray-500 mb-1">Milestone 3 → Epic 3.1 → Task 3.1.2</div>
+                        <h3 class="text-sm font-semibold text-gray-900 mb-1">Preschool (K) Navigation</h3>
+                        <div class="text-xs text-purple-600 font-medium">Academic Structure</div>
+                    </div>
+                    
+                    <div class="flex-1 flex flex-col justify-between">
+                        <div class="text-xs text-gray-600 mb-2">
+                            <div class="mb-1"><i class="fas fa-baby mr-1"></i>Academic Levels Navigation</div>
+                            <div class="text-gray-500">Create preschool/kindergarten level navigation and content areas</div>
+                        </div>
+                        
+                        <div class="flex items-center justify-between text-xs bg-purple-50 p-2 rounded">
+                            <span class="text-purple-700 font-semibold">30 minutes</span>
+                            <span class="px-2 py-1 bg-purple-100 text-purple-800 rounded-full">High Priority</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Task 3.1.3 -->
+                <div class="task-card bg-white rounded-lg border border-gray-200 p-3 w-64 h-full flex flex-col shadow-sm hover:shadow-md transition-shadow">
+                    <div class="flex items-center justify-between mb-2 flex-shrink-0">
+                        <div class="w-8 h-8 bg-purple-600 rounded-full flex items-center justify-center text-white font-bold text-xs">3.1.3</div>
+                        <input type="checkbox" class="task-checkbox w-4 h-4" onchange="updateProgress()">
+                    </div>
+                    
+                    <div class="mb-2 flex-shrink-0">
+                        <div class="text-xs text-gray-500 mb-1">Milestone 3 → Epic 3.1 → Task 3.1.3</div>
+                        <h3 class="text-sm font-semibold text-gray-900 mb-1">Elementary Navigation</h3>
+                        <div class="text-xs text-purple-600 font-medium">Academic Structure</div>
+                    </div>
+                    
+                    <div class="flex-1 flex flex-col justify-between">
+                        <div class="text-xs text-gray-600 mb-2">
+                            <div class="mb-1"><i class="fas fa-child mr-1"></i>Academic Levels Navigation</div>
+                            <div class="text-gray-500">Create elementary level navigation with grade-specific sections</div>
+                        </div>
+                        
+                        <div class="flex items-center justify-between text-xs bg-purple-50 p-2 rounded">
+                            <span class="text-purple-700 font-semibold">30 minutes</span>
+                            <span class="px-2 py-1 bg-purple-100 text-purple-800 rounded-full">High Priority</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Task 3.1.4 -->
+                <div class="task-card bg-white rounded-lg border border-gray-200 p-3 w-64 h-full flex flex-col shadow-sm hover:shadow-md transition-shadow">
+                    <div class="flex items-center justify-between mb-2 flex-shrink-0">
+                        <div class="w-8 h-8 bg-purple-600 rounded-full flex items-center justify-center text-white font-bold text-xs">3.1.4</div>
+                        <input type="checkbox" class="task-checkbox w-4 h-4" onchange="updateProgress()">
+                    </div>
+                    
+                    <div class="mb-2 flex-shrink-0">
+                        <div class="text-xs text-gray-500 mb-1">Milestone 3 → Epic 3.1 → Task 3.1.4</div>
+                        <h3 class="text-sm font-semibold text-gray-900 mb-1">High School Navigation</h3>
+                        <div class="text-xs text-purple-600 font-medium">Academic Structure</div>
+                    </div>
+                    
+                    <div class="flex-1 flex flex-col justify-between">
+                        <div class="text-xs text-gray-600 mb-2">
+                            <div class="mb-1"><i class="fas fa-user-graduate mr-1"></i>Academic Levels Navigation</div>
+                            <div class="text-gray-500">Create high school navigation with grade levels and tracks</div>
+                        </div>
+                        
+                        <div class="flex items-center justify-between text-xs bg-purple-50 p-2 rounded">
+                            <span class="text-purple-700 font-semibold">30 minutes</span>
+                            <span class="px-2 py-1 bg-purple-100 text-purple-800 rounded-full">High Priority</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Task 3.1.5 -->
+                <div class="task-card bg-white rounded-lg border border-gray-200 p-3 w-64 h-full flex flex-col shadow-sm hover:shadow-md transition-shadow">
+                    <div class="flex items-center justify-between mb-2 flex-shrink-0">
+                        <div class="w-8 h-8 bg-purple-600 rounded-full flex items-center justify-center text-white font-bold text-xs">3.1.5</div>
+                        <input type="checkbox" class="task-checkbox w-4 h-4" onchange="updateProgress()">
+                    </div>
+                    
+                    <div class="mb-2 flex-shrink-0">
+                        <div class="text-xs text-gray-500 mb-1">Milestone 3 → Epic 3.1 → Task 3.1.5</div>
+                        <h3 class="text-sm font-semibold text-gray-900 mb-1">College Programs Nav</h3>
+                        <div class="text-xs text-purple-600 font-medium">Academic Structure</div>
+                    </div>
+                    
+                    <div class="flex-1 flex flex-col justify-between">
+                        <div class="text-xs text-gray-600 mb-2">
+                            <div class="mb-1"><i class="fas fa-university mr-1"></i>Academic Levels Navigation</div>
+                            <div class="text-gray-500">Create college programs navigation with degree programs</div>
+                        </div>
+                        
+                        <div class="flex items-center justify-between text-xs bg-purple-50 p-2 rounded">
+                            <span class="text-purple-700 font-semibold">30 minutes</span>
+                            <span class="px-2 py-1 bg-purple-100 text-purple-800 rounded-full">High Priority</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Task 3.2.1 -->
+                <div class="task-card bg-white rounded-lg border border-gray-200 p-3 w-64 h-full flex flex-col shadow-sm hover:shadow-md transition-shadow">
+                    <div class="flex items-center justify-between mb-2 flex-shrink-0">
+                        <div class="w-8 h-8 bg-purple-600 rounded-full flex items-center justify-center text-white font-bold text-xs">3.2.1</div>
+                        <input type="checkbox" class="task-checkbox w-4 h-4" onchange="updateProgress()">
+                    </div>
+                    
+                    <div class="mb-2 flex-shrink-0">
+                        <div class="text-xs text-gray-500 mb-1">Milestone 3 → Epic 3.2 → Task 3.2.1</div>
+                        <h3 class="text-sm font-semibold text-gray-900 mb-1">School Year Interface</h3>
+                        <div class="text-xs text-purple-600 font-medium">Academic Structure</div>
+                    </div>
+                    
+                    <div class="flex-1 flex flex-col justify-between">
+                        <div class="text-xs text-gray-600 mb-2">
+                            <div class="mb-1"><i class="fas fa-calendar mr-1"></i>School Year Selection</div>
+                            <div class="text-gray-500">Create school year selection interface with current year display</div>
+                        </div>
+                        
+                        <div class="flex items-center justify-between text-xs bg-purple-50 p-2 rounded">
+                            <span class="text-purple-700 font-semibold">25 minutes</span>
+                            <span class="px-2 py-1 bg-purple-100 text-purple-800 rounded-full">High Priority</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Task 3.2.2 -->
+                <div class="task-card bg-white rounded-lg border border-gray-200 p-3 w-64 h-full flex flex-col shadow-sm hover:shadow-md transition-shadow">
+                    <div class="flex items-center justify-between mb-2 flex-shrink-0">
+                        <div class="w-8 h-8 bg-purple-600 rounded-full flex items-center justify-center text-white font-bold text-xs">3.2.2</div>
+                        <input type="checkbox" class="task-checkbox w-4 h-4" onchange="updateProgress()">
+                    </div>
+                    
+                    <div class="mb-2 flex-shrink-0">
+                        <div class="text-xs text-gray-500 mb-1">Milestone 3 → Epic 3.2 → Task 3.2.2</div>
+                        <h3 class="text-sm font-semibold text-gray-900 mb-1">Archive Years</h3>
+                        <div class="text-xs text-purple-600 font-medium">Academic Structure</div>
+                    </div>
+                    
+                    <div class="flex-1 flex flex-col justify-between">
+                        <div class="text-xs text-gray-600 mb-2">
+                            <div class="mb-1"><i class="fas fa-archive mr-1"></i>School Year Selection</div>
+                            <div class="text-gray-500">Implement archive functionality for past school years</div>
+                        </div>
+                        
+                        <div class="flex items-center justify-between text-xs bg-purple-50 p-2 rounded">
+                            <span class="text-purple-700 font-semibold">25 minutes</span>
+                            <span class="px-2 py-1 bg-yellow-100 text-yellow-800 rounded-full">Medium Priority</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Task 3.2.3 -->
+                <div class="task-card bg-white rounded-lg border border-gray-200 p-3 w-64 h-full flex flex-col shadow-sm hover:shadow-md transition-shadow">
+                    <div class="flex items-center justify-between mb-2 flex-shrink-0">
+                        <div class="w-8 h-8 bg-purple-600 rounded-full flex items-center justify-center text-white font-bold text-xs">3.2.3</div>
+                        <input type="checkbox" class="task-checkbox w-4 h-4" onchange="updateProgress()">
+                    </div>
+                    
+                    <div class="mb-2 flex-shrink-0">
+                        <div class="text-xs text-gray-500 mb-1">Milestone 3 → Epic 3.2 → Task 3.2.3</div>
+                        <h3 class="text-sm font-semibold text-gray-900 mb-1">Add New Year</h3>
+                        <div class="text-xs text-purple-600 font-medium">Academic Structure</div>
+                    </div>
+                    
+                    <div class="flex-1 flex flex-col justify-between">
+                        <div class="text-xs text-gray-600 mb-2">
+                            <div class="mb-1"><i class="fas fa-plus mr-1"></i>School Year Selection</div>
+                            <div class="text-gray-500">Create interface to add new school year with validation</div>
+                        </div>
+                        
+                        <div class="flex items-center justify-between text-xs bg-purple-50 p-2 rounded">
+                            <span class="text-purple-700 font-semibold">15 minutes</span>
+                            <span class="px-2 py-1 bg-gray-100 text-gray-800 rounded-full">Low Priority</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Milestone 4 Tasks -->
+                <!-- Task 4.1.1 -->
+                <div class="task-card bg-white rounded-lg border border-gray-200 p-3 w-64 h-full flex flex-col shadow-sm hover:shadow-md transition-shadow">
+                    <div class="flex items-center justify-between mb-2 flex-shrink-0">
+                        <div class="w-8 h-8 bg-orange-600 rounded-full flex items-center justify-center text-white font-bold text-xs">4.1.1</div>
+                        <input type="checkbox" class="task-checkbox w-4 h-4" onchange="updateProgress()">
+                    </div>
+                    
+                    <div class="mb-2 flex-shrink-0">
+                        <div class="text-xs text-gray-500 mb-1">Milestone 4 → Epic 4.1 → Task 4.1.1</div>
+                        <h3 class="text-sm font-semibold text-gray-900 mb-1">Subject Cards Display</h3>
+                        <div class="text-xs text-orange-600 font-medium">Subjects & Sections</div>
+                    </div>
+                    
+                    <div class="flex-1 flex flex-col justify-between">
+                        <div class="text-xs text-gray-600 mb-2">
+                            <div class="mb-1"><i class="fas fa-book mr-1"></i>Subject Management Interface</div>
+                            <div class="text-gray-500">Create subject cards display with subject information and statistics</div>
+                        </div>
+                        
+                        <div class="flex items-center justify-between text-xs bg-orange-50 p-2 rounded">
+                            <span class="text-orange-700 font-semibold">30 minutes</span>
+                            <span class="px-2 py-1 bg-orange-100 text-orange-800 rounded-full">High Priority</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Task 4.1.2 -->
+                <div class="task-card bg-white rounded-lg border border-gray-200 p-3 w-64 h-full flex flex-col shadow-sm hover:shadow-md transition-shadow">
+                    <div class="flex items-center justify-between mb-2 flex-shrink-0">
+                        <div class="w-8 h-8 bg-orange-600 rounded-full flex items-center justify-center text-white font-bold text-xs">4.1.2</div>
+                        <input type="checkbox" class="task-checkbox w-4 h-4" onchange="updateProgress()">
+                    </div>
+                    
+                    <div class="mb-2 flex-shrink-0">
+                        <div class="text-xs text-gray-500 mb-1">Milestone 4 → Epic 4.1 → Task 4.1.2</div>
+                        <h3 class="text-sm font-semibold text-gray-900 mb-1">Subject Icons</h3>
+                        <div class="text-xs text-orange-600 font-medium">Subjects & Sections</div>
+                    </div>
+                    
+                    <div class="flex-1 flex flex-col justify-between">
+                        <div class="text-xs text-gray-600 mb-2">
+                            <div class="mb-1"><i class="fas fa-flask mr-1"></i>Subject Management Interface</div>
+                            <div class="text-gray-500">Add subject-specific icons and visual indicators for different subjects</div>
+                        </div>
+                        
+                        <div class="flex items-center justify-between text-xs bg-orange-50 p-2 rounded">
+                            <span class="text-orange-700 font-semibold">15 minutes</span>
+                            <span class="px-2 py-1 bg-orange-100 text-orange-800 rounded-full">High Priority</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Task 4.1.3 -->
+                <div class="task-card bg-white rounded-lg border border-gray-200 p-3 w-64 h-full flex flex-col shadow-sm hover:shadow-md transition-shadow">
+                    <div class="flex items-center justify-between mb-2 flex-shrink-0">
+                        <div class="w-8 h-8 bg-orange-600 rounded-full flex items-center justify-center text-white font-bold text-xs">4.1.3</div>
+                        <input type="checkbox" class="task-checkbox w-4 h-4" onchange="updateProgress()">
+                    </div>
+                    
+                    <div class="mb-2 flex-shrink-0">
+                        <div class="text-xs text-gray-500 mb-1">Milestone 4 → Epic 4.1 → Task 4.1.3</div>
+                        <h3 class="text-sm font-semibold text-gray-900 mb-1">Student Count Per Subject</h3>
+                        <div class="text-xs text-orange-600 font-medium">Subjects & Sections</div>
+                    </div>
+                    
+                    <div class="flex-1 flex flex-col justify-between">
+                        <div class="text-xs text-gray-600 mb-2">
+                            <div class="mb-1"><i class="fas fa-chart-bar mr-1"></i>Subject Management Interface</div>
+                            <div class="text-gray-500">Display student enrollment count for each subject with statistics</div>
+                        </div>
+                        
+                        <div class="flex items-center justify-between text-xs bg-orange-50 p-2 rounded">
+                            <span class="text-orange-700 font-semibold">15 minutes</span>
+                            <span class="px-2 py-1 bg-yellow-100 text-yellow-800 rounded-full">Medium Priority</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Task 4.1.4 -->
+                <div class="task-card bg-white rounded-lg border border-gray-200 p-3 w-64 h-full flex flex-col shadow-sm hover:shadow-md transition-shadow">
+                    <div class="flex items-center justify-between mb-2 flex-shrink-0">
+                        <div class="w-8 h-8 bg-orange-600 rounded-full flex items-center justify-center text-white font-bold text-xs">4.1.4</div>
+                        <input type="checkbox" class="task-checkbox w-4 h-4" onchange="updateProgress()">
+                    </div>
+                    
+                    <div class="mb-2 flex-shrink-0">
+                        <div class="text-xs text-gray-500 mb-1">Milestone 4 → Epic 4.1 → Task 4.1.4</div>
+                        <h3 class="text-sm font-semibold text-gray-900 mb-1">Add/Edit Subjects</h3>
+                        <div class="text-xs text-orange-600 font-medium">Subjects & Sections</div>
+                    </div>
+                    
+                    <div class="flex-1 flex flex-col justify-between">
+                        <div class="text-xs text-gray-600 mb-2">
+                            <div class="mb-1"><i class="fas fa-plus mr-1"></i>Subject Management Interface</div>
+                            <div class="text-gray-500">Create interface to add new subjects and edit existing subject details</div>
+                        </div>
+                        
+                        <div class="flex items-center justify-between text-xs bg-orange-50 p-2 rounded">
+                            <span class="text-orange-700 font-semibold">5 minutes</span>
+                            <span class="px-2 py-1 bg-gray-100 text-gray-800 rounded-full">Low Priority</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Task 4.2.1 -->
+                <div class="task-card bg-white rounded-lg border border-gray-200 p-3 w-64 h-full flex flex-col shadow-sm hover:shadow-md transition-shadow">
+                    <div class="flex items-center justify-between mb-2 flex-shrink-0">
+                        <div class="w-8 h-8 bg-orange-600 rounded-full flex items-center justify-center text-white font-bold text-xs">4.2.1</div>
+                        <input type="checkbox" class="task-checkbox w-4 h-4" onchange="updateProgress()">
+                    </div>
+                    
+                    <div class="mb-2 flex-shrink-0">
+                        <div class="text-xs text-gray-500 mb-1">Milestone 4 → Epic 4.2 → Task 4.2.1</div>
+                        <h3 class="text-sm font-semibold text-gray-900 mb-1">Section Cards</h3>
+                        <div class="text-xs text-orange-600 font-medium">Subjects & Sections</div>
+                    </div>
+                    
+                    <div class="flex-1 flex flex-col justify-between">
+                        <div class="text-xs text-gray-600 mb-2">
+                            <div class="mb-1"><i class="fas fa-door-open mr-1"></i>Class Section Management</div>
+                            <div class="text-gray-500">Create section cards display with class information and capacity</div>
+                        </div>
+                        
+                        <div class="flex items-center justify-between text-xs bg-orange-50 p-2 rounded">
+                            <span class="text-orange-700 font-semibold">30 minutes</span>
+                            <span class="px-2 py-1 bg-orange-100 text-orange-800 rounded-full">High Priority</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Task 4.2.2 -->
+                <div class="task-card bg-white rounded-lg border border-gray-200 p-3 w-64 h-full flex flex-col shadow-sm hover:shadow-md transition-shadow">
+                    <div class="flex items-center justify-between mb-2 flex-shrink-0">
+                        <div class="w-8 h-8 bg-orange-600 rounded-full flex items-center justify-center text-white font-bold text-xs">4.2.2</div>
+                        <input type="checkbox" class="task-checkbox w-4 h-4" onchange="updateProgress()">
+                    </div>
+                    
+                    <div class="mb-2 flex-shrink-0">
+                        <div class="text-xs text-gray-500 mb-1">Milestone 4 → Epic 4.2 → Task 4.2.2</div>
+                        <h3 class="text-sm font-semibold text-gray-900 mb-1">Teacher Assignment</h3>
+                        <div class="text-xs text-orange-600 font-medium">Subjects & Sections</div>
+                    </div>
+                    
+                    <div class="flex-1 flex flex-col justify-between">
+                        <div class="text-xs text-gray-600 mb-2">
+                            <div class="mb-1"><i class="fas fa-chalkboard-teacher mr-1"></i>Class Section Management</div>
+                            <div class="text-gray-500">Implement teacher assignment interface for sections with validation</div>
+                        </div>
+                        
+                        <div class="flex items-center justify-between text-xs bg-orange-50 p-2 rounded">
+                            <span class="text-orange-700 font-semibold">1 hour</span>
+                            <span class="px-2 py-1 bg-orange-100 text-orange-800 rounded-full">High Priority</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Task 4.2.3 -->
+                <div class="task-card bg-white rounded-lg border border-gray-200 p-3 w-64 h-full flex flex-col shadow-sm hover:shadow-md transition-shadow">
+                    <div class="flex items-center justify-between mb-2 flex-shrink-0">
+                        <div class="w-8 h-8 bg-orange-600 rounded-full flex items-center justify-center text-white font-bold text-xs">4.2.3</div>
+                        <input type="checkbox" class="task-checkbox w-4 h-4" onchange="updateProgress()">
+                    </div>
+                    
+                    <div class="mb-2 flex-shrink-0">
+                        <div class="text-xs text-gray-500 mb-1">Milestone 4 → Epic 4.2 → Task 4.2.3</div>
+                        <h3 class="text-sm font-semibold text-gray-900 mb-1">Student Count</h3>
+                        <div class="text-xs text-orange-600 font-medium">Subjects & Sections</div>
+                    </div>
+                    
+                    <div class="flex-1 flex flex-col justify-between">
+                        <div class="text-xs text-gray-600 mb-2">
+                            <div class="mb-1"><i class="fas fa-users mr-1"></i>Class Section Management</div>
+                            <div class="text-gray-500">Display current student count and capacity for each section</div>
+                        </div>
+                        
+                        <div class="flex items-center justify-between text-xs bg-orange-50 p-2 rounded">
+                            <span class="text-orange-700 font-semibold">5 minutes</span>
+                            <span class="px-2 py-1 bg-yellow-100 text-yellow-800 rounded-full">Medium Priority</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Task 4.2.4 -->
+                <div class="task-card bg-white rounded-lg border border-gray-200 p-3 w-64 h-full flex flex-col shadow-sm hover:shadow-md transition-shadow">
+                    <div class="flex items-center justify-between mb-2 flex-shrink-0">
+                        <div class="w-8 h-8 bg-orange-600 rounded-full flex items-center justify-center text-white font-bold text-xs">4.2.4</div>
+                        <input type="checkbox" class="task-checkbox w-4 h-4" onchange="updateProgress()">
+                    </div>
+                    
+                    <div class="mb-2 flex-shrink-0">
+                        <div class="text-xs text-gray-500 mb-1">Milestone 4 → Epic 4.2 → Task 4.2.4</div>
+                        <h3 class="text-sm font-semibold text-gray-900 mb-1">Section Creation</h3>
+                        <div class="text-xs text-orange-600 font-medium">Subjects & Sections</div>
+                    </div>
+                    
+                    <div class="flex-1 flex flex-col justify-between">
+                        <div class="text-xs text-gray-600 mb-2">
+                            <div class="mb-1"><i class="fas fa-edit mr-1"></i>Class Section Management</div>
+                            <div class="text-gray-500">Create interface to add new sections and edit section details</div>
+                        </div>
+                        
+                        <div class="flex items-center justify-between text-xs bg-orange-50 p-2 rounded">
+                            <span class="text-orange-700 font-semibold">5 minutes</span>
+                            <span class="px-2 py-1 bg-gray-100 text-gray-800 rounded-full">Low Priority</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Milestone 5 Tasks -->
+                <!-- Task 5.1.1 -->
+                <div class="task-card bg-white rounded-lg border border-gray-200 p-3 w-64 h-full flex flex-col shadow-sm hover:shadow-md transition-shadow">
+                    <div class="flex items-center justify-between mb-2 flex-shrink-0">
+                        <div class="w-8 h-8 bg-red-600 rounded-full flex items-center justify-center text-white font-bold text-xs">5.1.1</div>
+                        <input type="checkbox" class="task-checkbox w-4 h-4" onchange="updateProgress()">
+                    </div>
+                    
+                    <div class="mb-2 flex-shrink-0">
+                        <div class="text-xs text-gray-500 mb-1">Milestone 5 → Epic 5.1 → Task 5.1.1</div>
+                        <h3 class="text-sm font-semibold text-gray-900 mb-1">Student Data Table</h3>
+                        <div class="text-xs text-red-600 font-medium">Student Management</div>
+                    </div>
+                    
+                    <div class="flex-1 flex flex-col justify-between">
+                        <div class="text-xs text-gray-600 mb-2">
+                            <div class="mb-1"><i class="fas fa-table mr-1"></i>Student Data Tables</div>
+                            <div class="text-gray-500">Create comprehensive student data table with sorting and pagination</div>
+                        </div>
+                        
+                        <div class="flex items-center justify-between text-xs bg-red-50 p-2 rounded">
+                            <span class="text-red-700 font-semibold">20 minutes</span>
+                            <span class="px-2 py-1 bg-red-100 text-red-800 rounded-full">High Priority</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Task 5.1.2 -->
+                <div class="task-card bg-white rounded-lg border border-gray-200 p-3 w-64 h-full flex flex-col shadow-sm hover:shadow-md transition-shadow">
+                    <div class="flex items-center justify-between mb-2 flex-shrink-0">
+                        <div class="w-8 h-8 bg-red-600 rounded-full flex items-center justify-center text-white font-bold text-xs">5.1.2</div>
+                        <input type="checkbox" class="task-checkbox w-4 h-4" onchange="updateProgress()">
+                    </div>
+                    
+                    <div class="mb-2 flex-shrink-0">
+                        <div class="text-xs text-gray-500 mb-1">Milestone 5 → Epic 5.1 → Task 5.1.2</div>
+                        <h3 class="text-sm font-semibold text-gray-900 mb-1">Regular Students Tab</h3>
+                        <div class="text-xs text-red-600 font-medium">Student Management</div>
+                    </div>
+                    
+                    <div class="flex-1 flex flex-col justify-between">
+                        <div class="text-xs text-gray-600 mb-2">
+                            <div class="mb-1"><i class="fas fa-users mr-1"></i>Student Data Tables</div>
+                            <div class="text-gray-500">Create tab interface for regular students with status indicators</div>
+                        </div>
+                        
+                        <div class="flex items-center justify-between text-xs bg-red-50 p-2 rounded">
+                            <span class="text-red-700 font-semibold">10 minutes</span>
+                            <span class="px-2 py-1 bg-red-100 text-red-800 rounded-full">High Priority</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Task 5.1.3 -->
+                <div class="task-card bg-white rounded-lg border border-gray-200 p-3 w-64 h-full flex flex-col shadow-sm hover:shadow-md transition-shadow">
+                    <div class="flex items-center justify-between mb-2 flex-shrink-0">
+                        <div class="w-8 h-8 bg-red-600 rounded-full flex items-center justify-center text-white font-bold text-xs">5.1.3</div>
+                        <input type="checkbox" class="task-checkbox w-4 h-4" onchange="updateProgress()">
+                    </div>
+                    
+                    <div class="mb-2 flex-shrink-0">
+                        <div class="text-xs text-gray-500 mb-1">Milestone 5 → Epic 5.1 → Task 5.1.3</div>
+                        <h3 class="text-sm font-semibold text-gray-900 mb-1">Irregular Students Tab</h3>
+                        <div class="text-xs text-red-600 font-medium">Student Management</div>
+                    </div>
+                    
+                    <div class="flex-1 flex flex-col justify-between">
+                        <div class="text-xs text-gray-600 mb-2">
+                            <div class="mb-1"><i class="fas fa-exclamation-triangle mr-1"></i>Student Data Tables</div>
+                            <div class="text-gray-500">Create tab interface for irregular students with special indicators</div>
+                        </div>
+                        
+                        <div class="flex items-center justify-between text-xs bg-red-50 p-2 rounded">
+                            <span class="text-red-700 font-semibold">10 minutes</span>
+                            <span class="px-2 py-1 bg-red-100 text-red-800 rounded-full">High Priority</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Task 5.1.4 -->
+                <div class="task-card bg-white rounded-lg border border-gray-200 p-3 w-64 h-full flex flex-col shadow-sm hover:shadow-md transition-shadow">
+                    <div class="flex items-center justify-between mb-2 flex-shrink-0">
+                        <div class="w-8 h-8 bg-red-600 rounded-full flex items-center justify-center text-white font-bold text-xs">5.1.4</div>
+                        <input type="checkbox" class="task-checkbox w-4 h-4" onchange="updateProgress()">
+                    </div>
+                    
+                    <div class="mb-2 flex-shrink-0">
+                        <div class="text-xs text-gray-500 mb-1">Milestone 5 → Epic 5.1 → Task 5.1.4</div>
+                        <h3 class="text-sm font-semibold text-gray-900 mb-1">Search and Filtering</h3>
+                        <div class="text-xs text-red-600 font-medium">Student Management</div>
+                    </div>
+                    
+                    <div class="flex-1 flex flex-col justify-between">
+                        <div class="text-xs text-gray-600 mb-2">
+                            <div class="mb-1"><i class="fas fa-search mr-1"></i>Student Data Tables</div>
+                            <div class="text-gray-500">Implement search functionality and filtering options for student data</div>
+                        </div>
+                        
+                        <div class="flex items-center justify-between text-xs bg-red-50 p-2 rounded">
+                            <span class="text-red-700 font-semibold">10 minutes</span>
+                            <span class="px-2 py-1 bg-yellow-100 text-yellow-800 rounded-full">Medium Priority</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Task 5.2.1 -->
+                <div class="task-card bg-white rounded-lg border border-gray-200 p-3 w-64 h-full flex flex-col shadow-sm hover:shadow-md transition-shadow">
+                    <div class="flex items-center justify-between mb-2 flex-shrink-0">
+                        <div class="w-8 h-8 bg-red-600 rounded-full flex items-center justify-center text-white font-bold text-xs">5.2.1</div>
+                        <input type="checkbox" class="task-checkbox w-4 h-4" onchange="updateProgress()">
+                    </div>
+                    
+                    <div class="mb-2 flex-shrink-0">
+                        <div class="text-xs text-gray-500 mb-1">Milestone 5 → Epic 5.2 → Task 5.2.1</div>
+                        <h3 class="text-sm font-semibold text-gray-900 mb-1">View Student Details</h3>
+                        <div class="text-xs text-red-600 font-medium">Student Management</div>
+                    </div>
+                    
+                    <div class="flex-1 flex flex-col justify-between">
+                        <div class="text-xs text-gray-600 mb-2">
+                            <div class="mb-1"><i class="fas fa-eye mr-1"></i>Student Management Actions</div>
+                            <div class="text-gray-500">Create detailed student profile view with comprehensive information</div>
+                        </div>
+                        
+                        <div class="flex items-center justify-between text-xs bg-red-50 p-2 rounded">
+                            <span class="text-red-700 font-semibold">20 minutes</span>
+                            <span class="px-2 py-1 bg-red-100 text-red-800 rounded-full">High Priority</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Task 5.2.2 -->
+                <div class="task-card bg-white rounded-lg border border-gray-200 p-3 w-64 h-full flex flex-col shadow-sm hover:shadow-md transition-shadow">
+                    <div class="flex items-center justify-between mb-2 flex-shrink-0">
+                        <div class="w-8 h-8 bg-red-600 rounded-full flex items-center justify-center text-white font-bold text-xs">5.2.2</div>
+                        <input type="checkbox" class="task-checkbox w-4 h-4" onchange="updateProgress()">
+                    </div>
+                    
+                    <div class="mb-2 flex-shrink-0">
+                        <div class="text-xs text-gray-500 mb-1">Milestone 5 → Epic 5.2 → Task 5.2.2</div>
+                        <h3 class="text-sm font-semibold text-gray-900 mb-1">Edit Student Info</h3>
+                        <div class="text-xs text-red-600 font-medium">Student Management</div>
+                    </div>
+                    
+                    <div class="flex-1 flex flex-col justify-between">
+                        <div class="text-xs text-gray-600 mb-2">
+                            <div class="mb-1"><i class="fas fa-edit mr-1"></i>Student Management Actions</div>
+                            <div class="text-gray-500">Create student information editing interface with validation</div>
+                        </div>
+                        
+                        <div class="flex items-center justify-between text-xs bg-red-50 p-2 rounded">
+                            <span class="text-red-700 font-semibold">10 minutes</span>
+                            <span class="px-2 py-1 bg-red-100 text-red-800 rounded-full">High Priority</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Task 5.2.3 -->
+                <div class="task-card bg-white rounded-lg border border-gray-200 p-3 w-64 h-full flex flex-col shadow-sm hover:shadow-md transition-shadow">
+                    <div class="flex items-center justify-between mb-2 flex-shrink-0">
+                        <div class="w-8 h-8 bg-red-600 rounded-full flex items-center justify-center text-white font-bold text-xs">5.2.3</div>
+                        <input type="checkbox" class="task-checkbox w-4 h-4" onchange="updateProgress()">
+                    </div>
+                    
+                    <div class="mb-2 flex-shrink-0">
+                        <div class="text-xs text-gray-500 mb-1">Milestone 5 → Epic 5.2 → Task 5.2.3</div>
+                        <h3 class="text-sm font-semibold text-gray-900 mb-1">Add New Student</h3>
+                        <div class="text-xs text-red-600 font-medium">Student Management</div>
+                    </div>
+                    
+                    <div class="flex-1 flex flex-col justify-between">
+                        <div class="text-xs text-gray-600 mb-2">
+                            <div class="mb-1"><i class="fas fa-user-plus mr-1"></i>Student Management Actions</div>
+                            <div class="text-gray-500">Create interface to add new students with enrollment process</div>
+                        </div>
+                        
+                        <div class="flex items-center justify-between text-xs bg-red-50 p-2 rounded">
+                            <span class="text-red-700 font-semibold">10 minutes</span>
+                            <span class="px-2 py-1 bg-yellow-100 text-yellow-800 rounded-full">Medium Priority</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Milestone 6 Tasks -->
+                <!-- Task 6.1.1 -->
+                <div class="task-card bg-white rounded-lg border border-gray-200 p-3 w-64 h-full flex flex-col shadow-sm hover:shadow-md transition-shadow">
+                    <div class="flex items-center justify-between mb-2 flex-shrink-0">
+                        <div class="w-8 h-8 bg-indigo-600 rounded-full flex items-center justify-center text-white font-bold text-xs">6.1.1</div>
+                        <input type="checkbox" class="task-checkbox w-4 h-4" onchange="updateProgress()">
+                    </div>
+                    
+                    <div class="mb-2 flex-shrink-0">
+                        <div class="text-xs text-gray-500 mb-1">Milestone 6 → Epic 6.1 → Task 6.1.1</div>
+                        <h3 class="text-sm font-semibold text-gray-900 mb-1">Grade Overview Table</h3>
+                        <div class="text-xs text-indigo-600 font-medium">Grade Oversight</div>
+                    </div>
+                    
+                    <div class="flex-1 flex flex-col justify-between">
+                        <div class="text-xs text-gray-600 mb-2">
+                            <div class="mb-1"><i class="fas fa-chart-line mr-1"></i>Admin Grade View (Read-Only)</div>
+                            <div class="text-gray-500">Create comprehensive grade overview table with read-only access</div>
+                        </div>
+                        
+                        <div class="flex items-center justify-between text-xs bg-indigo-50 p-2 rounded">
+                            <span class="text-indigo-700 font-semibold">20 minutes</span>
+                            <span class="px-2 py-1 bg-indigo-100 text-indigo-800 rounded-full">High Priority</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Task 6.1.2 -->
+                <div class="task-card bg-white rounded-lg border border-gray-200 p-3 w-64 h-full flex flex-col shadow-sm hover:shadow-md transition-shadow">
+                    <div class="flex items-center justify-between mb-2 flex-shrink-0">
+                        <div class="w-8 h-8 bg-indigo-600 rounded-full flex items-center justify-center text-white font-bold text-xs">6.1.2</div>
+                        <input type="checkbox" class="task-checkbox w-4 h-4" onchange="updateProgress()">
+                    </div>
+                    
+                    <div class="mb-2 flex-shrink-0">
+                        <div class="text-xs text-gray-500 mb-1">Milestone 6 → Epic 6.1 → Task 6.1.2</div>
+                        <h3 class="text-sm font-semibold text-gray-900 mb-1">Quarter Selection Tabs</h3>
+                        <div class="text-xs text-indigo-600 font-medium">Grade Oversight</div>
+                    </div>
+                    
+                    <div class="flex-1 flex flex-col justify-between">
+                        <div class="text-xs text-gray-600 mb-2">
+                            <div class="mb-1"><i class="fas fa-calendar mr-1"></i>Admin Grade View (Read-Only)</div>
+                            <div class="text-gray-500">Create quarter selection tabs for grade period navigation</div>
+                        </div>
+                        
+                        <div class="flex items-center justify-between text-xs bg-indigo-50 p-2 rounded">
+                            <span class="text-indigo-700 font-semibold">30 minutes</span>
+                            <span class="px-2 py-1 bg-indigo-100 text-indigo-800 rounded-full">High Priority</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Task 6.1.3 -->
+                <div class="task-card bg-white rounded-lg border border-gray-200 p-3 w-64 h-full flex flex-col shadow-sm hover:shadow-md transition-shadow">
+                    <div class="flex items-center justify-between mb-2 flex-shrink-0">
+                        <div class="w-8 h-8 bg-indigo-600 rounded-full flex items-center justify-center text-white font-bold text-xs">6.1.3</div>
+                        <input type="checkbox" class="task-checkbox w-4 h-4" onchange="updateProgress()">
+                    </div>
+                    
+                    <div class="mb-2 flex-shrink-0">
+                        <div class="text-xs text-gray-500 mb-1">Milestone 6 → Epic 6.1 → Task 6.1.3</div>
+                        <h3 class="text-sm font-semibold text-gray-900 mb-1">Grade Calculations</h3>
+                        <div class="text-xs text-indigo-600 font-medium">Grade Oversight</div>
+                    </div>
+                    
+                    <div class="flex-1 flex flex-col justify-between">
+                        <div class="text-xs text-gray-600 mb-2">
+                            <div class="mb-1"><i class="fas fa-calculator mr-1"></i>Admin Grade View (Read-Only)</div>
+                            <div class="text-gray-500">Implement grade calculation display with averages and statistics</div>
+                        </div>
+                        
+                        <div class="flex items-center justify-between text-xs bg-indigo-50 p-2 rounded">
+                            <span class="text-indigo-700 font-semibold">45 minutes</span>
+                            <span class="px-2 py-1 bg-yellow-100 text-yellow-800 rounded-full">Medium Priority</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Task 6.1.4 -->
+                <div class="task-card bg-white rounded-lg border border-gray-200 p-3 w-64 h-full flex flex-col shadow-sm hover:shadow-md transition-shadow">
+                    <div class="flex items-center justify-between mb-2 flex-shrink-0">
+                        <div class="w-8 h-8 bg-indigo-600 rounded-full flex items-center justify-center text-white font-bold text-xs">6.1.4</div>
+                        <input type="checkbox" class="task-checkbox w-4 h-4" onchange="updateProgress()">
+                    </div>
+                    
+                    <div class="mb-2 flex-shrink-0">
+                        <div class="text-xs text-gray-500 mb-1">Milestone 6 → Epic 6.1 → Task 6.1.4</div>
+                        <h3 class="text-sm font-semibold text-gray-900 mb-1">Read-Only Indicators</h3>
+                        <div class="text-xs text-indigo-600 font-medium">Grade Oversight</div>
+                    </div>
+                    
+                    <div class="flex-1 flex flex-col justify-between">
+                        <div class="text-xs text-gray-600 mb-2">
+                            <div class="mb-1"><i class="fas fa-eye mr-1"></i>Admin Grade View (Read-Only)</div>
+                            <div class="text-gray-500">Add visual indicators showing admin has read-only access to grades</div>
+                        </div>
+                        
+                        <div class="flex items-center justify-between text-xs bg-indigo-50 p-2 rounded">
+                            <span class="text-indigo-700 font-semibold">10 minutes</span>
+                            <span class="px-2 py-1 bg-gray-100 text-gray-800 rounded-full">Low Priority</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Task 6.2.1 -->
+                <div class="task-card bg-white rounded-lg border border-gray-200 p-3 w-64 h-full flex flex-col shadow-sm hover:shadow-md transition-shadow">
+                    <div class="flex items-center justify-between mb-2 flex-shrink-0">
+                        <div class="w-8 h-8 bg-indigo-600 rounded-full flex items-center justify-center text-white font-bold text-xs">6.2.1</div>
+                        <input type="checkbox" class="task-checkbox w-4 h-4" onchange="updateProgress()">
+                    </div>
+                    
+                    <div class="mb-2 flex-shrink-0">
+                        <div class="text-xs text-gray-500 mb-1">Milestone 6 → Epic 6.2 → Task 6.2.1</div>
+                        <h3 class="text-sm font-semibold text-gray-900 mb-1">Export Data</h3>
+                        <div class="text-xs text-indigo-600 font-medium">Grade Oversight</div>
+                    </div>
+                    
+                    <div class="flex-1 flex flex-col justify-between">
+                        <div class="text-xs text-gray-600 mb-2">
+                            <div class="mb-1"><i class="fas fa-file-export mr-1"></i>Admin System Functions</div>
+                            <div class="text-gray-500">Create data export functionality for reports and backups</div>
+                        </div>
+                        
+                        <div class="flex items-center justify-between text-xs bg-indigo-50 p-2 rounded">
+                            <span class="text-indigo-700 font-semibold">3 hours</span>
+                            <span class="px-2 py-1 bg-indigo-100 text-indigo-800 rounded-full">High Priority</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Task 6.2.2 -->
+                <div class="task-card bg-white rounded-lg border border-gray-200 p-3 w-64 h-full flex flex-col shadow-sm hover:shadow-md transition-shadow">
+                    <div class="flex items-center justify-between mb-2 flex-shrink-0">
+                        <div class="w-8 h-8 bg-indigo-600 rounded-full flex items-center justify-center text-white font-bold text-xs">6.2.2</div>
+                        <input type="checkbox" class="task-checkbox w-4 h-4" onchange="updateProgress()">
+                    </div>
+                    
+                    <div class="mb-2 flex-shrink-0">
+                        <div class="text-xs text-gray-500 mb-1">Milestone 6 → Epic 6.2 → Task 6.2.2</div>
+                        <h3 class="text-sm font-semibold text-gray-900 mb-1">System Settings</h3>
+                        <div class="text-xs text-indigo-600 font-medium">Grade Oversight</div>
+                    </div>
+                    
+                    <div class="flex-1 flex flex-col justify-between">
+                        <div class="text-xs text-gray-600 mb-2">
+                            <div class="mb-1"><i class="fas fa-cog mr-1"></i>Admin System Functions</div>
+                            <div class="text-gray-500">Create system settings interface for admin configuration</div>
+                        </div>
+                        
+                        <div class="flex items-center justify-between text-xs bg-indigo-50 p-2 rounded">
+                            <span class="text-indigo-700 font-semibold">4 hours</span>
+                            <span class="px-2 py-1 bg-yellow-100 text-yellow-800 rounded-full">Medium Priority</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Task 6.2.3 -->
+                <div class="task-card bg-white rounded-lg border border-gray-200 p-3 w-64 h-full flex flex-col shadow-sm hover:shadow-md transition-shadow">
+                    <div class="flex items-center justify-between mb-2 flex-shrink-0">
+                        <div class="w-8 h-8 bg-indigo-600 rounded-full flex items-center justify-center text-white font-bold text-xs">6.2.3</div>
+                        <input type="checkbox" class="task-checkbox w-4 h-4" onchange="updateProgress()">
+                    </div>
+                    
+                    <div class="mb-2 flex-shrink-0">
+                        <div class="text-xs text-gray-500 mb-1">Milestone 6 → Epic 6.2 → Task 6.2.3</div>
+                        <h3 class="text-sm font-semibold text-gray-900 mb-1">Backup System</h3>
+                        <div class="text-xs text-indigo-600 font-medium">Grade Oversight</div>
+                    </div>
+                    
+                    <div class="flex-1 flex flex-col justify-between">
+                        <div class="text-xs text-gray-600 mb-2">
+                            <div class="mb-1"><i class="fas fa-backup mr-1"></i>Admin System Functions</div>
+                            <div class="text-gray-500">Implement backup system interface for data protection</div>
+                        </div>
+                        
+                        <div class="flex items-center justify-between text-xs bg-indigo-50 p-2 rounded">
+                            <span class="text-indigo-700 font-semibold">4 hours</span>
+                            <span class="px-2 py-1 bg-yellow-100 text-yellow-800 rounded-full">Medium Priority</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Task 6.2.4 -->
+                <div class="task-card bg-white rounded-lg border border-gray-200 p-3 w-64 h-full flex flex-col shadow-sm hover:shadow-md transition-shadow">
+                    <div class="flex items-center justify-between mb-2 flex-shrink-0">
+                        <div class="w-8 h-8 bg-indigo-600 rounded-full flex items-center justify-center text-white font-bold text-xs">6.2.4</div>
+                        <input type="checkbox" class="task-checkbox w-4 h-4" onchange="updateProgress()">
+                    </div>
+                    
+                    <div class="mb-2 flex-shrink-0">
+                        <div class="text-xs text-gray-500 mb-1">Milestone 6 → Epic 6.2 → Task 6.2.4</div>
+                        <h3 class="text-sm font-semibold text-gray-900 mb-1">Activity Feed</h3>
+                        <div class="text-xs text-indigo-600 font-medium">Grade Oversight</div>
+                    </div>
+                    
+                    <div class="flex-1 flex flex-col justify-between">
+                        <div class="text-xs text-gray-600 mb-2">
+                            <div class="mb-1"><i class="fas fa-bell mr-1"></i>Admin System Functions</div>
+                            <div class="text-gray-500">Create activity feed showing system events and notifications</div>
+                        </div>
+                        
+                        <div class="flex items-center justify-between text-xs bg-indigo-50 p-2 rounded">
+                            <span class="text-indigo-700 font-semibold">1 hour</span>
+                            <span class="px-2 py-1 bg-gray-100 text-gray-800 rounded-full">Low Priority</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Milestone 7 Tasks -->
+                <!-- Task 7.1.1 -->
+                <div class="task-card bg-white rounded-lg border border-gray-200 p-3 w-64 h-full flex flex-col shadow-sm hover:shadow-md transition-shadow">
+                    <div class="flex items-center justify-between mb-2 flex-shrink-0">
+                        <div class="w-8 h-8 bg-teal-600 rounded-full flex items-center justify-center text-white font-bold text-xs">7.1.1</div>
+                        <input type="checkbox" class="task-checkbox w-4 h-4" onchange="updateProgress()">
+                    </div>
+                    
+                    <div class="mb-2 flex-shrink-0">
+                        <div class="text-xs text-gray-500 mb-1">Milestone 7 → Epic 7.1 → Task 7.1.1</div>
+                        <h3 class="text-sm font-semibold text-gray-900 mb-1">College Program Cards</h3>
+                        <div class="text-xs text-teal-600 font-medium">College Programs</div>
+                    </div>
+                    
+                    <div class="flex-1 flex flex-col justify-between">
+                        <div class="text-xs text-gray-600 mb-2">
+                            <div class="mb-1"><i class="fas fa-university mr-1"></i>College Program Interface</div>
+                            <div class="text-gray-500">Create college program cards with degree information and statistics</div>
+                        </div>
+                        
+                        <div class="flex items-center justify-between text-xs bg-teal-50 p-2 rounded">
+                            <span class="text-teal-700 font-semibold">20 minutes</span>
+                            <span class="px-2 py-1 bg-teal-100 text-teal-800 rounded-full">High Priority</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Task 7.1.2 -->
+                <div class="task-card bg-white rounded-lg border border-gray-200 p-3 w-64 h-full flex flex-col shadow-sm hover:shadow-md transition-shadow">
+                    <div class="flex items-center justify-between mb-2 flex-shrink-0">
+                        <div class="w-8 h-8 bg-teal-600 rounded-full flex items-center justify-center text-white font-bold text-xs">7.1.2</div>
+                        <input type="checkbox" class="task-checkbox w-4 h-4" onchange="updateProgress()">
+                    </div>
+                    
+                    <div class="mb-2 flex-shrink-0">
+                        <div class="text-xs text-gray-500 mb-1">Milestone 7 → Epic 7.1 → Task 7.1.2</div>
+                        <h3 class="text-sm font-semibold text-gray-900 mb-1">Year Level Navigation</h3>
+                        <div class="text-xs text-teal-600 font-medium">College Programs</div>
+                    </div>
+                    
+                    <div class="flex-1 flex flex-col justify-between">
+                        <div class="text-xs text-gray-600 mb-2">
+                            <div class="mb-1"><i class="fas fa-layer-group mr-1"></i>College Program Interface</div>
+                            <div class="text-gray-500">Create year level navigation for college programs (1st-4th year)</div>
+                        </div>
+                        
+                        <div class="flex items-center justify-between text-xs bg-teal-50 p-2 rounded">
+                            <span class="text-teal-700 font-semibold">30 minutes</span>
+                            <span class="px-2 py-1 bg-teal-100 text-teal-800 rounded-full">High Priority</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Task 7.1.3 -->
+                <div class="task-card bg-white rounded-lg border border-gray-200 p-3 w-64 h-full flex flex-col shadow-sm hover:shadow-md transition-shadow">
+                    <div class="flex items-center justify-between mb-2 flex-shrink-0">
+                        <div class="w-8 h-8 bg-teal-600 rounded-full flex items-center justify-center text-white font-bold text-xs">7.1.3</div>
+                        <input type="checkbox" class="task-checkbox w-4 h-4" onchange="updateProgress()">
+                    </div>
+                    
+                    <div class="mb-2 flex-shrink-0">
+                        <div class="text-xs text-gray-500 mb-1">Milestone 7 → Epic 7.1 → Task 7.1.3</div>
+                        <h3 class="text-sm font-semibold text-gray-900 mb-1">Program Details View</h3>
+                        <div class="text-xs text-teal-600 font-medium">College Programs</div>
+                    </div>
+                    
+                    <div class="flex-1 flex flex-col justify-between">
+                        <div class="text-xs text-gray-600 mb-2">
+                            <div class="mb-1"><i class="fas fa-graduation-cap mr-1"></i>College Program Interface</div>
+                            <div class="text-gray-500">Create detailed program view with curriculum and requirements</div>
+                        </div>
+                        
+                        <div class="flex items-center justify-between text-xs bg-teal-50 p-2 rounded">
+                            <span class="text-teal-700 font-semibold">45 minutes</span>
+                            <span class="px-2 py-1 bg-yellow-100 text-yellow-800 rounded-full">Medium Priority</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Task 7.2.1 -->
+                <div class="task-card bg-white rounded-lg border border-gray-200 p-3 w-64 h-full flex flex-col shadow-sm hover:shadow-md transition-shadow">
+                    <div class="flex items-center justify-between mb-2 flex-shrink-0">
+                        <div class="w-8 h-8 bg-teal-600 rounded-full flex items-center justify-center text-white font-bold text-xs">7.2.1</div>
+                        <input type="checkbox" class="task-checkbox w-4 h-4" onchange="updateProgress()">
+                    </div>
+                    
+                    <div class="mb-2 flex-shrink-0">
+                        <div class="text-xs text-gray-500 mb-1">Milestone 7 → Epic 7.2 → Task 7.2.1</div>
+                        <h3 class="text-sm font-semibold text-gray-900 mb-1">Irregular Tracking</h3>
+                        <div class="text-xs text-teal-600 font-medium">College Programs</div>
+                    </div>
+                    
+                    <div class="flex-1 flex flex-col justify-between">
+                        <div class="text-xs text-gray-600 mb-2">
+                            <div class="mb-1"><i class="fas fa-exclamation-triangle mr-1"></i>Irregular Student Management</div>
+                            <div class="text-gray-500">Implement tracking system for irregular college students</div>
+                        </div>
+                        
+                        <div class="flex items-center justify-between text-xs bg-teal-50 p-2 rounded">
+                            <span class="text-teal-700 font-semibold">1 hour</span>
+                            <span class="px-2 py-1 bg-teal-100 text-teal-800 rounded-full">High Priority</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Milestone 8 Tasks -->
+                <!-- Task 8.1.1 -->
+                <div class="task-card bg-white rounded-lg border border-gray-200 p-3 w-64 h-full flex flex-col shadow-sm hover:shadow-md transition-shadow">
+                    <div class="flex items-center justify-between mb-2 flex-shrink-0">
+                        <div class="w-8 h-8 bg-gray-600 rounded-full flex items-center justify-center text-white font-bold text-xs">8.1.1</div>
+                        <input type="checkbox" class="task-checkbox w-4 h-4" onchange="updateProgress()">
+                    </div>
+                    
+                    <div class="mb-2 flex-shrink-0">
+                        <div class="text-xs text-gray-500 mb-1">Milestone 8 → Epic 8.1 → Task 8.1.1</div>
+                        <h3 class="text-sm font-semibold text-gray-900 mb-1">Feature Testing</h3>
+                        <div class="text-xs text-gray-600 font-medium">Frontend Testing</div>
+                    </div>
+                    
+                    <div class="flex-1 flex flex-col justify-between">
+                        <div class="text-xs text-gray-600 mb-2">
+                            <div class="mb-1"><i class="fas fa-vial mr-1"></i>Frontend Testing</div>
+                            <div class="text-gray-500">Comprehensive testing of all admin interface features</div>
+                        </div>
+                        
+                        <div class="flex items-center justify-between text-xs bg-gray-50 p-2 rounded">
+                            <span class="text-gray-700 font-semibold">4 hours</span>
+                            <span class="px-2 py-1 bg-gray-100 text-gray-800 rounded-full">High Priority</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Task 8.1.2 -->
+                <div class="task-card bg-white rounded-lg border border-gray-200 p-3 w-64 h-full flex flex-col shadow-sm hover:shadow-md transition-shadow">
+                    <div class="flex items-center justify-between mb-2 flex-shrink-0">
+                        <div class="w-8 h-8 bg-gray-600 rounded-full flex items-center justify-center text-white font-bold text-xs">8.1.2</div>
+                        <input type="checkbox" class="task-checkbox w-4 h-4" onchange="updateProgress()">
+                    </div>
+                    
+                    <div class="mb-2 flex-shrink-0">
+                        <div class="text-xs text-gray-500 mb-1">Milestone 8 → Epic 8.1 → Task 8.1.2</div>
+                        <h3 class="text-sm font-semibold text-gray-900 mb-1">Responsive Testing</h3>
+                        <div class="text-xs text-gray-600 font-medium">Frontend Testing</div>
+                    </div>
+                    
+                    <div class="flex-1 flex flex-col justify-between">
+                        <div class="text-xs text-gray-600 mb-2">
+                            <div class="mb-1"><i class="fas fa-mobile-alt mr-1"></i>Frontend Testing</div>
+                            <div class="text-gray-500">Test responsive design across different screen sizes</div>
+                        </div>
+                        
+                        <div class="flex items-center justify-between text-xs bg-gray-50 p-2 rounded">
+                            <span class="text-gray-700 font-semibold">2 hours</span>
+                            <span class="px-2 py-1 bg-gray-100 text-gray-800 rounded-full">High Priority</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Task 8.1.3 -->
+                <div class="task-card bg-white rounded-lg border border-gray-200 p-3 w-64 h-full flex flex-col shadow-sm hover:shadow-md transition-shadow">
+                    <div class="flex items-center justify-between mb-2 flex-shrink-0">
+                        <div class="w-8 h-8 bg-gray-600 rounded-full flex items-center justify-center text-white font-bold text-xs">8.1.3</div>
+                        <input type="checkbox" class="task-checkbox w-4 h-4" onchange="updateProgress()">
+                    </div>
+                    
+                    <div class="mb-2 flex-shrink-0">
+                        <div class="text-xs text-gray-500 mb-1">Milestone 8 → Epic 8.1 → Task 8.1.3</div>
+                        <h3 class="text-sm font-semibold text-gray-900 mb-1">User Flow Testing</h3>
+                        <div class="text-xs text-gray-600 font-medium">Frontend Testing</div>
+                    </div>
+                    
+                    <div class="flex-1 flex flex-col justify-between">
+                        <div class="text-xs text-gray-600 mb-2">
+                            <div class="mb-1"><i class="fas fa-users mr-1"></i>Frontend Testing</div>
+                            <div class="text-gray-500">Test complete user workflows and navigation paths</div>
+                        </div>
+                        
+                        <div class="flex items-center justify-between text-xs bg-gray-50 p-2 rounded">
+                            <span class="text-gray-700 font-semibold">2 hours</span>
+                            <span class="px-2 py-1 bg-yellow-100 text-yellow-800 rounded-full">Medium Priority</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Task 8.2.1 -->
+                <div class="task-card bg-white rounded-lg border border-gray-200 p-3 w-64 h-full flex flex-col shadow-sm hover:shadow-md transition-shadow">
+                    <div class="flex items-center justify-between mb-2 flex-shrink-0">
+                        <div class="w-8 h-8 bg-gray-600 rounded-full flex items-center justify-center text-white font-bold text-xs">8.2.1</div>
+                        <input type="checkbox" class="task-checkbox w-4 h-4" onchange="updateProgress()">
+                    </div>
+                    
+                    <div class="mb-2 flex-shrink-0">
+                        <div class="text-xs text-gray-500 mb-1">Milestone 8 → Epic 8.2 → Task 8.2.1</div>
+                        <h3 class="text-sm font-semibold text-gray-900 mb-1">Critical UI Bug Fixes</h3>
+                        <div class="text-xs text-gray-600 font-medium">Frontend Testing</div>
+                    </div>
+                    
+                    <div class="flex-1 flex flex-col justify-between">
+                        <div class="text-xs text-gray-600 mb-2">
+                            <div class="mb-1"><i class="fas fa-bug mr-1"></i>UI Bug Fixes & Polish</div>
+                            <div class="text-gray-500">Fix critical UI bugs and interface issues</div>
+                        </div>
+                        
+                        <div class="flex items-center justify-between text-xs bg-gray-50 p-2 rounded">
+                            <span class="text-gray-700 font-semibold">4 hours</span>
+                            <span class="px-2 py-1 bg-gray-100 text-gray-800 rounded-full">High Priority</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Task 8.2.2 -->
+                <div class="task-card bg-white rounded-lg border border-gray-200 p-3 w-64 h-full flex flex-col shadow-sm hover:shadow-md transition-shadow">
+                    <div class="flex items-center justify-between mb-2 flex-shrink-0">
+                        <div class="w-8 h-8 bg-gray-600 rounded-full flex items-center justify-center text-white font-bold text-xs">8.2.2</div>
+                        <input type="checkbox" class="task-checkbox w-4 h-4" onchange="updateProgress()">
+                    </div>
+                    
+                    <div class="mb-2 flex-shrink-0">
+                        <div class="text-xs text-gray-500 mb-1">Milestone 8 → Epic 8.2 → Task 8.2.2</div>
+                        <h3 class="text-sm font-semibold text-gray-900 mb-1">UI/UX Polish</h3>
+                        <div class="text-xs text-gray-600 font-medium">Frontend Testing</div>
+                    </div>
+                    
+                    <div class="flex-1 flex flex-col justify-between">
+                        <div class="text-xs text-gray-600 mb-2">
+                            <div class="mb-1"><i class="fas fa-paint-brush mr-1"></i>UI Bug Fixes & Polish</div>
+                            <div class="text-gray-500">Polish user interface and improve user experience</div>
+                        </div>
+                        
+                        <div class="flex items-center justify-between text-xs bg-gray-50 p-2 rounded">
+                            <span class="text-gray-700 font-semibold">2 hours</span>
+                            <span class="px-2 py-1 bg-yellow-100 text-yellow-800 rounded-full">Medium Priority</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Task 8.2.3 -->
+                <div class="task-card bg-white rounded-lg border border-gray-200 p-3 w-64 h-full flex flex-col shadow-sm hover:shadow-md transition-shadow">
+                    <div class="flex items-center justify-between mb-2 flex-shrink-0">
+                        <div class="w-8 h-8 bg-gray-600 rounded-full flex items-center justify-center text-white font-bold text-xs">8.2.3</div>
+                        <input type="checkbox" class="task-checkbox w-4 h-4" onchange="updateProgress()">
+                    </div>
+                    
+                    <div class="mb-2 flex-shrink-0">
+                        <div class="text-xs text-gray-500 mb-1">Milestone 8 → Epic 8.2 → Task 8.2.3</div>
+                        <h3 class="text-sm font-semibold text-gray-900 mb-1">Performance Optimization</h3>
+                        <div class="text-xs text-gray-600 font-medium">Frontend Testing</div>
+                    </div>
+                    
+                    <div class="flex-1 flex flex-col justify-between">
+                        <div class="text-xs text-gray-600 mb-2">
+                            <div class="mb-1"><i class="fas fa-tachometer-alt mr-1"></i>UI Bug Fixes & Polish</div>
+                            <div class="text-gray-500">Optimize performance and loading times</div>
+                        </div>
+                        
+                        <div class="flex items-center justify-between text-xs bg-gray-50 p-2 rounded">
+                            <span class="text-gray-700 font-semibold">2 hours</span>
+                            <span class="px-2 py-1 bg-gray-100 text-gray-800 rounded-full">Low Priority</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Milestone 9 Tasks -->
+                <!-- Task 9.1.1 -->
+                <div class="task-card bg-white rounded-lg border border-gray-200 p-3 w-64 h-full flex flex-col shadow-sm hover:shadow-md transition-shadow">
+                    <div class="flex items-center justify-between mb-2 flex-shrink-0">
+                        <div class="w-8 h-8 bg-purple-700 rounded-full flex items-center justify-center text-white font-bold text-xs">9.1.1</div>
+                        <input type="checkbox" class="task-checkbox w-4 h-4" onchange="updateProgress()">
+                    </div>
+                    
+                    <div class="mb-2 flex-shrink-0">
+                        <div class="text-xs text-gray-500 mb-1">Milestone 9 → Epic 9.1 → Task 9.1.1</div>
+                        <h3 class="text-sm font-semibold text-gray-900 mb-1">Admin Login Backend</h3>
+                        <div class="text-xs text-purple-700 font-medium">Backend Integration</div>
+                    </div>
+                    
+                    <div class="flex-1 flex flex-col justify-between">
+                        <div class="text-xs text-gray-600 mb-2">
+                            <div class="mb-1"><i class="fas fa-sign-in-alt mr-1"></i>Admin Backend Routes</div>
+                            <div class="text-gray-500">Implement admin authentication backend with JWT and security</div>
+                        </div>
+                        
+                        <div class="flex items-center justify-between text-xs bg-purple-50 p-2 rounded">
+                            <span class="text-purple-700 font-semibold">2 hours</span>
+                            <span class="px-2 py-1 bg-purple-100 text-purple-800 rounded-full">High Priority</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Task 9.1.2 -->
+                <div class="task-card bg-white rounded-lg border border-gray-200 p-3 w-64 h-full flex flex-col shadow-sm hover:shadow-md transition-shadow">
+                    <div class="flex items-center justify-between mb-2 flex-shrink-0">
+                        <div class="w-8 h-8 bg-purple-700 rounded-full flex items-center justify-center text-white font-bold text-xs">9.1.2</div>
+                        <input type="checkbox" class="task-checkbox w-4 h-4" onchange="updateProgress()">
+                    </div>
+                    
+                    <div class="mb-2 flex-shrink-0">
+                        <div class="text-xs text-gray-500 mb-1">Milestone 9 → Epic 9.1 → Task 9.1.2</div>
+                        <h3 class="text-sm font-semibold text-gray-900 mb-1">Dashboard Data Routes</h3>
+                        <div class="text-xs text-purple-700 font-medium">Backend Integration</div>
+                    </div>
+                    
+                    <div class="flex-1 flex flex-col justify-between">
+                        <div class="text-xs text-gray-600 mb-2">
+                            <div class="mb-1"><i class="fas fa-route mr-1"></i>Admin Backend Routes</div>
+                            <div class="text-gray-500">Create API routes for dashboard data and statistics</div>
+                        </div>
+                        
+                        <div class="flex items-center justify-between text-xs bg-purple-50 p-2 rounded">
+                            <span class="text-purple-700 font-semibold">1 hour</span>
+                            <span class="px-2 py-1 bg-purple-100 text-purple-800 rounded-full">High Priority</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Task 9.1.3 -->
+                <div class="task-card bg-white rounded-lg border border-gray-200 p-3 w-64 h-full flex flex-col shadow-sm hover:shadow-md transition-shadow">
+                    <div class="flex items-center justify-between mb-2 flex-shrink-0">
+                        <div class="w-8 h-8 bg-purple-700 rounded-full flex items-center justify-center text-white font-bold text-xs">9.1.3</div>
+                        <input type="checkbox" class="task-checkbox w-4 h-4" onchange="updateProgress()">
+                    </div>
+                    
+                    <div class="mb-2 flex-shrink-0">
+                        <div class="text-xs text-gray-500 mb-1">Milestone 9 → Epic 9.1 → Task 9.1.3</div>
+                        <h3 class="text-sm font-semibold text-gray-900 mb-1">Admin Role Validation</h3>
+                        <div class="text-xs text-purple-700 font-medium">Backend Integration</div>
+                    </div>
+                    
+                    <div class="flex-1 flex flex-col justify-between">
+                        <div class="text-xs text-gray-600 mb-2">
+                            <div class="mb-1"><i class="fas fa-user-shield mr-1"></i>Admin Backend Routes</div>
+                            <div class="text-gray-500">Implement admin role validation middleware and permissions</div>
+                        </div>
+                        
+                        <div class="flex items-center justify-between text-xs bg-purple-50 p-2 rounded">
+                            <span class="text-purple-700 font-semibold">1 hour</span>
+                            <span class="px-2 py-1 bg-yellow-100 text-yellow-800 rounded-full">Medium Priority</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Task 9.2.1 -->
+                <div class="task-card bg-white rounded-lg border border-gray-200 p-3 w-64 h-full flex flex-col shadow-sm hover:shadow-md transition-shadow">
+                    <div class="flex items-center justify-between mb-2 flex-shrink-0">
+                        <div class="w-8 h-8 bg-purple-700 rounded-full flex items-center justify-center text-white font-bold text-xs">9.2.1</div>
+                        <input type="checkbox" class="task-checkbox w-4 h-4" onchange="updateProgress()">
+                    </div>
+                    
+                    <div class="mb-2 flex-shrink-0">
+                        <div class="text-xs text-gray-500 mb-1">Milestone 9 → Epic 9.2 → Task 9.2.1</div>
+                        <h3 class="text-sm font-semibold text-gray-900 mb-1">Student CRUD Operations</h3>
+                        <div class="text-xs text-purple-700 font-medium">Backend Integration</div>
+                    </div>
+                    
+                    <div class="flex-1 flex flex-col justify-between">
+                        <div class="text-xs text-gray-600 mb-2">
+                            <div class="mb-1"><i class="fas fa-users mr-1"></i>Data Management Backend</div>
+                            <div class="text-gray-500">Implement student Create, Read, Update, Delete operations</div>
+                        </div>
+                        
+                        <div class="flex items-center justify-between text-xs bg-purple-50 p-2 rounded">
+                            <span class="text-purple-700 font-semibold">2 hours</span>
+                            <span class="px-2 py-1 bg-purple-100 text-purple-800 rounded-full">High Priority</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Task 9.2.2 -->
+                <div class="task-card bg-white rounded-lg border border-gray-200 p-3 w-64 h-full flex flex-col shadow-sm hover:shadow-md transition-shadow">
+                    <div class="flex items-center justify-between mb-2 flex-shrink-0">
+                        <div class="w-8 h-8 bg-purple-700 rounded-full flex items-center justify-center text-white font-bold text-xs">9.2.2</div>
+                        <input type="checkbox" class="task-checkbox w-4 h-4" onchange="updateProgress()">
+                    </div>
+                    
+                    <div class="mb-2 flex-shrink-0">
+                        <div class="text-xs text-gray-500 mb-1">Milestone 9 → Epic 9.2 → Task 9.2.2</div>
+                        <h3 class="text-sm font-semibold text-gray-900 mb-1">Subject Management Backend</h3>
+                        <div class="text-xs text-purple-700 font-medium">Backend Integration</div>
+                    </div>
+                    
+                    <div class="flex-1 flex flex-col justify-between">
+                        <div class="text-xs text-gray-600 mb-2">
+                            <div class="mb-1"><i class="fas fa-book mr-1"></i>Data Management Backend</div>
+                            <div class="text-gray-500">Create backend API for subject management operations</div>
+                        </div>
+                        
+                        <div class="flex items-center justify-between text-xs bg-purple-50 p-2 rounded">
+                            <span class="text-purple-700 font-semibold">1 hour</span>
+                            <span class="px-2 py-1 bg-purple-100 text-purple-800 rounded-full">High Priority</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Task 9.2.3 -->
+                <div class="task-card bg-white rounded-lg border border-gray-200 p-3 w-64 h-full flex flex-col shadow-sm hover:shadow-md transition-shadow">
+                    <div class="flex items-center justify-between mb-2 flex-shrink-0">
+                        <div class="w-8 h-8 bg-purple-700 rounded-full flex items-center justify-center text-white font-bold text-xs">9.2.3</div>
+                        <input type="checkbox" class="task-checkbox w-4 h-4" onchange="updateProgress()">
+                    </div>
+                    
+                    <div class="mb-2 flex-shrink-0">
+                        <div class="text-xs text-gray-500 mb-1">Milestone 9 → Epic 9.2 → Task 9.2.3</div>
+                        <h3 class="text-sm font-semibold text-gray-900 mb-1">Section Management Backend</h3>
+                        <div class="text-xs text-purple-700 font-medium">Backend Integration</div>
+                    </div>
+                    
+                    <div class="flex-1 flex flex-col justify-between">
+                        <div class="text-xs text-gray-600 mb-2">
+                            <div class="mb-1"><i class="fas fa-door-open mr-1"></i>Data Management Backend</div>
+                            <div class="text-gray-500">Create backend API for section management and assignments</div>
+                        </div>
+                        
+                        <div class="flex items-center justify-between text-xs bg-purple-50 p-2 rounded">
+                            <span class="text-purple-700 font-semibold">1 hour</span>
+                            <span class="px-2 py-1 bg-purple-100 text-purple-800 rounded-full">High Priority</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Task 9.2.4 -->
+                <div class="task-card bg-white rounded-lg border border-gray-200 p-3 w-64 h-full flex flex-col shadow-sm hover:shadow-md transition-shadow">
+                    <div class="flex items-center justify-between mb-2 flex-shrink-0">
+                        <div class="w-8 h-8 bg-purple-700 rounded-full flex items-center justify-center text-white font-bold text-xs">9.2.4</div>
+                        <input type="checkbox" class="task-checkbox w-4 h-4" onchange="updateProgress()">
+                    </div>
+                    
+                    <div class="mb-2 flex-shrink-0">
+                        <div class="text-xs text-gray-500 mb-1">Milestone 9 → Epic 9.2 → Task 9.2.4</div>
+                        <h3 class="text-sm font-semibold text-gray-900 mb-1">Grade Viewing Backend</h3>
+                        <div class="text-xs text-purple-700 font-medium">Backend Integration</div>
+                    </div>
+                    
+                    <div class="flex-1 flex flex-col justify-between">
+                        <div class="text-xs text-gray-600 mb-2">
+                            <div class="mb-1"><i class="fas fa-chart-line mr-1"></i>Data Management Backend</div>
+                            <div class="text-gray-500">Create read-only grade viewing API for admin oversight</div>
+                        </div>
+                        
+                        <div class="flex items-center justify-between text-xs bg-purple-50 p-2 rounded">
+                            <span class="text-purple-700 font-semibold">2 hours</span>
+                            <span class="px-2 py-1 bg-yellow-100 text-yellow-800 rounded-full">Medium Priority</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Task 9.3.1 -->
+                <div class="task-card bg-white rounded-lg border border-gray-200 p-3 w-64 h-full flex flex-col shadow-sm hover:shadow-md transition-shadow">
+                    <div class="flex items-center justify-between mb-2 flex-shrink-0">
+                        <div class="w-8 h-8 bg-purple-700 rounded-full flex items-center justify-center text-white font-bold text-xs">9.3.1</div>
+                        <input type="checkbox" class="task-checkbox w-4 h-4" onchange="updateProgress()">
+                    </div>
+                    
+                    <div class="mb-2 flex-shrink-0">
+                        <div class="text-xs text-gray-500 mb-1">Milestone 9 → Epic 9.3 → Task 9.3.1</div>
+                        <h3 class="text-sm font-semibold text-gray-900 mb-1">Export Data Backend</h3>
+                        <div class="text-xs text-purple-700 font-medium">Backend Integration</div>
+                    </div>
+                    
+                    <div class="flex-1 flex flex-col justify-between">
+                        <div class="text-xs text-gray-600 mb-2">
+                            <div class="mb-1"><i class="fas fa-file-export mr-1"></i>System Functions Backend</div>
+                            <div class="text-gray-500">Implement data export backend for CSV, Excel, and PDF formats</div>
+                        </div>
+                        
+                        <div class="flex items-center justify-between text-xs bg-purple-50 p-2 rounded">
+                            <span class="text-purple-700 font-semibold">1 hour</span>
+                            <span class="px-2 py-1 bg-yellow-100 text-yellow-800 rounded-full">Medium Priority</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Task 9.3.2 -->
+                <div class="task-card bg-white rounded-lg border border-gray-200 p-3 w-64 h-full flex flex-col shadow-sm hover:shadow-md transition-shadow">
+                    <div class="flex items-center justify-between mb-2 flex-shrink-0">
+                        <div class="w-8 h-8 bg-purple-700 rounded-full flex items-center justify-center text-white font-bold text-xs">9.3.2</div>
+                        <input type="checkbox" class="task-checkbox w-4 h-4" onchange="updateProgress()">
+                    </div>
+                    
+                    <div class="mb-2 flex-shrink-0">
+                        <div class="text-xs text-gray-500 mb-1">Milestone 9 → Epic 9.3 → Task 9.3.2</div>
+                        <h3 class="text-sm font-semibold text-gray-900 mb-1">Settings Backend</h3>
+                        <div class="text-xs text-purple-700 font-medium">Backend Integration</div>
+                    </div>
+                    
+                    <div class="flex-1 flex flex-col justify-between">
+                        <div class="text-xs text-gray-600 mb-2">
+                            <div class="mb-1"><i class="fas fa-cog mr-1"></i>System Functions Backend</div>
+                            <div class="text-gray-500">Create system settings backend API for configuration management</div>
+                        </div>
+                        
+                        <div class="flex items-center justify-between text-xs bg-purple-50 p-2 rounded">
+                            <span class="text-purple-700 font-semibold">1 hour</span>
+                            <span class="px-2 py-1 bg-yellow-100 text-yellow-800 rounded-full">Medium Priority</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Task 9.3.3 -->
+                <div class="task-card bg-white rounded-lg border border-gray-200 p-3 w-64 h-full flex flex-col shadow-sm hover:shadow-md transition-shadow">
+                    <div class="flex items-center justify-between mb-2 flex-shrink-0">
+                        <div class="w-8 h-8 bg-purple-700 rounded-full flex items-center justify-center text-white font-bold text-xs">9.3.3</div>
+                        <input type="checkbox" class="task-checkbox w-4 h-4" onchange="updateProgress()">
+                    </div>
+                    
+                    <div class="mb-2 flex-shrink-0">
+                        <div class="text-xs text-gray-500 mb-1">Milestone 9 → Epic 9.3 → Task 9.3.3</div>
+                        <h3 class="text-sm font-semibold text-gray-900 mb-1">College Programs Backend</h3>
+                        <div class="text-xs text-purple-700 font-medium">Backend Integration</div>
+                    </div>
+                    
+                    <div class="flex-1 flex flex-col justify-between">
+                        <div class="text-xs text-gray-600 mb-2">
+                            <div class="mb-1"><i class="fas fa-university mr-1"></i>System Functions Backend</div>
+                            <div class="text-gray-500">Create college programs backend API for program management</div>
+                        </div>
+                        
+                        <div class="flex items-center justify-between text-xs bg-purple-50 p-2 rounded">
+                            <span class="text-purple-700 font-semibold">1 hour</span>
+                            <span class="px-2 py-1 bg-yellow-100 text-yellow-800 rounded-full">Medium Priority</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Task 9.3.4 -->
+                <div class="task-card bg-white rounded-lg border border-gray-200 p-3 w-64 h-full flex flex-col shadow-sm hover:shadow-md transition-shadow">
+                    <div class="flex items-center justify-between mb-2 flex-shrink-0">
+                        <div class="w-8 h-8 bg-purple-700 rounded-full flex items-center justify-center text-white font-bold text-xs">9.3.4</div>
+                        <input type="checkbox" class="task-checkbox w-4 h-4" onchange="updateProgress()">
+                    </div>
+                    
+                    <div class="mb-2 flex-shrink-0">
+                        <div class="text-xs text-gray-500 mb-1">Milestone 9 → Epic 9.3 → Task 9.3.4</div>
+                        <h3 class="text-sm font-semibold text-gray-900 mb-1">Backup System Backend</h3>
+                        <div class="text-xs text-purple-700 font-medium">Backend Integration</div>
+                    </div>
+                    
+                    <div class="flex-1 flex flex-col justify-between">
+                        <div class="text-xs text-gray-600 mb-2">
+                            <div class="mb-1"><i class="fas fa-backup mr-1"></i>System Functions Backend</div>
+                            <div class="text-gray-500">Implement automated backup system for database and file storage</div>
+                        </div>
+                        
+                        <div class="flex items-center justify-between text-xs bg-purple-50 p-2 rounded">
+                            <span class="text-purple-700 font-semibold">1 hour</span>
+                            <span class="px-2 py-1 bg-gray-100 text-gray-800 rounded-full">Low Priority</span>
+                        </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        function updateProgress() {
+            // Update progress for individual task cards
+            document.querySelectorAll('.task-card').forEach(card => {
+                const checkbox = card.querySelector('.task-checkbox');
+                
+                // Add visual feedback for completed tasks
+                if (checkbox && checkbox.checked) {
+                    card.classList.add('opacity-75');
+                    card.style.background = 'linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%)';
+                } else {
+                    card.classList.remove('opacity-75');
+                    card.style.background = 'white';
+                }
+            });
+            
+            // Update overall progress
+            const allCheckboxes = document.querySelectorAll('.task-checkbox');
+            const checkedBoxes = document.querySelectorAll('.task-checkbox:checked');
+            const totalTasks = allCheckboxes.length;
+            const completedTasks = checkedBoxes.length;
+            
+            console.log(`Progress: ${completedTasks}/${totalTasks} tasks completed`);
+        }
+
+        // Add some CSS for completed tasks
+        const style = document.createElement('style');
+        style.textContent = `
+            .task-card.completed {
+                opacity: 0.75;
+                background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            }
+            .task-checkbox:checked + * {
+                opacity: 0.8;
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
+                <div class="milestone-card bg-white rounded-lg border border-gray-200 p-4 w-72 h-full flex flex-col">
+                    <div class="flex items-center justify-between mb-3 flex-shrink-0">
+                        <div class="flex items-center space-x-2">
+                            <div class="w-6 h-6 bg-green-600 rounded-full flex items-center justify-center text-white font-bold text-xs">2</div>
+                            <h3 class="text-sm font-semibold text-gray-900">Admin Auth & Dashboard</h3>
+                        </div>
+                        <span class="text-xs text-gray-500">Authentication & Dashboard</span>
+                    </div>
+                    
+                    <!-- Hierarchy Indicator -->
+                    <div class="mb-3 p-2 bg-gray-50 rounded border text-xs">
+                        <div class="font-semibold text-gray-700 mb-1">📋 Milestone 2 Structure:</div>
+                        <div class="text-gray-600">
+                            <div>• Epic 2.1: Admin Authentication (3 tasks)</div>
+                            <div>• Epic 2.2: Dashboard Interface (4 tasks)</div>
+                        </div>
+                    </div>
+                    
+                    <div class="space-y-2 mb-3 flex-1 overflow-y-auto">
+                        <!-- Epic 2.1: Admin Login System -->
+                        <div class="border border-gray-200 rounded-lg p-2 bg-green-50">
+                            <div class="flex items-center justify-between mb-1">
+                                <h4 class="font-medium text-green-900 text-xs">Epic 2.1: Admin Authentication System</h4>
+                                <span class="text-xs text-green-700">30min</span>
+                            </div>
+                            <div class="epic-progress h-1 rounded-full mb-2" style="--progress: 0%"></div>
+                            <div class="space-y-1">
+                                <div class="task-item priority-high p-1 rounded text-xs flex items-center bg-white border-l-4 border-green-600">
+                                    <input type="checkbox" class="task-checkbox mr-2 w-3 h-3" onchange="updateProgress()">
+                                    <span class="text-green-600 font-semibold mr-1">Task 2.1.1:</span>
+                                    <i class="fas fa-shield-alt mr-1"></i>Admin role-based auth (20min)
+                                </div>
+                                <div class="task-item priority-high p-1 rounded text-xs flex items-center bg-white border-l-4 border-green-600">
+                                    <input type="checkbox" class="task-checkbox mr-2 w-3 h-3" onchange="updateProgress()">
+                                    <span class="text-green-600 font-semibold mr-1">Task 2.1.2:</span>
+                                    <i class="fas fa-sign-in-alt mr-1"></i>Admin login page (5min)
+                                </div>
+                                <div class="task-item priority-medium p-1 rounded text-xs flex items-center bg-white border-l-4 border-green-600">
+                                    <input type="checkbox" class="task-checkbox mr-2 w-3 h-3" onchange="updateProgress()">
+                                    <span class="text-green-600 font-semibold mr-1">Task 2.1.3:</span>
+                                    <i class="fas fa-user-shield mr-1"></i>Session management (5min)
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Epic 2.2: Dashboard Layout -->
+                        <div class="border border-gray-200 rounded-lg p-2 bg-green-50">
+                            <div class="flex items-center justify-between mb-1">
+                                <h4 class="font-medium text-green-900 text-xs">Epic 2.2: Main Dashboard Interface</h4>
+                                <span class="text-xs text-green-700">2h 40min</span>
+                            </div>
+                            <div class="epic-progress h-1 rounded-full mb-2" style="--progress: 0%"></div>
+                            <div class="space-y-1">
+                                <div class="task-item priority-high p-1 rounded text-xs flex items-center bg-white border-l-4 border-green-600">
+                                    <input type="checkbox" class="task-checkbox mr-2 w-3 h-3" onchange="updateProgress()">
+                                    <span class="text-green-600 font-semibold mr-1">Task 2.2.1:</span>
+                                    <i class="fas fa-layout-dashboard mr-1"></i>Dashboard layout (30min)
+                                </div>
+                                <div class="task-item priority-high p-1 rounded text-xs flex items-center bg-white border-l-4 border-green-600">
+                                    <input type="checkbox" class="task-checkbox mr-2 w-3 h-3" onchange="updateProgress()">
+                                    <span class="text-green-600 font-semibold mr-1">Task 2.2.2:</span>
+                                    <i class="fas fa-chart-bar mr-1"></i>System overview cards (5min)
+                                </div>
+                                <div class="task-item priority-medium p-1 rounded text-xs flex items-center bg-white border-l-4 border-green-600">
+                                    <input type="checkbox" class="task-checkbox mr-2 w-3 h-3" onchange="updateProgress()">
+                                    <span class="text-green-600 font-semibold mr-1">Task 2.2.3:</span>
+                                    <i class="fas fa-moon mr-1"></i>Dark/light theme (5min)
+                                </div>
+                                <div class="task-item priority-low p-1 rounded text-xs flex items-center bg-white border-l-4 border-green-600">
+                                    <input type="checkbox" class="task-checkbox mr-2 w-3 h-3" onchange="updateProgress()">
+                                    <span class="text-green-600 font-semibold mr-1">Task 2.2.4:</span>
+                                    <i class="fas fa-mobile-alt mr-1"></i>Responsive design (2h)
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center justify-between text-xs flex-shrink-0 bg-green-50 p-2 rounded">
+                        <span class="text-green-700 font-semibold">Milestone 2: 0/7 tasks completed</span>
+                        <span class="font-medium text-green-600">3h 10min total</span>
+                    </div>
+                </div>
+                <!-- Milestone 3: Academic Structure Management -->
+                <div class="milestone-card bg-white rounded-lg border border-gray-200 p-4 w-72 h-full flex flex-col">
+                    <div class="flex items-center justify-between mb-3 flex-shrink-0">
+                        <div class="flex items-center space-x-2">
+                            <div class="w-6 h-6 bg-purple-600 rounded-full flex items-center justify-center text-white font-bold text-xs">3</div>
+                            <h3 class="text-sm font-semibold text-gray-900">Academic Structure</h3>
+                        </div>
+                        <span class="text-xs text-gray-500">Academic Structure</span>
+                    </div>
+                    
+                    <!-- Hierarchy Indicator -->
+                    <div class="mb-3 p-2 bg-gray-50 rounded border text-xs">
+                        <div class="font-semibold text-gray-700 mb-1">📋 Milestone 3 Structure:</div>
+                        <div class="text-gray-600">
+                            <div>• Epic 3.1: Academic Levels Nav (5 tasks)</div>
+                            <div>• Epic 3.2: School Year Selection (3 tasks)</div>
+                        </div>
+                    </div>
+                    
+                    <div class="space-y-2 mb-3 flex-1 overflow-y-auto">
+                        <!-- Epic 3.1: Academic Levels Sidebar -->
+                        <div class="border border-gray-200 rounded-lg p-2 bg-purple-50">
+                            <div class="flex items-center justify-between mb-1">
+                                <h4 class="font-medium text-purple-900 text-xs">Epic 3.1: Academic Levels Navigation</h4>
+                                <span class="text-xs text-purple-700">2h 15min</span>
+                            </div>
+                            <div class="epic-progress h-1 rounded-full mb-2" style="--progress: 0%"></div>
+                            <div class="space-y-1">
+                                <div class="task-item priority-high p-1 rounded text-xs flex items-center bg-white border-l-4 border-purple-600">
+                                    <input type="checkbox" class="task-checkbox mr-2 w-3 h-3" onchange="updateProgress()">
+                                    <span class="text-purple-600 font-semibold mr-1">Task 3.1.1:</span>
+                                    <i class="fas fa-sitemap mr-1"></i>Collapsible sidebar (15min)
+                                </div>
+                                <div class="task-item priority-high p-1 rounded text-xs flex items-center bg-white border-l-4 border-purple-600">
+                                    <input type="checkbox" class="task-checkbox mr-2 w-3 h-3" onchange="updateProgress()">
+                                    <span class="text-purple-600 font-semibold mr-1">Task 3.1.2:</span>
+                                    <i class="fas fa-baby mr-1"></i>Preschool (K) nav (30min)
+                                </div>
+                                <div class="task-item priority-high p-1 rounded text-xs flex items-center bg-white border-l-4 border-purple-600">
+                                    <input type="checkbox" class="task-checkbox mr-2 w-3 h-3" onchange="updateProgress()">
+                                    <span class="text-purple-600 font-semibold mr-1">Task 3.1.3:</span>
+                                    <i class="fas fa-child mr-1"></i>Elementary nav (30min)
+                                </div>
+                                <div class="task-item priority-high p-1 rounded text-xs flex items-center bg-white border-l-4 border-purple-600">
+                                    <input type="checkbox" class="task-checkbox mr-2 w-3 h-3" onchange="updateProgress()">
+                                    <span class="text-purple-600 font-semibold mr-1">Task 3.1.4:</span>
+                                    <i class="fas fa-user-graduate mr-1"></i>High School nav (30min)
+                                </div>
+                                <div class="task-item priority-high p-1 rounded text-xs flex items-center bg-white border-l-4 border-purple-600">
+                                    <input type="checkbox" class="task-checkbox mr-2 w-3 h-3" onchange="updateProgress()">
+                                    <span class="text-purple-600 font-semibold mr-1">Task 3.1.5:</span>
+                                    <i class="fas fa-university mr-1"></i>College programs (30min)
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Epic 3.2: School Year Management -->
+                        <div class="border border-gray-200 rounded-lg p-2 bg-purple-50">
+                            <div class="flex items-center justify-between mb-1">
+                                <h4 class="font-medium text-purple-900 text-xs">Epic 3.2: School Year Selection</h4>
+                                <span class="text-xs text-purple-700">1h 5min</span>
+                            </div>
+                            <div class="epic-progress h-1 rounded-full mb-2" style="--progress: 0%"></div>
+                            <div class="space-y-1">
+                                <div class="task-item priority-high p-1 rounded text-xs flex items-center bg-white border-l-4 border-purple-600">
+                                    <input type="checkbox" class="task-checkbox mr-2 w-3 h-3" onchange="updateProgress()">
+                                    <span class="text-purple-600 font-semibold mr-1">Task 3.2.1:</span>
+                                    <i class="fas fa-calendar mr-1"></i>School year interface (25min)
+                                </div>
+                                <div class="task-item priority-medium p-1 rounded text-xs flex items-center bg-white border-l-4 border-purple-600">
+                                    <input type="checkbox" class="task-checkbox mr-2 w-3 h-3" onchange="updateProgress()">
+                                    <span class="text-purple-600 font-semibold mr-1">Task 3.2.2:</span>
+                                    <i class="fas fa-archive mr-1"></i>Archive years (25min)
+                                </div>
+                                <div class="task-item priority-low p-1 rounded text-xs flex items-center bg-white border-l-4 border-purple-600">
+                                    <input type="checkbox" class="task-checkbox mr-2 w-3 h-3" onchange="updateProgress()">
+                                    <span class="text-purple-600 font-semibold mr-1">Task 3.2.3:</span>
+                                    <i class="fas fa-plus mr-1"></i>Add new year (15min)
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center justify-between text-xs flex-shrink-0 bg-purple-50 p-2 rounded">
+                        <span class="text-purple-700 font-semibold">Milestone 3: 0/8 tasks completed</span>
+                        <span class="font-medium text-purple-600">3h 20min total</span>
+                    </div>
+                </div>
+
+                <!-- Milestone 4: Subject & Section Management -->
+                <div class="milestone-card bg-white rounded-lg border border-gray-200 p-4 w-72 h-full flex flex-col">
+                    <div class="flex items-center justify-between mb-3 flex-shrink-0">
+                        <div class="flex items-center space-x-2">
+                            <div class="w-6 h-6 bg-orange-600 rounded-full flex items-center justify-center text-white font-bold text-xs">4</div>
+                            <h3 class="text-sm font-semibold text-gray-900">Subjects & Sections</h3>
+                        </div>
+                        <span class="text-xs text-gray-500">Subjects & Sections</span>
+                    </div>
+                    
+                    <!-- Hierarchy Indicator -->
+                    <div class="mb-3 p-2 bg-gray-50 rounded border text-xs">
+                        <div class="font-semibold text-gray-700 mb-1">📋 Milestone 4 Structure:</div>
+                        <div class="text-gray-600">
+                            <div>• Epic 4.1: Subject Management (4 tasks)</div>
+                            <div>• Epic 4.2: Section Management (4 tasks)</div>
+                        </div>
+                    </div>
+                    
+                    <div class="space-y-2 mb-3 flex-1 overflow-y-auto">
+                        <!-- Epic 4.1: Subject Management -->
+                        <div class="border border-gray-200 rounded-lg p-2 bg-orange-50">
+                            <div class="flex items-center justify-between mb-1">
+                                <h4 class="font-medium text-orange-900 text-xs">Epic 4.1: Subject Management Interface</h4>
+                                <span class="text-xs text-orange-700">1h 5min</span>
+                            </div>
+                            <div class="epic-progress h-1 rounded-full mb-2" style="--progress: 0%"></div>
+                            <div class="space-y-1">
+                                <div class="task-item priority-high p-1 rounded text-xs flex items-center bg-white border-l-4 border-orange-600">
+                                    <input type="checkbox" class="task-checkbox mr-2 w-3 h-3" onchange="updateProgress()">
+                                    <span class="text-orange-600 font-semibold mr-1">Task 4.1.1:</span>
+                                    <i class="fas fa-book mr-1"></i>Subject cards display (30min)
+                                </div>
+                                <div class="task-item priority-high p-1 rounded text-xs flex items-center bg-white border-l-4 border-orange-600">
+                                    <input type="checkbox" class="task-checkbox mr-2 w-3 h-3" onchange="updateProgress()">
+                                    <span class="text-orange-600 font-semibold mr-1">Task 4.1.2:</span>
+                                    <i class="fas fa-flask mr-1"></i>Subject icons (15min)
+                                </div>
+                                <div class="task-item priority-medium p-1 rounded text-xs flex items-center bg-white border-l-4 border-orange-600">
+                                    <input type="checkbox" class="task-checkbox mr-2 w-3 h-3" onchange="updateProgress()">
+                                    <span class="text-orange-600 font-semibold mr-1">Task 4.1.3:</span>
+                                    <i class="fas fa-chart-bar mr-1"></i>Student count per subject (15min)
+                                </div>
+                                <div class="task-item priority-low p-1 rounded text-xs flex items-center bg-white border-l-4 border-orange-600">
+                                    <input type="checkbox" class="task-checkbox mr-2 w-3 h-3" onchange="updateProgress()">
+                                    <span class="text-orange-600 font-semibold mr-1">Task 4.1.4:</span>
+                                    <i class="fas fa-plus mr-1"></i>Add/edit subjects (5min)
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Epic 4.2: Section Management -->
+                        <div class="border border-gray-200 rounded-lg p-2 bg-orange-50">
+                            <div class="flex items-center justify-between mb-1">
+                                <h4 class="font-medium text-orange-900 text-xs">Epic 4.2: Class Section Management</h4>
+                                <span class="text-xs text-orange-700">1h 40min</span>
+                            </div>
+                            <div class="epic-progress h-1 rounded-full mb-2" style="--progress: 0%"></div>
+                            <div class="space-y-1">
+                                <div class="task-item priority-high p-1 rounded text-xs flex items-center bg-white border-l-4 border-orange-600">
+                                    <input type="checkbox" class="task-checkbox mr-2 w-3 h-3" onchange="updateProgress()">
+                                    <span class="text-orange-600 font-semibold mr-1">Task 4.2.1:</span>
+                                    <i class="fas fa-door-open mr-1"></i>Section cards (30min)
+                                </div>
+                                <div class="task-item priority-high p-1 rounded text-xs flex items-center bg-white border-l-4 border-orange-600">
+                                    <input type="checkbox" class="task-checkbox mr-2 w-3 h-3" onchange="updateProgress()">
+                                    <span class="text-orange-600 font-semibold mr-1">Task 4.2.2:</span>
+                                    <i class="fas fa-chalkboard-teacher mr-1"></i>Teacher assignment (1h)
+                                </div>
+                                <div class="task-item priority-medium p-1 rounded text-xs flex items-center bg-white border-l-4 border-orange-600">
+                                    <input type="checkbox" class="task-checkbox mr-2 w-3 h-3" onchange="updateProgress()">
+                                    <span class="text-orange-600 font-semibold mr-1">Task 4.2.3:</span>
+                                    <i class="fas fa-users mr-1"></i>Student count (5min)
+                                </div>
+                                <div class="task-item priority-low p-1 rounded text-xs flex items-center bg-white border-l-4 border-orange-600">
+                                    <input type="checkbox" class="task-checkbox mr-2 w-3 h-3" onchange="updateProgress()">
+                                    <span class="text-orange-600 font-semibold mr-1">Task 4.2.4:</span>
+                                    <i class="fas fa-edit mr-1"></i>Section creation (5min)
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center justify-between text-xs flex-shrink-0 bg-orange-50 p-2 rounded">
+                        <span class="text-orange-700 font-semibold">Milestone 4: 0/8 tasks completed</span>
+                        <span class="font-medium text-orange-600">2h 45min total</span>
+                    </div>
+                </div>
+
+                <!-- Milestone 5: Student Management System -->
+                <div class="milestone-card bg-white rounded-lg border border-gray-200 p-4 w-72 h-full flex flex-col">
+                    <div class="flex items-center justify-between mb-3 flex-shrink-0">
+                        <div class="flex items-center space-x-2">
+                            <div class="w-6 h-6 bg-red-600 rounded-full flex items-center justify-center text-white font-bold text-xs">5</div>
+                            <h3 class="text-sm font-semibold text-gray-900">Student Management</h3>
+                        </div>
+                        <span class="text-xs text-gray-500">Student Management</span>
+                    </div>
+                    
+                    <!-- Hierarchy Indicator -->
+                    <div class="mb-3 p-2 bg-gray-50 rounded border text-xs">
+                        <div class="font-semibold text-gray-700 mb-1">📋 Milestone 5 Structure:</div>
+                        <div class="text-gray-600">
+                            <div>• Epic 5.1: Student Data Tables (4 tasks)</div>
+                            <div>• Epic 5.2: Student Actions (3 tasks)</div>
+                        </div>
+                    </div>
+                    
+                    <div class="space-y-2 mb-3 flex-1 overflow-y-auto">
+                        <!-- Epic 5.1: Student Lists & Tables -->
+                        <div class="border border-gray-200 rounded-lg p-2 bg-red-50">
+                            <div class="flex items-center justify-between mb-1">
+                                <h4 class="font-medium text-red-900 text-xs">Epic 5.1: Student Data Tables</h4>
+                                <span class="text-xs text-red-700">50min</span>
+                            </div>
+                            <div class="epic-progress h-1 rounded-full mb-2" style="--progress: 0%"></div>
+                            <div class="space-y-1">
+                                <div class="task-item priority-high p-1 rounded text-xs flex items-center bg-white border-l-4 border-red-600">
+                                    <input type="checkbox" class="task-checkbox mr-2 w-3 h-3" onchange="updateProgress()">
+                                    <span class="text-red-600 font-semibold mr-1">Task 5.1.1:</span>
+                                    <i class="fas fa-table mr-1"></i>Student data table (20min)
+                                </div>
+                                <div class="task-item priority-high p-1 rounded text-xs flex items-center bg-white border-l-4 border-red-600">
+                                    <input type="checkbox" class="task-checkbox mr-2 w-3 h-3" onchange="updateProgress()">
+                                    <span class="text-red-600 font-semibold mr-1">Task 5.1.2:</span>
+                                    <i class="fas fa-users mr-1"></i>Regular students tab (10min)
+                                </div>
+                                <div class="task-item priority-high p-1 rounded text-xs flex items-center bg-white border-l-4 border-red-600">
+                                    <input type="checkbox" class="task-checkbox mr-2 w-3 h-3" onchange="updateProgress()">
+                                    <span class="text-red-600 font-semibold mr-1">Task 5.1.3:</span>
+                                    <i class="fas fa-exclamation-triangle mr-1"></i>Irregular students tab (10min)
+                                </div>
+                                <div class="task-item priority-medium p-1 rounded text-xs flex items-center bg-white border-l-4 border-red-600">
+                                    <input type="checkbox" class="task-checkbox mr-2 w-3 h-3" onchange="updateProgress()">
+                                    <span class="text-red-600 font-semibold mr-1">Task 5.1.4:</span>
+                                    <i class="fas fa-search mr-1"></i>Search and filtering (10min)
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Epic 5.2: Student Actions -->
+                        <div class="border border-gray-200 rounded-lg p-2 bg-red-50">
+                            <div class="flex items-center justify-between mb-1">
+                                <h4 class="font-medium text-red-900 text-xs">Epic 5.2: Student Management Actions</h4>
+                                <span class="text-xs text-red-700">40min</span>
+                            </div>
+                            <div class="epic-progress h-1 rounded-full mb-2" style="--progress: 0%"></div>
+                            <div class="space-y-1">
+                                <div class="task-item priority-high p-1 rounded text-xs flex items-center bg-white border-l-4 border-red-600">
+                                    <input type="checkbox" class="task-checkbox mr-2 w-3 h-3" onchange="updateProgress()">
+                                    <span class="text-red-600 font-semibold mr-1">Task 5.2.1:</span>
+                                    <i class="fas fa-eye mr-1"></i>View student details (20min)
+                                </div>
+                                <div class="task-item priority-high p-1 rounded text-xs flex items-center bg-white border-l-4 border-red-600">
+                                    <input type="checkbox" class="task-checkbox mr-2 w-3 h-3" onchange="updateProgress()">
+                                    <span class="text-red-600 font-semibold mr-1">Task 5.2.2:</span>
+                                    <i class="fas fa-edit mr-1"></i>Edit student info (10min)
+                                </div>
+                                <div class="task-item priority-medium p-1 rounded text-xs flex items-center bg-white border-l-4 border-red-600">
+                                    <input type="checkbox" class="task-checkbox mr-2 w-3 h-3" onchange="updateProgress()">
+                                    <span class="text-red-600 font-semibold mr-1">Task 5.2.3:</span>
+                                    <i class="fas fa-user-plus mr-1"></i>Add new student (10min)
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center justify-between text-xs flex-shrink-0 bg-red-50 p-2 rounded">
+                        <span class="text-red-700 font-semibold">Milestone 5: 0/7 tasks completed</span>
+                        <span class="font-medium text-red-600">1h 30min total</span>
+                    </div>
+                </div>
+
+                <!-- Milestone 6: Grade Oversight & Reports -->
+                <div class="milestone-card bg-white rounded-lg border border-gray-200 p-4 w-72 h-full flex flex-col">
+                    <div class="flex items-center justify-between mb-3 flex-shrink-0">
+                        <div class="flex items-center space-x-2">
+                            <div class="w-6 h-6 bg-indigo-600 rounded-full flex items-center justify-center text-white font-bold text-xs">6</div>
+                            <h3 class="text-sm font-semibold text-gray-900">Grade Oversight</h3>
+                        </div>
+                        <span class="text-xs text-gray-500">Grade Oversight</span>
+                    </div>
+                    
+                    <!-- Hierarchy Indicator -->
+                    <div class="mb-3 p-2 bg-gray-50 rounded border text-xs">
+                        <div class="font-semibold text-gray-700 mb-1">📋 Milestone 6 Structure:</div>
+                        <div class="text-gray-600">
+                            <div>• Epic 6.1: Grade View (4 tasks)</div>
+                            <div>• Epic 6.2: System Functions (4 tasks)</div>
+                        </div>
+                    </div>
+                    
+                    <div class="space-y-2 mb-3 flex-1 overflow-y-auto">
+                        <!-- Epic 6.1: Grade Viewing -->
+                        <div class="border border-gray-200 rounded-lg p-2 bg-indigo-50">
+                            <div class="flex items-center justify-between mb-1">
+                                <h4 class="font-medium text-indigo-900 text-xs">Epic 6.1: Admin Grade View (Read-Only)</h4>
+                                <span class="text-xs text-indigo-700">1h 45min</span>
+                            </div>
+                            <div class="epic-progress h-1 rounded-full mb-2" style="--progress: 0%"></div>
+                            <div class="space-y-1">
+                                <div class="task-item priority-high p-1 rounded text-xs flex items-center bg-white border-l-4 border-indigo-600">
+                                    <input type="checkbox" class="task-checkbox mr-2 w-3 h-3" onchange="updateProgress()">
+                                    <span class="text-indigo-600 font-semibold mr-1">Task 6.1.1:</span>
+                                    <i class="fas fa-chart-line mr-1"></i>Grade overview table (20min)
+                                </div>
+                                <div class="task-item priority-high p-1 rounded text-xs flex items-center bg-white border-l-4 border-indigo-600">
+                                    <input type="checkbox" class="task-checkbox mr-2 w-3 h-3" onchange="updateProgress()">
+                                    <span class="text-indigo-600 font-semibold mr-1">Task 6.1.2:</span>
+                                    <i class="fas fa-calendar mr-1"></i>Quarter selection tabs (30min)
+                                </div>
+                                <div class="task-item priority-medium p-1 rounded text-xs flex items-center bg-white border-l-4 border-indigo-600">
+                                    <input type="checkbox" class="task-checkbox mr-2 w-3 h-3" onchange="updateProgress()">
+                                    <span class="text-indigo-600 font-semibold mr-1">Task 6.1.3:</span>
+                                    <i class="fas fa-calculator mr-1"></i>Grade calculations (45min)
+                                </div>
+                                <div class="task-item priority-low p-1 rounded text-xs flex items-center bg-white border-l-4 border-indigo-600">
+                                    <input type="checkbox" class="task-checkbox mr-2 w-3 h-3" onchange="updateProgress()">
+                                    <span class="text-indigo-600 font-semibold mr-1">Task 6.1.4:</span>
+                                    <i class="fas fa-eye mr-1"></i>Read-only indicators (10min)
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Epic 6.2: System Functions -->
+                        <div class="border border-gray-200 rounded-lg p-2 bg-indigo-50">
+                            <div class="flex items-center justify-between mb-1">
+                                <h4 class="font-medium text-indigo-900 text-xs">Epic 6.2: Admin System Functions</h4>
+                                <span class="text-xs text-indigo-700">12h</span>
+                            </div>
+                            <div class="epic-progress h-1 rounded-full mb-2" style="--progress: 0%"></div>
+                            <div class="space-y-1">
+                                <div class="task-item priority-high p-1 rounded text-xs flex items-center bg-white border-l-4 border-indigo-600">
+                                    <input type="checkbox" class="task-checkbox mr-2 w-3 h-3" onchange="updateProgress()">
+                                    <span class="text-indigo-600 font-semibold mr-1">Task 6.2.1:</span>
+                                    <i class="fas fa-file-export mr-1"></i>Export data (3h)
+                                </div>
+                                <div class="task-item priority-medium p-1 rounded text-xs flex items-center bg-white border-l-4 border-indigo-600">
+                                    <input type="checkbox" class="task-checkbox mr-2 w-3 h-3" onchange="updateProgress()">
+                                    <span class="text-indigo-600 font-semibold mr-1">Task 6.2.2:</span>
+                                    <i class="fas fa-cog mr-1"></i>System settings (4h)
+                                </div>
+                                <div class="task-item priority-medium p-1 rounded text-xs flex items-center bg-white border-l-4 border-indigo-600">
+                                    <input type="checkbox" class="task-checkbox mr-2 w-3 h-3" onchange="updateProgress()">
+                                    <span class="text-indigo-600 font-semibold mr-1">Task 6.2.3:</span>
+                                    <i class="fas fa-backup mr-1"></i>Backup system (4h)
+                                </div>
+                                <div class="task-item priority-low p-1 rounded text-xs flex items-center bg-white border-l-4 border-indigo-600">
+                                    <input type="checkbox" class="task-checkbox mr-2 w-3 h-3" onchange="updateProgress()">
+                                    <span class="text-indigo-600 font-semibold mr-1">Task 6.2.4:</span>
+                                    <i class="fas fa-bell mr-1"></i>Activity feed (1h)
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center justify-between text-xs flex-shrink-0 bg-indigo-50 p-2 rounded">
+                        <span class="text-indigo-700 font-semibold">Milestone 6: 0/8 tasks completed</span>
+                        <span class="font-medium text-indigo-600">13h 45min total</span>
+                    </div>
+                </div>
+
+                <!-- Milestone 7: College Program Management -->
+                <div class="milestone-card bg-white rounded-lg border border-gray-200 p-4 w-72 h-full flex flex-col">
+                    <div class="flex items-center justify-between mb-3 flex-shrink-0">
+                        <div class="flex items-center space-x-2">
+                            <div class="w-6 h-6 bg-teal-600 rounded-full flex items-center justify-center text-white font-bold text-xs">7</div>
+                            <h3 class="text-sm font-semibold text-gray-900">College Programs</h3>
+                        </div>
+                        <span class="text-xs text-gray-500">College Programs</span>
+                    </div>
+                    
+                    <!-- Hierarchy Indicator -->
+                    <div class="mb-3 p-2 bg-gray-50 rounded border text-xs">
+                        <div class="font-semibold text-gray-700 mb-1">📋 Milestone 7 Structure:</div>
+                        <div class="text-gray-600">
+                            <div>• Epic 7.1: Program Interface (3 tasks)</div>
+                            <div>• Epic 7.2: Irregular Students (1 task)</div>
+                        </div>
+                    </div>
+                    
+                    <div class="space-y-2 mb-3 flex-1 overflow-y-auto">
+                        <!-- Epic 7.1: Program Navigation -->
+                        <div class="border border-gray-200 rounded-lg p-2 bg-teal-50">
+                            <div class="flex items-center justify-between mb-1">
+                                <h4 class="font-medium text-teal-900 text-xs">Epic 7.1: College Program Interface</h4>
+                                <span class="text-xs text-teal-700">1h 35min</span>
+                            </div>
+                            <div class="epic-progress h-1 rounded-full mb-2" style="--progress: 0%"></div>
+                            <div class="space-y-1">
+                                <div class="task-item priority-high p-1 rounded text-xs flex items-center bg-white border-l-4 border-teal-600">
+                                    <input type="checkbox" class="task-checkbox mr-2 w-3 h-3" onchange="updateProgress()">
+                                    <span class="text-teal-600 font-semibold mr-1">Task 7.1.1:</span>
+                                    <i class="fas fa-university mr-1"></i>College program cards (20min)
+                                </div>
+                                <div class="task-item priority-high p-1 rounded text-xs flex items-center bg-white border-l-4 border-teal-600">
+                                    <input type="checkbox" class="task-checkbox mr-2 w-3 h-3" onchange="updateProgress()">
+                                    <span class="text-teal-600 font-semibold mr-1">Task 7.1.2:</span>
+                                    <i class="fas fa-layer-group mr-1"></i>Year level navigation (30min)
+                                </div>
+                                <div class="task-item priority-medium p-1 rounded text-xs flex items-center bg-white border-l-4 border-teal-600">
+                                    <input type="checkbox" class="task-checkbox mr-2 w-3 h-3" onchange="updateProgress()">
+                                    <span class="text-teal-600 font-semibold mr-1">Task 7.1.3:</span>
+                                    <i class="fas fa-graduation-cap mr-1"></i>Program details view (45min)
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Epic 7.2: Irregular Students -->
+                        <div class="border border-gray-200 rounded-lg p-2 bg-teal-50">
+                            <div class="flex items-center justify-between mb-1">
+                                <h4 class="font-medium text-teal-900 text-xs">Epic 7.2: Irregular Student Management</h4>
+                                <span class="text-xs text-teal-700">1h</span>
+                            </div>
+                            <div class="epic-progress h-1 rounded-full mb-2" style="--progress: 0%"></div>
+                            <div class="space-y-1">
+                                <div class="task-item priority-high p-1 rounded text-xs flex items-center bg-white border-l-4 border-teal-600">
+                                    <input type="checkbox" class="task-checkbox mr-2 w-3 h-3" onchange="updateProgress()">
+                                    <span class="text-teal-600 font-semibold mr-1">Task 7.2.1:</span>
+                                    <i class="fas fa-exclamation-triangle mr-1"></i>Irregular tracking (1h)
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center justify-between text-xs flex-shrink-0 bg-teal-50 p-2 rounded">
+                        <span class="text-teal-700 font-semibold">Milestone 7: 0/4 tasks completed</span>
+                        <span class="font-medium text-teal-600">2h 35min total</span>
+                    </div>
+                </div>
+
+                <!-- Milestone 8: Testing & Bug Fixes -->
+                <div class="milestone-card bg-white rounded-lg border border-gray-200 p-4 w-72 h-full flex flex-col">
+                    <div class="flex items-center justify-between mb-3 flex-shrink-0">
+                        <div class="flex items-center space-x-2">
+                            <div class="w-6 h-6 bg-gray-600 rounded-full flex items-center justify-center text-white font-bold text-xs">8</div>
+                            <h3 class="text-sm font-semibold text-gray-900">Frontend Testing</h3>
+                        </div>
+                        <span class="text-xs text-gray-500">Frontend Testing</span>
+                    </div>
+                    
+                    <!-- Hierarchy Indicator -->
+                    <div class="mb-3 p-2 bg-gray-50 rounded border text-xs">
+                        <div class="font-semibold text-gray-700 mb-1">📋 Milestone 8 Structure:</div>
+                        <div class="text-gray-600">
+                            <div>• Epic 8.1: Frontend Testing (3 tasks)</div>
+                            <div>• Epic 8.2: Bug Fixes & Polish (3 tasks)</div>
+                        </div>
+                    </div>
+                    
+                    <div class="space-y-2 mb-3 flex-1 overflow-y-auto">
+                        <!-- Epic 8.1: System Testing -->
+                        <div class="border border-gray-200 rounded-lg p-2 bg-gray-50">
+                            <div class="flex items-center justify-between mb-1">
+                                <h4 class="font-medium text-gray-900 text-xs">Epic 8.1: Frontend Testing</h4>
+                                <span class="text-xs text-gray-700">8h</span>
+                            </div>
+                            <div class="epic-progress h-1 rounded-full mb-2" style="--progress: 0%"></div>
+                            <div class="space-y-1">
+                                <div class="task-item priority-high p-1 rounded text-xs flex items-center bg-white border-l-4 border-gray-600">
+                                    <input type="checkbox" class="task-checkbox mr-2 w-3 h-3" onchange="updateProgress()">
+                                    <span class="text-gray-600 font-semibold mr-1">Task 8.1.1:</span>
+                                    <i class="fas fa-vial mr-1"></i>Feature testing (4h)
+                                </div>
+                                <div class="task-item priority-high p-1 rounded text-xs flex items-center bg-white border-l-4 border-gray-600">
+                                    <input type="checkbox" class="task-checkbox mr-2 w-3 h-3" onchange="updateProgress()">
+                                    <span class="text-gray-600 font-semibold mr-1">Task 8.1.2:</span>
+                                    <i class="fas fa-mobile-alt mr-1"></i>Responsive testing (2h)
+                                </div>
+                                <div class="task-item priority-medium p-1 rounded text-xs flex items-center bg-white border-l-4 border-gray-600">
+                                    <input type="checkbox" class="task-checkbox mr-2 w-3 h-3" onchange="updateProgress()">
+                                    <span class="text-gray-600 font-semibold mr-1">Task 8.1.3:</span>
+                                    <i class="fas fa-users mr-1"></i>User flow testing (2h)
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Epic 8.2: Bug Fixes -->
+                        <div class="border border-gray-200 rounded-lg p-2 bg-gray-50">
+                            <div class="flex items-center justify-between mb-1">
+                                <h4 class="font-medium text-gray-900 text-xs">Epic 8.2: UI Bug Fixes & Polish</h4>
+                                <span class="text-xs text-gray-700">8h</span>
+                            </div>
+                            <div class="epic-progress h-1 rounded-full mb-2" style="--progress: 0%"></div>
+                            <div class="space-y-1">
+                                <div class="task-item priority-high p-1 rounded text-xs flex items-center bg-white border-l-4 border-gray-600">
+                                    <input type="checkbox" class="task-checkbox mr-2 w-3 h-3" onchange="updateProgress()">
+                                    <span class="text-gray-600 font-semibold mr-1">Task 8.2.1:</span>
+                                    <i class="fas fa-bug mr-1"></i>Critical UI bug fixes (4h)
+                                </div>
+                                <div class="task-item priority-medium p-1 rounded text-xs flex items-center bg-white border-l-4 border-gray-600">
+                                    <input type="checkbox" class="task-checkbox mr-2 w-3 h-3" onchange="updateProgress()">
+                                    <span class="text-gray-600 font-semibold mr-1">Task 8.2.2:</span>
+                                    <i class="fas fa-paint-brush mr-1"></i>UI/UX polish (2h)
+                                </div>
+                                <div class="task-item priority-low p-1 rounded text-xs flex items-center bg-white border-l-4 border-gray-600">
+                                    <input type="checkbox" class="task-checkbox mr-2 w-3 h-3" onchange="updateProgress()">
+                                    <span class="text-gray-600 font-semibold mr-1">Task 8.2.3:</span>
+                                    <i class="fas fa-tachometer-alt mr-1"></i>Performance optimization (2h)
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center justify-between text-xs flex-shrink-0 bg-gray-50 p-2 rounded">
+                        <span class="text-gray-700 font-semibold">Milestone 8: 0/6 tasks completed</span>
+                        <span class="font-medium text-gray-600">16h total</span>
+                    </div>
+                </div>
+
+                <!-- Milestone 9: Backend Integration -->
+                <div class="milestone-card bg-white rounded-lg border border-gray-200 p-4 w-72 h-full flex flex-col">
+                    <div class="flex items-center justify-between mb-3 flex-shrink-0">
+                        <div class="flex items-center space-x-2">
+                            <div class="w-6 h-6 bg-purple-700 rounded-full flex items-center justify-center text-white font-bold text-xs">9</div>
+                            <h3 class="text-sm font-semibold text-gray-900">Backend Integration</h3>
+                        </div>
+                        <span class="text-xs text-gray-500">Backend Integration</span>
+                    </div>
+                    
+                    <!-- Hierarchy Indicator -->
+                    <div class="mb-3 p-2 bg-gray-50 rounded border text-xs">
+                        <div class="font-semibold text-gray-700 mb-1">📋 Milestone 9 Structure:</div>
+                        <div class="text-gray-600">
+                            <div>• Epic 9.1: Admin Backend Routes (3 tasks)</div>
+                            <div>• Epic 9.2: Data Management (4 tasks)</div>
+                            <div>• Epic 9.3: System Functions (4 tasks)</div>
+                        </div>
+                    </div>
+                    
+                    <div class="space-y-2 mb-3 flex-1 overflow-y-auto">
+                        <!-- Epic 9.1: Admin Backend Routes -->
+                        <div class="border border-gray-200 rounded-lg p-2 bg-purple-50">
+                            <div class="flex items-center justify-between mb-1">
+                                <h4 class="font-medium text-purple-900 text-xs">Epic 9.1: Admin Backend Routes</h4>
+                                <span class="text-xs text-purple-700">4h</span>
+                            </div>
+                            <div class="epic-progress h-1 rounded-full mb-2" style="--progress: 0%"></div>
+                            <div class="space-y-1">
+                                <div class="task-item priority-high p-1 rounded text-xs flex items-center bg-white border-l-4 border-purple-700">
+                                    <input type="checkbox" class="task-checkbox mr-2 w-3 h-3" onchange="updateProgress()">
+                                    <span class="text-purple-700 font-semibold mr-1">Task 9.1.1:</span>
+                                    <i class="fas fa-sign-in-alt mr-1"></i>Admin login backend (2h)
+                                </div>
+                                <div class="task-item priority-high p-1 rounded text-xs flex items-center bg-white border-l-4 border-purple-700">
+                                    <input type="checkbox" class="task-checkbox mr-2 w-3 h-3" onchange="updateProgress()">
+                                    <span class="text-purple-700 font-semibold mr-1">Task 9.1.2:</span>
+                                    <i class="fas fa-route mr-1"></i>Dashboard data routes (1h)
+                                </div>
+                                <div class="task-item priority-medium p-1 rounded text-xs flex items-center bg-white border-l-4 border-purple-700">
+                                    <input type="checkbox" class="task-checkbox mr-2 w-3 h-3" onchange="updateProgress()">
+                                    <span class="text-purple-700 font-semibold mr-1">Task 9.1.3:</span>
+                                    <i class="fas fa-user-shield mr-1"></i>Admin role validation (1h)
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Epic 9.2: Data Management Backend -->
+                        <div class="border border-gray-200 rounded-lg p-2 bg-purple-50">
+                            <div class="flex items-center justify-between mb-1">
+                                <h4 class="font-medium text-purple-900 text-xs">Epic 9.2: Data Management Backend</h4>
+                                <span class="text-xs text-purple-700">6h</span>
+                            </div>
+                            <div class="epic-progress h-1 rounded-full mb-2" style="--progress: 0%"></div>
+                            <div class="space-y-1">
+                                <div class="task-item priority-high p-1 rounded text-xs flex items-center bg-white border-l-4 border-purple-700">
+                                    <input type="checkbox" class="task-checkbox mr-2 w-3 h-3" onchange="updateProgress()">
+                                    <span class="text-purple-700 font-semibold mr-1">Task 9.2.1:</span>
+                                    <i class="fas fa-users mr-1"></i>Student CRUD operations (2h)
+                                </div>
+                                <div class="task-item priority-high p-1 rounded text-xs flex items-center bg-white border-l-4 border-purple-700">
+                                    <input type="checkbox" class="task-checkbox mr-2 w-3 h-3" onchange="updateProgress()">
+                                    <span class="text-purple-700 font-semibold mr-1">Task 9.2.2:</span>
+                                    <i class="fas fa-book mr-1"></i>Subject management backend (1h)
+                                </div>
+                                <div class="task-item priority-high p-1 rounded text-xs flex items-center bg-white border-l-4 border-purple-700">
+                                    <input type="checkbox" class="task-checkbox mr-2 w-3 h-3" onchange="updateProgress()">
+                                    <span class="text-purple-700 font-semibold mr-1">Task 9.2.3:</span>
+                                    <i class="fas fa-door-open mr-1"></i>Section management backend (1h)
+                                </div>
+                                <div class="task-item priority-medium p-1 rounded text-xs flex items-center bg-white border-l-4 border-purple-700">
+                                    <input type="checkbox" class="task-checkbox mr-2 w-3 h-3" onchange="updateProgress()">
+                                    <span class="text-purple-700 font-semibold mr-1">Task 9.2.4:</span>
+                                    <i class="fas fa-chart-line mr-1"></i>Grade viewing backend (2h)
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Epic 9.3: System Functions Backend -->
+                        <div class="border border-gray-200 rounded-lg p-2 bg-purple-50">
+                            <div class="flex items-center justify-between mb-1">
+                                <h4 class="font-medium text-purple-900 text-xs">Epic 9.3: System Functions Backend</h4>
+                                <span class="text-xs text-purple-700">4h</span>
+                            </div>
+                            <div class="epic-progress h-1 rounded-full mb-2" style="--progress: 0%"></div>
+                            <div class="space-y-1">
+                                <div class="task-item priority-medium p-1 rounded text-xs flex items-center bg-white border-l-4 border-purple-700">
+                                    <input type="checkbox" class="task-checkbox mr-2 w-3 h-3" onchange="updateProgress()">
+                                    <span class="text-purple-700 font-semibold mr-1">Task 9.3.1:</span>
+                                    <i class="fas fa-file-export mr-1"></i>Export data backend (1h)
+                                </div>
+                                <div class="task-item priority-medium p-1 rounded text-xs flex items-center bg-white border-l-4 border-purple-700">
+                                    <input type="checkbox" class="task-checkbox mr-2 w-3 h-3" onchange="updateProgress()">
+                                    <span class="text-purple-700 font-semibold mr-1">Task 9.3.2:</span>
+                                    <i class="fas fa-cog mr-1"></i>Settings backend (1h)
+                                </div>
+                                <div class="task-item priority-medium p-1 rounded text-xs flex items-center bg-white border-l-4 border-purple-700">
+                                    <input type="checkbox" class="task-checkbox mr-2 w-3 h-3" onchange="updateProgress()">
+                                    <span class="text-purple-700 font-semibold mr-1">Task 9.3.3:</span>
+                                    <i class="fas fa-university mr-1"></i>College programs backend (1h)
+                                </div>
+                                <div class="task-item priority-low p-1 rounded text-xs flex items-center bg-white border-l-4 border-purple-700">
+                                    <input type="checkbox" class="task-checkbox mr-2 w-3 h-3" onchange="updateProgress()">
+                                    <span class="text-purple-700 font-semibold mr-1">Task 9.3.4:</span>
+                                    <i class="fas fa-backup mr-1"></i>Backup system backend (1h)
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center justify-between text-xs flex-shrink-0 bg-purple-50 p-2 rounded">
+                        <span class="text-purple-700 font-semibold">Milestone 9: 0/11 tasks completed</span>
+                        <span class="font-medium text-purple-700">14h total</span>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <script>
+        function updateProgress() {
+            // Update progress for individual task cards
+            document.querySelectorAll('.task-card').forEach(card => {
+                const checkbox = card.querySelector('.task-checkbox');
+                
+                // Add visual feedback for completed tasks
+                if (checkbox && checkbox.checked) {
+                    card.classList.add('opacity-75');
+                    card.style.background = 'linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%)';
+                } else {
+                    card.classList.remove('opacity-75');
+                    card.style.background = 'white';
+                }
+            });
+            
+            // Update overall progress
+            const allCheckboxes = document.querySelectorAll('.task-checkbox');
+            const checkedBoxes = document.querySelectorAll('.task-checkbox:checked');
+            const totalTasks = allCheckboxes.length;
+            const completedTasks = checkedBoxes.length;
+            
+            console.log(`Progress: ${completedTasks}/${totalTasks} tasks completed`);
+        }
+
+        // Add some CSS for completed tasks
+        const style = document.createElement('style');
+        style.textContent = `
+            .task-card.completed {
+                opacity: 0.75;
+                background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            }
+            .task-checkbox:checked + * {
+                opacity: 0.8;
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>

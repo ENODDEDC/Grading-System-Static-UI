@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Structure Diagrams</title>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .diagram-container {
+            background: white;
+            margin: 20px 0;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        h2 {
+            color: #2196F3;
+            border-bottom: 2px solid #2196F3;
+            padding-bottom: 10px;
+        }
+        .mermaid {
+            text-align: center;
+        }
+        .nav {
+            background: #2196F3;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        .nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            padding: 8px 16px;
+            border-radius: 4px;
+            background: rgba(255,255,255,0.2);
+        }
+        .nav a:hover {
+            background: rgba(255,255,255,0.3);
+        }
+    </style>
+</head>
+<body>
+    <h1>🔗 Grading System API Structure Diagrams</h1>
+    
+    <div class="nav">
+        <a href="#architecture">System Architecture</a>
+        <a href="#auth-flow">Authentication Flow</a>
+        <a href="#endpoints">API Endpoints</a>
+        <a href="#data-flow">Data Flow</a>
+        <a href="#security">Security</a>
+    </div>
+
+    <div class="diagram-container" id="architecture">
+        <h2>🏗️ System Architecture Flow</h2>
+        <div class="mermaid">
+graph TB
+    subgraph "Student Portal (External)"
+        SP[Student Portal Website]
+        SL[Student Login Page]
+        SD[Student Dashboard]
+    end
+    
+    subgraph "Admin/Teacher System (Your System)"
+        AS[Admin System]
+        TS[Teacher System]
+        GE[Grade Entry Interface]
+    end
+    
+    subgraph "Authentication Layer"
+        API_AUTH[API Key Service]
+        KEY_STORE[Key Storage]
+        AUTH[Authorization Service]
+    end
+    
+    subgraph "Grading API (Your Proposed API)"
+        API[API Gateway]
+        AE[Auth Endpoints]
+        GE_API[Grade Endpoints]
+        VE[Validation Engine]
+    end
+    
+    subgraph "Database Layer"
+        DB[(Grading Database)]
+        STUDENTS[(Students Table)]
+        GRADES[(Grades Table)]
+        SUBJECTS[(Subjects Table)]
+    end
+    
+    %% Authentication Flow
+    SP --> SL
+    SL --> GA
+    GA --> JWT
+    JWT --> AUTH
+    
+    %% API Access Flow
+    SP --> API
+    AS --> API
+    TS --> API
+    
+    %% API Internal Flow
+    API --> AE
+    API --> GE_API
+    GE_API --> VE
+    VE --> DB
+    
+    %% Database Relations
+    DB --> STUDENTS
+    DB --> GRADES
+    DB --> SUBJECTS
+    
+    %% Grade Entry Flow
+    TS --> GE
+    GE --> GE_API
+    
+    style SP fill:#e1f5fe
+    style AS fill:#f3e5f5
+    style TS fill:#f3e5f5
+    style API fill:#e8f5e8
+    style DB fill:#fff3e0
+        </div>
+    </div>
+
+    <div class="diagram-container" id="auth-flow">
+        <h2>🔐 Authentication Flow Sequence</h2>
+        <div class="mermaid">
+sequenceDiagram
+    participant Student as Student Portal
+    participant API_KEY as API Key Service
+    participant API as Grading API
+    participant DB as Database
+    
+    Note over Student,DB: Authentication Process
+    Student->>Google: 1. Login Request (email/password)
+    Google->>Google: 2. Validate Credentials
+    Google->>API: 3. Send Authorization Code
+    API->>API: 4. Generate JWT Token
+    API->>Student: 5. Return JWT Token
+    
+    Note over Student,DB: Grade Request Process
+    Student->>API: 6. Request Grades (with JWT)
+    API->>API: 7. Validate JWT Token
+    API->>DB: 8. Query Student Grades
+    DB->>API: 9. Return Grade Data
+    API->>Student: 10. Send Grade Response (JSON)
+        </div>
+    </div>
+
+    <div class="diagram-container" id="endpoints">
+        <h2>🔗 API Endpoints Structure</h2>
+        <div class="mermaid">
+graph LR
+    subgraph "Authentication Endpoints"
+        A1[POST /auth/token<br/>Login & Get JWT]
+        A2[POST /auth/refresh<br/>Refresh Token]
+    end
+    
+    subgraph "Grade Management Endpoints"
+        G1[GET /students/{id}/grades<br/>Get Student Grades]
+        G2[POST /students/{id}/grades<br/>Add New Grade]
+        G3[PUT /students/{id}/grades/{gradeId}<br/>Update Grade]
+        G4[DELETE /students/{id}/grades/{gradeId}<br/>Delete Grade]
+    end
+    
+    subgraph "Section Management"
+        S1[GET /sections/{id}/grades<br/>Get Section Grades]
+        S2[POST /sections/{id}/grades/batch<br/>Batch Grade Input]
+    end
+    
+    subgraph "Utility Endpoints"
+        U1[GET /students/{id}/grades/summary<br/>Grade Summary]
+        U2[GET /students/{id}/grades/transcript<br/>Official Transcript]
+        U3[GET /academic-periods<br/>Available Periods]
+        U4[GET /subjects<br/>Subject List]
+    end
+    
+    style A1 fill:#ffcdd2
+    style A2 fill:#ffcdd2
+    style G1 fill:#c8e6c9
+    style G2 fill:#fff9c4
+    style G3 fill:#fff9c4
+    style G4 fill:#ffcdd2
+        </div>
+    </div>
+
+    <div class="diagram-container" id="data-flow">
+        <h2>📊 Data Flow Architecture</h2>
+        <div class="mermaid">
+graph TD
+    subgraph "Input Layer"
+        I1[Student Portal Request]
+        I2[Admin Dashboard]
+        I3[Teacher Interface]
+    end
+    
+    subgraph "API Layer"
+        API[Grading API Gateway]
+        AUTH[Authentication Middleware]
+        VALID[Request Validation]
+        ROUTE[Route Handler]
+    end
+    
+    subgraph "Business Logic Layer"
+        BL1[Grade Calculation Engine]
+        BL2[Permission Manager]
+        BL3[Data Formatter]
+    end
+    
+    subgraph "Data Layer"
+        DB[(Database)]
+        CACHE[(Redis Cache)]
+        LOG[(Audit Logs)]
+    end
+    
+    I1 --> API
+    I2 --> API
+    I3 --> API
+    
+    API --> AUTH
+    AUTH --> VALID
+    VALID --> ROUTE
+    
+    ROUTE --> BL1
+    ROUTE --> BL2
+    ROUTE --> BL3
+    
+    BL1 --> DB
+    BL2 --> DB
+    BL3 --> DB
+    
+    DB --> CACHE
+    BL1 --> LOG
+    BL2 --> LOG
+    
+    style API fill:#4caf50
+    style AUTH fill:#ff9800
+    style DB fill:#2196f3
+        </div>
+    </div>
+
+    <div class="diagram-container" id="security">
+        <h2>🛡️ Security & Access Control</h2>
+        <div class="mermaid">
+graph TB
+    subgraph "User Roles"
+        STUDENT[Student<br/>Read Own Grades Only]
+        TEACHER[Teacher<br/>Read/Write Assigned Sections]
+        ADMIN[Admin<br/>Read/Write All Data]
+    end
+    
+    subgraph "Authentication Methods"
+        API_KEY[API Key Authentication]
+        KEY_VALID[API Key Validation]
+    end
+    
+    subgraph "Access Control"
+        RBAC[Role-Based Access Control]
+        PERM[Permission Validation]
+        RATE[Rate Limiting]
+    end
+    
+    subgraph "Security Measures"
+        HTTPS[HTTPS Encryption]
+        CORS[CORS Policy]
+        AUDIT[Audit Logging]
+    end
+    
+    STUDENT --> API_AUTH
+    TEACHER --> API_AUTH
+    ADMIN --> API_AUTH
+    
+    API_KEY --> KEY_VALID
+    
+    KEY_VALID --> RBAC
+    RBAC --> PERM
+    PERM --> RATE
+    
+    RATE --> HTTPS
+    HTTPS --> CORS
+    CORS --> AUDIT
+    
+    style STUDENT fill:#c8e6c9
+    style TEACHER fill:#fff9c4
+    style ADMIN fill:#ffcdd2
+    style API_AUTH fill:#e1f5fe
+        </div>
+    </div>
+
+    <script>
+        mermaid.initialize({ 
+            startOnLoad: true,
+            theme: 'default',
+            flowchart: {
+                useMaxWidth: true,
+                htmlLabels: true
+            }
+        });
+    </script>
+</body>
+</html>
